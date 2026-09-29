@@ -1,8 +1,8 @@
-# Birthday Universe: Brand Story & Homepage Copy (Draft 1)
+# Birthday Universe: Brand Story & Homepage Copy (Draft 2)
 
 > Notes for you are in *italics*. Everything else is final-ready copy you can paste into Shopify.
 > Anything in **[brackets]** needs a real number from you or the vendor before it goes live.
-> Never publish a promise we can't keep, because broken promises are what hurt the old brand.
+> Never publish a promise we can't keep. Trust is the whole brand.
 
 ---
 
@@ -33,40 +33,59 @@ She should feel **celebrated, seen and a little bit iconic**, whether she's turn
 
 ---
 
-## Part 2: Brand story
+## Part 2: Brand story: "Her Turn"
 
-### Long version (About Us page)
+*This story isn't about us. It's about the woman every customer already knows: their mom, their grandma, their best friend, or themselves. That's why people will relate to it.*
 
-**For one day a year, everyone is the center of the universe.**
+### The story (About page + launch video voice-over)
 
-We learned that one shirt at a time.
+**Every family has one.**
 
-For six years, we've been making the shirts women wear on their biggest birthdays: the *Hello 60*, the *Hello 50*, the *Queen is 79*. We've seen them in thousands of photos: at restaurant tables with the whole family, on cruise ships, at backyard parties and at surprise brunches where everyone showed up matching.
+The woman who remembers every birthday.
 
-Along the way, we learned what a birthday really needs.
+She bakes the cake at midnight. She mails the card so it lands on the exact day. She knows your favorite color, your ring size, and which cousin can't have nuts.
 
-It needs to **arrive on time**, because a birthday gift that comes late isn't a gift.
-It needs to **fit and feel good**, because she'll wear it all day and in every picture.
-And it needs to **make her feel celebrated**, because turning 50, 60 or 75 is something to be proud of.
+She blows up the balloons. She hides the presents. She takes all the pictures, which is why she's in almost none of them.
 
-We also learned where we fell short. Some orders arrived later than they should have, and we didn't like how that felt for our customers any more than they did. So we rebuilt everything: new production partners, clear delivery dates before you order, and real people answering every message.
+And every year, when her own birthday comes around, she says the same thing:
 
-That's **Birthday Universe**: everything for the big day, in one place, from people who have celebrated thousands of birthdays with you.
+*"Oh, don't make a fuss about me."*
 
-Whoever you're celebrating, we'll help you make it their day.
+**We're making a fuss.**
 
-*— [Your first name], Founder*
+Birthday Universe was made for her: the mom, the grandma, the sister, the best friend. The woman who has spent her whole life making everyone else feel like the center of the universe.
 
-*Being honest about the late orders builds trust with people who remember the old brand. If you'd rather not mention it, delete that one paragraph and the story still works.*
+**This time, it's her turn.**
 
-### Short version (homepage, about 60 words)
+Her turn to wear the shirt that says *Hello 60*, and mean it.
+Her turn to be *in* the photos, not behind them.
+Her turn to walk into the restaurant and watch the whole table stand up and cheer.
 
-**Six years. Thousands of birthdays.**
-We've made the shirts women wear to their 40th, 50th, 60th and beyond, and we learned what the big day really needs: to arrive on time, to fit beautifully, and to make her feel celebrated. Birthday Universe is everything for that day, in one place.
-**[Read our story →]**
+Because turning 50, 60 or 80 is nothing to hide. It's a whole life of love, laughter, late nights and early mornings, and it deserves a party.
 
-### Tiny version (Instagram bio, footer)
-Milestone birthday shirts & gifts for women who celebrate out loud. 🎂 Every age deserves a party.
+So whether you're celebrating her, or you *are* her:
+
+**Welcome to Birthday Universe.**
+**For one day, the whole world revolves around you.**
+
+### Homepage version (about 55 words)
+
+**She remembers everyone's birthday.**
+She bakes the cake, hides the gifts and takes every photo, then says *"Don't make a fuss about me."*
+We made Birthday Universe for her. The mom, the grandma, the best friend who celebrates everyone.
+**This time, it's her turn.**
+**[Read her story →]**
+
+### One-liners
+- **Tagline:** *For the one who celebrates everyone.*
+- **Campaign line:** *It's her turn.*
+- **Instagram bio:** Birthday shirts & gifts for the woman who celebrates everyone. 🎂 This time, it's her turn.
+
+### Optional: founder note (only if it's true)
+*If you have a real memory, such as your mom, nani, or a friend who never let anyone celebrate her, add it under the story in your own words. A true 3-line memory is worth more than any copy I write. Don't invent one.*
+
+> I started Birthday Universe because of **[her name]**. **[One real memory: what she always did for everyone, and what her own birthday looked like.]** Every shirt we make is for her.
+> — **[Your first name]**, Founder
 
 ---
 
@@ -147,7 +166,7 @@ Every product shows its delivery date before checkout, so you'll never have to g
 
 ### 5. Best sellers
 ## The birthday favorites
-The shirts thousands of women have worn on their big day.
+The shirts made for the moments she'll remember forever.
 
 **Product card badges:** `Best seller` · `Most gifted` · `New`
 
@@ -171,9 +190,9 @@ Matching shirts for the party, the brunch or the cruise. Order 4 or more and sav
 ---
 
 ### 8. Our story (short version from Part 2)
-## Six years. Thousands of birthdays.
-*(Paste the short story here.)*
-**[Read our story]**
+## She remembers everyone's birthday.
+*(Paste the homepage version of "Her Turn" here.)*
+**[Read her story]**
 
 ---
 
@@ -218,5 +237,5 @@ Links: Shop by Age · Track My Order · Shipping & Delivery Dates · Size Guide 
 ## Next steps
 - [ ] Pick hero option A, B or C
 - [ ] Fill every **[bracket]** after the vendor test orders
-- [ ] Choose the About-page story with or without the "where we fell short" paragraph
+- [ ] Approve the "Her Turn" story (and add a real founder memory if you have one)
 - [ ] Then I'll write: product page template, size guide, shipping page, and the first 3 emails
