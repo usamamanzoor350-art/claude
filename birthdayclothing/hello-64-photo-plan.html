@@ -1,0 +1,264 @@
+<title>Hello 64 Photo Plan</title>
+<style>
+/* Layout: a phone-frame product page preview beside the shot list, then signature concepts and stores to study. */
+:root{
+  --bg:#fbf6ef; --panel:#ffffff; --ink:#1d1b2e; --muted:#645d72; --line:#e8dfd6;
+  --plum:#241b33; --gold:#e3b25b; --gold-ink:#8a5a0e; --blush:#f4c7d0; --cream:#fbf6ef;
+  --display:"Young Serif",Georgia,serif; --body:"Instrument Sans",system-ui,-apple-system,sans-serif;
+  --script:"Caveat",cursive; --block:"Oswald","Arial Narrow",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17131f;--panel:#211c2c;--ink:#f2edf5;--muted:#aba3b9;--line:#352e44;--gold-ink:#e3b25b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17131f;--panel:#211c2c;--ink:#f2edf5;--muted:#aba3b9;--line:#352e44;--gold-ink:#e3b25b;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:28px 80px;display:grid;gap:44px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.2;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.9rem,5vw,2.8rem)}
+h2{font-size:1.6rem}
+h3{font-size:1.08rem}
+p{margin:0;max-width:65ch}
+.eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink);font-weight:600}
+.lede{color:var(--muted);font-size:1.05rem}
+section{display:grid;gap:16px}
+.note{font-size:.88rem;color:var(--muted)}
+a{color:var(--gold-ink)}
+/* phone preview */
+.preview{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:760px){.preview{grid-template-columns:1fr}}
+.phone{background:#fff;color:#1d1b2e;border:10px solid #1d1b2e;border-radius:36px;overflow:hidden;box-shadow:0 20px 50px rgba(36,27,51,.18);max-width:340px;width:100%;justify-self:center}
+.phone .top{background:#241b33;color:#fbf6ef;font-size:.7rem;text-align:center;padding:6px 8px}
+.phone .hero{aspect-ratio:4/5;position:relative;background:#fbf6ef;display:grid;place-items:center;overflow:hidden}
+.phone .hero svg{width:100%;height:100%}
+.phone .thumbs{display:flex;gap:6px;padding:8px;overflow-x:auto;background:#fff}
+.phone .thumbs button{flex:0 0 46px;height:58px;border:2px solid transparent;border-radius:6px;padding:0;background:#fbf6ef;cursor:pointer;overflow:hidden}
+.phone .thumbs button[aria-current="true"]{border-color:#e3b25b}
+.phone .thumbs svg{width:100%;height:100%;display:block}
+.phone .info{padding:12px 14px 16px;display:grid;gap:8px}
+.phone .ptitle{font-family:var(--display);font-size:1.1rem}
+.phone .price{font-weight:600}
+.phone .lbl{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#645d72}
+.sw{display:flex;gap:8px;flex-wrap:wrap}
+.sw button{width:30px;height:30px;border-radius:50%;border:2px solid #e8dfd6;cursor:pointer;padding:0}
+.sw button[aria-pressed="true"]{outline:2px solid #1d1b2e;outline-offset:2px}
+.sizes{display:flex;gap:6px;flex-wrap:wrap}
+.sizes span{border:1px solid #d9cfc4;border-radius:8px;padding:4px 10px;font-size:.8rem}
+.eta{color:#2f7d5b;font-size:.82rem;font-weight:600}
+.atc{background:#e3b25b;color:#1d1b2e;border-radius:10px;text-align:center;padding:10px;font-weight:600}
+/* shot list */
+.shots{display:grid;gap:10px;counter-reset:s}
+.shot{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.shot::before{counter-increment:s;content:counter(s);grid-row:span 2;font-family:var(--display);font-size:1.4rem;color:var(--gold-ink);width:1.6rem}
+.shot b{font-weight:600}
+.shot span{color:var(--muted);font-size:.9rem}
+.shot[aria-current="true"]{border-color:var(--gold)}
+/* concepts */
+.concepts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.concept{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.concept .art{aspect-ratio:4/3;background:#fbf6ef}
+.concept .art svg{width:100%;height:100%;display:block}
+.concept .txt{padding:12px 14px 14px;display:grid;gap:6px;align-content:start}
+.concept .txt p{font-size:.9rem;color:var(--muted)}
+.tag{justify-self:start;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;background:var(--blush);color:#1d1b2e;border-radius:99px;padding:2px 9px;font-weight:600}
+/* stores */
+.tbl{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+ul{margin:0;padding-left:1.1rem;display:grid;gap:6px;max-width:70ch}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.fact{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:6px;align-content:start}
+.fact p{font-size:.9rem;color:var(--muted)}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Instrument+Sans:wght@400;600&family=Oswald:wght@600&family=Young+Serif&display=swap">
+
+<main class="wrap">
+  <header style="display:grid;gap:10px">
+    <span class="eyebrow">Birthday Universe · Product photos</span>
+    <h1>What the Hello 64 page will look like</h1>
+    <p class="lede">Tap the shots and the color dots on the phone. This is how a shopper will see the product page: 8 photos, 6 colors, and every photo answering "how will this look on me?"</p>
+    <p class="note">These are simple drawings to show the plan. The real photos come from ChatGPT using the prompts.</p>
+  </header>
+
+  <section>
+    <span class="eyebrow">1 · The product page</span>
+    <div class="preview">
+      <div class="phone" aria-label="Phone preview of the product page">
+        <div class="top">🎉 See your delivery date before you check out</div>
+        <div class="hero" id="hero"></div>
+        <div class="thumbs" id="thumbs" role="tablist" aria-label="Product photos"></div>
+        <div class="info">
+          <div class="ptitle">Hello 64 Birthday Shirt</div>
+          <div class="price">$25.99</div>
+          <div class="lbl">Color: <span id="cname">Black</span></div>
+          <div class="sw" id="swatches" role="group" aria-label="Shirt color"></div>
+          <div class="lbl">Size</div>
+          <div class="sizes"><span>S</span><span>M</span><span>L</span><span>XL</span><span>2XL</span><span>3XL</span></div>
+          <div class="eta">Order today, get it by Thu, Oct 8</div>
+          <div class="atc">Add to Cart</div>
+        </div>
+      </div>
+      <div class="shots" id="shots"></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">2 · What makes it ours</span>
+    <h2>Five signature ideas nobody else in the niche uses</h2>
+    <p>Most birthday-shirt sellers (Etsy, Amazon, and the old store) use the same flat lay: wooden floor, jeans, fake flowers. These five ideas belong only to a birthday brand. Use them across every product, and people will recognize a Birthday Universe photo on sight.</p>
+    <div class="concepts" id="concepts"></div>
+  </section>
+
+  <section>
+    <span class="eyebrow">3 · What the research says</span>
+    <div class="facts">
+      <div class="fact"><h3>People want to see it worn</h3><p>Model photos help buyers picture the shirt on themselves, judge size and fit, and see it on different body types.</p></div>
+      <div class="fact"><h3>Lifestyle beats a floating shirt</h3><p>One Etsy seller guide says floating shirts on white convert about 40% worse than lifestyle shots. Treat that number as a seller's claim, not a study, but the direction is consistent across guides.</p></div>
+      <div class="fact"><h3>A small repeatable stack wins</h3><p>Guides recommend a set you can repeat for every product: a clean flat lay, a lifestyle angle, a close crop and a hero image. Clarity on a phone matters more than fancy effects.</p></div>
+      <div class="fact"><h3>Show real fabric</h3><p>Good mockups show realistic folds, shadows and light. A pasted-on print looks fake and lowers trust.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">4 · Look for yourself</span>
+    <h2>Stores to study (open these on your phone)</h2>
+    <p class="note">I couldn't open these sites from here because the network blocks them, so I can't describe their pages. Open each one on your phone and note the answers in the last column. That takes about 10 minutes.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Store</th><th>Why look</th><th>Notice this</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://spiritualgangster.com/collections/graphic-shop">Spiritual Gangster</a></td><td>Big, well-known slogan-tee brand for women</td><td>What is the 1st photo: model or flat? How many photos per product? Do the models look like the buyers?</td></tr>
+        <tr><td><a href="https://graysonthreads.com/">Grayson Threads</a></td><td>Women's graphic tees sold widely in US stores</td><td>How do they show different colors? What happens when you tap a color?</td></tr>
+        <tr><td><a href="https://www.etsy.com/market/birthday_queen_shirt">Etsy: birthday queen shirts</a></td><td>Your direct competitors, sorted by best sellers</td><td>What do the top 5 listings' first photos have in common? What looks cheap that you should avoid?</td></tr>
+        <tr><td><a href="https://www.amazon.com/birthday-queen-shirts/s?k=birthday+queen+shirts">Amazon: birthday queen shirts</a></td><td>What mass-market buyers see</td><td>Which first photos look generic or cheap? Those are the looks to stand apart from.</td></tr>
+        <tr><td><a href="https://epiceratees.com/blogs/news/50th-birthday-shirt-for-women">Epic Era Tees</a></td><td>A store focused only on birthday shirts</td><td>Do they use models of the right age? How do they write the product title?</td></tr>
+        <tr><td><a href="https://www.pinterest.com/ideas/graphic-tees-photoshoot/912967420320/">Pinterest: graphic tee photoshoots</a></td><td>Scene and pose ideas</td><td>Save 10 pins you love. Send them to me and I'll turn them into prompts.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Sources</span>
+    <ul class="note">
+      <li><a href="https://www.squareshot.com/post/t-shirt-photoshoot">Squareshot: T-shirt photoshoot ideas</a></li>
+      <li><a href="https://mydesigns.io/blog/free-tshirt-mockup/">MyDesigns: T-shirt mockups for Etsy sellers</a></li>
+      <li><a href="https://www.kittl.com/blogs/how-to-create-etsy-listing-images-pod/">Kittl: Etsy listing images</a></li>
+      <li><a href="https://www.caspa.ai/blog/t-shirt-product-photography">caspa AI: T-shirt product photography ideas</a></li>
+      <li><a href="https://www.photoroom.com/blog/ecommerce-product-image-best-practices-2026">Photoroom: 2026 product image best practices</a></li>
+    </ul>
+  </section>
+</main>
+
+<script>
+(function(){
+  var COLORS = [
+    {name:'Light Pink', fill:'#f2c4cc', ink:'#1d1b2e'},
+    {name:'White', fill:'#fbfbf8', ink:'#1d1b2e'},
+    {name:'Sand', fill:'#dcc8a8', ink:'#1d1b2e'},
+    {name:'Charcoal Gray', fill:'#4a4a50', ink:'#ffffff'},
+    {name:'Navy Blue', fill:'#23304f', ink:'#ffffff'},
+    {name:'Black', fill:'#1b1b1d', ink:'#ffffff'}
+  ];
+  var color = COLORS[5];
+  var shot = 0;
+
+  var TEE = 'M62 22 L86 13 Q100 26 114 13 L138 22 L176 50 L159 80 L142 70 L142 190 L58 190 L58 70 L41 80 L24 50 Z';
+  function tee(c, x, y, s){
+    s = s || 1;
+    return '<g transform="translate('+x+','+y+') scale('+s+')">' +
+      '<path d="'+TEE+'" fill="'+c.fill+'" stroke="rgba(0,0,0,.18)" stroke-width="1.2"/>' +
+      '<text x="100" y="92" text-anchor="middle" font-family="Caveat,cursive" font-size="26" textLength="46" lengthAdjust="spacingAndGlyphs" fill="'+c.ink+'">hello</text>' +
+      '<text x="98" y="118" text-anchor="middle" font-family="Oswald,Arial Narrow,sans-serif" font-weight="600" font-size="19" textLength="70" lengthAdjust="spacingAndGlyphs" fill="'+c.ink+'">SIXTY FOUR</text>' +
+      '<path d="M141 112 c2-3 6-2 6 1 c0 3-6 6-6 6 c0 0-6-3-6-6 c0-3 4-4 6-1z" fill="'+c.ink+'"/>' +
+      '<text x="124" y="134" text-anchor="middle" font-family="Oswald,Arial Narrow,sans-serif" font-size="9" fill="'+c.ink+'">EST. 1962</text></g>';
+  }
+  function confetti(n, w, h, seed){
+    var s = '', r = seed || 7;
+    for (var i=0;i<n;i++){ r = (r*9301+49297)%233280; var x = r/233280*w; r = (r*9301+49297)%233280; var y = r/233280*h;
+      s += '<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="5" height="3" rx="1" fill="#e3b25b" transform="rotate('+(i*37%90)+' '+x.toFixed(1)+' '+y.toFixed(1)+')"/>'; }
+    return s;
+  }
+  function person(c, x, y, s, hair, skin){
+    s = s || 1;
+    return '<g transform="translate('+x+','+y+') scale('+s+')">' +
+      '<circle cx="100" cy="-6" r="24" fill="'+(skin||'#e9c2a6')+'"/>' +
+      '<path d="M74 -8 Q76 -38 100 -36 Q126 -38 127 -6 Q124 -22 100 -22 Q80 -22 74 -8Z" fill="'+(hair||'#d9d2c5')+'"/>' +
+      tee(c,0,0,1) + '</g>';
+  }
+  function svg(inner, bg){ return '<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="200" height="250" fill="'+(bg||'#fbf6ef')+'"/>'+inner+'</svg>'; }
+  function box(x,y){ return '<rect x="'+x+'" y="'+y+'" width="30" height="24" fill="#fff" stroke="#e8dfd6"/><rect x="'+(x+13)+'" y="'+y+'" width="4" height="24" fill="#e3b25b"/><rect x="'+x+'" y="'+(y+10)+'" width="30" height="4" fill="#e3b25b"/>'; }
+  function candle(x,y){ return '<rect x="'+x+'" y="'+y+'" width="5" height="22" fill="#e3b25b"/><ellipse cx="'+(x+2.5)+'" cy="'+(y-5)+'" rx="3" ry="5" fill="#ffb347"/>'; }
+
+  var SHOTS = [
+    {t:'On-model hero', d:'A woman about 64, smiling, wearing the shirt. Cream backdrop, gold confetti. This is the photo in ads and on collection pages.', art:function(c){ return svg(confetti(14,200,250,3)+person(c,10,60,0.9,'#d9d2c5')); }},
+    {t:'Styled flat lay', d:'Shirt flat on cream with a gift box, a gold candle and confetti. Replaces the old wooden-floor look.', art:function(c){ return svg(confetti(22,200,250,11)+tee(c,15,25,0.85)+box(150,200)+candle(22,205)); }},
+    {t:'Print close-up', d:'Tight crop on the print so shoppers see the fabric and the exact words.', art:function(c){ return svg('<g transform="translate(-160,-150) scale(2.6)">'+tee(c,0,0,1)+'</g>', c.fill); }},
+    {t:'6 colors, one photo', d:'All six shirts folded side by side, with names. Shoppers see every option at once.', art:function(){ var s=''; COLORS.forEach(function(k,i){ var x=12+(i%3)*62, y=40+Math.floor(i/3)*100; s+='<rect x="'+x+'" y="'+y+'" width="52" height="60" rx="4" fill="'+k.fill+'" stroke="rgba(0,0,0,.15)"/><text x="'+(x+26)+'" y="'+(y+30)+'" text-anchor="middle" font-family="Caveat" font-size="12" fill="'+k.ink+'">hello</text><text x="'+(x+26)+'" y="'+(y+42)+'" text-anchor="middle" font-family="Oswald" font-size="7" textLength="36" lengthAdjust="spacingAndGlyphs" fill="'+k.ink+'">SIXTY FOUR</text><text x="'+(x+26)+'" y="'+(y+76)+'" text-anchor="middle" font-family="Instrument Sans" font-size="7" fill="#645d72">'+k.name+'</text>'; }); return svg(s); }},
+    {t:'Second model, curvy', d:'A different body type in another color, so more women see themselves in it.', art:function(){ return svg(confetti(10,200,250,5)+person(COLORS[3],0,60,1.0,'#6b6b6b','#c99a7a')); }},
+    {t:'The birthday moment', d:'Birthday dinner with candles and family cheering. Sells the feeling, not just the shirt.', art:function(){ return svg('<rect width="200" height="250" fill="#2a2138"/>'+confetti(18,200,160,9)+person(COLORS[0],30,70,0.7,'#d9d2c5')+'<rect x="40" y="200" width="120" height="30" rx="4" fill="#fbf6ef"/>'+candle(80,180)+candle(96,180)+candle(112,180), '#2a2138'); }},
+    {t:'Size & fit', d:'Full-length photo plus a size chart: "Model is 5\'6" wearing M. Between sizes? Size up."', art:function(c){ return svg(person(c,-10,50,0.75)+'<rect x="138" y="40" width="54" height="120" rx="6" fill="#fff" stroke="#e8dfd6"/><text x="165" y="58" text-anchor="middle" font-family="Instrument Sans" font-weight="600" font-size="9" fill="#1d1b2e">Size chart</text>'+[0,1,2,3,4].map(function(i){return '<rect x="146" y="'+(68+i*16)+'" width="38" height="6" rx="2" fill="#e8dfd6"/>';}).join('')); }},
+    {t:'Complete the look', d:'Shirt with the crown, socks and tote, with prices. Raises the order value.', art:function(c){ return svg(confetti(12,200,250,13)+tee(c,40,20,0.6)+'<path d="M20 190 l10-18 10 12 10-16 10 16 10-12 10 18z" fill="#e3b25b"/><rect x="95" y="175" width="18" height="40" rx="6" fill="#f4c7d0"/><rect x="118" y="175" width="18" height="40" rx="6" fill="#f4c7d0"/><rect x="146" y="165" width="42" height="50" rx="3" fill="#e6dccb"/><path d="M155 165 q12-18 24 0" stroke="#bfae93" stroke-width="3" fill="none"/>'); }}
+  ];
+
+  var hero = document.getElementById('hero');
+  var thumbs = document.getElementById('thumbs');
+  var shots = document.getElementById('shots');
+  var sw = document.getElementById('swatches');
+  var cname = document.getElementById('cname');
+
+  function render(){
+    hero.innerHTML = SHOTS[shot].art(color);
+    hero.setAttribute('aria-label', SHOTS[shot].t + ', ' + color.name);
+    thumbs.innerHTML = '';
+    SHOTS.forEach(function(s,i){
+      var b = document.createElement('button');
+      b.type='button'; b.setAttribute('role','tab'); b.setAttribute('aria-label', s.t);
+      b.setAttribute('aria-current', i===shot ? 'true' : 'false');
+      b.innerHTML = s.art(color);
+      b.addEventListener('click', function(){ shot=i; render(); });
+      thumbs.appendChild(b);
+    });
+    [].forEach.call(shots.children, function(el,i){ el.setAttribute('aria-current', i===shot ? 'true':'false'); });
+    [].forEach.call(sw.children, function(el){ el.setAttribute('aria-pressed', el.dataset.name===color.name ? 'true':'false'); });
+    cname.textContent = color.name;
+  }
+
+  SHOTS.forEach(function(s,i){
+    var b = document.createElement('button');
+    b.type='button'; b.className='shot';
+    b.innerHTML = '<b></b><span></span>';
+    b.querySelector('b').textContent = s.t;
+    b.querySelector('span').textContent = s.d;
+    b.addEventListener('click', function(){ shot=i; render(); });
+    shots.appendChild(b);
+  });
+  COLORS.forEach(function(c){
+    var b = document.createElement('button');
+    b.type='button'; b.style.background=c.fill; b.dataset.name=c.name; b.setAttribute('aria-label', c.name);
+    b.addEventListener('click', function(){ color=c; if (shot===3) shot=0; render(); });
+    sw.appendChild(b);
+  });
+
+  var CONCEPTS = [
+    {tag:'Signature', t:'Her number in balloons', d:'Model in the shirt holding giant gold number balloons of her age: "64" for Hello 64. Instantly says birthday, and the age matches the shirt. Make the balloons in Canva so the number is always right.',
+     art:function(){ return '<svg viewBox="0 0 240 180"><rect width="240" height="180" fill="#fbf6ef"/>'+confetti(16,240,180,21)+'<g transform="translate(40,40) scale(0.62)">'+person(COLORS[0],0,40,1,'#d9d2c5')+'</g><text x="175" y="95" text-anchor="middle" font-family="Oswald" font-weight="600" font-size="78" fill="#e3b25b" stroke="#b8862d" stroke-width="1.5">64</text><line x1="160" y1="100" x2="150" y2="165" stroke="#b8862d"/><line x1="192" y1="100" x2="182" y2="165" stroke="#b8862d"/></svg>'; }},
+    {tag:'Signature', t:'The 6-color birthday cake', d:'All six folded shirts stacked like the layers of a birthday cake, with one lit candle on top. Our unique way to show "available in 6 colors".',
+     art:function(){ var s='<svg viewBox="0 0 240 180"><rect width="240" height="180" fill="#fbf6ef"/>'+confetti(12,240,180,5); COLORS.slice().reverse().forEach(function(c,i){ s+='<rect x="'+(62+i*4)+'" y="'+(150-i*18)+'" width="'+(116-i*8)+'" height="16" rx="3" fill="'+c.fill+'" stroke="rgba(0,0,0,.15)"/>'; }); return s+candle(117,32)+'</svg>'; }},
+    {tag:'Signature', t:'EST. 1962 time capsule', d:'The shirt next to things from the year she was born: a vintage record, an old Polaroid, a retro radio. Makes "EST. 1962" personal and nostalgic, and it works for every birth year.',
+     art:function(){ return '<svg viewBox="0 0 240 180"><rect width="240" height="180" fill="#efe4d2"/><g transform="translate(18,12) scale(0.72)">'+tee(COLORS[5],0,0,1)+'</g><circle cx="190" cy="55" r="34" fill="#1d1b2e"/><circle cx="190" cy="55" r="9" fill="#e3b25b"/><rect x="160" y="105" width="56" height="62" fill="#fff" stroke="#d9cfc4"/><rect x="166" y="111" width="44" height="38" fill="#c9b79a"/><text x="188" y="162" text-anchor="middle" font-family="Caveat" font-size="12" fill="#1d1b2e">1962</text></svg>'; }},
+    {tag:'Emotion', t:'Make a wish', d:'Close-up of her in the shirt, eyes closed, about to blow out the candles. Warm and dark, candle-lit. Perfect for ads and the homepage.',
+     art:function(){ return '<svg viewBox="0 0 240 180"><rect width="240" height="180" fill="#2a2138"/>'+confetti(10,240,90,17)+'<g transform="translate(50,40) scale(0.6)">'+person(COLORS[0],0,40,1,'#d9d2c5')+'</g><rect x="40" y="148" width="160" height="32" rx="4" fill="#fbf6ef"/>'+candle(100,128)+candle(118,128)+candle(136,128)+'</svg>'; }},
+    {tag:'Gift', t:'The handover', d:'Only hands and the gift: a daughter\'s hands passing an open box with the folded shirt inside, gold tissue paper. Speaks straight to gift buyers.',
+     art:function(){ return '<svg viewBox="0 0 240 180"><rect width="240" height="180" fill="#fbf6ef"/>'+confetti(14,240,180,29)+'<rect x="60" y="60" width="120" height="90" rx="4" fill="#fff" stroke="#e8dfd6"/><path d="M60 60 l20-20 h80 l20 20z" fill="#f3e3b8"/><g transform="translate(78,52) scale(0.42)">'+tee(COLORS[0],0,0,1)+'</g><ellipse cx="45" cy="120" rx="26" ry="14" fill="#e9c2a6"/><ellipse cx="195" cy="120" rx="26" ry="14" fill="#e9c2a6"/></svg>'; }}
+  ];
+  var cwrap = document.getElementById('concepts');
+  CONCEPTS.forEach(function(c){
+    var el = document.createElement('article'); el.className='concept';
+    el.innerHTML = '<div class="art">'+c.art()+'</div><div class="txt"><span class="tag"></span><h3></h3><p></p></div>';
+    el.querySelector('.tag').textContent = c.tag; el.querySelector('h3').textContent = c.t; el.querySelector('p').textContent = c.d;
+    cwrap.appendChild(el);
+  });
+
+  render();
+})();
+</script>
