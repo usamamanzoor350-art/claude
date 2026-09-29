@@ -1,193 +1,266 @@
 <title>Hello 64 Gallery Concepts</title>
 <style>
-/* Layout: a grid of 4:5 image mockups, each a finished-looking infographic, with a "how to make it" panel under each. */
+/* Layout: Hollow-style system translated to Birthday Universe. A strip of square gallery mockups, then the product page's right column, then the build kit. */
 :root{
-  --bg:#f6f0e8; --panel:#ffffff; --ink:#1d1b2e; --muted:#645d72; --line:#e6dccf;
-  --plum:#241b33; --gold:#e3b25b; --gold-ink:#8a5a0e; --blush:#f4c7d0; --cream:#fbf6ef; --green:#2f7d5b;
+  --bg:#f3eee7; --panel:#ffffff; --ink:#1d1b2e; --muted:#645d72; --line:#e3d9cc;
+  --plum:#241b33; --gold:#e3b25b; --gold-ink:#8a5a0e; --cream:#f6f1ea; --green:#2f7d5b; --red:#c8453b;
   --display:"Young Serif",Georgia,serif; --body:"Instrument Sans",system-ui,-apple-system,sans-serif;
-  --script:"Caveat",cursive; --block:"Oswald","Arial Narrow",sans-serif;
+  --cond:"Oswald","Arial Narrow",sans-serif; --mono:"Space Mono",ui-monospace,Menlo,monospace; --script:"Caveat",cursive;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16121d;--panel:#211c2c;--ink:#f2edf5;--muted:#aba3b9;--line:#352e44;--gold-ink:#e3b25b;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#16121d;--panel:#211c2c;--ink:#f2edf5;--muted:#aba3b9;--line:#352e44;--gold-ink:#e3b25b;color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
-.wrap{max-width:1120px;margin:0 auto;padding-inline:20px;padding-block:28px 80px;display:grid;gap:28px}
-h1,h2{font-family:var(--display);font-weight:400;line-height:1.2;margin:0;text-wrap:balance}
-h1{font-size:clamp(1.9rem,5vw,2.8rem)}
-h2{font-size:1.25rem}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:28px 80px;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.2;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.9rem,5vw,2.8rem)} h2{font-size:1.5rem} h3{font-size:1.05rem}
 p{margin:0;max-width:68ch}
 .eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink);font-weight:600}
 .lede{color:var(--muted);font-size:1.05rem}
+section{display:grid;gap:16px}
 .warn{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:4px 10px 10px 4px;padding:12px 16px;font-size:.93rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.learn{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.learn div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:4px;align-content:start}
+.learn p{font-size:.9rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px}
 .item{display:grid;gap:10px;align-content:start}
-.item .num{font-family:var(--display);color:var(--gold-ink)}
+.item h3 .n{font-family:var(--cond);color:var(--gold-ink);margin-right:6px}
 .how{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:8px;font-size:.9rem}
 .how p{color:var(--muted)}
 .how details summary{cursor:pointer;font-weight:600;color:var(--ink)}
 .how pre{white-space:pre-wrap;font-size:.8rem;background:var(--plum);color:#f2edf5;border-radius:8px;padding:10px;margin:8px 0 0;font-family:ui-monospace,Menlo,monospace}
 .how button{justify-self:start;font:inherit;font-size:.82rem;font-weight:600;border:0;border-radius:8px;padding:6px 12px;background:var(--gold);color:#1d1b2e;cursor:pointer}
 
-/* the mock images: always light, like a real photo file */
-.card{container-type:inline-size;aspect-ratio:4/5;width:100%;border-radius:12px;overflow:hidden;position:relative;background:#fbf6ef;color:#1d1b2e;box-shadow:0 10px 28px rgba(36,27,51,.14)}
-.card svg.bgart{position:absolute;inset:0;width:100%;height:100%}
-.abs{position:absolute}
-.logo{font-family:var(--display);font-size:3.2cqw;letter-spacing:.02em}
-.cap{font-family:var(--body);font-weight:600;font-size:3.4cqw;line-height:1.2}
-.small{font-family:var(--body);font-size:2.9cqw;line-height:1.25}
-.pill{background:#fff;border-radius:99px;padding:1.2cqw 2.6cqw;box-shadow:0 1cqw 3cqw rgba(0,0,0,.08);white-space:nowrap}
-.dot{width:1.6cqw;height:1.6cqw;border-radius:50%;background:#e3b25b;display:inline-block;margin-right:1.4cqw;vertical-align:middle}
-.head{font-family:var(--display);font-size:7cqw;line-height:1.05}
-.placeholder{background:#fff3cf;border:.3cqw dashed #b8862d;border-radius:1.5cqw;padding:.6cqw 1.6cqw;font-family:var(--body);font-size:2.6cqw;font-weight:600;color:#6b4a0f;white-space:nowrap}
-.cert{position:absolute;inset:5cqw;border:1cqw double #b8862d;background:#fffaf0;display:grid;grid-template-rows:auto auto 1fr auto;padding:5cqw;gap:2cqw;text-align:center}
-.cert .row{display:grid;grid-template-columns:auto 1fr;gap:1.5cqw;text-align:left;font-size:3cqw;border-bottom:.2cqw solid #e2d3b5;padding-bottom:1cqw}
-.cert .row b{font-weight:600}
-.inv{position:absolute;inset:6cqw 8cqw;background:#241b33;color:#fbf6ef;border-radius:2cqw;padding:6cqw;display:grid;gap:2.2cqw;align-content:start;text-align:center}
-.inv .row{display:grid;grid-template-columns:18cqw 1fr;gap:2cqw;text-align:left;font-size:3.1cqw}
-.inv .row b{color:#e3b25b;font-weight:600;letter-spacing:.06em}
-.check{display:grid;gap:1.6cqw;font-size:3.4cqw}
-.check span::before{content:"✓";display:inline-grid;place-items:center;width:4.6cqw;height:4.6cqw;border-radius:50%;background:#e3b25b;color:#1d1b2e;font-weight:700;font-size:2.8cqw;margin-right:2cqw}
-.steps{position:absolute;left:5cqw;right:5cqw;bottom:6cqw;display:grid;grid-template-columns:repeat(3,1fr);gap:2.5cqw}
-.steps div{background:#fff;border-radius:2cqw;padding:2.5cqw;text-align:center;box-shadow:0 1cqw 3cqw rgba(0,0,0,.08)}
-.steps b{display:block;font-family:var(--display);font-weight:400;font-size:6cqw;color:#b8862d}
-.quote{background:#fff;border-radius:2.5cqw;padding:3.5cqw;box-shadow:0 1cqw 3cqw rgba(0,0,0,.08);font-size:3.1cqw;line-height:1.35}
-.stars{color:#e3b25b;letter-spacing:.3cqw;font-size:3.6cqw}
+/* gallery tile: fixed light look, like an exported image */
+.tile{container-type:inline-size;aspect-ratio:1/1;width:100%;border-radius:10px;overflow:hidden;position:relative;background:#f6f1ea;color:#1d1b2e;box-shadow:0 10px 26px rgba(36,27,51,.14)}
+.tile .a{position:absolute}
+.tile svg.full{position:absolute;inset:0;width:100%;height:100%}
+.bar{left:0;right:0;top:0;background:#241b33;color:#fbf6ef;text-align:center;font-family:var(--cond);font-weight:600;text-transform:uppercase;font-size:6.6cqw;line-height:1;padding:9.5cqw 3cqw 3.2cqw;letter-spacing:.01em}
+.tag{left:3.5cqw;top:3cqw;background:#efe3c8;color:#241b33;font-family:var(--mono);font-size:2.7cqw;letter-spacing:.14em;padding:.8cqw 1.8cqw;border-radius:1cqw;z-index:2}
+.pillb{left:50%;transform:translateX(-50%);bottom:0;background:#241b33;color:#fbf6ef;font-family:var(--cond);font-weight:600;text-transform:uppercase;font-size:4.2cqw;padding:2.4cqw 5cqw;border-radius:2cqw 2cqw 0 0;white-space:nowrap}
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:2.9cqw;line-height:1.25}
+.big{font-family:var(--cond);font-weight:600;text-transform:uppercase;line-height:.98;letter-spacing:.005em}
+.ic{display:grid;grid-template-columns:8cqw 1fr;align-items:center;gap:2.4cqw}
+.ic svg{width:7cqw;height:7cqw}
+.ph{background:#fff3cf;border:.3cqw dashed #b8862d;border-radius:1cqw;padding:.3cqw 1.2cqw;color:#6b4a0f;font-weight:700}
+.cmp{left:5cqw;right:5cqw;top:19cqw;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;align-items:center;font-family:var(--mono);font-size:2.5cqw;text-transform:uppercase;letter-spacing:.05em}
+.cmp>div{padding:1.6cqw 1cqw;border-bottom:.25cqw solid #d9cfc2;min-height:8cqw;display:flex;align-items:center}
+.cmp .us{background:#241b33;color:#fbf6ef;justify-content:center}
+.cmp .c{justify-content:center}
+.cmp .h{font-family:var(--cond);font-weight:600;font-size:3.6cqw;border-bottom:0;justify-content:center;text-align:center;line-height:1}
+.cmp .us.h{border-radius:2cqw 2cqw 0 0;font-size:3.4cqw}
+.yes{color:#3fb58a;font-size:4.6cqw;font-weight:700}
+.no{display:inline-grid;place-items:center;width:5.4cqw;height:5.4cqw;border:.5cqw solid #c8453b;border-radius:50%;color:#c8453b;font-size:3cqw;font-weight:700;line-height:1}
+.tbl2{left:5cqw;right:5cqw;display:grid;grid-template-columns:repeat(4,1fr);font-family:var(--mono);font-size:2.6cqw;text-align:center;border:.3cqw solid #241b33;border-radius:1.2cqw;overflow:hidden;background:#fff}
+.tbl2 div{padding:1.4cqw .5cqw;border-bottom:.2cqw solid #e3d9cc}
+.tbl2 .th{background:#241b33;color:#fbf6ef;font-family:var(--cond);font-weight:600;font-size:3cqw}
+
+/* product page right column */
+.pdp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:28px;align-items:start}
+@media (max-width:860px){.pdp{grid-template-columns:1fr}}
+.strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.strip .mini{flex:0 0 96px}
+.rcol{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:14px}
+.rcol .t{font-family:var(--cond);font-weight:600;text-transform:uppercase;font-size:1.9rem;line-height:1}
+.rcol .atc{background:var(--plum);color:#fbf6ef;text-align:center;border-radius:8px;padding:14px;font-family:var(--mono);letter-spacing:.14em}
+:root:not([data-theme="light"]) .rcol .atc{outline:1px solid var(--line)}
+.trust{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;border:1px solid var(--line);border-radius:10px;padding:12px;font-family:var(--mono);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase}
+.trust .g{color:var(--green)}
+.rcol table{border-collapse:collapse;width:100%;font-family:var(--mono);font-size:.78rem}
+.rcol th,.rcol td{border:1px solid var(--line);padding:6px;text-align:center}
+.rcol th{background:var(--plum);color:#fbf6ef;font-weight:400}
+.feat{display:grid;gap:6px;margin:0;padding:0;list-style:none;font-size:.95rem}
+.feat li::before{content:"✓";display:inline-grid;place-items:center;width:1.2em;height:1.2em;border-radius:50%;background:var(--ink);color:var(--panel);font-size:.72em;margin-right:8px;font-weight:700}
+.acc{display:grid}
+.acc div{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:10px 0;font-family:var(--cond);font-weight:600;text-transform:uppercase;font-size:1.2rem}
+.kit{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.kit div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:6px;align-content:start;font-size:.92rem}
+.kit ul{margin:0;padding-left:1.1rem;color:var(--muted)}
+.sw{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px;border:1px solid rgba(0,0,0,.2)}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Instrument+Sans:wght@400;600&family=Oswald:wght@600&family=Young+Serif&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Instrument+Sans:wght@400;600&family=Oswald:wght@500;600&family=Space+Mono&family=Young+Serif&display=swap">
 
 <main class="wrap">
   <header style="display:grid;gap:10px">
-    <span class="eyebrow">Birthday Universe · Out-of-the-box product images</span>
-    <h1>Eight images that sell the Hello 64 on their own</h1>
-    <p class="lede">Each image does one job: the first one explains everything at a glance, and the rest answer the questions a shopper has before buying (fit, colors, gift, delivery, trust). They're all built around birthdays, so no other shirt store can copy them.</p>
-    <div class="warn"><b>Yellow dashed boxes = real facts only.</b> Put in your true rating, fabric, delivery days and reviews. A made-up star rating or review on a product image is illegal in the US (FTC rules) and destroys trust if customers notice.</div>
+    <span class="eyebrow">Birthday Universe · Hollow-style gallery for Hello 64</span>
+    <h1>One question per image, one look for every image</h1>
+    <p class="lede">Hollow's gallery works because every image answers one question a buyer has, and all of them share one design system. Here is the same system built for a birthday shirt.</p>
+    <div class="warn"><b>Yellow dashed boxes = your real numbers.</b> Fabric, wash results, delivery days, orders and reviews must come from your vendor and your store. Hollow can say "4,000,000+ pairs sold" because it's true; we only claim what's true for Birthday Universe.</div>
   </header>
 
-  <div class="grid" id="grid"></div>
+  <section>
+    <span class="eyebrow">What Hollow does (from your screenshots)</span>
+    <div class="learn">
+      <div><h3>Same frame on every image</h3><p>Cream background, a dark header bar with a big condensed headline, a "BEST SELLER" tag top-left, a dark pill at the bottom with one key line.</p></div>
+      <div><h3>One question per image</h3><p>What does it do (icons) · which colors · who is it for (lifestyle) · is it risky (guarantee + proof) · what's it made of · why not others (comparison) · will it fit (size tables).</p></div>
+      <div><h3>Icons + short caps labels</h3><p>Benefits are 2–3 words in monospace capitals next to a simple line icon. Easy to read on a phone.</p></div>
+      <div><h3>The right column repeats it</h3><p>Add to cart, "ships by tomorrow", guarantee, the size chart in plain sight, a features checklist, then accordions.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">The 8 gallery images</span>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section>
+    <span class="eyebrow">The product page, Hollow-style</span>
+    <h2>Gallery on the left, answers on the right</h2>
+    <div class="pdp">
+      <div style="display:grid;gap:10px;min-width:0">
+        <div id="bigview"></div>
+        <div class="strip" id="strip"></div>
+      </div>
+      <div class="rcol">
+        <div class="t">Hello 64 Birthday Shirt</div>
+        <div style="display:flex;gap:10px;align-items:baseline"><b style="font-size:1.3rem">$25.99</b><span class="mono" style="font-size:.75rem;color:var(--muted)">EST. 1962 · 6 colors · S–5XL</span></div>
+        <div class="atc">ADD TO CART</div>
+        <div class="trust"><span>🎁 Free size swap</span><span><span class="g">●</span> Ships by: <b><span class="ph" style="font-size:.8em">Tue, Oct 6</span></b></span></div>
+        <div style="font-family:var(--cond);font-weight:600;text-transform:uppercase;font-size:1.3rem">Size chart <span style="font-family:var(--body);text-transform:none;font-weight:400;font-size:.85rem;color:var(--muted)">Body width, inches</span></div>
+        <table><tr><th>Size</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>2XL</th></tr><tr><td>Width</td><td colspan="5"><span class="ph" style="font-size:.9em">real numbers from your vendor</span></td></tr><tr><td>Length</td><td colspan="5"><span class="ph" style="font-size:.9em">real numbers from your vendor</span></td></tr></table>
+        <div style="font-family:var(--cond);font-weight:600;text-transform:uppercase;font-size:1.3rem">Features</div>
+        <ul class="feat"><li>Her age and birth year, printed big and clear</li><li>Soft, breathable <span class="ph" style="font-size:.85em">fabric from vendor</span></li><li>Relaxed fit that flatters, S to 5XL</li><li>6 colors, black or white print</li><li>Made to wear all day, dinner to dessert</li></ul>
+        <div class="acc"><div>Materials <span>+</span></div><div>Washing &amp; care <span>+</span></div><div>Free size swap <span>+</span></div><div>Shipping &amp; delivery dates <span>+</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Build kit (Canva)</span>
+    <div class="kit">
+      <div><h3>Canvas</h3><ul><li>Square, 2048 × 2048 px</li><li>Background cream <span class="sw" style="background:#f6f1ea"></span>#F6F1EA</li><li>Bars and pills plum <span class="sw" style="background:#241b33"></span>#241B33</li><li>Tag and accents gold <span class="sw" style="background:#e3b25b"></span>#E3B25B</li></ul></div>
+      <div><h3>Fonts (all free in Canva)</h3><ul><li>Headlines: <b>Oswald</b> SemiBold, ALL CAPS</li><li>Labels: <b>Space Mono</b>, ALL CAPS, wide spacing</li><li>Body: Instrument Sans (or Canva Sans)</li></ul></div>
+      <div><h3>Every image has</h3><ul><li>"BIRTHDAY FAVORITE" tag top-left (or "BEST SELLER" on true best sellers)</li><li>Plum header bar or big headline</li><li>One plum pill at the bottom</li><li>Line icons from Canva Elements, search "line icon gift", "sparkle", "shirt", "truck"</li></ul></div>
+      <div><h3>Where the photos come from</h3><ul><li>Shirt cut-outs: your flat lay with background removed (Canva "BG Remover")</li><li>Models and lifestyle: ChatGPT prompts in each image's panel</li><li>All text is typed in Canva, never generated by AI</li></ul></div>
+    </div>
+  </section>
 </main>
 
 <script>
 (function(){
   var TEE='M62 22 L86 13 Q100 26 114 13 L138 22 L176 50 L159 80 L142 70 L142 190 L58 190 L58 70 L41 80 L24 50 Z';
-  function tee(fill, ink, x, y, s){
-    return '<g transform="translate('+x+','+y+') scale('+s+')"><path d="'+TEE+'" fill="'+fill+'" stroke="rgba(0,0,0,.18)" stroke-width="1.2"/>'+
-      '<text x="100" y="92" text-anchor="middle" font-family="Caveat,cursive" font-size="26" textLength="46" lengthAdjust="spacingAndGlyphs" fill="'+ink+'">hello</text>'+
-      '<text x="98" y="118" text-anchor="middle" font-family="Oswald,Arial Narrow,sans-serif" font-weight="600" font-size="19" textLength="70" lengthAdjust="spacingAndGlyphs" fill="'+ink+'">SIXTY FOUR</text>'+
-      '<path d="M141 112 c2-3 6-2 6 1 c0 3-6 6-6 6 c0 0-6-3-6-6 c0-3 4-4 6-1z" fill="'+ink+'"/>'+
-      '<text x="124" y="134" text-anchor="middle" font-family="Oswald,Arial Narrow,sans-serif" font-size="9" fill="'+ink+'">EST. 1962</text></g>';
-  }
-  function person(fill, ink, x, y, s, hair, skin){
-    return '<g transform="translate('+x+','+y+') scale('+s+')"><circle cx="100" cy="-6" r="24" fill="'+(skin||'#e9c2a6')+'"/>'+
-      '<path d="M74 -8 Q76 -38 100 -36 Q126 -38 127 -6 Q124 -22 100 -22 Q80 -22 74 -8Z" fill="'+(hair||'#d9d2c5')+'"/>'+tee(fill,ink,0,0,1)+'</g>';
-  }
-  function confetti(n,w,h,seed){ var s='',r=seed||7; for(var i=0;i<n;i++){ r=(r*9301+49297)%233280; var x=r/233280*w; r=(r*9301+49297)%233280; var y=r/233280*h; s+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="5" height="3" rx="1" fill="#e3b25b" transform="rotate('+(i*37%90)+' '+x.toFixed(1)+' '+y.toFixed(1)+')"/>'; } return s; }
-  function art(inner,bg){ return '<svg class="bgart" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><rect width="400" height="500" fill="'+(bg||'#fbf6ef')+'"/>'+inner+'</svg>'; }
-  function ph(t){ return '<span class="placeholder">'+t+'</span>'; }
-  var BLACK=['#1b1b1d','#fff'], PINK=['#f2c4cc','#1d1b2e'], SAND=['#dcc8a8','#1d1b2e'], CHAR=['#4a4a50','#fff'], NAVY=['#23304f','#fff'], WHITE=['#fbfbf8','#1d1b2e'];
+  function tee(f,ink,x,y,s){ return '<g transform="translate('+x+','+y+') scale('+s+')"><path d="'+TEE+'" fill="'+f+'" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>'+
+    '<text x="100" y="92" text-anchor="middle" font-family="Caveat,cursive" font-size="26" textLength="46" lengthAdjust="spacingAndGlyphs" fill="'+ink+'">hello</text>'+
+    '<text x="98" y="118" text-anchor="middle" font-family="Oswald,Arial Narrow,sans-serif" font-weight="600" font-size="19" textLength="70" lengthAdjust="spacingAndGlyphs" fill="'+ink+'">SIXTY FOUR</text>'+
+    '<path d="M141 112 c2-3 6-2 6 1 c0 3-6 6-6 6 c0 0-6-3-6-6 c0-3 4-4 6-1z" fill="'+ink+'"/>'+
+    '<text x="124" y="134" text-anchor="middle" font-family="Oswald,Arial Narrow,sans-serif" font-size="9" fill="'+ink+'">EST. 1962</text></g>'; }
+  function person(f,ink,x,y,s,hair,skin){ return '<g transform="translate('+x+','+y+') scale('+s+')"><circle cx="100" cy="-6" r="24" fill="'+(skin||'#e9c2a6')+'"/><path d="M74 -8 Q76 -38 100 -36 Q126 -38 127 -6 Q124 -22 100 -22 Q80 -22 74 -8Z" fill="'+(hair||'#d9d2c5')+'"/>'+tee(f,ink,0,0,1)+'</g>'; }
+  function svg(inner,bg){ return '<svg class="full" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice"><rect width="400" height="400" fill="'+(bg||'#f6f1ea')+'"/>'+inner+'</svg>'; }
+  var I = {
+    gift:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1.5S10 9 12 9zm0 0c2-4 6-4 6-1.5S14 9 12 9z"/></svg>',
+    soft:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 16c3-6 13-6 16 0M6 12c2-3 10-3 12 0M9 8c1-1 5-1 6 0"/></svg>',
+    print:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.4 6.8 19.2l1-5.9L3.5 9.2l5.9-.8z"/></svg>',
+    fit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3l-5 3 2 4 2-1v12h10V9l2 1 2-4-5-3c-1 2-3 2-4 2s-3 0-4-2z"/></svg>',
+    truck:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 6h12v10H2zM14 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>',
+    camera:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8 7l1.5-3h5L16 7"/></svg>',
+    heart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/></svg>',
+    cake:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21h16v-7H4zM4 17c2 1 4 1 6 0s4-1 6 0 3 1 4 0M12 14V9M12 6.5c1-1 .5-2.5 0-3.5-.5 1-1 2.5 0 3.5z"/></svg>'
+  };
+  function ic(icon,label){ return '<div class="ic">'+I[icon]+'<span class="mono">'+label+'</span></div>'; }
+  function ph(t){ return '<span class="ph">'+t+'</span>'; }
+  var TAG='<div class="a tag">BIRTHDAY FAVORITE</div>';
+  var C={pink:['#f2c4cc','#1d1b2e'],white:['#fbfbf8','#1d1b2e'],sand:['#dcc8a8','#1d1b2e'],char:['#4a4a50','#fff'],navy:['#23304f','#fff'],black:['#1b1b1d','#fff']};
 
   var ITEMS = [
-    { title:'The "everything at a glance" hero', job:'First image, in ads and on collection pages. Answers: what is it, why it\'s good, can I trust it.',
-      html: art(confetti(20,400,500,3)+person(BLACK[0],BLACK[1],70,120,1.3))+
-        '<div class="abs logo" style="left:5cqw;top:4cqw">Birthday Universe</div>'+
-        '<div class="abs" style="right:5cqw;top:4cqw">'+ph('★ 4.9 · 1,240 reviews')+'</div>'+
-        '<div class="abs pill cap" style="left:4cqw;top:26cqw"><span class="dot"></span>'+'Super-soft cotton</div>'+
-        '<div class="abs pill cap" style="right:4cqw;top:40cqw"><span class="dot"></span>Print won\'t crack</div>'+
-        '<div class="abs pill cap" style="left:4cqw;top:62cqw"><span class="dot"></span>Sizes S–5XL</div>'+
-        '<div class="abs pill cap" style="right:4cqw;top:78cqw"><span class="dot"></span>6 colors</div>'+
-        '<div class="abs cap" style="left:0;right:0;bottom:0;background:#241b33;color:#fbf6ef;text-align:center;padding:3cqw">Arrives before the big day · Free size swap</div>',
-      how:'Make the photo in ChatGPT (model wearing the shirt, clean cream background, lots of space around her). Add the pills, rating and bottom bar in Canva, so the text is always correct.',
-      prompt:'Photorealistic e-commerce photo of a happy woman aged about 64 with silver-blonde hair, standing centered and facing the camera, wearing the attached BLACK T-shirt with the WHITE "hello SIXTY FOUR · EST. 1962" print (copy the print exactly, letter for letter). Warm cream seamless background, a few gold confetti pieces, soft light. Leave generous empty space on both sides of her for text labels. 4:5 portrait.',
-      note:'Only use claims that are true for your shirts: check the fabric, the wash test and the size range with the vendor.' },
+    { t:'Hero: the shirt + 4 benefits', q:'"What is it and why is it good?"',
+      html: svg(tee(C.black[0],C.black[1],-6,90,1.25))+TAG+
+        '<div class="a" style="right:5cqw;top:12cqw;display:grid;gap:6.5cqw;width:40cqw">'+ic('soft','Super soft<br>cotton')+ic('print','Print that<br>won\'t crack')+ic('fit','Relaxed fit<br>S – 5XL')+ic('truck','Here before<br>the party')+'</div>',
+      how:'Canva: your flat lay with the background removed on the left, 4 line icons + Space Mono labels on the right. Mirrors Hollow\'s sock + icons image.',
+      prompt:'(No AI needed.) Canva → upload flat lay → Edit → BG Remover → place left half → Elements: line icons (gift/sparkle/shirt/truck) → labels in Space Mono caps.',
+      note:'"Print that won\'t crack" only if the vendor\'s print method is tested for it. Otherwise use "Crisp, bold print".' },
 
-    { title:'Birthday certificate', job:'Turns "EST. 1962" into something personal and funny. Also lists the product facts in a fun way.',
-      html: art('')+'<div class="cert"><div class="head" style="font-size:6.2cqw">Certificate of<br>Being Fabulous</div><div class="small" style="font-style:italic">This certifies that the wearer has been officially iconic since</div>'+
-        '<div style="display:grid;gap:1.4cqw;align-content:center"><div style="font-family:var(--block);font-size:10cqw;color:#b8862d;line-height:1">EST. 1962</div>'+
-        '<svg viewBox="0 0 200 200" style="width:34cqw;justify-self:center">'+tee(BLACK[0],BLACK[1],0,0,1)+'</svg>'+
-        '<div class="row"><b>Design</b><span>hello SIXTY FOUR</span></div><div class="row"><b>Fabric</b>'+ph('100% cotton')+'</div><div class="row"><b>Sizes</b><span>S to 5XL</span></div><div class="row"><b>Colors</b><span>6 to choose from</span></div></div>'+
-        '<div class="small" style="display:flex;justify-content:space-between;font-family:var(--script);font-size:4.4cqw"><span>Birthday Universe</span><span>Seal of approval ✦</span></div></div>',
-      how:'100% Canva: an old-style certificate frame, a flat-lay cut-out of the shirt, and the facts. Change the year and design name for every product.',
-      prompt:'(No AI needed.) Canva: search "vintage certificate" template → recolor to cream and gold → add the shirt flat-lay image with background removed → fill in the rows.',
-      note:'Works for every birth year, and people love sharing it.' },
+    { t:'Birthday colorways', q:'"Which colors can I get?"',
+      html: svg((function(){ var k=[C.pink,C.white,C.sand,C.char,C.navy,C.black],s=''; k.forEach(function(c,i){ var x=8+(i%3)*132,y=100+Math.floor(i/3)*140; s+='<line x1="'+(x+128)+'" y1="'+y+'" x2="'+(x+128)+'" y2="'+(y+130)+'" stroke="#cfc3b3" stroke-dasharray="4 4"/>'+tee(c[0],c[1],x+4,y-4,0.6); }); return s; })())+
+        '<div class="a bar">Birthday colorways</div>'+TAG+
+        '<div class="a mono" style="left:0;right:0;top:55.5cqw;display:grid;grid-template-columns:repeat(3,1fr);text-align:center">'+'<span>Light pink</span><span>White</span><span>Sand</span></div>'+
+        '<div class="a mono" style="left:0;right:0;top:90.5cqw;display:grid;grid-template-columns:repeat(3,1fr);text-align:center">'+'<span>Charcoal</span><span>Navy</span><span>Black</span></div>',
+      how:'Canva: 6 flat-lay cut-outs in a 3×2 grid with dashed dividers and Space Mono color names. Same as Hollow\'s colorways image.',
+      prompt:'ChatGPT, if you don\'t have all 6 flat lays yet:\nTop-down photo of a plain [COLOR] crew-neck T-shirt laid flat, sleeves slightly folded, on a pure light cream background, soft even light, no props. The print must be an exact copy of the attached image: "hello" script, "SIXTY FOUR" bold capitals with a small heart, "EST. 1962". [Black print on light pink/white/sand; white print on charcoal/navy/black.] Square format.',
+      note:'Keep color names identical to the Shopify variant names.' },
 
-    { title:'The party invitation', job:'Written like a birthday invite: tells what it is, when it arrives, where to wear it. Instantly on-theme.',
-      html: art(confetti(30,400,500,9),'#f4c7d0')+'<div class="inv"><div style="font-family:var(--script);font-size:6cqw;color:#e3b25b">You\'re invited to celebrate</div>'+
-        '<div class="head" style="font-size:12cqw">64</div>'+
-        '<svg viewBox="0 0 200 200" style="width:32cqw;justify-self:center">'+tee(PINK[0],PINK[1],0,0,1)+'</svg>'+
-        '<div class="row"><b>WHAT</b><span>The Hello 64 birthday shirt</span></div>'+
-        '<div class="row"><b>WHEN</b><span>Arrives in '+ph('5–7 days')+'</span></div>'+
-        '<div class="row"><b>WHERE</b><span>Dinner, brunch, the cruise, the whole weekend</span></div>'+
-        '<div class="row"><b>DRESS</b><span>6 colors · S to 5XL</span></div>'+
-        '<div class="row"><b>RSVP</b><span>Add to cart 🎉</span></div></div>',
-      how:'Canva: dark invitation card on a blush background with confetti; the shirt is a flat-lay cut-out. Swap the number and delivery days per product.',
-      prompt:'(No AI needed, or ask ChatGPT for just the background:) Top-down photo of a blush pink table covered in gold confetti and a few gold star sequins, empty space in the middle, soft light. 4:5 portrait.',
-      note:'Delivery time must be your real, tested number.' },
+    { t:'Made for her big day', q:'"Who is it for, and how will it feel?"',
+      html: svg('<rect width="400" height="400" fill="#2a2138"/>'+person(C.pink[0],C.pink[1],150,150,1.15,'#d9d2c5'),'#2a2138')+TAG+
+        '<div class="a big" style="left:5cqw;top:12cqw;color:#fbf6ef;font-size:9.6cqw;width:52cqw">Made for<br>the big<br>six-four</div>'+
+        '<div class="a" style="left:5cqw;top:52cqw;display:grid;gap:4.5cqw;color:#fbf6ef;width:48cqw">'+ic('camera','Looks great<br>in every photo')+ic('heart','Comfy from<br>cake to last dance')+ic('gift','Ready to<br>gift')+ic('cake','Her age, big<br>and proud')+'</div>',
+      how:'ChatGPT for the photo (dark, candle-lit, woman on the right half). Canva for the headline and icons on the left, like Hollow\'s "Made for swollen legs" image.',
+      prompt:'Photorealistic photo, warm and moody, candle-lit room at night with soft golden bokeh. A joyful woman aged about 64 with silver-blonde hair stands on the RIGHT half of the frame, laughing, wearing the attached T-shirt in LIGHT PINK with the BLACK print copied exactly ("hello" script, "SIXTY FOUR" bold capitals with a small heart, "EST. 1962"). The LEFT half of the image is dark and empty for text. Square format.',
+      note:'"Ready to gift" only if it ships in gift-ready packaging.' },
 
-    { title:'Recipe for the perfect 64th', job:'Fun checklist that sells the add-ons (crown, socks, tote) without feeling pushy.',
-      html: art(confetti(16,400,500,21))+'<div class="abs head" style="left:6cqw;top:6cqw;right:6cqw">Recipe for the<br>perfect 64th</div>'+
-        '<svg viewBox="0 0 200 200" class="abs" style="right:0;top:30cqw;width:56cqw">'+tee(SAND[0],SAND[1],0,0,1)+'</svg>'+
-        '<div class="abs check" style="left:6cqw;top:36cqw;width:46cqw"><span>1 Hello 64 shirt</span><span>1 sparkly crown</span><span>64 candles (or just 6 + 4)</span><span>The whole family</span><span>Zero dishes for her</span></div>'+
-        '<div class="abs small" style="left:6cqw;right:6cqw;bottom:6cqw;background:#241b33;color:#fbf6ef;border-radius:2cqw;padding:3cqw;text-align:center">Complete the look: Crown $12.99 · Socks $15.99 · Tote $34.99</div>',
-      how:'ChatGPT for a flat lay of the shirt with a crown and socks on cream; Canva for the recipe text and price bar.',
-      prompt:'Top-down flat lay on warm cream: the attached T-shirt in SAND with BLACK "hello SIXTY FOUR · EST. 1962" print (exact copy) on the right side, a gold birthday crown and a pair of pink birthday socks beside it, gold confetti. Keep the left half of the image empty for text. Soft light, 4:5 portrait.',
-      note:'Prices come from the store, so keep them up to date.' },
+    { t:'Zero risk', q:'"What if it doesn\'t fit or arrives late?"',
+      html: svg('<rect width="400" height="400" fill="#241b33"/>','#241b33')+TAG+
+        '<div class="a big" style="left:0;right:0;top:14cqw;text-align:center;color:#fbf6ef;font-size:13cqw">🎁 Zero risk</div>'+
+        '<div class="a mono" style="left:0;right:0;top:30cqw;text-align:center;color:#e3b25b">Free size swap · Real humans in 24h</div>'+
+        '<div class="a big" style="left:0;right:0;top:41cqw;text-align:center;color:#fbf6ef;font-size:5.4cqw">'+ph('X,XXX')+' birthdays celebrated</div>'+
+        '<div class="a mono" style="left:0;right:0;top:55cqw;text-align:center;color:#e3b25b">★★★★★ '+ph('real review count')+'</div>'+
+        '<div class="a" style="left:8cqw;right:8cqw;top:66cqw;background:#fbf6ef;border-radius:2cqw;padding:3.5cqw;font-size:3.2cqw;text-align:center;font-style:italic">"'+ph('A real customer quote goes here')+'"<div class="mono" style="font-style:normal;margin-top:1.5cqw;font-size:2.4cqw">'+ph('First name, State')+'</div></div>',
+      how:'Canva only. Plum background, big "Zero risk", your guarantee, your real numbers and one real review. Hollow\'s "Zero risk · 4,000,000+ pairs sold" image.',
+      prompt:'(No AI. Numbers and reviews must be real.)',
+      note:'Until reviews come in, drop the stars and quote and keep only the guarantee lines.' },
 
-    { title:'Find your fit', job:'The #1 question for women\'s tees: "how will it fit me?" Shows 3 real body types with the size each wears.',
-      html: art(confetti(10,400,500,5))+'<div class="abs head" style="left:6cqw;top:5cqw;font-size:6.4cqw">Find your fit</div>'+
-        '<svg viewBox="0 0 400 500" class="bgart">'+person(PINK[0],PINK[1],-10,170,0.8,'#d9d2c5')+person(CHAR[0],CHAR[1],118,160,0.9,'#6b6b6b','#c99a7a')+person(NAVY[0],NAVY[1],250,170,0.8,'#8a6a4a','#b98567')+'</svg>'+
-        '<div class="abs" style="left:4cqw;right:4cqw;bottom:14cqw;display:grid;grid-template-columns:repeat(3,1fr);gap:2cqw;text-align:center">'+
-        '<div class="small"><b>5\'4" · wears S</b><br>'+ph('usually size 4')+'</div><div class="small"><b>5\'6" · wears XL</b><br>'+ph('usually size 16')+'</div><div class="small"><b>5\'8" · wears M</b><br>'+ph('usually size 8')+'</div></div>'+
-        '<div class="abs small" style="left:6cqw;right:6cqw;bottom:5cqw;text-align:center;font-weight:600">Relaxed fit · Between sizes? Size up</div>',
-      how:'ChatGPT: three women of different sizes side by side in the shirt (3 colors). Canva: height and size under each.',
-      prompt:'Photorealistic catalog photo of three smiling women around 60 standing side by side on a warm cream background: a petite woman in LIGHT PINK, a curvy plus-size woman in CHARCOAL GRAY, a tall slim woman in NAVY BLUE, each wearing the attached T-shirt with the "hello SIXTY FOUR · EST. 1962" print copied exactly (black print on pink, white print on gray and navy), with jeans. Full length, relaxed poses, space at the bottom for labels. 4:5 portrait.',
-      note:'Use your real size chart to decide which size each model "wears".' },
+    { t:'Soft. Comfy. Party-proof.', q:'"What is it made of?"',
+      html: svg('<rect width="400" height="400" fill="#1d1b2e"/><g opacity=".55">'+tee(C.black[0],C.black[1],150,60,1.5)+'</g>','#1d1b2e')+TAG+
+        '<div class="a big" style="left:5cqw;top:12cqw;color:#fbf6ef;font-size:10cqw">Soft.<br>Comfy.<br>Party-proof.</div>'+
+        '<div class="a mono" style="left:5cqw;right:5cqw;top:58cqw;color:#fbf6ef;display:flex;align-items:center;gap:3cqw;font-size:3.2cqw">Birthday standard<span style="flex:1;height:.3cqw;background:#fbf6ef"></span></div>'+
+        '<div class="a" style="left:5cqw;right:5cqw;bottom:6cqw;display:grid;grid-template-columns:repeat(3,1fr);gap:3cqw;color:#fbf6ef;text-align:left">'+
+        '<div><div class="big" style="font-size:9cqw">'+ph('100%')+'</div><div class="mono" style="font-size:2.3cqw">'+ph('ring-spun cotton')+'</div></div>'+
+        '<div><div class="big" style="font-size:9cqw">'+ph('4.2')+'</div><div class="mono" style="font-size:2.3cqw">'+ph('oz, lightweight')+'</div></div>'+
+        '<div><div class="big" style="font-size:9cqw">S–5XL</div><div class="mono" style="font-size:2.3cqw">sizes</div></div></div>',
+      how:'ChatGPT or phone photo of the fabric close-up, darkened. Canva for the 3 big numbers, like Hollow\'s "48% / 47% / 5%" image.',
+      prompt:'Macro close-up photo of soft black cotton T-shirt fabric with a crisp white printed letter edge visible, gentle folds, dramatic low side light, dark and moody, shallow depth of field. Square format.',
+      note:'Your photos show a Bella+Canvas neck tag. Check the exact model with your vendor (e.g. 3001) and copy its real fabric and weight. Heather colors are usually cotton-poly blends.' },
 
-    { title:'The 6-color birthday cake', job:'Our signature "available in 6 colors" image: the shirts stacked like cake layers.',
-      html: art(confetti(22,400,500,13)+(function(){ var c=[BLACK,NAVY,CHAR,SAND,WHITE,PINK], s=''; c.forEach(function(k,i){ var w=300-i*34, x=(400-w)/2, y=400-i*44; s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="40" rx="6" fill="'+k[0]+'" stroke="rgba(0,0,0,.15)"/>'; }); return s+'<rect x="196" y="98" width="8" height="42" fill="#e3b25b"/><ellipse cx="200" cy="90" rx="6" ry="10" fill="#ffb347"/>'; })())+
-        '<div class="abs head" style="left:0;right:0;top:6cqw;text-align:center;font-size:6.4cqw">Pick your flavor</div>'+
-        '<div class="abs small" style="right:4cqw;top:40cqw;text-align:right;line-height:2.1">Light Pink<br>White<br>Sand<br>Charcoal Gray<br>Navy Blue<br>Black</div>',
-      how:'ChatGPT: 6 folded blank shirts stacked like a cake with a candle. Canva: the headline and color names.',
-      prompt:'Photorealistic product photo: six plain folded crew-neck T-shirts stacked into a tiered "birthday cake" shape, widest at the bottom: black, navy blue, charcoal gray, sand, white, light pink on top, with one lit gold birthday candle on the top shirt. Warm cream background, gold confetti, soft light. 4:5 portrait.',
-      note:'Blank shirts here, so no print errors are possible.' },
+    { t:'Birthday Universe vs. the rest', q:'"Why buy here and not somewhere else?"',
+      html: svg('')+TAG+
+        '<div class="a big" style="left:0;right:0;top:9cqw;text-align:center;font-size:5.6cqw">Our tee <span style="display:inline-grid;place-items:center;width:10cqw;height:10cqw;border-radius:50%;background:#241b33;color:#fbf6ef;font-size:4cqw;vertical-align:middle">VS</span> party-store tee</div>'+
+        '<div class="a cmp">'+
+        '<div class="h"></div><div class="us h">Birthday<br>Universe</div><div class="h">Party<br>store</div><div class="h">Generic<br>tee</div>'+
+        '<div>Her exact age &amp; year</div><div class="us"><span class="yes">✓</span></div><div class="c"><span class="no">✕</span></div><div class="c"><span class="no">✕</span></div>'+
+        '<div>Soft cotton</div><div class="us"><span class="yes">✓</span></div><div class="c"><span class="no">✕</span></div><div class="c"><span class="yes" style="color:#3fb58a">✓</span></div>'+
+        '<div>Sizes to 5XL</div><div class="us"><span class="yes">✓</span></div><div class="c"><span class="no">✕</span></div><div class="c"><span class="no">✕</span></div>'+
+        '<div>Delivery date shown</div><div class="us"><span class="yes">✓</span></div><div class="c"><span class="no">✕</span></div><div class="c"><span class="no">✕</span></div>'+
+        '<div>Free size swap</div><div class="us"><span class="yes">✓</span></div><div class="c"><span class="no">✕</span></div><div class="c"><span class="no">✕</span></div></div>',
+      how:'Canva only: a comparison table in Hollow\'s layout, with our column in plum.',
+      prompt:'(No AI needed.)',
+      note:'Compare against a general type ("party-store tee"), never a named brand, and only list rows that are really true.' },
 
-    { title:'From click to happy tears', job:'Removes the biggest worry ("will it arrive in time?") in 3 simple steps.',
-      html: art(confetti(14,400,300,17)+'<rect x="0" y="0" width="400" height="300" fill="#2a2138"/>'+confetti(18,400,300,23)+person(BLACK[0],BLACK[1],110,90,0.95,'#d9d2c5'))+
-        '<div class="abs head" style="left:6cqw;top:5cqw;color:#fbf6ef;font-size:6cqw">From click to<br>happy tears</div>'+
-        '<div class="steps"><div><b>1</b><span class="small">Pick her age, color & size</span></div><div><b>2</b><span class="small">Arrives in '+ph('5–7 days')+'</span></div><div><b>3</b><span class="small">She wears it all day</span></div></div>',
-      how:'ChatGPT: the birthday-dinner photo (she\'s wearing the shirt, candles, family). Canva: the 3 steps.',
-      prompt:'Candid photorealistic photo at a candle-lit birthday dinner: a delighted woman aged about 64 wearing the attached BLACK T-shirt with the WHITE "hello SIXTY FOUR · EST. 1962" print (copy exactly), family cheering around her, cake with candles, warm golden light, confetti. Keep the bottom third of the image calm and dark for text. 4:5 portrait.',
-      note:'Only promise the delivery time your vendor has proven.' },
+    { t:'Find your fit', q:'"Will it fit me?"',
+      html: svg(person(C.pink[0],C.pink[1],-4,95,0.78,'#d9d2c5')+person(C.char[0],C.char[1],126,88,0.86,'#6b6b6b','#c99a7a')+person(C.navy[0],C.navy[1],252,95,0.78,'#8a6a4a','#b98567'))+
+        '<div class="a bar">Find your fit</div>'+TAG+
+        '<div class="a mono" style="left:0;right:0;top:66cqw;display:grid;grid-template-columns:repeat(3,1fr);text-align:center;font-size:2.5cqw"><span>5\'4" · wears S</span><span>5\'6" · wears XL</span><span>5\'8" · wears M</span></div>'+
+        '<div class="a tbl2" style="top:73cqw"><div class="th">Size</div><div class="th">S</div><div class="th">M</div><div class="th">L</div><div>Width</div><div>'+ph('--')+'</div><div>'+ph('--')+'</div><div>'+ph('--')+'</div></div>'+
+        '<div class="a pillb">Between sizes? Go a size up</div>',
+      how:'ChatGPT for the 3 women; Canva for the header bar, labels, mini size table and bottom pill, like Hollow\'s standard vs. wide fit image.',
+      prompt:'Photorealistic catalog photo, three smiling women around 60 standing side by side from the waist up on a light cream background: a petite woman in LIGHT PINK, a curvy plus-size woman in CHARCOAL GRAY, a tall slim woman in NAVY BLUE, each wearing the attached T-shirt with the print copied exactly ("hello" script, "SIXTY FOUR" bold capitals with a small heart, "EST. 1962"; black print on pink, white print on gray and navy). Empty space above them and at the bottom for text. Square format.',
+      note:'Heights and sizes must match the real size chart.' },
 
-    { title:'What families say', job:'Social proof. Real review quotes over a real customer photo (once you have them).',
-      html: art(confetti(12,400,500,31),'#fbf6ef')+'<div class="abs head" style="left:6cqw;top:6cqw;font-size:6.4cqw">What families say</div>'+
-        '<div class="abs" style="left:6cqw;right:6cqw;top:22cqw;display:grid;gap:3cqw">'+
-        '<div class="quote"><div class="stars">★★★★★</div>'+ph('Real review quote from a real order')+'<div class="small" style="margin-top:1.5cqw;color:#645d72">'+ph('First name, State · Verified buyer')+'</div></div>'+
-        '<div class="quote"><div class="stars">★★★★★</div>'+ph('Real review quote from a real order')+'<div class="small" style="margin-top:1.5cqw;color:#645d72">'+ph('First name, State · Verified buyer')+'</div></div>'+
-        '<div class="quote"><div class="stars">★★★★★</div>'+ph('Real review quote from a real order')+'<div class="small" style="margin-top:1.5cqw;color:#645d72">'+ph('First name, State · Verified buyer')+'</div></div></div>',
-      how:'Canva template only. Leave this image out until real reviews arrive. Your review app (Judge.me) will collect them.',
-      prompt:'(No AI. Never generate reviews or "customer" photos with AI.)',
-      note:'Ask each reviewer\'s permission to use their words and photo.' }
+    { t:'Same design, every birthday', q:'"Do you have it for my age?" (unique to us)',
+      html: svg('')+'<div class="a bar">Every age. Every year.</div>'+TAG+
+        '<div class="a" style="left:6cqw;right:6cqw;top:24cqw;display:grid;grid-template-columns:repeat(5,1fr);gap:2.4cqw">'+
+        [30,35,40,45,50,55,58,60,62,63,64,65,68,70,75].map(function(n){ var on=n===64; return '<div style="aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-family:var(--cond);font-weight:600;font-size:6cqw;'+(on?'background:#241b33;color:#e3b25b':'background:#fff;color:#241b33;border:.4cqw solid #e3d9cc')+'">'+n+'</div>'; }).join('')+'</div>'+
+        '<div class="a mono" style="left:0;right:0;top:81cqw;text-align:center">Hello · Queen · Vintage year</div>'+
+        '<div class="a pillb">Tap your age on the page ↓</div>',
+      how:'Canva only: number bubbles with the current age highlighted. Tells shoppers the whole range exists and sends them to the age buttons.',
+      prompt:'(No AI needed.) Duplicate per product and move the highlight to that product\'s age.',
+      note:'List only ages you actually sell.' }
   ];
 
-  var grid = document.getElementById('grid');
-  ITEMS.forEach(function(it, i){
-    var el = document.createElement('article'); el.className = 'item';
-    el.innerHTML = '<h2><span class="num">'+(i+1)+'.</span> <span class="t"></span></h2>'+
-      '<div class="card" role="img"></div>'+
-      '<div class="how"><p class="job"></p><p class="mk"></p><details><summary>ChatGPT / Canva prompt</summary><pre></pre></details><button type="button">Copy prompt</button><p class="nt" style="font-size:.84rem"></p></div>';
-    el.querySelector('.t').textContent = it.title;
-    var card = el.querySelector('.card'); card.innerHTML = it.html; card.setAttribute('aria-label', it.title + ' mockup');
-    el.querySelector('.job').textContent = it.job;
-    el.querySelector('.mk').innerHTML = '<b>How to make it:</b> ';
-    el.querySelector('.mk').appendChild(document.createTextNode(it.how));
-    el.querySelector('pre').textContent = it.prompt;
-    el.querySelector('.nt').textContent = '⚠ ' + it.note;
-    var btn = el.querySelector('button');
-    btn.addEventListener('click', function(){
-      function done(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy prompt'; }, 1500); }
-      function fb(){ var ta=document.createElement('textarea'); ta.value=it.prompt; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); done();}catch(e){} ta.remove(); }
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(it.prompt).then(done, fb); else fb();
-    });
-    grid.appendChild(el);
+  var grid=document.getElementById('grid'), strip=document.getElementById('strip'), big=document.getElementById('bigview');
+  function tile(it){ var d=document.createElement('div'); d.className='tile'; d.setAttribute('role','img'); d.setAttribute('aria-label', it.t+' mockup'); d.innerHTML=it.html; return d; }
+  ITEMS.forEach(function(it,i){
+    var el=document.createElement('article'); el.className='item';
+    var h=document.createElement('h3'); h.innerHTML='<span class="n">'+(i+1)+'</span>'; h.appendChild(document.createTextNode(it.t)); el.appendChild(h);
+    el.appendChild(tile(it));
+    var how=document.createElement('div'); how.className='how';
+    how.innerHTML='<p><b>Answers:</b> <span class="q"></span></p><p><b>How to make it:</b> <span class="m"></span></p><details><summary>Prompt / steps</summary><pre></pre></details><button type="button">Copy prompt</button><p class="nt" style="font-size:.84rem"></p>';
+    how.querySelector('.q').textContent=it.q; how.querySelector('.m').textContent=it.how; how.querySelector('pre').textContent=it.prompt; how.querySelector('.nt').textContent='⚠ '+it.note;
+    var btn=how.querySelector('button');
+    btn.addEventListener('click',function(){ function ok(){ btn.textContent='Copied'; setTimeout(function(){btn.textContent='Copy prompt';},1500);} function fb(){ var ta=document.createElement('textarea'); ta.value=it.prompt; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); ok();}catch(e){} ta.remove(); } if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(it.prompt).then(ok,fb); else fb(); });
+    el.appendChild(how); grid.appendChild(el);
+    var mini=document.createElement('button'); mini.type='button'; mini.className='mini'; mini.style.cssText='padding:0;border:2px solid transparent;border-radius:8px;background:none;cursor:pointer';
+    mini.setAttribute('aria-label','Show '+it.t); mini.appendChild(tile(it));
+    mini.addEventListener('click',function(){ show(i); }); strip.appendChild(mini);
   });
+  function show(i){ big.replaceChildren(tile(ITEMS[i])); [].forEach.call(strip.children,function(b,j){ b.style.borderColor = j===i ? '#e3b25b' : 'transparent'; }); }
+  show(0);
 })();
 </script>
