@@ -1,0 +1,74 @@
+<title>Birthday Universe Website Brief</title>
+<style>
+/* Layout: single reading column with a sticky copy bar; tables scroll inside their own box. */
+:root{--bg:#fbf6ef;--panel:#ffffff;--ink:#1d1b2e;--muted:#625b70;--line:#e8dfd6;--plum:#241b33;--gold:#9a6512;--gold-btn:#e3b25b;--pink:#f4c7d0;
+--display:"Young Serif",Georgia,serif;--body:"Instrument Sans",system-ui,-apple-system,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17131f;--panel:#201b2b;--ink:#f2edf5;--muted:#aaa2b8;--line:#342d42;--plum:#0f0c16;--gold:#e3b25b;--gold-btn:#e3b25b;--pink:#4a2f3a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17131f;--panel:#201b2b;--ink:#f2edf5;--muted:#aaa2b8;--line:#342d42;--plum:#0f0c16;--gold:#e3b25b;--gold-btn:#e3b25b;--pink:#4a2f3a;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:3;background:var(--plum);color:#fbf6ef;padding-block:10px}
+.bar .in{max-width:860px;margin:0 auto;padding-inline:20px;display:flex;gap:10px 12px;align-items:center;flex-wrap:wrap}
+.bar b{font-family:var(--display);font-weight:400;font-size:1.05rem}
+.bar .sp{flex:1}
+button{font:inherit;font-weight:600;border:0;border-radius:10px;padding:8px 14px;min-height:40px;cursor:pointer;background:var(--gold-btn);color:#1d1b2e}
+button.ghost{background:transparent;color:#fbf6ef;border:1px solid rgba(251,246,239,.45)}
+#msg{font-size:.85rem;color:#f4c7d0}
+main{max-width:860px;margin:0 auto;padding-inline:20px;padding-block:28px 80px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.2;text-wrap:balance}
+h1{font-size:clamp(1.9rem,5vw,2.7rem);margin:.2em 0}
+h2{font-size:1.6rem;margin:2.2em 0 .5em;padding-top:1.2em;border-top:1px solid var(--line)}
+h3{font-size:1.15rem;margin:1.6em 0 .4em}
+p,li{max-width:70ch}
+a{color:var(--gold)}
+blockquote{margin:1em 0;padding:14px 18px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--gold-btn);border-radius:4px 10px 10px 4px}
+blockquote p{margin:.35em 0}
+pre{background:var(--plum);color:#f2edf5;padding:16px;border-radius:10px;overflow-x:auto;font-family:var(--mono);font-size:.82rem;line-height:1.55;white-space:pre-wrap}
+code{font-family:var(--mono);font-size:.88em;background:var(--pink);color:var(--ink);padding:1px 5px;border-radius:4px}
+pre code{background:none;color:inherit;padding:0}
+.tw{overflow-x:auto;margin:1em 0;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:8px 12px;border-bottom:1px solid var(--line)}
+th{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+hr{border:0;margin:0}
+li input[type=checkbox]{margin-right:6px;accent-color:var(--gold-btn)}
+em{color:var(--muted)}
+:focus-visible{outline:2px solid var(--gold-btn);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600&family=JetBrains+Mono&family=Young+Serif&display=swap">
+<div class="bar"><div class="in"><b>Birthday Universe · Build Brief</b><span class="sp"></span><span id="msg" aria-live="polite"></span><button id="copyPrompt" class="ghost" type="button">Copy master prompt</button><button id="copyAll" type="button">Copy full brief</button></div></div>
+<main id="doc"><h1>Birthday Universe: Complete Website Build Brief</h1><p>Loading the brief…</p></main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script>
+(function(){
+  var doc = document.getElementById('doc');
+  var msg = document.getElementById('msg');
+  var src = '';
+  fetch('brief.md').then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); }).then(function(text){
+    src = text;
+    if (window.marked) {
+      doc.innerHTML = marked.parse(src, {gfm:true});
+      doc.querySelectorAll('table').forEach(function(t){ var w=document.createElement('div'); w.className='tw'; t.parentNode.insertBefore(w,t); w.appendChild(t); });
+    } else {
+      var pre = document.createElement('pre'); pre.textContent = src; doc.replaceChildren(pre);
+    }
+  }).catch(function(){
+    doc.querySelector('p').textContent = 'The brief could not load. Refresh the page to try again.';
+  });
+  function copy(text, label){
+    if (!text) { msg.textContent = 'Still loading, try again in a second'; return; }
+    function fallback(){
+      var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); msg.textContent = label + ' copied'; } catch(e){ msg.textContent = 'Select the text and copy it by hand'; }
+      ta.remove();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function(){ msg.textContent = label + ' copied'; }, fallback);
+    else fallback();
+  }
+  document.getElementById('copyAll').addEventListener('click', function(){ copy(src, 'Full brief'); });
+  document.getElementById('copyPrompt').addEventListener('click', function(){
+    var m = src.match(/## 0\. Master prompt[\s\S]*?```\n([\s\S]*?)```/);
+    copy(m ? m[1] : src, 'Master prompt');
+  });
+})();
+</script>
