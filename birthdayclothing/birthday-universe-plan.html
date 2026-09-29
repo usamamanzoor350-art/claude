@@ -1,0 +1,433 @@
+<title>Birthday Universe Plan</title>
+<style>
+/* Layout: one reading column with a sticky progress bar; the phased checklist is the working heart of the page. */
+:root{
+  --bg:#fbf8f6; --panel:#ffffff; --ink:#1d1b2e; --muted:#5f5a70; --line:#e7e1e6;
+  --accent:#c2415d; --accent-soft:#f8e4e9; --gold:#b7791f; --gold-soft:#faefd9;
+  --good:#2f7d5b; --good-soft:#e2f2ea; --warn:#b4541a; --warn-soft:#fbeadd;
+  --display:"Young Serif",Georgia,"Times New Roman",serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#15131f; --panel:#1e1b2b; --ink:#f1edf4; --muted:#a9a2b8; --line:#322d42;
+  --accent:#ef7d97; --accent-soft:#3a2230; --gold:#e3b25b; --gold-soft:#352a17;
+  --good:#6fcf9f; --good-soft:#193127; --warn:#f0a06b; --warn-soft:#3a2517; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15131f; --panel:#1e1b2b; --ink:#f1edf4; --muted:#a9a2b8; --line:#322d42;
+  --accent:#ef7d97; --accent-soft:#3a2230; --gold:#e3b25b; --gold-soft:#352a17;
+  --good:#6fcf9f; --good-soft:#193127; --warn:#f0a06b; --warn-soft:#3a2517; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding-inline:20px;padding-block:28px 80px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem)}
+h2{font-size:1.65rem;margin-bottom:.4rem}
+h3{font-size:1.15rem}
+p{margin:0;max-width:65ch}
+.eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.lede{color:var(--muted);font-size:1.08rem;margin-top:.6rem}
+section{padding-block:36px;border-top:1px solid var(--line);display:grid;gap:16px}
+header.top{display:grid;gap:10px;padding-bottom:26px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bar nav{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:.85rem}
+.bar a{color:var(--muted);text-decoration:none}
+.bar a:hover,.bar a:focus-visible{color:var(--accent)}
+.prog{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:.85rem;font-variant-numeric:tabular-nums}
+.meter{width:110px;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:2px}
+.stat b{font-family:var(--display);font-weight:400;font-size:1.7rem;font-variant-numeric:tabular-nums}
+.stat span{font-size:.85rem;color:var(--muted)}
+.stat.alert b{color:var(--warn)}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:10px;min-width:0}
+.scroll{overflow-x:auto;display:grid;gap:6px}
+.cols{display:grid;grid-template-columns:repeat(13,minmax(34px,1fr));align-items:end;gap:6px;height:170px;min-width:480px}
+.col{display:flex;flex-direction:column;justify-content:flex-end;gap:3px;height:100%;text-align:center;font-size:.72rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.col i{display:block;height:calc(var(--h) * .85);background:var(--accent);border-radius:4px 4px 0 0;opacity:.85}
+.col.dim i{background:var(--muted);opacity:.4}
+.xlab{display:grid;grid-template-columns:repeat(13,minmax(34px,1fr));gap:6px;font-size:.7rem;color:var(--muted);text-align:center;min-width:480px;font-family:var(--mono)}
+.note{font-size:.85rem;color:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+.tbl{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line)}
+th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
+.causes{display:grid;gap:12px}
+.cause{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:baseline}
+.cause .k{font-family:var(--mono);font-size:.8rem;color:var(--warn);background:var(--warn-soft);border-radius:6px;padding:2px 8px}
+.cause p{grid-column:2;color:var(--muted)}
+.story{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:4px 10px 10px 4px;padding:18px 20px;display:grid;gap:10px;font-family:var(--display);font-size:1.12rem;line-height:1.55}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--gold-soft);color:var(--ink);border-radius:99px;padding:4px 12px;font-size:.9rem}
+ul.plain{margin:0;padding-left:1.1rem;display:grid;gap:6px;max-width:65ch}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:6px;align-content:start;min-width:0}
+.box p,.box li{font-size:.93rem;color:var(--muted)}
+.wire{display:grid;gap:6px;counter-reset:w}
+.wire div{display:grid;grid-template-columns:2rem 1fr;gap:10px;align-items:baseline;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.wire div::before{counter-increment:w;content:counter(w);font-family:var(--mono);font-size:.8rem;color:var(--accent)}
+.wire b{font-weight:600}
+.wire span{display:block;color:var(--muted);font-size:.9rem}
+.ads{display:grid;gap:10px}
+.ad{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:4px}
+.ad .hook{font-family:var(--display);font-size:1.05rem}
+.ad p{font-size:.92rem;color:var(--muted)}
+.calc{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:14px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.fields label{display:grid;gap:4px;font-size:.82rem;color:var(--muted)}
+.fields input{font:inherit;font-variant-numeric:tabular-nums;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:100%;box-sizing:border-box}
+.result{display:flex;flex-wrap:wrap;gap:8px 24px;font-variant-numeric:tabular-nums}
+.result b{font-family:var(--display);font-weight:400;font-size:1.5rem}
+.pos{color:var(--good)} .neg{color:var(--warn)}
+.phase{display:grid;gap:8px}
+.phase-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.phase-head small{color:var(--muted);font-variant-numeric:tabular-nums}
+.task{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer}
+.task input{width:20px;height:20px;margin-top:3px;accent-color:var(--accent);cursor:pointer}
+.task .t{min-width:0;display:block}
+.task .t b{font-weight:600;display:block}
+.task .t span{font-size:.88rem;color:var(--muted)}
+.task.done .t b{text-decoration:line-through;color:var(--muted)}
+.who{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:2px 9px;white-space:nowrap;font-weight:600}
+.who.you{background:var(--accent-soft);color:var(--accent)}
+.who.claude{background:var(--good-soft);color:var(--good)}
+.who.both{background:var(--gold-soft);color:var(--gold)}
+.save{font-size:.8rem;color:var(--muted)}
+.urgent{background:var(--warn-soft);border-radius:10px;padding:12px 16px;font-size:.95rem}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:520px){.task{grid-template-columns:auto 1fr}.task .who{grid-column:2;justify-self:start}.prog{margin-left:0}}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600&family=JetBrains+Mono&family=Young+Serif&display=swap">
+
+<main class="wrap" id="app">
+  <header class="top">
+    <span class="eyebrow">birthdayclothing.com → Birthday Universe</span>
+    <h1>From one lucky launch to a real birthday brand</h1>
+    <p class="lede">Your numbers, why sales keep dropping after two weeks, and a step-by-step plan to build Birthday Universe. Tick each step as we finish it.</p>
+  </header>
+
+  <div class="bar">
+    <nav aria-label="Sections">
+      <a href="#numbers">Numbers</a><a href="#why">Why sales drop</a><a href="#brand">Brand</a><a href="#website">Website</a><a href="#videos">Video ads</a><a href="#money">Money</a><a href="#roadmap">Roadmap</a>
+    </nav>
+    <div class="prog"><div class="meter"><i id="meter"></i></div><span id="progtext">0 of 0 done</span></div>
+  </div>
+
+  <section id="numbers">
+    <span class="eyebrow">1 · Where you stand</span>
+    <h2>Your Shopify numbers</h2>
+    <p class="note">From the connected Shopify store, May 1 to Sep 28, 2026. The store has no sales before May 2026.</p>
+    <div class="stats">
+      <div class="stat"><b>$216k</b><span>net sales since May</span></div>
+      <div class="stat"><b>$31</b><span>average order: about one shirt</span></div>
+      <div class="stat alert"><b>94%</b><span>of orders from Facebook + Instagram</span></div>
+      <div class="stat alert"><b>3%</b><span>of customers came back (208 of 6,827)</span></div>
+      <div class="stat"><b>3.8%</b><span>of visits end in a purchase</span></div>
+      <div class="stat alert"><b>51%</b><span>of people who reach checkout finish it</span></div>
+    </div>
+    <div class="chart" role="img" aria-label="Weekly orders: about 50 a week in July, jumping to 1,697 in the week of Aug 3, then falling every week to 98 by the week of Sep 21.">
+      <h3>Orders per week</h3>
+      <div class="scroll"><div class="cols">
+        <div class="col dim"><span>51</span><i style="--h:3%"></i></div>
+        <div class="col dim"><span>59</span><i style="--h:3.5%"></i></div>
+        <div class="col dim"><span>64</span><i style="--h:3.8%"></i></div>
+        <div class="col dim"><span>21</span><i style="--h:1.2%"></i></div>
+        <div class="col"><span>720</span><i style="--h:42%"></i></div>
+        <div class="col"><span>1,697</span><i style="--h:100%"></i></div>
+        <div class="col"><span>1,082</span><i style="--h:64%"></i></div>
+        <div class="col"><span>886</span><i style="--h:52%"></i></div>
+        <div class="col"><span>589</span><i style="--h:35%"></i></div>
+        <div class="col"><span>578</span><i style="--h:34%"></i></div>
+        <div class="col"><span>154</span><i style="--h:9%"></i></div>
+        <div class="col"><span>201</span><i style="--h:12%"></i></div>
+        <div class="col"><span>98</span><i style="--h:5.8%"></i></div>
+      </div>
+      <div class="xlab"><span>6/29</span><span>7/6</span><span>7/13</span><span>7/20</span><span>7/27</span><span>8/3</span><span>8/10</span><span>8/17</span><span>8/24</span><span>8/31</span><span>9/7</span><span>9/14</span><span>9/21</span></div></div>
+      <p class="note">This is exactly the pattern you described: a new design launches, one week explodes, then orders fall by about a third every week until the ad stops working.</p>
+    </div>
+    <h3>Best sellers, last 12 months</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Product</th><th class="n">Orders</th><th class="n">Net sales</th></tr></thead>
+      <tbody>
+        <tr><td>Hello 60</td><td class="n">728</td><td class="n">$21,719</td></tr>
+        <tr><td>Hello 65</td><td class="n">649</td><td class="n">$19,039</td></tr>
+        <tr><td>Hello 50</td><td class="n">485</td><td class="n">$14,551</td></tr>
+        <tr><td>Hello 63</td><td class="n">447</td><td class="n">$13,101</td></tr>
+        <tr><td>Hello 59</td><td class="n">279</td><td class="n">$7,754</td></tr>
+        <tr><td>50th Vintage 1976</td><td class="n">232</td><td class="n">$7,209</td></tr>
+        <tr><td>Hello 40</td><td class="n">238</td><td class="n">$7,037</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">The "Hello" line is the brand today. Your buyers are women turning 50 to 65, or their daughters buying for them, which makes them mostly Gen X and Boomers, with Millennial daughters as gift buyers. Check the age split in Meta Ads Manager to see which of the two is actually paying.</p>
+  </section>
+
+  <section id="why">
+    <span class="eyebrow">2 · Diagnosis</span>
+    <h2>Why sales die after 15 days</h2>
+    <div class="causes">
+      <div class="cause"><span class="k">creative</span><h3>One ad carries everything</h3><p>Meta shows the same static image to the same people until they stop reacting. That's why a new design works for 1–2 weeks and then fades. The fix is a steady supply of new videos every week, not one perfect ad.</p></div>
+      <div class="cause"><span class="k">retention</span><h3>Every sale is bought with ad money</h3><p>Only 3% of customers come back. Birthdays happen every year, and every buyer has a mom, sister and friends with birthdays too. Email and SMS reminders make that repeat business almost free.</p></div>
+      <div class="cause"><span class="k">channel</span><h3>One channel</h3><p>94% of orders come from Meta. One bad month there, or one account problem, and the business stops. Google Shopping and Pinterest people are already searching for "60th birthday shirt".</p></div>
+      <div class="cause"><span class="k">basket</span><h3>People buy one shirt</h3><p>At $31 per order, the ad has to pay for itself on a single tee. Squad packs and add-ons (sash, tumbler, crown) raise the order value, so you can afford to spend more to win each customer.</p></div>
+      <div class="cause"><span class="k">trust</span><h3>Late deliveries hurt the name</h3><p>A birthday shirt that arrives after the birthday is worthless to the buyer. A new domain alone won't fix that; reliable delivery dates and fast support will.</p></div>
+    </div>
+  </section>
+
+  <section id="brand">
+    <span class="eyebrow">3 · Brand</span>
+    <h2>Birthday Universe</h2>
+    <p><b>Position:</b> the first place an American woman goes when a milestone birthday is coming, for herself, her mom or her best friend. Start with what already sells (milestone shirts for women 40–80), then add the rest of the day: sashes, crowns, tumblers, squad shirts, party decor.</p>
+    <div class="story">
+      <p>For one day a year, everyone is the center of the universe.</p>
+      <p>For six years we've made the shirts women wear on that day: the Hello 60s, the Queen is 79s, the ones that get a hundred photos at dinner. We learned what the day needs. It has to arrive on time, it has to fit, and it has to make her feel celebrated.</p>
+      <p>Birthday Universe is everything for that day, in one place.</p>
+    </div>
+    <p class="note">First draft of the brand story. It's honest about the six years, which is your strongest trust signal. We'll polish it together.</p>
+    <h3>Tagline options</h3>
+    <div class="chips"><span class="chip">Your day. Your universe.</span><span class="chip">Every age deserves a party.</span><span class="chip">Hello, best year yet.</span><span class="chip">Made for the milestone.</span></div>
+    <h3>Three promises (only if you can keep them)</h3>
+    <ul class="plain">
+      <li><b>Here before the birthday.</b> Show a real delivery date on every product page. Promise it only after the vendor has proven the times in test orders.</li>
+      <li><b>A real person in 24 hours.</b> Every email and chat answered within one day.</li>
+      <li><b>Wrong size? We fix it.</b> One free size swap.</li>
+    </ul>
+    <div class="urgent"><b>Domain check (Sep 29):</b> birthdayuniverse.co is <b>not registered yet</b> and is available for about $14/year. Register it today so nobody else takes it. Americans often type ".com" by habit, and birthdayuniverse.com did not show up as available, so find out who owns it. If you can buy it, point it to the store too.</div>
+  </section>
+
+  <section id="website">
+    <span class="eyebrow">4 · Website</span>
+    <h2>A homepage that feels like the party started</h2>
+    <p>Almost all your traffic comes from Facebook and Instagram, so that means phones. A "cinematic" site has to load fast on a phone: one short hero video (under 3 MB, no sound), then quick ways to find the right age.</p>
+    <div class="wire">
+      <div><p><b>Hero video + one line</b><span>Slow-motion confetti and a woman opening her "Hello 60" tee. Headline: "Every age deserves a party." Button: Shop by age.</span></p></div>
+      <div><p><b>"What birthday are we celebrating?"</b><span>A row of big number buttons, 30 · 40 · 50 · 60 · 65 · 70 · 80+. Your products are sold by age, so this is the fastest path to the right shirt.</span></p></div>
+      <div><p><b>Order-by-date banner</b><span>"Birthday on Oct 18? Order by Oct 8." Builds trust right away and answers the question everyone has.</span></p></div>
+      <div><p><b>Shop by who it's for</b><span>For Mom · For Grandma · For my best friend · For me · For the whole squad.</span></p></div>
+      <div><p><b>Best sellers</b><span>Hello 60, Hello 65, Hello 50, Queen collection, Vintage year shirts.</span></p></div>
+      <div><p><b>Real birthday photos</b><span>Customer photos and reviews. Collect these from day one with a post-purchase email.</span></p></div>
+      <div><p><b>Squad pack</b><span>"Matching shirts for the birthday crew. 4+ shirts, 15% off."</span></p></div>
+      <div><p><b>Our story</b><span>The short brand story plus the three promises.</span></p></div>
+      <div><p><b>Birthday reminder signup</b><span>"Tell us whose birthday is coming. We'll remind you 3 weeks before and send 10% off." This is the start of repeat sales.</span></p></div>
+    </div>
+    <h3>Which tools to use (one-person setup)</h3>
+    <div class="two">
+      <div class="box"><h3>Store and design</h3><p>Shopify with a fast free theme (Dawn or Horizon). A paid theme is optional. I can write custom sections for the theme, like the age picker and order-by banner, and you paste them in.</p></div>
+      <div class="box"><h3>Words and data</h3><p>Claude (me): brand copy, product titles and descriptions, SEO, emails, ad scripts, and a weekly look at your Shopify numbers through the connector.</p></div>
+      <div class="box"><h3>Images and video</h3><p>Omni Flash for AI video stories, Google image tools for lifestyle scenes, CapCut for editing and captions. Use real shirt mockups on close-ups so the print is always correct.</p></div>
+      <div class="box"><h3>Shopify apps</h3><p>Klaviyo (email and SMS flows), Judge.me (reviews with photos), and a delivery-date estimator. Start with these three and add more only when you need them.</p></div>
+    </div>
+  </section>
+
+  <section id="videos">
+    <span class="eyebrow">5 · Video ads</span>
+    <h2>A video engine, not a single video</h2>
+    <p>The rule: make <b>3 to 5 new ads every week</b>, each about 15–30 seconds, vertical, with captions, and a hook in the first 2 seconds. Keep the winners running and replace the losers every week, so there is always a fresh ad ready before the old one fades.</p>
+    <div class="ads">
+      <div class="ad"><span class="eyebrow">Reaction</span><p class="hook">"I gave my mom her 60th birthday shirt…"</p><p>A daughter films mom opening the package. The real reaction is usually your strongest ad. Get these from customers and UGC creators.</p></div>
+      <div class="ad"><span class="eyebrow">Find your year</span><p class="hook">"What year were you born? Stop scrolling when you see it."</p><p>Fast flip through 1946 → 1996 shirts. The viewer waits for their own year, so they keep watching.</p></div>
+      <div class="ad"><span class="eyebrow">Fairy tale (AI)</span><p class="hook">The princess, the witch and the tee tree.</p><p>The Omni Flash story we already wrote. Good for attention and brand feel. Test it next to real-people ads.</p></div>
+      <div class="ad"><span class="eyebrow">Squad</span><p class="hook">"When the whole birthday crew shows up matching."</p><p>Four friends at a brunch in Hello 50 shirts. Sells the squad pack.</p></div>
+      <div class="ad"><span class="eyebrow">Trust</span><p class="hook">"Ordered Monday, arrived Friday, birthday Saturday."</p><p>Unboxing with the real delivery date on screen. Answers the #1 fear directly.</p></div>
+      <div class="ad"><span class="eyebrow">Last minute</span><p class="hook">"Her birthday is in 2 weeks and you still have no gift?"</p><p>Gentle urgency with the order-by date. Works well near weekends.</p></div>
+      <div class="ad"><span class="eyebrow">Founder</span><p class="hook">"Six years, thousands of birthdays. Here's what we changed."</p><p>You or a voice-over, talking about the new promises. Builds trust for the new name.</p></div>
+      <div class="ad"><span class="eyebrow">Queen</span><p class="hook">"She's not getting older. She's getting royal."</p><p>For the Queen line: grandma in a crown with the family singing.</p></div>
+    </div>
+  </section>
+
+  <section id="money">
+    <span class="eyebrow">6 · Money</span>
+    <h2>Profit per order</h2>
+    <p>Before we scale ads, we need to know how much you can pay Meta for one order and still make money. Put in your real numbers. The ones shown are examples.</p>
+    <div class="calc">
+      <div class="fields">
+        <label for="c-aov">Average order ($)<input id="c-aov" type="number" step="0.01" value="31"></label>
+        <label for="c-cogs">Shirt + printing cost ($)<input id="c-cogs" type="number" step="0.01" value="11"></label>
+        <label for="c-ship">Shipping you pay ($)<input id="c-ship" type="number" step="0.01" value="5"></label>
+        <label for="c-cpa">Ad cost per order ($)<input id="c-cpa" type="number" step="0.01" value="10"></label>
+      </div>
+      <div class="result" aria-live="polite">
+        <div>Profit per order<br><b id="r-profit">–</b></div>
+        <div>Most you can pay per order and break even<br><b id="r-max">–</b></div>
+      </div>
+      <p class="note">Payment fees are estimated at 2.9% + $0.30 (Shopify Basic online rate). Raising the average order from $31 to $45 with bundles lets you pay much more per customer, and that is how you outbid competitors.</p>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <span class="eyebrow">7 · Roadmap</span>
+    <h2>Step by step, in order</h2>
+    <p>Fix the base first: trust and delivery come before a beautiful site, and a beautiful site comes before more ad spend. Each step says who does it. <span id="savestate" class="save"></span></p>
+
+    <div class="phase" data-phase>
+      <div class="phase-head"><h3>Phase 0 · Fix the base</h3><small data-count></small></div>
+      <label class="task" data-id="f1"><input type="checkbox"><span class="t"><b>Register birthdayuniverse.co today</b><span>And find out who owns birthdayuniverse.com.</span></span><span class="who you">You</span></label>
+      <label class="task" data-id="f2"><input type="checkbox"><span class="t"><b>Lock down the vendor</b><span>Written production and shipping times, a backup vendor, and 3 test orders to US addresses.</span></span><span class="who you">You</span></label>
+      <label class="task" data-id="f3"><input type="checkbox"><span class="t"><b>Honest shipping, returns and size-swap policy</b><span>I draft, you check against what the vendor really does.</span></span><span class="who both">Together</span></label>
+      <label class="task" data-id="f4"><input type="checkbox"><span class="t"><b>Support setup</b><span>support@ email, Shopify Inbox chat, order-tracking page, 24-hour reply rule, saved replies.</span></span><span class="who both">Together</span></label>
+      <label class="task" data-id="f5"><input type="checkbox"><span class="t"><b>Plan the move from birthdayclothing.com</b><span>Keep it selling until the new store is ready, then redirect it so ads, links and search traffic aren't lost.</span></span><span class="who both">Together</span></label>
+    </div>
+
+    <div class="phase" data-phase>
+      <div class="phase-head"><h3>Phase 1 · Brand</h3><small data-count></small></div>
+      <label class="task" data-id="b1"><input type="checkbox"><span class="t"><b>Final brand story and tagline</b><span>From the draft above.</span></span><span class="who both">Together</span></label>
+      <label class="task" data-id="b2"><input type="checkbox"><span class="t"><b>Brand kit</b><span>Logo, colors, fonts, and how the shirts are photographed.</span></span><span class="who both">Together</span></label>
+      <label class="task" data-id="b3"><input type="checkbox"><span class="t"><b>Voice guide + 20 example captions</b><span>Warm, funny, a little sassy, never cheap.</span></span><span class="who claude">Claude</span></label>
+    </div>
+
+    <div class="phase" data-phase>
+      <div class="phase-head"><h3>Phase 2 · Website</h3><small data-count></small></div>
+      <label class="task" data-id="w1"><input type="checkbox"><span class="t"><b>Pick and install the theme</b><span>Dawn or Horizon to start.</span></span><span class="who you">You</span></label>
+      <label class="task" data-id="w2"><input type="checkbox"><span class="t"><b>Build the homepage</b><span>The 9 sections from the website plan.</span></span><span class="who both">Together</span></label>
+      <label class="task" data-id="w3"><input type="checkbox"><span class="t"><b>"Shop by age" collections and picker</b><span>30 to 80+. I write the code and set up collections through the connector.</span></span><span class="who claude">Claude</span></label>
+      <label class="task" data-id="w4"><input type="checkbox"><span class="t"><b>Product page upgrade</b><span>Delivery date, size chart, reviews, "complete the look" add-ons.</span></span><span class="who both">Together</span></label>
+      <label class="task" data-id="w5"><input type="checkbox"><span class="t"><b>Rewrite product titles and descriptions</b><span>Clear, searchable, on-brand.</span></span><span class="who claude">Claude</span></label>
+      <label class="task" data-id="w6"><input type="checkbox"><span class="t"><b>Reviews app with photos</b><span>Bring over only real reviews from real orders.</span></span><span class="who you">You</span></label>
+      <label class="task" data-id="w7"><input type="checkbox"><span class="t"><b>Tracking</b><span>Meta Pixel + Conversions API and Google Analytics, tested with one real order.</span></span><span class="who you">You</span></label>
+      <label class="task" data-id="w8"><input type="checkbox"><span class="t"><b>Phone speed and checkout test</b><span>Loads in under 3 seconds on a phone, and checkout works end to end.</span></span><span class="who both">Together</span></label>
+    </div>
+
+    <div class="phase" data-phase>
+      <div class="phase-head"><h3>Phase 3 · Video engine</h3><small data-count></small></div>
+      <label class="task" data-id="v1"><input type="checkbox"><span class="t"><b>Backlog of 20 video ideas with scripts and prompts</b><span>Built from the 8 angles above.</span></span><span class="who claude">Claude</span></label>
+      <label class="task" data-id="v2"><input type="checkbox"><span class="t"><b>Make the first 6 videos</b><span>3 AI (Omni Flash), 3 filmed on a phone.</span></span><span class="who you">You</span></label>
+      <label class="task" data-id="v3"><input type="checkbox"><span class="t"><b>Find 3 UGC creators</b><span>Women 50+ and daughters, paid per video.</span></span><span class="who you">You</span></label>
+      <label class="task" data-id="v4"><input type="checkbox"><span class="t"><b>Weekly rhythm: 3–5 new ads every week</b><span>Keep the winners and switch off the losers.</span></span><span class="who you">You</span></label>
+      <label class="task" data-id="v5"><input type="checkbox"><span class="t"><b>Weekly numbers review</b><span>Every Monday I pull the Shopify numbers and we decide what to make next.</span></span><span class="who both">Together</span></label>
+    </div>
+
+    <div class="phase" data-phase>
+      <div class="phase-head"><h3>Phase 4 · Repeat customers and bigger orders</h3><small data-count></small></div>
+      <label class="task" data-id="r1"><input type="checkbox"><span class="t"><b>Email flows</b><span>Welcome, abandoned checkout, shipping updates, review request. I write them, you set them up in Klaviyo.</span></span><span class="who both">Together</span></label>
+      <label class="task" data-id="r2"><input type="checkbox"><span class="t"><b>Birthday reminder program</b><span>Collect whose birthday is coming, remind 3 weeks before.</span></span><span class="who both">Together</span></label>
+      <label class="task" data-id="r3"><input type="checkbox"><span class="t"><b>Squad pack + add-on bundles</b><span>Goal: average order from $31 to $40+.</span></span><span class="who both">Together</span></label>
+    </div>
+
+    <div class="phase" data-phase>
+      <div class="phase-head"><h3>Phase 5 · Grow the universe</h3><small data-count></small></div>
+      <label class="task" data-id="e1"><input type="checkbox"><span class="t"><b>First accessory line</b><span>Sashes, tumblers or crowns that match the Hello and Queen designs.</span></span><span class="who you">You</span></label>
+      <label class="task" data-id="e2"><input type="checkbox"><span class="t"><b>Google Shopping</b><span>People search "60th birthday shirt" every day.</span></span><span class="who you">You</span></label>
+      <label class="task" data-id="e3"><input type="checkbox"><span class="t"><b>Pinterest and TikTok</b><span>Reuse the same videos.</span></span><span class="who you">You</span></label>
+      <label class="task" data-id="e4"><input type="checkbox"><span class="t"><b>12-month calendar</b><span>Holiday gifting, Valentine's, Mother's Day, and when each design launches.</span></span><span class="who claude">Claude</span></label>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="state">{"done":[]}</script>
+<script>
+(function(){
+  // Capture the authored parts of the page before anything changes, so a save can rebuild the same document.
+  var headStyle = document.head.querySelector('style');
+  var RESET = headStyle ? headStyle.textContent : '';
+  var ownTitle = document.querySelector('body > title, title');
+  var parts = {
+    title: ownTitle ? ownTitle.outerHTML : '<title>Birthday Universe Plan</title>',
+    style: [].map.call(document.querySelectorAll('body > style'), function(s){ return s.outerHTML; }).join(''),
+    font: [].map.call(document.querySelectorAll('body > link[rel="stylesheet"]'), function(l){ return l.outerHTML; }).join(''),
+    app: document.getElementById('app').outerHTML,
+    script: document.currentScript.outerHTML
+  };
+
+  var state = {done: []};
+  try { state = JSON.parse(document.getElementById('state').textContent) || state; } catch(e) {}
+  var done = new Set(state.done || []);
+  var saveEl = document.getElementById('savestate');
+  var LS = 'bu-plan-done';
+  var mode = 'pending';
+
+  function render(){
+    var tasks = document.querySelectorAll('.task');
+    var n = 0;
+    tasks.forEach(function(t){
+      var on = done.has(t.dataset.id);
+      t.querySelector('input').checked = on;
+      t.classList.toggle('done', on);
+      if (on) n++;
+    });
+    document.querySelectorAll('[data-phase]').forEach(function(p){
+      var all = p.querySelectorAll('.task').length;
+      var d = [].filter.call(p.querySelectorAll('.task'), function(t){ return done.has(t.dataset.id); }).length;
+      p.querySelector('[data-count]').textContent = d + ' of ' + all;
+    });
+    document.getElementById('progtext').textContent = n + ' of ' + tasks.length + ' done';
+    document.getElementById('meter').style.width = (tasks.length ? n / tasks.length * 100 : 0) + '%';
+  }
+
+  function buildDoc(){
+    var json = JSON.stringify({done: Array.from(done)});
+    return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>' + RESET + '</style></head><body>' +
+      parts.title + '\n' + parts.style + '\n' + parts.font + '\n\n' + parts.app + '\n<script type="application/json" id="state">' + json + '<\/script>\n' + parts.script + '</body></html>';
+  }
+
+  var timer = null, artifactNs = null;
+  function scheduleSave(){
+    if (mode === 'artifact' && artifactNs) {
+      saveEl.textContent = 'Saving…';
+      clearTimeout(timer);
+      timer = setTimeout(function(){
+        artifactNs.publish(buildDoc()).catch(function(err){
+          var code = err && err.code;
+          if (code === 'conflict') return;
+          if (code === 'not_writer' || code === 'not_granted' || code === 'not_declared' || code === 'capability_disabled' || code === 'consent_required') {
+            mode = 'local'; saveLocal();
+            saveEl.textContent = 'This view is read-only for the shared page, so ticks are kept in this browser only.';
+            return;
+          }
+          saveEl.textContent = 'Could not save just now. Tick again in a minute.';
+        });
+      }, 1500);
+    } else {
+      saveLocal();
+    }
+  }
+  function saveLocal(){
+    try { localStorage.setItem(LS, JSON.stringify(Array.from(done))); saveEl.textContent = 'Saved in this browser.'; }
+    catch(e) { saveEl.textContent = 'Ticks can’t be saved in this view.'; }
+  }
+
+  document.querySelectorAll('.task input').forEach(function(box){
+    box.addEventListener('change', function(){
+      var id = box.closest('.task').dataset.id;
+      if (box.checked) done.add(id); else done.delete(id);
+      render();
+      scheduleSave();
+    });
+  });
+
+  // Profit calculator
+  function num(id){ var v = parseFloat(document.getElementById(id).value); return isFinite(v) ? v : 0; }
+  function money(v){ return (v < 0 ? '−$' : '$') + Math.abs(v).toFixed(2); }
+  function calc(){
+    var aov = num('c-aov'), cogs = num('c-cogs'), ship = num('c-ship'), cpa = num('c-cpa');
+    var fees = aov * 0.029 + 0.30;
+    var before = aov - cogs - ship - fees;
+    var profit = before - cpa;
+    var p = document.getElementById('r-profit');
+    p.textContent = money(profit);
+    p.className = profit >= 0 ? 'pos' : 'neg';
+    document.getElementById('r-max').textContent = money(before);
+  }
+  ['c-aov','c-cogs','c-ship','c-cpa'].forEach(function(id){ document.getElementById(id).addEventListener('input', calc); });
+  calc();
+
+  render();
+
+  var cl = window.claude;
+  if (cl && typeof cl.use === 'function') {
+    cl.use('artifact').then(function(ns){
+      if (ns) { artifactNs = ns; mode = 'artifact'; saveEl.textContent = ''; }
+      else { useLocal(); }
+    }).catch(useLocal);
+  } else { useLocal(); }
+
+  function useLocal(){
+    mode = 'local';
+    try {
+      var saved = JSON.parse(localStorage.getItem(LS) || 'null');
+      if (Array.isArray(saved) && saved.length && !(state.done || []).length) { done = new Set(saved); render(); }
+    } catch(e) {}
+  }
+})();
+</script>
