@@ -1,0 +1,107 @@
+<title>Hello 64 ChatGPT Prompts</title>
+<style>
+/* Layout: one column of numbered prompt cards, each with a big copy button; beginner-friendly steps on top. */
+:root{--bg:#f6f1ea;--panel:#ffffff;--ink:#1d1b2e;--muted:#645d72;--line:#e3d9cc;--plum:#241b33;--gold:#e3b25b;--gold-ink:#8a5a0e;--green:#2f7d5b;
+--display:"Young Serif",Georgia,serif;--body:"Instrument Sans",system-ui,-apple-system,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16121d;--panel:#211c2c;--ink:#f2edf5;--muted:#aba3b9;--line:#352e44;--gold-ink:#e3b25b;--green:#6fcf9f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#16121d;--panel:#211c2c;--ink:#f2edf5;--muted:#aba3b9;--line:#352e44;--gold-ink:#e3b25b;--green:#6fcf9f;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding-inline:18px;padding-block:28px 80px;display:grid;gap:22px}
+h1,h2{font-family:var(--display);font-weight:400;line-height:1.2;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.8rem,5vw,2.5rem)} h2{font-size:1.25rem}
+p{margin:0;max-width:66ch}
+.eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink);font-weight:600}
+.steps{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:8px}
+.steps ol{margin:0;padding-left:1.3rem;display:grid;gap:6px}
+.check{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:4px 12px 12px 4px;padding:14px 16px;display:grid;gap:6px;font-size:.95rem}
+.fix{font-family:ui-monospace,Menlo,monospace;font-size:.85rem;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:10px}
+.head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.num{display:inline-grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--plum);color:#fbf6ef;font-weight:700;flex:none}
+:root:not([data-theme="light"]) .num{outline:1px solid var(--line)}
+.head h2{flex:1;min-width:0}
+.why{color:var(--muted);font-size:.93rem}
+button.copy{font:inherit;font-weight:700;font-size:1rem;border:0;border-radius:10px;padding:12px 18px;min-height:48px;background:var(--gold);color:#1d1b2e;cursor:pointer}
+button.copy.done{background:var(--green);color:#fff}
+details summary{cursor:pointer;color:var(--muted);font-size:.9rem}
+pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;font-size:.8rem;background:var(--plum);color:#f2edf5;border-radius:8px;padding:12px;margin:8px 0 0;max-height:320px;overflow:auto}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Young+Serif&display=swap">
+
+<main class="wrap">
+  <header style="display:grid;gap:8px">
+    <span class="eyebrow">Birthday Universe · Hello 64 · no Canva needed</span>
+    <h1>8 prompts, 8 finished product images</h1>
+    <p style="color:var(--muted)">Each prompt makes one complete image, photo and text together, ready to upload to Shopify.</p>
+  </header>
+
+  <section class="steps">
+    <h2>How to use (every time)</h2>
+    <ol>
+      <li>Open <b>ChatGPT</b> and start a <b>new chat</b>.</li>
+      <li>Attach your <b>black "hello SIXTY FOUR" shirt photo</b> (the paperclip / + button).</li>
+      <li>Tap <b>Copy</b> on prompt 1 below, paste it into ChatGPT, send.</li>
+      <li>When the image is done, do the next prompt <b>in the same chat</b> (attach the shirt photo again each time).</li>
+      <li>Download each image and name it <b>hello-64-01.png</b>, <b>hello-64-02.png</b>…</li>
+    </ol>
+  </section>
+
+  <section class="check">
+    <b>Check every image before using it</b>
+    <p>Read all the text slowly. The shirt must say exactly <b>hello / SIXTY FOUR ♥ / EST. 1962</b>, and every word in the design must be spelled right. If something is wrong, reply in the same chat:</p>
+    <div class="fix">Fix the text. The shirt must say exactly: hello / SIXTY FOUR (with a small heart) / EST. 1962. Keep everything else the same.</div>
+  </section>
+
+  <div id="list" style="display:grid;gap:16px"></div>
+</main>
+
+<script>
+(function(){
+  var SHIRT = 'Use the attached photo as the exact reference for my T-shirt and its print. The print must be copied exactly, letter for letter: the word "hello" in flowing handwritten script; below it "SIXTY FOUR" in bold tall sans-serif capital letters with a small heart after "FOUR"; below that "EST. 1962" in small capitals, right-aligned. Do not change, add or remove any letters. Do not copy the wooden floor, jeans, flowers or bottle from the reference photo.';
+  var STYLE = 'Brand style for all text in the image: bold condensed sans-serif capital letters for headlines (like Oswald or Bebas Neue), a clean monospace font in capitals for small labels, colors deep plum #241B33, warm cream #F6F1EA and candle gold #E3B25B. All text must be sharp, correctly spelled, and easy to read on a phone. Square image, 1:1, high resolution, premium e-commerce product image, no watermark, no brand logos other than the text I give you.';
+
+  var P = [
+    { t:'Hero: the shirt + 4 benefits', why:'The first photo buyers see. Explains the product in one glance.',
+      p: SHIRT + '\n\nCreate a square e-commerce product infographic on a warm cream background (#F6F1EA). On the LEFT half: the BLACK T-shirt with the WHITE print, laid flat, neat and slightly styled, with a few gold confetti pieces around it. On the RIGHT half: four benefit rows stacked vertically, each with a simple thin gold line icon and a short label in dark plum capital letters:\n1. (soft fabric icon) "SUPER SOFT COTTON"\n2. (star icon) "CRISP, BOLD PRINT"\n3. (T-shirt icon) "RELAXED FIT S–5XL"\n4. (delivery truck icon) "HERE BEFORE THE PARTY"\nTop-left corner: a small beige tag with the text "BIRTHDAY FAVORITE". Along the bottom edge: a full-width dark plum bar with cream text "ARRIVES BEFORE THE BIG DAY · FREE SIZE SWAP".\n\n' + STYLE },
+
+    { t:'Birthday colorways (6 colors)', why:'Shows every color at once, like Hollow\'s colorways image.',
+      p: SHIRT + '\n\nCreate a square product image on a warm cream background. At the top: a dark plum header bar with the headline "BIRTHDAY COLORWAYS" in big cream capital letters, and a small beige tag "BIRTHDAY FAVORITE" in the top-left corner. Below: six of this same T-shirt, each folded neatly so the whole print shows, in a 3 by 2 grid separated by thin dashed lines. Top row, left to right: LIGHT PINK shirt with black print, WHITE shirt with black print, SAND (warm beige) shirt with black print. Bottom row: CHARCOAL GRAY shirt with white print, NAVY BLUE shirt with white print, BLACK shirt with white print. Under each shirt, its color name in small monospace capitals: "LIGHT PINK", "WHITE", "SAND", "CHARCOAL GRAY", "NAVY BLUE", "BLACK". Every shirt must show the exact same print.\n\n' + STYLE },
+
+    { t:'Made for the big six-four (lifestyle)', why:'Shows who it is for and how it feels to wear it.',
+      p: SHIRT + '\n\nCreate a square lifestyle ad image. RIGHT half: a photorealistic, joyful American woman about 64 years old with silver-blonde hair, laughing, wearing this T-shirt in LIGHT PINK with the BLACK print clearly visible, in a warm candle-lit room with soft golden bokeh and a little gold confetti in the air. LEFT half: a solid dark plum area (#241B33) with a big cream headline in three lines "MADE FOR / THE BIG / SIX-FOUR", and below it four short rows, each with a small gold circle icon and cream capital text: "LOOKS GREAT IN EVERY PHOTO", "COMFY FROM CAKE TO LAST DANCE", "HER AGE, BIG AND PROUD", "SOFT, ALL-DAY COTTON". Top-left: small beige tag "BIRTHDAY FAVORITE".\n\n' + STYLE },
+
+    { t:'Zero risk (guarantee)', why:'Removes the fear of wrong size or late delivery. No fake numbers.',
+      p: 'Create a square graphic on a solid dark plum background (#241B33). No product photo needed. Layout from top to bottom: a small beige tag "BIRTHDAY FAVORITE" in the top-left corner; a huge cream headline "ZERO RISK" with a small gold gift-box icon; a gold line of text "FREE SIZE SWAP · REAL HUMANS IN 24H"; then three cream rows with thin gold line icons: "WRONG SIZE? WE\'LL SWAP IT", "SEE YOUR DELIVERY DATE BEFORE YOU ORDER", "SECURE CHECKOUT". At the bottom, a gold rounded pill with plum text "SHOP WITH CONFIDENCE". Do not add any star ratings, review counts or customer quotes.\n\n' + STYLE },
+
+    { t:'Soft. Comfy. Party-proof.', why:'The fabric image, like Hollow\'s "48% / 47% / 5%".',
+      p: SHIRT + '\n\nCreate a square image whose background is a dark, moody macro close-up photo of soft black cotton T-shirt fabric, with the edge of the white "hello SIXTY FOUR" print softly visible in the corner. Over it, on the left, a huge cream headline in three lines: "SOFT." / "COMFY." / "PARTY-PROOF.". Below it, a thin cream line with the small monospace label "BIRTHDAY STANDARD". At the bottom, three columns with big cream text and small gold labels underneath: "SOFT" with label "BREATHABLE COTTON"; "6" with label "COLORS"; "S–5XL" with label "SIZES FOR EVERY BODY". Top-left: small beige tag "BIRTHDAY FAVORITE".\n\n' + STYLE },
+
+    { t:'Our tee vs party-store tee', why:'Answers "why buy here?" with a simple table.',
+      p: 'Create a square comparison-table graphic on a warm cream background (#F6F1EA). No photos. Top-left: small beige tag "BIRTHDAY FAVORITE". Headline at the top in big dark plum capitals: "OUR TEE VS PARTY-STORE TEE". Below: a table with 5 rows and 3 columns. The first column is highlighted as a tall dark plum rounded rectangle with the header "BIRTHDAY UNIVERSE" in cream; the other two column headers are "PARTY STORE" and "GENERIC TEE" in dark plum. Row labels on the left in dark plum capitals: "HER EXACT AGE & BIRTH YEAR", "SOFT COTTON", "SIZES UP TO 5XL", "DELIVERY DATE SHOWN", "FREE SIZE SWAP". In the BIRTHDAY UNIVERSE column every row has a green check mark. In the PARTY STORE column every row has a gray X. In the GENERIC TEE column: gray X, green check, gray X, gray X, gray X. Thin light divider lines between rows.\n\n' + STYLE },
+
+    { t:'Find your fit', why:'Answers "will it fit me?" with three body types.',
+      p: SHIRT + '\n\nCreate a square product image on a warm cream background. At the top: a dark plum header bar with the headline "FIND YOUR FIT" in big cream capitals, and a small beige tag "BIRTHDAY FAVORITE" in the top-left corner. Middle: a photorealistic photo of three smiling women around 60 standing side by side, waist up: a petite woman in the LIGHT PINK shirt (black print), a curvy plus-size woman in the CHARCOAL GRAY shirt (white print), and a tall slim woman in the NAVY BLUE shirt (white print); each print copied exactly. Under the photo, three small labels in dark plum monospace capitals: "PETITE · WEARS S", "CURVY · WEARS XL", "TALL · WEARS M". At the bottom: a dark plum rounded pill with cream text "BETWEEN SIZES? GO A SIZE UP".\n\n' + STYLE },
+
+    { t:'Every age, every year', why:'Unique to us: tells buyers every age exists.',
+      p: 'Create a square graphic on a warm cream background (#F6F1EA). No photos. At the top: a dark plum header bar with the headline "EVERY AGE. EVERY YEAR." in big cream capitals, and a small beige tag "BIRTHDAY FAVORITE" in the top-left corner. Below: 15 round number bubbles in a 5 by 3 grid, each a white circle with a thin light-beige border and a big bold dark plum number inside. The numbers, left to right, row by row: 30, 35, 40, 45, 50 / 55, 58, 60, 62, 63 / 64, 65, 68, 70, 75. The "64" bubble is highlighted: filled dark plum with a gold border and a gold number. Under the grid, in gray capitals: "HELLO · QUEEN · VINTAGE YEAR". At the bottom: a dark plum rounded pill with cream text "TAP YOUR AGE ON THE PAGE ↓".\n\n' + STYLE }
+  ];
+
+  var list = document.getElementById('list');
+  P.forEach(function(item, i){
+    var c = document.createElement('article'); c.className = 'card';
+    c.innerHTML = '<div class="head"><span class="num"></span><h2></h2><button class="copy" type="button">Copy prompt</button></div><p class="why"></p><details><summary>See the prompt</summary><pre></pre></details>';
+    c.querySelector('.num').textContent = i + 1;
+    c.querySelector('h2').textContent = item.t;
+    c.querySelector('.why').textContent = item.why;
+    c.querySelector('pre').textContent = item.p;
+    var b = c.querySelector('button');
+    b.addEventListener('click', function(){
+      function ok(){ b.textContent = 'Copied ✓'; b.classList.add('done'); setTimeout(function(){ b.textContent = 'Copy prompt'; b.classList.remove('done'); }, 2000); }
+      function fb(){ var ta = document.createElement('textarea'); ta.value = item.p; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); ok(); } catch(e) { c.querySelector('details').open = true; } ta.remove(); }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(item.p).then(ok, fb); else fb();
+    });
+    list.appendChild(c);
+  });
+})();
+</script>
