@@ -1,0 +1,131 @@
+<title>Birthday Universe Color System</title>
+<style>
+/* Layout: option switcher on top, then one live preview (announcement bar, header, hero, product grid, product image tile) painted with the chosen palette, then the verdict. */
+:root{--bg:#f7f4f2;--panel:#fff;--ink:#231a20;--muted:#6b5f66;--line:#e6dde0;--accent:#7a1e3a;
+--display:"Young Serif",Georgia,serif;--body:"Instrument Sans",system-ui,-apple-system,sans-serif;--cond:"Oswald","Arial Narrow",sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171216;--panel:#221b20;--ink:#f3ecf0;--muted:#b3a6ad;--line:#3a3036;--accent:#e58aa6;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171216;--panel:#221b20;--ink:#f3ecf0;--muted:#b3a6ad;--line:#3a3036;--accent:#e58aa6;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:980px;margin:0 auto;padding-inline:18px;padding-block:28px 80px;display:grid;gap:26px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.2;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.8rem,5vw,2.6rem)} h2{font-size:1.4rem} h3{font-size:1.05rem}
+p{margin:0;max-width:68ch}
+.eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{font:inherit;font-weight:600;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:10px 16px;cursor:pointer;min-height:44px}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.sw{display:grid;grid-template-columns:40px 1fr;gap:2px 10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px}
+.sw i{grid-row:span 2;width:40px;height:40px;border-radius:8px;border:1px solid rgba(0,0,0,.12)}
+.sw b{font-size:.9rem} .sw small{color:var(--muted);font-size:.75rem;font-family:ui-monospace,Menlo,monospace}
+.verdict{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:10px}
+.verdict ul{margin:0;padding-left:1.1rem;display:grid;gap:4px}
+.good{color:#2f7d5b;font-weight:700} .bad{color:#b4541a;font-weight:700}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .good{color:#7fd3a8}:root:not([data-theme="light"]) .bad{color:#f0a06b}}
+:root[data-theme="dark"] .good{color:#7fd3a8}
+:root[data-theme="dark"] .bad{color:#f0a06b}
+/* preview: painted only with --p-* tokens, always a light storefront */
+.preview{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--p-bg);color:var(--p-ink);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.p-ann{background:var(--p-bar);color:var(--p-onbar);text-align:center;font-size:.85rem;padding:8px 12px}
+.p-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--p-line);background:var(--p-bg)}
+.p-logo{font-family:var(--display);font-size:1.3rem;color:var(--p-brand)}
+.p-nav{display:flex;gap:14px;font-size:.85rem;flex-wrap:wrap}
+.p-hero{background:var(--p-hero);padding:34px 20px;display:grid;gap:12px;text-align:center;justify-items:center}
+.p-hero h2{font-family:var(--cond);font-weight:600;font-size:clamp(2rem,6vw,3.2rem);text-transform:uppercase;color:var(--p-brand);letter-spacing:.01em}
+.p-hero p{color:var(--p-ink2)}
+.p-btn{background:var(--p-btn);color:var(--p-onbtn);border-radius:10px;padding:12px 22px;font-weight:700;display:inline-block}
+.p-ages{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.p-ages span{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:var(--p-bg);border:2px solid var(--p-line);color:var(--p-brand)}
+.p-ages span.on{background:var(--p-brand);color:var(--p-onbar);border-color:var(--p-gold)}
+.p-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px;padding:22px 18px}
+.p-card{display:grid;gap:6px}
+.p-img{aspect-ratio:1;border-radius:10px;background:var(--p-img);display:grid;place-items:center;position:relative;overflow:hidden}
+.p-img svg{width:78%;height:78%}
+.p-badge{position:absolute;left:8px;top:8px;background:var(--p-badge);color:var(--p-onbadge);font-size:.66rem;font-weight:700;letter-spacing:.06em;padding:3px 7px;border-radius:5px}
+.p-card b{font-size:.85rem} .p-card span{font-size:.8rem;color:var(--p-ink2)}
+.p-tile{padding:0 18px 22px}
+.p-tile .t{aspect-ratio:2/1;border-radius:12px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;background:var(--p-img)}
+.p-tile .l{display:grid;place-items:center}
+.p-tile .l svg{width:70%;height:auto}
+.p-tile .r{background:var(--p-brand);color:var(--p-onbar);display:grid;align-content:center;gap:8px;padding:16px;font-family:var(--cond);text-transform:uppercase}
+.p-tile .r b{font-size:clamp(1.2rem,3.4vw,1.9rem);line-height:1}
+.p-tile .r span{font-size:.8rem;color:var(--p-gold);letter-spacing:.08em}
+.p-foot{background:var(--p-bar);color:var(--p-onbar);padding:14px 18px;font-size:.8rem;text-align:center}
+.warnbox{background:#fff3cf;color:#5a3d06;border-radius:8px;padding:8px 10px;font-size:.85rem;margin:0 18px 18px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Oswald:wght@600&family=Young+Serif&display=swap">
+
+<main class="wrap">
+  <header style="display:grid;gap:8px">
+    <span class="eyebrow">Birthday Universe · one color system for everything</span>
+    <h1>Pick the colors once: website, store and product images</h1>
+    <p style="color:var(--muted)">Tap an option and the whole preview below repaints. It shows the website, the product grid with all 6 shirt colors, and a product image, so you can see whether everything fits together.</p>
+  </header>
+
+  <div class="tabs" role="group" aria-label="Color options" id="tabs"></div>
+  <div class="swatches" id="swatches"></div>
+
+  <section class="preview" id="preview" aria-label="Store preview">
+    <div class="p-ann">🎉 Birthday coming up? See your delivery date before checkout</div>
+    <div class="p-head"><span class="p-logo">Birthday Universe</span><span class="p-nav"><span>Shop by Birthday</span><span>Shirts</span><span>Accessories</span><span>Gifts For</span></span></div>
+    <div class="p-hero">
+      <h2>Because you were born.</h2>
+      <p>Birthday shirts & gifts for every age, and everyone who loves them.</p>
+      <span class="p-btn">Shop by Birthday</span>
+      <div class="p-ages"><span>40</span><span>50</span><span>60</span><span class="on">64</span><span>70</span><span>80+</span></div>
+    </div>
+    <div class="p-grid" id="grid"></div>
+    <div class="warnbox" id="warn" hidden></div>
+    <div class="p-tile"><div class="t"><div class="l" id="tileShirt"></div><div class="r"><span>Birthday favorite</span><b>Made for<br>the big six-four</b><span>Here before the party</span></div></div></div>
+    <div class="p-foot">Because you were born. · Free size swap · Real humans in 24h</div>
+  </section>
+
+  <section class="verdict" id="verdict"></section>
+
+  <section class="verdict">
+    <h2>How the colors match everywhere</h2>
+    <ul>
+      <li><b>Website:</b> warm white background, burgundy for the logo, text, buttons and the announcement bar, blush for some sections, gold only for small highlights.</li>
+      <li><b>Product images:</b> the same warm white or blush backgrounds, burgundy header bars and pills, gold confetti. Light shirts (pink, white, sand) go on <b>warm white</b>; dark shirts (charcoal, navy, black) can go on blush.</li>
+      <li><b>Ads and videos:</b> same palette, so an ad, the website and the product photos look like one brand.</li>
+      <li><b>Rule:</b> 60% warm white and blush, 30% burgundy, 10% gold. No other colors, except the shirts themselves.</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+(function(){
+  var SHIRTS = [['Light Pink','#f2c4cc','#1d1b2e'],['White','#fbfbf8','#1d1b2e'],['Sand','#dcc8a8','#1d1b2e'],['Charcoal','#4a4a50','#fff'],['Navy','#23304f','#fff'],['Black','#1b1b1d','#fff']];
+  var OPT = {
+    a:{ name:'A · Blush & Burgundy (recommended)',
+        tokens:{bg:'#FCFAF8',hero:'#F8E4E8',img:'#FCFAF8',ink:'#2A1620',ink2:'#6E5560',line:'#EBD9DE',brand:'#7A1E3A',bar:'#7A1E3A',onbar:'#FFFFFF',btn:'#7A1E3A',onbtn:'#FFFFFF',gold:'#D9A94E',badge:'#D9A94E',onbadge:'#2A1620'},
+        sw:[['Warm White','#FCFAF8','main background'],['Blush','#F8E4E8','sections'],['Rose','#E8A3B4','soft accents'],['Burgundy','#7A1E3A','brand, text, buttons'],['Champagne Gold','#D9A94E','highlights, confetti'],['Ink','#2A1620','body text']],
+        verdict:'<h2>Option A: your idea, refined</h2><p>Light pink with burgundy is a strong choice, and the research supports it: women 40+ tend to prefer richer, classier tones (burgundy, mauve) over neon, and pink ties straight to your best-selling pink tees. I changed two things:</p><ul><li><span class="good">✓</span> <b>Warm white as the main background, blush only for some sections.</b> With pink everywhere, your Light Pink shirt disappears into the background (see option C).</li><li><span class="good">✓</span> <b>Champagne gold as the "party" accent.</b> Pink + burgundy alone can feel like a wine bar or a Valentine\'s shop. Gold confetti and highlights make it feel like a birthday.</li><li><span class="good">✓</span> Burgundy on white passes accessibility easily, so text and buttons are very readable for older eyes.</li><li><span class="bad">⚠</span> Pink + burgundy reads mostly "for women". That fits today\'s best sellers, but when you add men\'s or kids\' products later, use warm white and gold more and pink less on those pages.</li></ul>' },
+    b:{ name:'B · Grown-up Party (berry + teal)',
+        tokens:{bg:'#F8F6F1',hero:'#F9DDE3',img:'#F8F6F1',ink:'#2E1A3A',ink2:'#6A5A70',line:'#EADCE2',brand:'#B8336A',bar:'#B8336A',onbar:'#FFFFFF',btn:'#B8336A',onbtn:'#FFFFFF',gold:'#E0B25C',badge:'#1F9E97',onbadge:'#FFFFFF'},
+        sw:[['Cloud White','#F8F6F1','background'],['Soft Blush','#F9DDE3','sections'],['Berry','#B8336A','brand, buttons'],['Deep Plum','#2E1A3A','text'],['Champagne Gold','#E0B25C','confetti'],['Party Teal','#1F9E97','checks, badges']],
+        verdict:'<h2>Option B: my earlier scheme</h2><ul><li><span class="good">✓</span> More playful and "party". Teal adds energy.</li><li><span class="bad">⚠</span> Six colors are harder to keep consistent across 400 products, and berry is brighter and younger than what the 50–70 audience usually prefers.</li><li><span class="bad">⚠</span> Teal next to pink and berry can look busy in small product images.</li></ul><p>Good, but A is calmer, more premium and easier to keep consistent.</p>' },
+    c:{ name:'C · All pink + burgundy (unrefined)',
+        tokens:{bg:'#F6D6DD',hero:'#F2C4CE',img:'#F2C4CC',ink:'#4A1024',ink2:'#6E3448',line:'#E8B6C2',brand:'#6D1A36',bar:'#6D1A36',onbar:'#FFFFFF',btn:'#6D1A36',onbtn:'#FFFFFF',gold:'#6D1A36',badge:'#6D1A36',onbadge:'#FFFFFF'},
+        sw:[['Pink','#F6D6DD','everything'],['Deeper Pink','#F2C4CE','sections'],['Burgundy','#6D1A36','brand, text']],
+        verdict:'<h2>Option C: why not pink everywhere</h2><ul><li><span class="bad">✗</span> Your <b>Light Pink shirt almost disappears</b> on a pink background (look at the first product in the grid). It is your best-selling color.</li><li><span class="bad">✗</span> Heavy and flat: no bright "party" accent, so it feels more like Valentine\'s Day than a birthday.</li><li><span class="bad">✗</span> Pink on every page feels narrow for a store that wants to serve everyone who celebrates birthdays.</li></ul>',
+        warn:'Look at the Light Pink shirt: it blends into the background. This is the main problem with an all-pink store.' }
+  };
+  var TEE='M62 22 L86 13 Q100 26 114 13 L138 22 L176 50 L159 80 L142 70 L142 190 L58 190 L58 70 L41 80 L24 50 Z';
+  function tee(f,ink){ return '<svg viewBox="0 0 200 200"><path d="'+TEE+'" fill="'+f+'" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/><text x="100" y="92" text-anchor="middle" font-family="Caveat,cursive" font-size="26" textLength="46" lengthAdjust="spacingAndGlyphs" fill="'+ink+'">hello</text><text x="98" y="118" text-anchor="middle" font-family="Oswald,Arial Narrow,sans-serif" font-weight="600" font-size="19" textLength="70" lengthAdjust="spacingAndGlyphs" fill="'+ink+'">SIXTY FOUR</text><text x="124" y="134" text-anchor="middle" font-family="Oswald,Arial Narrow,sans-serif" font-size="9" fill="'+ink+'">EST. 1962</text></svg>'; }
+  var tabs=document.getElementById('tabs'), sw=document.getElementById('swatches'), pv=document.getElementById('preview'), grid=document.getElementById('grid'), verdict=document.getElementById('verdict'), warn=document.getElementById('warn');
+  SHIRTS.forEach(function(s,i){ var d=document.createElement('div'); d.className='p-card'; d.innerHTML='<div class="p-img">'+(i===0?'<span class="p-badge">BEST SELLER</span>':'')+tee(s[1],s[2])+'</div><b>Hello 64 Birthday Shirt</b><span>'+s[0]+' · $25.99</span>'; grid.appendChild(d); });
+  document.getElementById('tileShirt').innerHTML = tee('#1b1b1d','#fff');
+  function show(k){
+    var o=OPT[k];
+    Object.keys(o.tokens).forEach(function(t){ pv.style.setProperty('--p-'+t, o.tokens[t]); });
+    sw.innerHTML=''; o.sw.forEach(function(c){ var d=document.createElement('div'); d.className='sw'; d.innerHTML='<i style="background:'+c[1]+'"></i><b></b><small></small>'; d.querySelector('b').textContent=c[0]; d.querySelector('small').textContent=c[1]+' · '+c[2]; sw.appendChild(d); });
+    verdict.innerHTML=o.verdict;
+    warn.hidden=!o.warn; warn.textContent=o.warn||'';
+    [].forEach.call(tabs.children,function(b){ b.setAttribute('aria-pressed', b.dataset.k===k?'true':'false'); });
+  }
+  Object.keys(OPT).forEach(function(k){ var b=document.createElement('button'); b.type='button'; b.dataset.k=k; b.textContent=OPT[k].name; b.addEventListener('click',function(){ show(k); }); tabs.appendChild(b); });
+  show('a');
+})();
+</script>
