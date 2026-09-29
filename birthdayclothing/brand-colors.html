@@ -1,0 +1,165 @@
+<title>Blush & Burgundy Brand Colors</title>
+<style>
+/* Layout: a one-column brand reference. Swatch cards with copy buttons, the 60/30/10 bar, usage rules, shirt/background pairing, a live storefront preview, do/don't. */
+:root{--bg:#FCFAF8;--panel:#FFFFFF;--ink:#2A1620;--muted:#6E5560;--line:#EBD9DE;--brand:#7A1E3A;--blush:#F8E4E8;--gold:#D9A94E;
+--display:"Young Serif",Georgia,serif;--body:"Instrument Sans",system-ui,-apple-system,sans-serif;--cond:"Oswald","Arial Narrow",sans-serif;--mono:ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1216;--panel:#241a1f;--ink:#f5ecf0;--muted:#bba9b1;--line:#3d2e35;--brand:#e58aa6;--blush:#3a2530;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1a1216;--panel:#241a1f;--ink:#f5ecf0;--muted:#bba9b1;--line:#3d2e35;--brand:#e58aa6;--blush:#3a2530;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding-inline:18px;padding-block:32px 80px;display:grid;gap:40px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.2;margin:0;text-wrap:balance}
+h1{font-size:clamp(2rem,6vw,3rem)} h2{font-size:1.5rem} h3{font-size:1.05rem}
+p{margin:0;max-width:66ch}
+section{display:grid;gap:14px}
+.eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);font-weight:600}
+.muted{color:var(--muted)}
+.chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.chip{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid}
+.chip .c{height:110px;display:flex;align-items:flex-end;padding:10px 12px;font-family:var(--mono);font-size:.8rem}
+.chip .i{padding:12px 14px;display:grid;gap:4px}
+.chip .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.chip b{font-size:1rem}
+.chip small{color:var(--muted);font-size:.85rem}
+.chip button{font:inherit;font-size:.8rem;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:6px 10px;cursor:pointer;min-height:36px;font-family:var(--mono)}
+.ratio{display:flex;height:56px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.ratio div{display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.rule{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.rule ul{margin:0;padding-left:1.1rem;display:grid;gap:4px;color:var(--muted);font-size:.93rem}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.pair{border-radius:12px;padding:12px;display:grid;justify-items:center;gap:6px;border:1px solid var(--line);font-size:.8rem;font-weight:600;color:#2A1620}
+.pair svg{width:80%;height:auto}
+.dd{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.dd .rule h3{display:flex;gap:8px;align-items:center}
+.yes{color:#2f7d5b} .no{color:#b4541a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .yes{color:#7fd3a8}:root:not([data-theme="light"]) .no{color:#f0a06b}}
+:root[data-theme="dark"] .yes{color:#7fd3a8} :root[data-theme="dark"] .no{color:#f0a06b}
+/* storefront preview: fixed brand colors, always light like the real store */
+.store{border-radius:14px;overflow:hidden;border:1px solid #EBD9DE;background:#FCFAF8;color:#2A1620;box-shadow:0 10px 30px rgba(122,30,58,.08)}
+.s-ann{background:#7A1E3A;color:#fff;text-align:center;font-size:.85rem;padding:8px 12px}
+.s-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 18px;border-bottom:1px solid #EBD9DE}
+.s-logo{font-family:var(--display);color:#7A1E3A;font-size:1.3rem}
+.s-nav{display:flex;gap:14px;font-size:.85rem;flex-wrap:wrap}
+.s-hero{background:#F8E4E8;padding:30px 18px;text-align:center;display:grid;gap:12px;justify-items:center}
+.s-hero h3{font-family:var(--cond);font-weight:600;text-transform:uppercase;font-size:clamp(1.8rem,6vw,3rem);color:#7A1E3A}
+.s-btn{background:#7A1E3A;color:#fff;border-radius:10px;padding:12px 22px;font-weight:700}
+.s-ages{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.s-ages span{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:#fff;border:2px solid #EBD9DE;color:#7A1E3A}
+.s-ages span.on{background:#7A1E3A;color:#fff;border-color:#D9A94E}
+.s-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;padding:20px 18px}
+.s-card{display:grid;gap:4px;font-size:.8rem}
+.s-img{aspect-ratio:1;border-radius:10px;background:#FCFAF8;border:1px solid #F1E6E9;display:grid;place-items:center;position:relative}
+.s-img svg{width:78%;height:auto}
+.s-badge{position:absolute;left:6px;top:6px;background:#D9A94E;color:#2A1620;font-size:.62rem;font-weight:700;letter-spacing:.06em;padding:3px 6px;border-radius:5px}
+.s-foot{background:#7A1E3A;color:#fff;text-align:center;font-size:.8rem;padding:12px}
+.type{display:grid;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.type .t1{font-family:var(--cond);font-weight:600;text-transform:uppercase;font-size:2rem;color:var(--brand);line-height:1}
+.type .t2{font-family:var(--display);font-size:1.4rem}
+.type .t3{font-family:var(--body)}
+.type small{color:var(--muted);font-family:var(--mono);font-size:.78rem}
+button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Oswald:wght@600&family=Young+Serif&display=swap">
+
+<main class="wrap">
+  <header style="display:grid;gap:10px">
+    <span class="eyebrow">Birthday Universe · Brand colors</span>
+    <h1>Blush &amp; Burgundy</h1>
+    <p class="muted">One color system for the website, the Shopify store, product images, ads and videos. Every design uses only these six colors, plus the shirts themselves.</p>
+  </header>
+
+  <section aria-labelledby="h-pal">
+    <h2 id="h-pal">The six colors</h2>
+    <div class="chips" id="chips"></div>
+  </section>
+
+  <section aria-labelledby="h-mix">
+    <h2 id="h-mix">How much of each</h2>
+    <div class="ratio" role="img" aria-label="60 percent warm white and blush, 30 percent burgundy, 10 percent gold">
+      <div style="flex:60;background:linear-gradient(90deg,#FCFAF8 0 70%,#F8E4E8 70%);color:#7A1E3A">60% White + Blush</div>
+      <div style="flex:30;background:#7A1E3A;color:#fff">30% Burgundy</div>
+      <div style="flex:10;background:#D9A94E;color:#2A1620">10%</div>
+    </div>
+    <p class="muted">Mostly calm and light, a strong burgundy for the brand, and a small touch of gold to make it feel like a party. Rose is only for soft extras (hover states, thin lines, small details).</p>
+  </section>
+
+  <section aria-labelledby="h-where">
+    <h2 id="h-where">Where each color goes</h2>
+    <div class="rules">
+      <div class="rule"><h3>Website &amp; store</h3><ul><li>Page background: Warm White</li><li>Some sections (hero, reviews): Blush</li><li>Logo, headings, buttons, announcement bar, footer: Burgundy</li><li>Body text: Ink</li><li>"Best Seller" badges, small stars: Gold</li></ul></div>
+      <div class="rule"><h3>Product images</h3><ul><li>Background: Warm White (or Blush for dark shirts)</li><li>Header bars and pills: Burgundy with white text</li><li>Confetti, thin icons: Gold</li><li>Tag "BIRTHDAY FAVORITE": Blush with Burgundy text</li></ul></div>
+      <div class="rule"><h3>Ads, videos, social</h3><ul><li>Same palette as the product images</li><li>Text on video: white on a Burgundy band</li><li>End card: Burgundy background, white logo, gold confetti</li></ul></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-pair">
+    <h2 id="h-pair">Which background for which shirt</h2>
+    <p class="muted">Light shirts disappear on pink. Always check the shirt stands out.</p>
+    <div class="pairs" id="pairs"></div>
+  </section>
+
+  <section aria-labelledby="h-type">
+    <h2 id="h-type">Fonts</h2>
+    <div class="type">
+      <div><div class="t1">Because you were born.</div><small>Headlines · Oswald SemiBold, ALL CAPS</small></div>
+      <div><div class="t2">For one day, the world revolves around you.</div><small>Story and big quotes · Young Serif</small></div>
+      <div><div class="t3">Soft, comfy birthday shirts for every age, delivered before the party.</div><small>Body text · Instrument Sans</small></div>
+    </div>
+    <p class="muted">All three are free on Google Fonts and in Canva.</p>
+  </section>
+
+  <section aria-labelledby="h-prev">
+    <h2 id="h-prev">What it looks like together</h2>
+    <div class="store">
+      <div class="s-ann">🎉 Birthday coming up? See your delivery date before checkout</div>
+      <div class="s-head"><span class="s-logo">Birthday Universe</span><span class="s-nav"><span>Shop by Birthday</span><span>Shirts</span><span>Accessories</span><span>Gifts For</span></span></div>
+      <div class="s-hero"><h3>Because you were born.</h3><span>Birthday shirts &amp; gifts for every age, and everyone who loves them.</span><span class="s-btn">Shop by Birthday</span><div class="s-ages"><span>40</span><span>50</span><span>60</span><span class="on">64</span><span>70</span><span>80+</span></div></div>
+      <div class="s-grid" id="grid"></div>
+      <div class="s-foot">Because you were born. · Free size swap · Real humans in 24h</div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-dd">
+    <h2 id="h-dd">Do and don't</h2>
+    <div class="dd">
+      <div class="rule"><h3><span class="yes">✓</span> Do</h3><ul><li>Keep lots of white space; let the shirts be the most colorful thing</li><li>Use Burgundy for every "Add to cart" and main button</li><li>Use Gold in small amounts: confetti, badges, stars</li><li>Put light shirts on Warm White</li></ul></div>
+      <div class="rule"><h3><span class="no">✗</span> Don't</h3><ul><li>Make whole pages pink</li><li>Add new colors (teal, purple, neon, rainbow)</li><li>Write text in Gold or Rose on white (too hard to read)</li><li>Put the Light Pink shirt on a Blush background</li></ul></div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var C=[
+    ['Warm White','#FCFAF8','Main background, website and product images','#7A1E3A'],
+    ['Blush','#F8E4E8','Some sections; background for dark shirts','#7A1E3A'],
+    ['Rose','#E8A3B4','Soft extras only: hover, thin lines, small details','#2A1620'],
+    ['Burgundy','#7A1E3A','The brand color: logo, buttons, headings, bars','#FFFFFF'],
+    ['Champagne Gold','#D9A94E','Party accent: confetti, badges, stars','#2A1620'],
+    ['Ink','#2A1620','All body text','#FFFFFF']
+  ];
+  var chips=document.getElementById('chips');
+  C.forEach(function(c){
+    var d=document.createElement('div'); d.className='chip';
+    d.innerHTML='<div class="c"></div><div class="i"><div class="row"><b></b><button type="button"></button></div><small></small></div>';
+    var sw=d.querySelector('.c'); sw.style.background=c[1]; sw.style.color=c[3]; sw.textContent=c[1];
+    if(c[1]==='#FCFAF8') sw.style.borderBottom='1px solid #EBD9DE';
+    d.querySelector('b').textContent=c[0]; d.querySelector('small').textContent=c[2];
+    var b=d.querySelector('button'); b.textContent='Copy '+c[1];
+    b.addEventListener('click',function(){
+      function ok(){ b.textContent='Copied ✓'; setTimeout(function(){ b.textContent='Copy '+c[1]; },1500); }
+      function fb(){ var t=document.createElement('textarea'); t.value=c[1]; document.body.appendChild(t); t.select(); try{document.execCommand('copy'); ok();}catch(e){} t.remove(); }
+      if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(c[1]).then(ok,fb); else fb();
+    });
+    chips.appendChild(d);
+  });
+  var TEE='M62 22 L86 13 Q100 26 114 13 L138 22 L176 50 L159 80 L142 70 L142 190 L58 190 L58 70 L41 80 L24 50 Z';
+  function tee(f,ink){ return '<svg viewBox="0 0 200 200"><path d="'+TEE+'" fill="'+f+'" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/><text x="100" y="92" text-anchor="middle" font-family="Caveat,cursive" font-size="26" textLength="46" lengthAdjust="spacingAndGlyphs" fill="'+ink+'">hello</text><text x="98" y="118" text-anchor="middle" font-family="Oswald,Arial Narrow,sans-serif" font-weight="600" font-size="19" textLength="70" lengthAdjust="spacingAndGlyphs" fill="'+ink+'">SIXTY FOUR</text><text x="124" y="134" text-anchor="middle" font-family="Oswald,Arial Narrow,sans-serif" font-size="9" fill="'+ink+'">EST. 1962</text></svg>'; }
+  var S=[['Light Pink','#f2c4cc','#1d1b2e','#FCFAF8','Warm White'],['White','#fbfbf8','#1d1b2e','#FCFAF8','Warm White'],['Sand','#dcc8a8','#1d1b2e','#FCFAF8','Warm White'],['Charcoal','#4a4a50','#fff','#F8E4E8','Blush or White'],['Navy','#23304f','#fff','#F8E4E8','Blush or White'],['Black','#1b1b1d','#fff','#F8E4E8','Blush or White']];
+  var pairs=document.getElementById('pairs'), grid=document.getElementById('grid');
+  S.forEach(function(s,i){
+    var p=document.createElement('div'); p.className='pair'; p.style.background=s[3]; p.innerHTML=tee(s[1],s[2])+'<span></span>'; p.querySelector('span').textContent=s[0]+' → '+s[4]; pairs.appendChild(p);
+    var g=document.createElement('div'); g.className='s-card'; g.innerHTML='<div class="s-img">'+(i===0?'<span class="s-badge">BEST SELLER</span>':'')+tee(s[1],s[2])+'</div><b>Hello 64 Birthday Shirt</b><span style="color:#6E5560">'+s[0]+' · $25.99</span>'; grid.appendChild(g);
+  });
+})();
+</script>
