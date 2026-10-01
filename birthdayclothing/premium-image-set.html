@@ -1,0 +1,167 @@
+<title>Premium Image Set</title>
+<style>
+/* Layout: board notes first, then settings (color, neck, model) that rewrite the 8 prompt cards live, then Shopify setup. */
+:root{--bg:#FCFAF8;--panel:#FFFFFF;--ink:#2A1620;--muted:#6E5560;--line:#EBD9DE;--brand:#7A1E3A;--blush:#F8E4E8;--gold:#D9A94E;
+--display:"Young Serif",Georgia,serif;--body:"Instrument Sans",system-ui,-apple-system,sans-serif;--mono:ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1216;--panel:#241a1f;--ink:#f5ecf0;--muted:#bba9b1;--line:#3d2e35;--brand:#e58aa6;--blush:#3a2530;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1a1216;--panel:#241a1f;--ink:#f5ecf0;--muted:#bba9b1;--line:#3d2e35;--brand:#e58aa6;--blush:#3a2530;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:860px;margin:0 auto;padding-inline:18px;padding-block:30px 80px;display:grid;gap:30px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.2;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.9rem,5vw,2.6rem)} h2{font-size:1.4rem} h3{font-size:1.1rem}
+p{margin:0;max-width:66ch}
+section{display:grid;gap:12px}
+.eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);font-weight:600}
+.muted{color:var(--muted)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:10px}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.note{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:4px}
+.note b{font-family:var(--mono);font-size:.85rem;color:var(--brand)}
+.note span{font-size:.92rem}
+.ask{background:var(--blush);border-radius:10px;padding:12px 14px;font-size:.95rem}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.controls fieldset{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0;background:var(--panel);display:grid;gap:8px;align-content:start}
+legend{font-weight:700;padding:0 6px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;align-content:flex-start}
+.opts label{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;font-size:.9rem;min-height:40px;background:var(--bg)}
+.opts input{accent-color:#7A1E3A}
+.dot{width:16px;height:16px;border-radius:50%;border:1px solid rgba(0,0,0,.2);display:inline-block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:8px}
+.head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.num{display:inline-grid;place-items:center;width:2.1rem;height:2.1rem;border-radius:50%;background:#7A1E3A;color:#fff;font-weight:700;flex:none}
+.head h3{flex:1;min-width:0}
+.why{color:var(--muted);font-size:.93rem}
+.flag{font-size:.88rem;background:#fff3cf;color:#5a3d06;border-radius:8px;padding:6px 10px}
+button.copy{font:inherit;font-weight:700;border:0;border-radius:10px;padding:10px 16px;min-height:44px;background:#7A1E3A;color:#fff;cursor:pointer}
+button.copy.done{background:#2f7d5b}
+details summary{cursor:pointer;color:var(--muted);font-size:.9rem}
+pre{white-space:pre-wrap;font-family:var(--mono);font-size:.8rem;background:#2A1620;color:#f5ecf0;border-radius:8px;padding:12px;margin:8px 0 0;max-height:300px;overflow:auto}
+ul{margin:0;padding-left:1.1rem;display:grid;gap:5px}
+a{color:var(--brand)}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Young+Serif&display=swap">
+
+<main class="wrap">
+  <header style="display:grid;gap:8px">
+    <span class="eyebrow">Birthday Universe · Premium product images</span>
+    <h1>Every point on one product page</h1>
+    <p class="muted">Like the big apparel brands: calm studio photos, very little text, and the shirt is the star. Pick a color below and all 8 prompts rewrite themselves for that color.</p>
+  </header>
+
+  <section>
+    <h2>Your 9 points (whiteboard + voice note)</h2>
+    <div class="notes">
+      <div class="note"><b>1 color → all images</b><span>Tap Navy and every image is Navy. Each color gets its own full set.</span></div>
+      <div class="note"><b>V-neck + round neck</b><span>One image shows both neck styles are available.</span></div>
+      <div class="note"><b>6 colors</b><span>One image shows all six colors.</span></div>
+      <div class="note"><b>Size: relaxed fit</b><span>Size chart says clearly: relaxed, not fitted.</span></div>
+      <div class="note"><b>With age</b><span>Model matches the shirt: a 60s woman for Hello 60/64, a 50s woman for Hello 50.</span></div>
+      <div class="note"><b>Wide-leg jeans</b><span>One look styled with wide-leg jeans.</span></div>
+      <div class="note"><b>Skirt</b><span>One look styled beautifully with a skirt.</span></div>
+      <div class="note"><b>Gift packing</b><span>One image in gift packaging.</span></div>
+      <div class="note"><b>Birthday vibe + print close-up</b><span>One celebration image and one print close-up.</span></div>
+    </div>
+    <p class="muted" style="font-size:.92rem">All 9 points from your board and voice note are covered in the 8 images below (age is shown in both model photos).</p>
+  </section>
+
+  <section>
+    <h2>Choose before copying</h2>
+    <div class="controls">
+      <fieldset><legend>Shirt color</legend><div class="opts" id="colors"></div></fieldset>
+      <fieldset><legend>Neck style in the photos</legend><div class="opts" id="necks"></div></fieldset>
+      <fieldset><legend>Shirt age</legend><div class="opts"><label style="gap:8px">Age on shirt <input id="age" type="number" min="18" max="100" value="64" style="width:5rem;font:inherit;padding:4px 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)"></label></div></fieldset>
+    </div>
+    <p class="muted" style="font-size:.9rem">How to use: new ChatGPT chat → attach your shirt photo → copy prompt 1 → send. Then prompt 2 in the same chat, and so on. Change the color here and repeat for the next color. For another design (e.g. Hello 60), set the age and edit the print words in the prompt.</p>
+  </section>
+
+  <div id="cards" style="display:grid;gap:14px"></div>
+
+  <section class="box">
+    <h2>Making "tap a color → see 8 images in that color" work in Shopify</h2>
+    <p class="muted">Shopify doesn't group a set of images per color on its own; by default it shows every image of every color.</p>
+    <ul>
+      <li><b>Horizon theme:</b> assign images to each color variant in the product admin, then set the product media to carousel in the theme editor.</li>
+      <li><b>Dawn or other themes:</b> use a variant-images app (for example Rubik Variant Images or NS Color Swatch Variant Images).</li>
+      <li>Name files clearly, e.g. <code>hello-64-black-01-hero.png</code> … <code>hello-64-black-08-colors.png</code>, so assigning them is fast.</li>
+      <li>Image 8 (all colors) can go in every color's set.</li>
+    </ul>
+  </section>
+
+  <section class="box">
+    <h2>Check every image</h2>
+    <p>The print must say exactly <b>hello / SIXTY FOUR ♥ / EST. 1962</b>. If anything is wrong, reply in the same chat:</p>
+    <pre style="max-height:none">Fix the print. It must say exactly: hello / SIXTY FOUR (with a small heart) / EST. 1962. Keep everything else the same.</pre>
+  </section>
+
+  <section>
+    <span class="eyebrow">Sources</span>
+    <ul class="muted" style="font-size:.88rem">
+      <li><a href="https://community.shopify.com/t/horizon/659928">Shopify Community: Horizon variant images</a></li>
+      <li><a href="https://rubikvariantimages.com/shopify-shows-all-images-every-variant/">Rubik Variant Images: showing only the selected color's images</a></li>
+      <li><a href="https://nestscale.com/blog/show-only-selected-variant-images.html">NestScale: selected variant images in Dawn</a></li>
+    </ul>
+  </section>
+</main>
+
+<script>
+(function(){
+  var COLORS=[['Black','BLACK','WHITE','#1b1b1d','Blush (#F8E4E8)'],['Light Pink','LIGHT PINK','BLACK','#f2c4cc','Warm White (#FCFAF8)'],['White','WHITE','BLACK','#fbfbf8','Warm White (#FCFAF8) with a soft shadow so the white shirt stands out'],['Sand','SAND (warm beige)','BLACK','#dcc8a8','Warm White (#FCFAF8)'],['Charcoal Gray','CHARCOAL GRAY','WHITE','#4a4a50','Blush (#F8E4E8)'],['Navy Blue','NAVY BLUE','WHITE','#23304f','Blush (#F8E4E8)']];
+  var NECKS=[['V-neck','V-NECK'],['Round neck','ROUND CREW-NECK']];
+  var st={c:0,n:0};
+  function model(){ var a=parseInt(document.getElementById('age').value,10)||64; var hair=a>=55?'soft silver-blonde hair':(a>=45?'shoulder-length hair with subtle highlights':'long glossy hair'); return 'a graceful, stylish American woman who looks about '+a+' years old, with '+hair+', warm smile, natural makeup'; }
+
+  function radios(id,list,key,label){
+    var box=document.getElementById(id);
+    list.forEach(function(it,i){
+      var l=document.createElement('label'); var r=document.createElement('input'); r.type='radio'; r.name=id; r.checked=i===0;
+      r.addEventListener('change',function(){ st[key]=i; render(); });
+      l.appendChild(r);
+      if(id==='colors'){ var d=document.createElement('span'); d.className='dot'; d.style.background=it[3]; l.appendChild(d); }
+      l.appendChild(document.createTextNode(it[0])); box.appendChild(l);
+    });
+  }
+  radios('colors',COLORS,'c'); radios('necks',NECKS,'n');
+  document.getElementById('age').addEventListener('input',function(){ render(); });
+
+  function build(){
+    var C=COLORS[st.c], N=NECKS[st.n], M=[0,model()];
+    var shirt=C[1]+' '+N[1]+' women\'s T-shirt with the '+C[2]+' print';
+    var REF='Use the attached photo as the exact reference for my T-shirt print. Copy the print exactly, letter for letter: "hello" in flowing handwritten script; below it "SIXTY FOUR" in bold tall capital letters with a small heart after "FOUR"; below that "EST. 1962" in small capitals, right-aligned. Print it in '+C[2]+' ink. Do not change, add or remove any letters. Ignore the background of the reference photo.';
+    var LOOK='Style: high-end minimalist apparel catalog, like a premium fashion brand. Soft natural daylight, gentle shadows, true-to-life fabric texture and color, clean and calm. Brand colors only where needed: Warm White #FCFAF8, Blush #F8E4E8, Burgundy #7A1E3A, small Champagne Gold #D9A94E accents. No neon, no busy props, no extra text, no watermark, no logos. Square 1:1, high resolution.';
+    var BG=C[4];
+    return [
+      {t:'Hero · with a skirt', why:'First image: the shirt worn by a woman of the right age, styled beautifully with a skirt.', p:REF+'\n\nCreate a photorealistic e-commerce photo of '+M[1]+', standing relaxed and smiling, facing the camera, shown from the knees up. She wears the '+shirt+', loosely front-tucked into a flowing satin midi skirt in soft blush, with delicate gold jewelry. The shirt has a relaxed, comfortable fit, not tight. Seamless studio background in '+BG+'. The whole print is clearly visible and not covered by hair or hands.\n\n'+LOOK},
+      {t:'With wide-leg jeans', why:'Second look: casual and stylish, same woman, same color.', p:REF+'\n\nCreate a photorealistic full-length e-commerce photo of the same woman ('+M[1]+') walking naturally toward the camera, wearing the '+shirt+' loosely half-tucked into light-wash high-waisted WIDE-LEG jeans, with simple white sneakers and a small tan bag. The shirt fits relaxed and easy, not tight. Seamless studio background in '+BG+'. The print is clearly visible and readable.\n\n'+LOOK},
+      {t:'Print close-up', why:'Proves print quality and the exact wording.', p:REF+'\n\nCreate a close-up detail photo of the print on the '+C[1]+' cotton T-shirt, filling most of the frame, slight angle, soft side light that shows the cotton texture and the crisp '+C[2]+' print edges. The complete text "hello / SIXTY FOUR / EST. 1962" must be in frame and sharp.\n\n'+LOOK},
+      {t:'V-neck and round neck', why:'Shows both neck styles are available, in this color.', p:REF+'\n\nCreate a clean product photo of two '+C[1]+' women\'s T-shirts with the same '+C[2]+' print, laid flat side by side on a '+BG+' background: on the left a V-NECK version, on the right a ROUND CREW-NECK version. Under each, a small, elegant label in Burgundy (#7A1E3A) capital letters: "V-NECK" and "ROUND NECK". No other text.\n\n'+LOOK},
+      {t:'Birthday celebration', why:'The birthday vibe: the feeling that sells the shirt.', p:REF+'\n\nCreate a candid, photorealistic lifestyle photo of '+M[1]+' wearing the '+shirt+', laughing at an elegant birthday celebration with family and friends around her. Soft warm light, a pretty birthday cake with a few lit candles in front of her (not covering the shirt), a small bunch of blush and champagne-gold balloons in the background, a little gold confetti. Premium and joyful, not cluttered. She faces the camera so the print is clearly visible.\n\n'+LOOK},
+      {t:'Gift packing', why:'Shows it arrives ready to gift.', flag:'Describe your real packaging here so the photo matches what customers receive.', p:REF+'\n\nCreate a top-down product photo of the '+shirt+', neatly folded so the print shows, resting in an open premium gift box: the box is Burgundy (#7A1E3A) with blush tissue paper and a thin champagne-gold ribbon, the lid beside it, and a small blank gift card. Warm White background, soft daylight, two or three tiny gold confetti pieces. No text.\n\n'+LOOK},
+      {t:'Size guide · relaxed fit', why:'Answers "will it fit?" and says clearly it is a relaxed fit, not fitted.', flag:'Replace the [ ] numbers with your vendor\'s real measurements before sending.', p:'Create a clean, premium size guide graphic on a Warm White (#FCFAF8) background. Title at the top in Burgundy (#7A1E3A) capital letters: "SIZE GUIDE", and right under it a Burgundy pill with white text: "RELAXED FIT · NOT FITTED". A simple table with a Burgundy header row (white text) and thin light lines:\nSize: S, M, L, XL, 2XL, 3XL\nBody width (in): [  ], [  ], [  ], [  ], [  ], [  ]\nLength (in): [  ], [  ], [  ], [  ], [  ], [  ]\nUnder the table, in small Ink (#2A1620) text: "Comfortable, roomy fit. Measure a T-shirt you love and compare." Next to the table, a simple line drawing of a '+N[0].toLowerCase()+' T-shirt showing where width and length are measured. Use exactly these numbers, do not invent any.\n\n'+LOOK},
+      {t:'All 6 colors', why:'Shows every color option at once. Put it in every color\'s set.', p:REF+'\n\nCreate a clean top-down product photo of six identical '+N[1]+' T-shirts, each folded neatly into the same square so the whole print shows, arranged in a 3 by 2 grid on a Warm White (#FCFAF8) background. Top row: LIGHT PINK with black print, WHITE with black print, SAND (warm beige) with black print. Bottom row: CHARCOAL GRAY with white print, NAVY BLUE with white print, BLACK with white print. Under each shirt, its color name in small Burgundy capital letters: "LIGHT PINK", "WHITE", "SAND", "CHARCOAL", "NAVY", "BLACK". Every shirt must show the exact same print.\n\n'+LOOK}
+    ];
+  }
+  var cards=document.getElementById('cards');
+  function render(){
+    cards.innerHTML='';
+    var C=COLORS[st.c];
+    build().forEach(function(it,i){
+      var el=document.createElement('article'); el.className='card';
+      el.innerHTML='<div class="head"><span class="num"></span><h3></h3><button class="copy" type="button">Copy prompt</button></div><p class="why"></p>'+(it.flag?'<p class="flag"></p>':'')+'<details><summary>See the prompt</summary><pre></pre></details>';
+      el.querySelector('.num').textContent=i+1;
+      el.querySelector('h3').textContent=it.t+(i===7||i===6?'':' · '+C[0]);
+      el.querySelector('.why').textContent=it.why;
+      if(it.flag) el.querySelector('.flag').textContent='⚠ '+it.flag;
+      el.querySelector('pre').textContent=it.p;
+      var b=el.querySelector('button');
+      b.addEventListener('click',function(){
+        function ok(){ b.textContent='Copied ✓'; b.classList.add('done'); setTimeout(function(){ b.textContent='Copy prompt'; b.classList.remove('done'); },1800); }
+        function fb(){ var t=document.createElement('textarea'); t.value=it.p; document.body.appendChild(t); t.select(); try{document.execCommand('copy'); ok();}catch(e){ el.querySelector('details').open=true; } t.remove(); }
+        if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(it.p).then(ok,fb); else fb();
+      });
+      cards.appendChild(el);
+    });
+  }
+  render();
+})();
+</script>
