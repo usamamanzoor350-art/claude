@@ -1,0 +1,169 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "faq_accordion_mMX4Gf": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_DBBEzn": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How long will it take to receive my order?",
+            "faq_des": "<p>Every order is customized with love and care, just for you. Your order will be delivered within <strong>10–15 business days</strong>, and we will email you a tracking link as soon as it ships. Celebrating on a special date? We recommend ordering a little early.</p>"
+          }
+        },
+        "faq_VKybaU": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How do I choose the right age or birth year?",
+            "faq_des": "<p>Every design comes ready with its milestone age and birth year. Simply pick your design, choose the age you are celebrating, then select your color, neckline and size. Not sure which one? Visit our <a href=\"/pages/shop-by-design\">Shop by Design</a> page.</p>"
+          }
+        },
+        "faq_bmPkR7": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What if I entered the wrong details or shipping address?",
+            "faq_des": "<p>No worries, it happens! Please email us at <a href=\"mailto:help@birthdayuniverse.co\">help@birthdayuniverse.co</a> with your order number as soon as possible, and we will do our best to update your order before it goes into production or ships.</p>"
+          }
+        },
+        "faq_L4NPHn": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How do your sizes run, and where can I find a size chart?",
+            "faq_des": "<p>Our tees have a relaxed unisex fit in sizes S to 3XL. You can find chest and length measurements in inches on every product page and on our <a href=\"/pages/size-guide\">Size Guide</a> page.</p>"
+          }
+        },
+        "faq_Kzb7pz": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What material are your shirts made of?",
+            "faq_des": "<p>Our tees are made of 100% soft cotton and printed with care so your design stays bright and beautiful wash after wash.</p>"
+          }
+        },
+        "faq_JN89mw": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Can I change or cancel my order?",
+            "faq_des": "<p>Because every order is customized just for you and moves quickly into production, please contact us within 2 hours of placing your order for any changes or cancellations. We will always do our best to help.</p>"
+          }
+        },
+        "faq_kJFn3q": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Can I send my order directly as a birthday gift?",
+            "faq_des": "<p>Absolutely! Just enter the recipient's address at checkout. We never include prices or invoices in the package, so it arrives gift-ready.</p>"
+          }
+        },
+        "faq_yC666M": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What is your return policy?",
+            "faq_des": "<p>We offer <strong>easy 30-day returns</strong>. If something isn't quite right, email us within 30 days of delivery. If your item arrives damaged or misprinted, we will gladly send a free replacement or a full refund. You can read more in our <a href=\"/policies/refund-policy\">Refund Policy</a>.</p>"
+          }
+        },
+        "faq_VXCa7M": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How should I wash and care for my tee?",
+            "faq_des": "<p>To keep your print looking brand new, machine wash inside out in cold water with similar colors. Tumble dry low or hang dry, and please don't iron directly on the print.</p>"
+          }
+        },
+        "faq_Bfaj6V": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How can I contact you?",
+            "faq_des": "<p>We would love to hear from you! Email <a href=\"mailto:help@birthdayuniverse.co\">help@birthdayuniverse.co</a> or call <a href=\"tel:+18594465112\">+1 (859) 446-5112</a>. Please include your order number so we can help you as quickly as possible.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_DBBEzn",
+        "faq_VKybaU",
+        "faq_bmPkR7",
+        "faq_L4NPHn",
+        "faq_Kzb7pz",
+        "faq_JN89mw",
+        "faq_kJFn3q",
+        "faq_yC666M",
+        "faq_VXCa7M",
+        "faq_Bfaj6V"
+      ],
+      "name": "Faqs Accordion",
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_pos": "center center",
+        "title_top": "FREQUENTLY ASKED QUESTIONS",
+        "title": "Got Questions? We’ve Got Answers.",
+        "des": "Everything you need to know about sizing, delivery, returns and gifting. Made with love, answered with care.",
+        "align-heading": "center",
+        "title_size": "h4",
+        "e_first_open": true,
+        "e_reverse": true,
+        "e_small": true,
+        "left_html": "",
+        "e_right": false,
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "e3f9b59b-307f-4380-8307-f05ffecaaef0": {
+      "type": "rich-text",
+      "blocks": {
+        "a48bdf20-667c-4450-8cfc-ab5ff5d1dd70": {
+          "type": "heading",
+          "settings": {
+            "title": "Didn't find your answer?",
+            "size_text": "h3"
+          }
+        },
+        "367e94fc-6596-45ac-a2ce-0ca3e3f4c096": {
+          "type": "paragraph",
+          "settings": {
+            "subtext": "Don't hesitate to reach out. We are always happy to help!"
+          }
+        },
+        "9a37e0ea-8786-4c9d-8b46-47a4c56f625d": {
+          "type": "button",
+          "settings": {
+            "button": "Contact us",
+            "link": "shopify://pages/contact",
+            "style_btn": "btn-theme btn-white"
+          }
+        }
+      },
+      "block_order": [
+        "a48bdf20-667c-4450-8cfc-ab5ff5d1dd70",
+        "367e94fc-6596-45ac-a2ce-0ca3e3f4c096",
+        "9a37e0ea-8786-4c9d-8b46-47a4c56f625d"
+      ],
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#000000",
+        "gradient_bg": "",
+        "title_color": "#fbf6f0",
+        "title_top": "",
+        "title": "",
+        "text": "",
+        "align-heading": "center",
+        "paddingsection": "100px 0px 100px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq_accordion_mMX4Gf",
+    "e3f9b59b-307f-4380-8307-f05ffecaaef0"
+  ]
+}

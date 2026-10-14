@@ -1,0 +1,261 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "mu_footer_wxgM9p": {
+      "type": "mu-footer",
+      "blocks": {
+        "menu_gPFxxh": {
+          "type": "menu",
+          "settings": {
+            "heading": "Quick Links",
+            "menu": "main-menu",
+            "uppercase": false,
+            "new_tab": false
+          }
+        },
+        "menu_txNY8R": {
+          "type": "menu",
+          "settings": {
+            "heading": "Policies",
+            "menu": "policies",
+            "uppercase": false,
+            "new_tab": false
+          }
+        },
+        "menu_T7qfxi": {
+          "type": "menu",
+          "settings": {
+            "heading": "Social Media",
+            "menu": "social",
+            "uppercase": false,
+            "new_tab": true
+          }
+        },
+        "text_zV8QMN": {
+          "type": "text",
+          "settings": {
+            "heading": "Business Info",
+            "text": "<p><strong>Address:</strong> 4881 Rivers Ave, North Charleston, SC 29406<br/><br/></p><p><strong>Phone:</strong> <a href=\"tel:+18594465112\">+1 (859) 446-5112</a><br/><br/></p><p><strong>Email:</strong> <a href=\"mailto:help@birthdayuniverse.co\">help@birthdayuniverse.co</a></p>",
+            "max_width": 320
+          }
+        },
+        "text_i6HKGM": {
+          "type": "text",
+          "settings": {
+            "heading": "We Are Here For You",
+            "text": "<p>Mon to Fri: 9:00 AM – 5:00 PM (EST)</p><p>Sat & Sun: 10:00 AM – 4:00 PM (EST)</p><p>We reply to every message with care, usually within one business day.</p>",
+            "max_width": 320
+          }
+        }
+      },
+      "block_order": [
+        "menu_gPFxxh",
+        "menu_txNY8R",
+        "menu_T7qfxi",
+        "text_zV8QMN",
+        "text_i6HKGM"
+      ],
+      "name": "mu-Birthday footer",
+      "settings": {
+        "logo": "shopify://shop_images/birthday_8.png",
+        "logo_width_d": 120,
+        "logo_width_m": 124,
+        "show_payment": true,
+        "pay_height_d": 28,
+        "pay_height_m": 26,
+        "pay_gap": 10,
+        "show_newsletter": true,
+        "nl_heading": "Join The Birthday Family",
+        "nl_text": "<p>Be the first to hear about new designs, special offers and gift ideas, sent with love. No spam, ever.</p>",
+        "nl_placeholder": "Enter Your Email...",
+        "nl_button": "Subscribe",
+        "nl_success": "Thank you for joining the Birthday Universe family! ♡",
+        "copyright": "BirthdayUniverse.co",
+        "divider_color": "#dddddd",
+        "copy_size_d": 15,
+        "copy_size_m": 13,
+        "copy_weight": "400",
+        "bottom_py_d": 22,
+        "bottom_py_m": 18,
+        "bg_color": "#f5f5f5",
+        "heading_color": "#000000",
+        "text_color": "#000000",
+        "accent_color": "#e55c8a",
+        "font_family": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+        "col_h_size_d": 20,
+        "col_h_size_m": 18,
+        "col_h_weight": "400",
+        "col_h_ls": 0,
+        "col_h_uppercase": true,
+        "col_h_mb_d": 16,
+        "col_h_mb_m": 14,
+        "text_size_d": 14,
+        "text_size_m": 13,
+        "text_weight": "400",
+        "text_lh": 150,
+        "link_gap_d": 8,
+        "link_gap_m": 6,
+        "para_gap": 8,
+        "nl_h_size_d": 40,
+        "nl_h_size_m": 30,
+        "nl_h_weight": "400",
+        "nl_h_ls": -1,
+        "nl_sub_color": "#777777",
+        "nl_sub_size_d": 13,
+        "nl_sub_size_m": 13,
+        "nl_sub_weight": "400",
+        "input_bg": "#f5f5f5",
+        "input_border": "#dddddd",
+        "input_size_d": 17,
+        "input_size_m": 16,
+        "input_px_d": 34,
+        "form_height_d": 60,
+        "form_height_m": 54,
+        "btn_bg": "#1a1a1a",
+        "btn_text": "#ffffff",
+        "btn_bg_hover": "#e55c8a",
+        "btn_text_hover": "#ffffff",
+        "btn_size_d": 20,
+        "btn_size_m": 16,
+        "btn_weight": "400",
+        "btn_width_d": 212,
+        "container_max": 1440,
+        "pad_x_d": 110,
+        "pad_x_m": 16,
+        "cols_mt_d": 44,
+        "cols_mt_m": 36,
+        "cols_row_gap_m": 32,
+        "nl_mt_d": 32,
+        "nl_mt_m": 40,
+        "form_mt_d": 22,
+        "form_mt_m": 18,
+        "pt_d": 40,
+        "pt_m": 36,
+        "nl_mb_d": 38,
+        "nl_mb_m": 32,
+        "mt_d": 0,
+        "mt_m": 0
+      }
+    },
+    "newsletter-footer": {
+      "type": "newsletter-footer",
+      "disabled": true,
+      "settings": {
+        "enable_newletter_footer": false,
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#000000",
+        "newletter_color": "#ff6f2e",
+        "colorborder": "#e9e9e9",
+        "e_size": "cover",
+        "e_repeat": "no-repeat",
+        "title_top": "",
+        "title": "Subscrible & Get <span class=\"text-theme\">10% </span> Discount",
+        "des": "",
+        "html_left": false,
+        "html_left_block": "",
+        "paddingsection": "60px 0px 0px 0px",
+        "paddingmobile": "30px 0px 30px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "1595696762386": {
+          "type": "text",
+          "settings": {
+            "logofooter": "shopify://shop_images/Black_and_White_Minimalist_Studio_Creative_Logo.png",
+            "widthlogofooter": 150,
+            "title": "",
+            "text": "<div style=\"margin-bottom: 15px;\">\n    <p>\n      Personalized gifts created to make the people you love feel seen, celebrated, and remembered.\n    </p>\n  </div>\n\n<ul class=\"list-unstyled footer-mid__info\">\n<li>\n<svg style=\"margin-right: 8px;\nxmlns=\" http: class=\"ionicon\" viewbox=\"0 0 512 512\"><path d=\"M451 374c-15.88-16-54.34-39.35-73-48.76-24.3-12.24-26.3-13.24-45.4.95-12.74 9.47-21.21 17.93-36.12 14.75s-47.31-21.11-75.68-49.39-47.34-61.62-50.53-76.48 5.41-23.23 14.79-36c13.22-18 12.22-21 .92-45.3-8.81-18.9-32.84-57-48.9-72.8C119.9 44 119.9 47 108.83 51.6A160.15 160.15 0 0083 65.37C67 76 58.12 84.83 51.91 98.1s-9 44.38 23.07 102.64 54.57 88.05 101.14 134.49S258.5 406.64 310.85 436c64.76 36.27 89.6 29.2 102.91 23s22.18-15 32.83-31a159.09 159.09 0 0013.8-25.8C465 391.17 468 391.17 451 374z\" fill=\"none\" stroke=\"currentColor\" stroke-miterlimit=\"10\" stroke-width=\"32\"></path></svg><a href=\"tel:+18594465112\" target=\"_blank\">+1 (859) 446-5112</a>\n                    </li>\n<li>\n<i class=\"icon-envelope\"></i><a href=\"mailto:help@birthdayuniverse.co\" target=\"_blank\"> help@birthdayuniverse.co </a>\n                      \n                    </li>\n</ul>",
+            "width": "33%"
+          }
+        },
+        "1562342622030": {
+          "type": "menu",
+          "settings": {
+            "link_list": "",
+            "width": "16%"
+          }
+        },
+        "menu_pp4hY9": {
+          "type": "menu",
+          "settings": {
+            "link_list": "shop",
+            "width": "16%"
+          }
+        },
+        "menu_K3hmRT": {
+          "type": "menu",
+          "settings": {
+            "link_list": "footer",
+            "width": "16%"
+          }
+        },
+        "menu_CyQbYi": {
+          "type": "menu",
+          "settings": {
+            "link_list": "policies",
+            "width": "16%"
+          }
+        },
+        "text_xCD7fJ": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "widthlogofooter": 150,
+            "title": "Customer Care",
+            "text": "Delivery: 10–15 business days\n<br>\nMon–Fri, 9 AM–5 PM EST\n<br>\n4881 Rivers Ave, North Charleston, SC 29406",
+            "width": "25%"
+          }
+        }
+      },
+      "block_order": [
+        "1595696762386",
+        "1562342622030",
+        "menu_pp4hY9",
+        "menu_K3hmRT",
+        "menu_CyQbYi",
+        "text_xCD7fJ"
+      ],
+      "disabled": true,
+      "settings": {
+        "setwidth": "container-fluid",
+        "background": "#fbf6f0",
+        "border_headfooter": "#e9e3dd",
+        "border-copryright": "#e7ded6",
+        "text": "#332d32",
+        "text_hover": "#b3272d",
+        "title": "#b3272d",
+        "footer_align_title": "left",
+        "enable_border": false,
+        "footer_font_family": "--g-font-2",
+        "footer_font_size_title": 14,
+        "footer_font_weight": "500",
+        "footer_spacing": 0.2,
+        "footer_typetext": "uppercase",
+        "acc_mobile": false,
+        "e_ft_currency": true,
+        "enable_image": true,
+        "enable_name": true,
+        "enable_language_selector": true,
+        "payment_info": "svg",
+        "copyright": false,
+        "link_list_bottom": "",
+        "customcopyright": "© 2026 BirthdayUniverse.co",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "m_padding_top": 32,
+        "m_padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "mu_footer_wxgM9p",
+    "newsletter-footer",
+    "footer"
+  ]
+}

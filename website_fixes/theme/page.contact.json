@@ -1,0 +1,162 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "e7285e43-2bb7-46e5-a5e4-538568d8723e": {
+      "type": "image-content",
+      "blocks": {
+        "template--16736981025086__e7285e43-2bb7-46e5-a5e4-538568d8723e-1666759876b5fa9979-0": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/58-fabulous-navy.jpg"
+          }
+        },
+        "template--16736981025086__e7285e43-2bb7-46e5-a5e4-538568d8723e-1666759876b5fa9979-1": {
+          "type": "text_block",
+          "settings": {
+            "width": "100%",
+            "bgtext": "rgba(0,0,0,0)",
+            "title_color": "rgba(0,0,0,0)",
+            "subtitle": "We Would Love To Hear From You",
+            "title": "Questions about sizing, your order or the perfect gift? We're always happy to help.",
+            "size_text": "h2",
+            "text": "",
+            "answer_content": "",
+            "style_btn": "btn-underline btn-underline-white",
+            "button": "",
+            "link": "",
+            "enable_padding": true,
+            "align": "left"
+          }
+        }
+      },
+      "block_order": [
+        "template--16736981025086__e7285e43-2bb7-46e5-a5e4-538568d8723e-1666759876b5fa9979-0",
+        "template--16736981025086__e7285e43-2bb7-46e5-a5e4-538568d8723e-1666759876b5fa9979-1"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "full",
+        "bgsection": "#FFFFFF",
+        "rangebg": 0,
+        "bgbefore": "rgba(0,0,0,0)",
+        "bg_pos": "left",
+        "enable_padding": false,
+        "align_center": true,
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "0px 0px 60px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "fb754d90-39ba-47df-8255-8b3096ae9437": {
+      "type": "service",
+      "blocks": {
+        "template--16736981025086__fb754d90-39ba-47df-8255-8b3096ae9437-16667679904d65e643-0": {
+          "type": "service",
+          "settings": {
+            "bgblock": "rgba(0,0,0,0)",
+            "title": "Address",
+            "description": "4881 Rivers Ave, North Charleston, SC 29406",
+            "icon": "<i class=\"icon-placeholder\"></i>"
+          }
+        },
+        "template--16736981025086__fb754d90-39ba-47df-8255-8b3096ae9437-16667679904d65e643-2": {
+          "type": "service",
+          "settings": {
+            "bgblock": "rgba(0,0,0,0)",
+            "title": "Open",
+            "description": "Mon–Fri 9 AM–5 PM EST · Sat & Sun 10 AM–4 PM EST",
+            "icon": "<i class=\"icon-check-circle\"></i>"
+          }
+        },
+        "d58418bf-4652-4e45-8cbb-19e0434944cf": {
+          "type": "service",
+          "settings": {
+            "bgblock": "rgba(0,0,0,0)",
+            "title": "Email",
+            "description": "help@birthdayuniverse.co",
+            "icon": "<i class=\"icon-mail\"></i>"
+          }
+        },
+        "phone_bu01": {
+          "type": "service",
+          "settings": {
+            "bgblock": "rgba(0,0,0,0)",
+            "title": "Phone",
+            "description": "+1 (859) 446-5112",
+            "icon": "<i class=\"icon-phone\"></i>"
+          }
+        }
+      },
+      "block_order": [
+        "template--16736981025086__fb754d90-39ba-47df-8255-8b3096ae9437-16667679904d65e643-0",
+        "template--16736981025086__fb754d90-39ba-47df-8255-8b3096ae9437-16667679904d65e643-2",
+        "d58418bf-4652-4e45-8cbb-19e0434944cf",
+        "phone_bu01"
+      ],
+      "settings": {
+        "animation": "fade",
+        "setwidth": "container",
+        "bgsection": "#EDEDED",
+        "title_top": "",
+        "title": "",
+        "des": "",
+        "align-heading": "center",
+        "paddingbox": "0px 0px 0px 0px",
+        "iconcolor": "#000000",
+        "titlecolor": "#000000",
+        "subcolor": "#666666",
+        "size": 24,
+        "service_heading": "h5",
+        "layout": "style-1",
+        "enable_carousel": false,
+        "arrows": false,
+        "draggable": true,
+        "dots": true,
+        "infinite": true,
+        "paddingsection": "64px 0px 64px 0px",
+        "paddingmobile": "32px 0px 8px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "c025329d-7132-4163-b678-b778c06ac8f9": {
+      "type": "line",
+      "settings": {
+        "animation": "fade",
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "bgsection": "#ffffff",
+        "setwidth": "full",
+        "bgborder": "#e7e7e7",
+        "wborder": "1px"
+      }
+    },
+    "863c2be4-cbba-4ba1-ba39-64e0fe639fc6": {
+      "type": "contact-form",
+      "settings": {
+        "animation": "",
+        "bgsection": "#FFFFFF",
+        "title_top": "",
+        "title": "Send Us A Message",
+        "des": "Leave us a note below and our friendly team will get back to you as soon as possible, usually within one business day.",
+        "align-heading": "center",
+        "answer_content": "<p>This site is protected by reCAPTCHA and the Google <a href=\"https://policies.google.com/privacy\">Privacy Policy</a> and <a href=\"https://policies.google.com/terms\">Terms of Service</a> apply.</p>",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "e7285e43-2bb7-46e5-a5e4-538568d8723e",
+    "fb754d90-39ba-47df-8255-8b3096ae9437",
+    "c025329d-7132-4163-b678-b778c06ac8f9",
+    "863c2be4-cbba-4ba1-ba39-64e0fe639fc6"
+  ]
+}

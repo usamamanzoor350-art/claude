@@ -1,0 +1,558 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-template-1",
+      "blocks": {
+        "989bce2f-7961-4267-8e6c-40ff4bb0ed64": {
+          "type": "title",
+          "settings": {
+            "e_label": true
+          }
+        },
+        "c5c11045-e3b5-47e4-80d1-25e86ec844cc": {
+          "type": "price",
+          "settings": {}
+        },
+        "text_WBkbUV": {
+          "type": "text",
+          "settings": {
+            "text": "A Birthstone Birthday Necklace is a personalized piece of jewelry that celebrates the uniqueness of each individual by featuring their birthstone, representing the month of their birth. Each birthstone has its own significance and meaning, making these necklaces a thoughtful and sentimental gift for birthdays or other special occasions.",
+            "text_style": "body"
+          }
+        },
+        "ff32ea77-bcea-43d3-8e38-55894c9d938a": {
+          "type": "separator",
+          "settings": {}
+        },
+        "8288910a-1ad6-47df-b127-118bc1d2ce24": {
+          "type": "buttons",
+          "settings": {
+            "enable_local_pickup": true,
+            "enable_hurrify": false,
+            "enable_payment_button": false,
+            "waitlist": false,
+            "product_selector": "radio",
+            "sw_color_product": true,
+            "color_circle": true,
+            "size_color": "small-38"
+          }
+        },
+        "tabcustom_tW9YNw": {
+          "type": "tabcustom",
+          "settings": {
+            "title_tab": "Shipping & Delivery",
+            "icon": "none",
+            "answer_content": "<p>Each stone is checked under magnification and set by hand into its prong upon order. Please allow 10–15 business days for our team to carefully craft and inspect your necklace before it ships.</p>",
+            "page": ""
+          }
+        },
+        "tabcustom_BmLLTD": {
+          "type": "tabcustom",
+          "settings": {
+            "title_tab": "Care & Materials",
+            "icon": "none",
+            "answer_content": "<p>Made with a tarnish-resistant chain designed to survive everyday wear. To keep it shining brightly, avoid wearing it in pools or oceans. Wipe it down with a soft polishing cloth after wear and store it in the provided pouch.</p>",
+            "page": ""
+          }
+        },
+        "tabcustom_kKt8qt": {
+          "type": "tabcustom",
+          "settings": {
+            "title_tab": "Frequently Asked Questions",
+            "icon": "none",
+            "answer_content": "<ul><li><strong>Will the chain turn my neck green?</strong> No. Our chains are crafted from high-quality, tarnish-resistant materials designed for sensitive skin and daily wear.</li><li><strong>Can I add a second birthstone later?</strong> This specific setting is engineered to highlight a single, featured stone in order to maintain its delicate, minimalist aesthetic.</li><li><strong>Does it come in a gift box?</strong> Yes, every necklace arrives beautifully packaged in a custom box, completely ready to be gifted the moment it arrives.</li></ul>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "989bce2f-7961-4267-8e6c-40ff4bb0ed64",
+        "c5c11045-e3b5-47e4-80d1-25e86ec844cc",
+        "text_WBkbUV",
+        "ff32ea77-bcea-43d3-8e38-55894c9d938a",
+        "8288910a-1ad6-47df-b127-118bc1d2ce24",
+        "tabcustom_tW9YNw",
+        "tabcustom_BmLLTD",
+        "tabcustom_kKt8qt"
+      ],
+      "custom_css": [],
+      "settings": {
+        "setwidth": "container-fluid",
+        "media_style": "media-left",
+        "media_size": "normal",
+        "image_size": "square",
+        "enable_video_looping": true,
+        "stock_enable": false,
+        "sizeguide_enable": false,
+        "sizeguide_title": "Size Guide",
+        "sizeguide_page": "size-guide",
+        "crosssell_title": "Cross selling",
+        "upsell_accept": "Add to cart",
+        "upsell_decline": "No, thanks",
+        "upsell_time": 3,
+        "enable": false,
+        "mix_1": "#262626",
+        "mix_2": "#ffffff",
+        "text_cl": "#ffffff",
+        "cart_bg": "#ffffff",
+        "cart_cl": "#000000",
+        "cart_cl_hover": "#ffffff"
+      }
+    },
+    "aa_birthstones_JNc9cx": {
+      "type": "aa-birthstones",
+      "blocks": {
+        "stone_6UgJbf": {
+          "type": "stone",
+          "settings": {
+            "month": "January",
+            "short_month": "Jan",
+            "title": "Siam",
+            "color": "#c8102e",
+            "meaning": "Devotion and courage — a deep red that carries warmth through winter."
+          }
+        },
+        "stone_9f4pkW": {
+          "type": "stone",
+          "settings": {
+            "month": "February",
+            "short_month": "Feb",
+            "title": "Amethyst",
+            "color": "#9b5de5",
+            "meaning": "Clarity and calm — the stone of a steady, thoughtful mind."
+          }
+        },
+        "stone_qRCqfy": {
+          "type": "stone",
+          "settings": {
+            "month": "March",
+            "short_month": "Mar",
+            "title": "Aqua",
+            "color": "#4cc9e8",
+            "meaning": "Renewal and hope — clear water light after a long season."
+          }
+        },
+        "stone_NAGGpm": {
+          "type": "stone",
+          "settings": {
+            "month": "April",
+            "short_month": "Apr",
+            "title": "Crystal",
+            "color": "#e6e6ea",
+            "meaning": "Purity and new beginnings — light held in its simplest form."
+          }
+        },
+        "stone_Aq7q9Y": {
+          "type": "stone",
+          "settings": {
+            "month": "May",
+            "short_month": "May",
+            "title": "Emerald",
+            "color": "#0f7a4a",
+            "meaning": "Growth and loyalty — the colour of things that keep blooming."
+          }
+        },
+        "stone_BzG7eN": {
+          "type": "stone",
+          "settings": {
+            "month": "June",
+            "short_month": "Jun",
+            "title": "Light Amethyst",
+            "color": "#c9a4e8",
+            "meaning": "Grace and intuition — softness with quiet strength beneath."
+          }
+        },
+        "stone_zn8jLj": {
+          "type": "stone",
+          "settings": {
+            "month": "July",
+            "short_month": "Jul",
+            "title": "Light Siam",
+            "color": "#e03a3e",
+            "meaning": "Passion and vitality — a heart that leads the way."
+          }
+        },
+        "stone_EWnUjB": {
+          "type": "stone",
+          "settings": {
+            "month": "August",
+            "short_month": "Aug",
+            "title": "Peridot",
+            "color": "#e3d94a",
+            "meaning": "Joy and light — sunlight caught in a single stone."
+          }
+        },
+        "stone_7cPCX3": {
+          "type": "stone",
+          "settings": {
+            "month": "September",
+            "short_month": "Sep",
+            "title": "Sapphire",
+            "color": "#1b2a6b",
+            "meaning": "Wisdom and truth — depth that never asks for attention."
+          }
+        },
+        "stone_a8mKje": {
+          "type": "stone",
+          "settings": {
+            "month": "October",
+            "short_month": "Oct",
+            "title": "Rose",
+            "color": "#f48fb1",
+            "meaning": "Tenderness and compassion — love expressed gently."
+          }
+        },
+        "stone_df6AXe": {
+          "type": "stone",
+          "settings": {
+            "month": "November",
+            "short_month": "Nov",
+            "title": "Topaz",
+            "color": "#f5a623",
+            "meaning": "Warmth and generosity — golden, giving, unmistakable."
+          }
+        },
+        "stone_R94Dtx": {
+          "type": "stone",
+          "settings": {
+            "month": "December",
+            "short_month": "Dec",
+            "title": "Montana",
+            "color": "#4a6fd4",
+            "meaning": "Serenity and reflection — the quiet blue of a closing year."
+          }
+        }
+      },
+      "block_order": [
+        "stone_6UgJbf",
+        "stone_9f4pkW",
+        "stone_qRCqfy",
+        "stone_NAGGpm",
+        "stone_Aq7q9Y",
+        "stone_BzG7eN",
+        "stone_zn8jLj",
+        "stone_EWnUjB",
+        "stone_7cPCX3",
+        "stone_a8mKje",
+        "stone_df6AXe",
+        "stone_R94Dtx"
+      ],
+      "name": "AA Birthstones",
+      "settings": {
+        "animation": "",
+        "setwidth": "container-fluid",
+        "bgsection": "#f3e6d6",
+        "gradient_bg": "",
+        "title_color": "rgba(0,0,0,0)",
+        "subtitle": "Twelve months, twelve stones",
+        "title": "Find the stone that belongs to her month",
+        "size_text": "h2",
+        "highlight_color": "#d4af37",
+        "highlight_italic": true,
+        "subtext": "Every birth month carries its own colour and its own meaning. Choose a month to see the stone we set by hand into each Birthstone Birthday Necklace.",
+        "paddingsection": "112px 0px 112px 0px",
+        "paddingmobile": "80px 0px 80px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "aa_brand_quote_fhKn8X": {
+      "type": "aa-brand-quote",
+      "name": "AA Brand Quote",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#2b1a1a",
+        "quote_text": "People have worn their birth month close for centuries — not because a stone\nchanges anything, but because it says something did. This one's for you. Not\nfor everyone born in September. You, specifically.",
+        "text_color": "#ffffff",
+        "divider_color": "#c8a375",
+        "quote_size_desktop": 32,
+        "quote_size_mobile": 22,
+        "avatar_size": 55,
+        "author_name": "",
+        "author_subtext": "",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "image_content_KLWdXN": {
+      "type": "image-content",
+      "blocks": {
+        "image_block_MHKrM3": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_qf4krmqf4krmqf4k.jpg"
+          }
+        },
+        "text_block_p6mffW": {
+          "type": "text_block",
+          "settings": {
+            "width": "100%",
+            "bgtext": "rgba(0,0,0,0)",
+            "title_color": "rgba(0,0,0,0)",
+            "subtitle": "SET BY HAND",
+            "title": "Small enough to overlook. We don't.",
+            "size_text": "h2",
+            "text": "",
+            "answer_content": "<p>Every stone is hand-set into its prong, checked under magnification, and paired with a chain finished to resist tarnish — because a necklace worn every day has to survive every day.</p><p>Nothing is pulled from a bin of pre-made pendants. Yours is set only once you've confirmed the month, the name, and the length — one piece, made for one person.</p>",
+            "style_btn": "btn-underline btn-underline-white",
+            "button": "",
+            "link": "",
+            "enable_padding": true,
+            "align": "left"
+          }
+        }
+      },
+      "block_order": [
+        "image_block_MHKrM3",
+        "text_block_p6mffW"
+      ],
+      "name": "Image with text",
+      "settings": {
+        "animation": "",
+        "setwidth": "full",
+        "bgsection": "#f3e6d6",
+        "rangebg": 0,
+        "bgbefore": "rgba(0,0,0,0)",
+        "bg_pos": "left",
+        "enable_padding": false,
+        "align_center": true,
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "0px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "rich_text_7zQ3VA": {
+      "type": "rich-text",
+      "blocks": {
+        "sub_title_7CNbDA": {
+          "type": "sub_title",
+          "settings": {
+            "subtitle": "A GIFT SHE'LL ACTUALLY WEAR"
+          }
+        },
+        "heading_xrChkr": {
+          "type": "heading",
+          "settings": {
+            "title": "Flowers fade in a week. This goes with her everywhere,for years.",
+            "size_text": "h1"
+          }
+        },
+        "paragraph_dhGJ8J": {
+          "type": "paragraph",
+          "settings": {
+            "subtext": "Delicate enough to wear alone, easy to layer with what she already owns, and light enough that she'll forget it's there — until she catches it in a mirror and remembers exactly who gave it to her, and why"
+          }
+        }
+      },
+      "block_order": [
+        "sub_title_7CNbDA",
+        "heading_xrChkr",
+        "paragraph_dhGJ8J"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#fbf6f0",
+        "gradient_bg": "",
+        "title_color": "rgba(0,0,0,0)",
+        "title_top": "",
+        "title": "",
+        "text": "",
+        "align-heading": "center",
+        "paddingsection": "100px 0px 100px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "aa_trust_badges_qKrqdF": {
+      "type": "aa-trust-badges",
+      "blocks": {
+        "badge_9764am": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/checked.png",
+            "custom_svg": "<svg fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"></path></svg>",
+            "title": "Proofed by Humans",
+            "text": "Manually checked for accuracy before it ever leaves our studio."
+          }
+        },
+        "badge_tQDQBN": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/box.png",
+            "custom_svg": "<svg fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z\"></path><polyline stroke-linecap=\"round\" stroke-linejoin=\"round\" points=\"3.27 6.96 12 12.01 20.73 6.96\"></polyline><line stroke-linecap=\"round\" stroke-linejoin=\"round\" x1=\"12\" y1=\"22.08\" x2=\"12\" y2=\"12\"></line></svg>",
+            "title": "Small Batch Quality",
+            "text": "Made specifically for you. No bins of pre-made inventory."
+          }
+        },
+        "badge_bXifx9": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/security.png",
+            "custom_svg": "<svg fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M9 12.75L11.25 15 15 9.75M12 21.25c-4.97 0-9-3.358-9-7.5s4.03-7.5 9-7.5c2.148 0 4.12.637 5.672 1.7A5.964 5.964 0 0015 12c0 2.316.326 4.545.923 6.643-1.077.587-2.43 1.107-3.923 1.107z\"></path><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 2.25V6\"></path></svg>",
+            "title": "Made to Last",
+            "text": "Fade-resistant threads and sturdy hardware built for daily wear."
+          }
+        },
+        "badge_kGRHqW": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/gift.png",
+            "custom_svg": "<svg fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z\"></path></svg>",
+            "title": "The Perfect Gift",
+            "text": "Carefully packed and ready to unbox. We obsess over the details."
+          }
+        }
+      },
+      "block_order": [
+        "badge_9764am",
+        "badge_tQDQBN",
+        "badge_bXifx9",
+        "badge_kGRHqW"
+      ],
+      "name": "AA Trust Badges",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f3e6d6",
+        "gradient_bg": "",
+        "title_color": "rgba(0,0,0,0)",
+        "title_top": "",
+        "title": "Small Batch, On Purpose",
+        "text": "<p>We don't do mass production. Every piece is crafted, proofed, and packed by our small team to ensure it is exactly right.</p>",
+        "grid_gap": 40,
+        "icon_size": 32,
+        "icon_color": "#7d2a2c",
+        "image_width": 60,
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "1789202472fd79a55a": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_wRbG8G": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_wRbG8G"
+      ],
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px",
+        "bgsection": "#fbf6f0"
+      }
+    },
+    "product-requently": {
+      "type": "product-bundle",
+      "disabled": true,
+      "settings": {
+        "animation": "fade-up",
+        "bgsection": "#ffffff",
+        "bundle_title": "Frequently Bought Together",
+        "size_text": "h4",
+        "limit_bundle": 3,
+        "enable_border": true,
+        "btn_add": "Add selected items",
+        "paddingsection": "40px 0px 40px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "product-content": {
+      "type": "product-content",
+      "blocks": {
+        "6889c9ba-caef-4edd-9757-6711505cb095": {
+          "type": "description",
+          "settings": {
+            "title_tab": "Description"
+          }
+        }
+      },
+      "block_order": [
+        "6889c9ba-caef-4edd-9757-6711505cb095"
+      ],
+      "disabled": true,
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container-fluid",
+        "tab_size": "large",
+        "enable_left": true,
+        "paddingsection": "40px 0px 40px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container-fluid",
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "heading_align": "center",
+        "products_to_show": 10,
+        "spaceBetween": 30,
+        "perviewDesktop": 4,
+        "nowrap": true,
+        "arrows": true,
+        "scrollbar": true,
+        "padding_top": 80,
+        "padding_bottom": 32
+      }
+    },
+    "product-recent": {
+      "type": "recently-viewed",
+      "disabled": true,
+      "settings": {
+        "enable": true,
+        "animation": "fade-up",
+        "setwidth": "container",
+        "title_top": "",
+        "title": "Recently viewed",
+        "des": "",
+        "align-heading": "center",
+        "limit": 6,
+        "paddingsection": "0px 0px 60px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "aa_birthstones_JNc9cx",
+    "aa_brand_quote_fhKn8X",
+    "image_content_KLWdXN",
+    "rich_text_7zQ3VA",
+    "aa_trust_badges_qKrqdF",
+    "1789202472fd79a55a",
+    "product-requently",
+    "product-content",
+    "product-recommendations",
+    "product-recent"
+  ]
+}

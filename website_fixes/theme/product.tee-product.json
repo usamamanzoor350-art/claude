@@ -1,0 +1,522 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-template-1",
+      "blocks": {
+        "989bce2f-7961-4267-8e6c-40ff4bb0ed64": {
+          "type": "title",
+          "settings": {
+            "e_label": true
+          }
+        },
+        "c5c11045-e3b5-47e4-80d1-25e86ec844cc": {
+          "type": "price",
+          "settings": {}
+        },
+        "1affb493-1e14-4893-9876-be8d348ee475": {
+          "type": "shortdesc",
+          "settings": {}
+        },
+        "ff32ea77-bcea-43d3-8e38-55894c9d938a": {
+          "type": "separator",
+          "settings": {}
+        },
+        "8288910a-1ad6-47df-b127-118bc1d2ce24": {
+          "type": "buttons",
+          "settings": {
+            "enable_local_pickup": true,
+            "enable_hurrify": false,
+            "enable_payment_button": false,
+            "waitlist": false,
+            "product_selector": "radio",
+            "sw_color_product": true,
+            "color_circle": true,
+            "size_color": "small-38"
+          }
+        },
+        "size_charts_jotly_jotly_size_chart_block_P86BJT": {
+          "type": "shopify://apps/size-charts-jotly/blocks/jotly-size-chart-block/97eaca86-aad8-492c-9d4d-0dfdc4899889",
+          "settings": {}
+        },
+        "tabcustom_wLXC4Q": {
+          "type": "tabcustom",
+          "settings": {
+            "title_tab": "Shipping & Delivery",
+            "icon": "checkmark",
+            "answer_content": "<p>Production takes 10–15 business days because every shirt is custom-printed to order. Once crafted, standard shipping applies. You will receive a tracking number via email the moment your order leaves our facility.</p>",
+            "page": ""
+          }
+        },
+        "tabcustom_we48rk": {
+          "type": "tabcustom",
+          "settings": {
+            "title_tab": "Care Instructions",
+            "icon": "checkmark",
+            "answer_content": "<p>To keep the print looking sharp, machine wash cold, inside-out, on a gentle cycle. Tumble dry on low or hang dry. Do not iron directly over the customized design.</p>",
+            "page": ""
+          }
+        },
+        "tabcustom_9WcRqn": {
+          "type": "tabcustom",
+          "settings": {
+            "title_tab": "Frequently Asked Questions",
+            "icon": "checkmark",
+            "answer_content": "<ul><li><strong>Can I order different sizes for a group?</strong> Yes! Just enter the custom details, select the size, add it to your cart, and repeat the process for each person in your group.</li><li><strong>What if I misspell the destination?</strong> You have a 12-hour window after placing your order to email our support team with corrections before production begins.</li><li><strong>Is the shirt true to size?</strong> Yes, these are unisex classic fit shirts. If you prefer a trendy, oversized look, we recommend sizing up by one or two sizes.</li></ul>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "989bce2f-7961-4267-8e6c-40ff4bb0ed64",
+        "c5c11045-e3b5-47e4-80d1-25e86ec844cc",
+        "1affb493-1e14-4893-9876-be8d348ee475",
+        "ff32ea77-bcea-43d3-8e38-55894c9d938a",
+        "8288910a-1ad6-47df-b127-118bc1d2ce24",
+        "size_charts_jotly_jotly_size_chart_block_P86BJT",
+        "tabcustom_wLXC4Q",
+        "tabcustom_we48rk",
+        "tabcustom_9WcRqn"
+      ],
+      "custom_css": [],
+      "settings": {
+        "setwidth": "container-fluid",
+        "media_style": "media-left",
+        "media_size": "normal",
+        "image_size": "square",
+        "enable_video_looping": true,
+        "stock_enable": false,
+        "sizeguide_enable": false,
+        "sizeguide_title": "Size Guide",
+        "sizeguide_page": "size-guide",
+        "crosssell_title": "Cross selling",
+        "upsell_accept": "Add to cart",
+        "upsell_decline": "No, thanks",
+        "upsell_time": 3,
+        "enable": false,
+        "mix_1": "#262626",
+        "mix_2": "#ffffff",
+        "text_cl": "#ffffff",
+        "cart_bg": "#ffffff",
+        "cart_cl": "#000000",
+        "cart_cl_hover": "#ffffff"
+      }
+    },
+    "aa_product_specs_8DJC6m": {
+      "type": "aa-product-specs",
+      "blocks": {
+        "spec_zXeFJD": {
+          "type": "spec",
+          "settings": {
+            "label": "Fabric",
+            "value": "100% Cotton"
+          }
+        },
+        "spec_XgkrU7": {
+          "type": "spec",
+          "settings": {
+            "label": "Fit",
+            "value": "Unisex, true to size"
+          }
+        },
+        "spec_CqGCHW": {
+          "type": "spec",
+          "settings": {
+            "label": "Print",
+            "value": "Fade-resistant"
+          }
+        },
+        "spec_nV3iQ9": {
+          "type": "spec",
+          "settings": {
+            "label": "Care",
+            "value": "Machine wash cold"
+          }
+        }
+      },
+      "block_order": [
+        "spec_zXeFJD",
+        "spec_XgkrU7",
+        "spec_CqGCHW",
+        "spec_nV3iQ9"
+      ],
+      "name": "AA Product Specs",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f3e6d6",
+        "gradient_bg": "",
+        "box_bg": "#fbf6f0",
+        "box_border": "#b3272d",
+        "divider_color": "#e5e5e5",
+        "title": "WHAT IT'S MADE OF",
+        "heading_color": "#7d2a2c",
+        "label_color": "#888888",
+        "value_color": "#222222",
+        "footer_text": "Soft enough for a ten-hour flight, sturdy enough to survive the whole trip in a suitcase.",
+        "footer_color": "#777777",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "aa_numbered_steps_fRgcki": {
+      "type": "aa-numbered-steps",
+      "blocks": {
+        "step_ifaPjL": {
+          "type": "step",
+          "settings": {
+            "number": "1",
+            "title": "Share this page",
+            "text": "Send the link to your group chat."
+          }
+        },
+        "step_mJw9G8": {
+          "type": "step",
+          "settings": {
+            "number": "2",
+            "title": "Everyone picks their fit",
+            "text": "Own size, own color, same design."
+          }
+        },
+        "step_TbdenB": {
+          "type": "step",
+          "settings": {
+            "number": "3",
+            "title": "Same trip, same words",
+            "text": "Agree on the destination and message once."
+          }
+        },
+        "step_jp444w": {
+          "type": "step",
+          "settings": {
+            "number": "4",
+            "title": "Everyone matches on day one",
+            "text": "Orders ship separately, timed to arrive together."
+          }
+        }
+      },
+      "block_order": [
+        "step_ifaPjL",
+        "step_mJw9G8",
+        "step_TbdenB",
+        "step_jp444w"
+      ],
+      "name": "AA Numbered Steps",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#fbf6f0",
+        "gradient_bg": "",
+        "title_color": "rgba(0,0,0,0)",
+        "title_top": "TRAVELING AS A GROUP",
+        "title": "One design. Everybody orders their own.",
+        "text": "<p>No group chat spreadsheet needed. Send everyone this page — each person just picks their own size and color, and every shirt carries the same trip and message.</p>",
+        "desktop_columns": 4,
+        "grid_gap": 40,
+        "mobile_columns": "1",
+        "circle_size": 65,
+        "circle_bg": "#f3e6d6",
+        "circle_border": "#b3272d",
+        "circle_text_color": "#000000",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "aa_polaroid_gallery_en9gMk": {
+      "type": "aa-polaroid-gallery",
+      "blocks": {
+        "polaroid_FmD4iH": {
+          "type": "polaroid",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Sep_8_2026_10_39_20_PM_10.png",
+            "caption": "the airport, day one",
+            "rotation": -6
+          }
+        },
+        "polaroid_pV7n9T": {
+          "type": "polaroid",
+          "settings": {
+            "image": "shopify://shop_images/52774718-a015-40d3-90f8-610cd0f62d21.png",
+            "caption": "everyone, matching, finally",
+            "rotation": 2
+          }
+        },
+        "polaroid_G3tecq": {
+          "type": "polaroid",
+          "settings": {
+            "image": "shopify://shop_images/61a3f9ee-3953-4bf6-8a49-4ad5c1959bad.png",
+            "caption": "the toast, sunset",
+            "rotation": -3
+          }
+        },
+        "polaroid_h7wCXT": {
+          "type": "polaroid",
+          "settings": {
+            "image": "shopify://shop_images/61a3f9ee-3953-4bf6-8a49-4ad5c1959bad.png",
+            "caption": "folded, drawer, years later",
+            "rotation": 5
+          }
+        }
+      },
+      "block_order": [
+        "polaroid_FmD4iH",
+        "polaroid_pV7n9T",
+        "polaroid_G3tecq",
+        "polaroid_h7wCXT"
+      ],
+      "name": "AA Polaroid Gallery",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container-fluid",
+        "bgsection": "#f3e6d6",
+        "gradient_bg": "",
+        "title_color": "rgba(0,0,0,0)",
+        "title_top": "PIN IT TO THE WALL",
+        "title": "The kind of photos this shirt ends up in",
+        "text": "",
+        "footer_text": "Tag @birthday_universe and yours might end up here too",
+        "footer_color": "#332d32",
+        "desktop_columns": 4,
+        "desktop_gap": 30,
+        "mobile_columns": "2",
+        "mobile_gap": 15,
+        "caption_color": "#332d32",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "rich_text_gGjc86": {
+      "type": "rich-text",
+      "blocks": {
+        "paragraph_WBbfRX": {
+          "type": "paragraph",
+          "settings": {
+            "subtext": "<h4 style=\"font-style: italic;\">\n  You won't remember what you talked about at dinner. You'll remember all of you showing up in the same shirt, refusing to take it off for four straight days — and every photo from the trip proving it.\n</h4>"
+          }
+        }
+      },
+      "block_order": [
+        "paragraph_WBbfRX"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#b3272d",
+        "gradient_bg": "",
+        "title_color": "#fbf6f0",
+        "title_top": "",
+        "title": "",
+        "text": "",
+        "align-heading": "center",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "aa_trust_badges_hWzqTW": {
+      "type": "aa-trust-badges",
+      "blocks": {
+        "badge_ihhKnz": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/checked.png",
+            "custom_svg": "<svg fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z\"></path></svg>",
+            "title": "Proofed by Humans",
+            "text": "Manually checked for accuracy before it ever leaves our studio."
+          }
+        },
+        "badge_4fNwfA": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/box.png",
+            "custom_svg": "<svg fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z\"></path><polyline stroke-linecap=\"round\" stroke-linejoin=\"round\" points=\"3.27 6.96 12 12.01 20.73 6.96\"></polyline><line stroke-linecap=\"round\" stroke-linejoin=\"round\" x1=\"12\" y1=\"22.08\" x2=\"12\" y2=\"12\"></line></svg>",
+            "title": "Small Batch Quality",
+            "text": "Made specifically for you. No bins of pre-made inventory."
+          }
+        },
+        "badge_Mx7QEJ": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/security.png",
+            "custom_svg": "<svg fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M9 12.75L11.25 15 15 9.75M12 21.25c-4.97 0-9-3.358-9-7.5s4.03-7.5 9-7.5c2.148 0 4.12.637 5.672 1.7A5.964 5.964 0 0015 12c0 2.316.326 4.545.923 6.643-1.077.587-2.43 1.107-3.923 1.107z\"></path><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 2.25V6\"></path></svg>",
+            "title": "Made to Last",
+            "text": "Fade-resistant threads and sturdy hardware built for daily wear."
+          }
+        },
+        "badge_FEjAV9": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/gift.png",
+            "custom_svg": "<svg fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z\"></path></svg>",
+            "title": "The Perfect Gift",
+            "text": "Carefully packed and ready to unbox. We obsess over the details."
+          }
+        }
+      },
+      "block_order": [
+        "badge_ihhKnz",
+        "badge_4fNwfA",
+        "badge_Mx7QEJ",
+        "badge_FEjAV9"
+      ],
+      "name": "AA Trust Badges",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f3e6d6",
+        "gradient_bg": "",
+        "title_color": "rgba(0,0,0,0)",
+        "title_top": "",
+        "title": "Small Batch, On Purpose",
+        "text": "<p>We don't do mass production. Every piece is crafted, proofed, and packed by our small team to ensure it is exactly right.</p>",
+        "grid_gap": 40,
+        "icon_size": 32,
+        "icon_color": "#7d2a2c",
+        "image_width": 60,
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "1789202472fd79a55a": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_wRbG8G": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_wRbG8G"
+      ],
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px",
+        "bgsection": "#fbf6f0"
+      }
+    },
+    "product-requently": {
+      "type": "product-bundle",
+      "disabled": true,
+      "settings": {
+        "animation": "fade-up",
+        "bgsection": "#ffffff",
+        "bundle_title": "Frequently Bought Together",
+        "size_text": "h4",
+        "limit_bundle": 3,
+        "enable_border": true,
+        "btn_add": "Add selected items",
+        "paddingsection": "40px 0px 40px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "product-content": {
+      "type": "product-content",
+      "blocks": {
+        "6889c9ba-caef-4edd-9757-6711505cb095": {
+          "type": "description",
+          "settings": {
+            "title_tab": "Description"
+          }
+        }
+      },
+      "block_order": [
+        "6889c9ba-caef-4edd-9757-6711505cb095"
+      ],
+      "disabled": true,
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container-fluid",
+        "tab_size": "large",
+        "enable_left": true,
+        "paddingsection": "40px 0px 40px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container-fluid",
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "heading_align": "center",
+        "products_to_show": 10,
+        "spaceBetween": 30,
+        "perviewDesktop": 4,
+        "nowrap": true,
+        "arrows": true,
+        "scrollbar": true,
+        "padding_top": 80,
+        "padding_bottom": 32
+      }
+    },
+    "be561305-5bee-4018-a668-c8770086ba5b": {
+      "type": "line",
+      "disabled": true,
+      "settings": {
+        "animation": "",
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "bgsection": "#ffffff",
+        "setwidth": "container",
+        "bgborder": "#dddddd",
+        "wborder": "1px"
+      }
+    },
+    "product-recent": {
+      "type": "recently-viewed",
+      "disabled": true,
+      "settings": {
+        "enable": true,
+        "animation": "fade-up",
+        "setwidth": "container",
+        "title_top": "",
+        "title": "Recently viewed",
+        "des": "",
+        "align-heading": "center",
+        "limit": 6,
+        "paddingsection": "0px 0px 60px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "aa_product_specs_8DJC6m",
+    "aa_numbered_steps_fRgcki",
+    "aa_polaroid_gallery_en9gMk",
+    "rich_text_gGjc86",
+    "aa_trust_badges_hWzqTW",
+    "1789202472fd79a55a",
+    "product-requently",
+    "product-content",
+    "product-recommendations",
+    "be561305-5bee-4018-a668-c8770086ba5b",
+    "product-recent"
+  ]
+}

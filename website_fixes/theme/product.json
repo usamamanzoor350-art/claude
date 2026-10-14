@@ -1,0 +1,748 @@
+{
+  "sections": {
+    "mu_pdp_PmyMnU": {
+      "type": "mu-pdp",
+      "blocks": {
+        "size_chart_xBB4DY": {
+          "type": "size_chart",
+          "settings": {
+            "placement": "option_3",
+            "open_text": "Open size chart",
+            "close_text": "Close size chart",
+            "title": "Size Chart",
+            "subtitle": "Measurements in inches",
+            "header": "SIZE|CHEST (FLAT)|LENGTH",
+            "rows": "S|18.5|26\nM|20|28\nL|22|30\nXL|24.8|31\n2XL|26|33\n3XL|28|34",
+            "note": "<p><strong>Relaxed unisex fit.</strong> Between sizes? Choose your usual size for a relaxed look, or one size down for a closer fit.</p>",
+            "first_col": 90
+          }
+        },
+        "quantity_tier_qXULnj": {
+          "type": "quantity_tier",
+          "settings": {
+            "quantity": 1,
+            "discount": 0,
+            "title": "1 Shirt",
+            "subtitle": "[unit_price]/shirt",
+            "badge": "",
+            "badge_bg": "#000000",
+            "badge_color": "#ffffff",
+            "selected": true
+          }
+        },
+        "quantity_tier_rD3e7c": {
+          "type": "quantity_tier",
+          "settings": {
+            "quantity": 3,
+            "discount": 50,
+            "title": "Buy 2 get 1 free",
+            "subtitle": "[unit_price]/shirt+ free shipping",
+            "badge": "Most Popular",
+            "badge_bg": "#000000",
+            "badge_color": "#ffffff",
+            "selected": false
+          }
+        },
+        "quantity_tier_b3kHAA": {
+          "type": "quantity_tier",
+          "settings": {
+            "quantity": 6,
+            "discount": 50,
+            "title": "Buy 4 get 2 free",
+            "subtitle": "[unit_price]/shirt+ free shipping",
+            "badge": "Best Value",
+            "badge_bg": "#e55c8a",
+            "badge_color": "#ffffff",
+            "selected": false
+          }
+        },
+        "size_chart_KRVA79": {
+          "type": "size_chart",
+          "settings": {
+            "placement": "static",
+            "open_text": "Open size chart",
+            "close_text": "Close size chart",
+            "title": "Size Chart",
+            "subtitle": "Measurements in inches",
+            "header": "SIZE|CHEST (FLAT)|LENGTH",
+            "rows": "S|18.5|26\nM|20|28\nL|22|30\nXL|24.8|31\n2XL|26|33\n3XL|28|34",
+            "note": "",
+            "first_col": 90
+          }
+        },
+        "accordion_gMpJiq": {
+          "type": "accordion",
+          "settings": {
+            "title": "Features",
+            "content": "<ul><li><strong>100% premium cotton</strong> – soft, breathable and comfortable all day long</li><li><strong>Relaxed, comfortable fit</strong> – flattering on every body</li><li><strong>Two necklines</strong> – classic Round Neck or feminine V-Neck</li><li><strong>Sizes S – 3XL</strong></li><li><strong>6 colors</strong> – Black, White, Pink, Sage Green, Burgundy and Navy Blue</li><li><strong>Crisp, long-lasting print</strong> that stays bright wash after wash</li></ul>",
+            "check_icons": true,
+            "open": true
+          }
+        },
+        "accordion_EpAJxj": {
+          "type": "accordion",
+          "settings": {
+            "title": "Washing & care",
+            "content": "<ul><li>Machine wash cold, inside out, with similar colors</li><li>Tumble dry low or hang dry</li><li>Do not iron directly on the print</li><li>Do not bleach or dry clean</li></ul>",
+            "check_icons": false,
+            "open": false
+          }
+        },
+        "accordion_6Vzm4e": {
+          "type": "accordion",
+          "settings": {
+            "title": "Easy 30-day returns",
+            "content": "<p>We want you to love your shirt. If something isn't quite right, you can request a return within 30 days of delivery. If your order arrives damaged or misprinted, we'll happily send a free replacement or a full refund. Just email us at <a href=\"mailto:help@birthdayuniverse.co\">help@birthdayuniverse.co</a>.</p>",
+            "check_icons": false,
+            "open": false
+          }
+        },
+        "accordion_xCGYfA": {
+          "type": "accordion",
+          "settings": {
+            "title": "Shipping",
+            "content": "<p>Every order is customized with love and care, just for you. Please allow <strong>10–15 business days</strong> for delivery. Ordering for a special day? We recommend ordering a little early so it arrives in time for the celebration!</p>",
+            "check_icons": false,
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "size_chart_xBB4DY",
+        "quantity_tier_qXULnj",
+        "quantity_tier_rD3e7c",
+        "quantity_tier_b3kHAA",
+        "size_chart_KRVA79",
+        "accordion_gMpJiq",
+        "accordion_EpAJxj",
+        "accordion_6Vzm4e",
+        "accordion_xCGYfA"
+      ],
+      "name": "mu-Product main",
+      "settings": {
+        "product": "{{ product }}",
+        "container_max": 1236,
+        "pad_x_d": 20,
+        "pad_x_m": 10,
+        "col_gap": 64,
+        "media_ratio": 62,
+        "pt_d": 20,
+        "pb_d": 40,
+        "mt_d": 0,
+        "mb_d": 0,
+        "pt_m": 10,
+        "pb_m": 30,
+        "mt_m": 0,
+        "mb_m": 0,
+        "font_family": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+        "bg_color": "#ffffff",
+        "text_color": "#000000",
+        "muted_color": "#707070",
+        "compare_color": "#e55c8a",
+        "accent_bg": "#f5f5f5",
+        "dark_color": "#e55c8a",
+        "border_color": "#d4d4d4",
+        "media_bg": "#f5f5f5",
+        "star_color": "#ffc107",
+        "badge_text": "Best seller",
+        "badge_bg": "#e55c8a",
+        "badge_color": "#ffffff",
+        "badge_fs_d": 16,
+        "badge_fs_m": 14,
+        "badge_fw": "500",
+        "show_rating": true,
+        "rating_count": "(8,850)",
+        "rating_link": "",
+        "rc_fs_d": 16,
+        "rc_fs_m": 16,
+        "rc_fw": "400",
+        "title_fs_d": 28,
+        "title_fs_m": 21,
+        "title_fw": "700",
+        "title_lh": 100,
+        "subtitle": "<p>Soft 100% cotton, customized with love and care to make her birthday truly unforgettable.</p>",
+        "sub_fs_d": 18,
+        "sub_fs_m": 17,
+        "sub_fw": "400",
+        "sub_lh": 140,
+        "promo_text": "Buy 2 get 1 free",
+        "promo_fs_d": 14,
+        "promo_fs_m": 16,
+        "promo_fw": "500",
+        "value_labels": "",
+        "lbl_fs_d": 12,
+        "lbl_fs_m": 12,
+        "lbl_fw": "500",
+        "opt_fs_d": 15,
+        "opt_fs_m": 15,
+        "opt_fw": "500",
+        "link_fs_d": 12,
+        "link_fs_m": 12,
+        "link_fw": "500",
+        "cell_fs_d": 14,
+        "cell_fs_m": 12,
+        "cell_fw": "500",
+        "note_fs_d": 12,
+        "note_fs_m": 12,
+        "note_fw": "400",
+        "ct_fs_d": 29,
+        "ct_fs_m": 29,
+        "ct_fw": "700",
+        "cs_fs_d": 14,
+        "cs_fs_m": 14,
+        "cs_fw": "500",
+        "qty_label": "Quantity",
+        "tt_fs_d": 15,
+        "tt_fs_m": 15,
+        "tt_fw": "500",
+        "ts_fs_d": 12,
+        "ts_fs_m": 12,
+        "ts_fw": "400",
+        "tp_fs_d": 15,
+        "tp_fs_m": 15,
+        "tp_fw": "500",
+        "tb_fs_d": 10,
+        "tb_fs_m": 10,
+        "tb_fw": "500",
+        "atc_text": "Add to cart",
+        "soldout_text": "Sold out",
+        "atc_fs_d": 18,
+        "atc_fs_m": 18,
+        "atc_fw": "500",
+        "show_hsa": false,
+        "hsa_bold": "",
+        "hsa_text": "",
+        "hsa_link_text": "",
+        "hsa_link": "",
+        "hsa_fs_d": 12,
+        "hsa_fs_m": 12,
+        "hsa_fw": "400",
+        "show_guarantee": true,
+        "g_text_1": "Easy 30-day returns",
+        "g_text_2": "Delivered in <strong>10–15 business days</strong>",
+        "g_bg": "#f5f5f5",
+        "g_color": "#000000",
+        "dot_color": "#e55c8a",
+        "gb_fs_d": 14,
+        "gb_fs_m": 15,
+        "gb_fw": "500",
+        "at_fs_d": 18,
+        "at_fs_m": 17,
+        "at_fw": "700",
+        "at_lh": 88,
+        "ab_fs_d": 16,
+        "ab_fs_m": 15,
+        "ab_fw": "400",
+        "ab_lh": 140
+      }
+    },
+    "main": {
+      "type": "product-template-1",
+      "blocks": {
+        "989bce2f-7961-4267-8e6c-40ff4bb0ed64": {
+          "type": "title",
+          "settings": {
+            "e_label": true
+          }
+        },
+        "c5c11045-e3b5-47e4-80d1-25e86ec844cc": {
+          "type": "price",
+          "settings": {}
+        },
+        "1affb493-1e14-4893-9876-be8d348ee475": {
+          "type": "shortdesc",
+          "settings": {}
+        },
+        "ff32ea77-bcea-43d3-8e38-55894c9d938a": {
+          "type": "separator",
+          "settings": {}
+        },
+        "8288910a-1ad6-47df-b127-118bc1d2ce24": {
+          "type": "buttons",
+          "settings": {
+            "enable_local_pickup": true,
+            "enable_hurrify": false,
+            "enable_payment_button": false,
+            "waitlist": false,
+            "product_selector": "radio",
+            "sw_color_product": true,
+            "color_circle": false,
+            "size_color": "small-38"
+          }
+        }
+      },
+      "block_order": [
+        "989bce2f-7961-4267-8e6c-40ff4bb0ed64",
+        "c5c11045-e3b5-47e4-80d1-25e86ec844cc",
+        "1affb493-1e14-4893-9876-be8d348ee475",
+        "ff32ea77-bcea-43d3-8e38-55894c9d938a",
+        "8288910a-1ad6-47df-b127-118bc1d2ce24"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "setwidth": "container-fluid",
+        "media_style": "media-left",
+        "media_size": "normal",
+        "image_size": "square",
+        "enable_video_looping": true,
+        "stock_enable": false,
+        "sizeguide_enable": false,
+        "sizeguide_title": "Size Guide",
+        "sizeguide_page": "size-guide",
+        "crosssell_title": "Cross selling",
+        "upsell_accept": "Add to cart",
+        "upsell_decline": "No, thanks",
+        "upsell_time": 3,
+        "enable": false,
+        "mix_1": "#262626",
+        "mix_2": "#ffffff",
+        "text_cl": "#ffffff",
+        "cart_bg": "#ffffff",
+        "cart_cl": "#000000",
+        "cart_cl_hover": "#ffffff"
+      }
+    },
+    "product-requently": {
+      "type": "product-bundle",
+      "disabled": true,
+      "settings": {
+        "animation": "fade-up",
+        "bgsection": "#ffffff",
+        "bundle_title": "Frequently Bought Together",
+        "size_text": "h4",
+        "limit_bundle": 3,
+        "enable_border": true,
+        "btn_add": "Add selected items",
+        "paddingsection": "40px 0px 40px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "product-content": {
+      "type": "product-content",
+      "blocks": {
+        "6889c9ba-caef-4edd-9757-6711505cb095": {
+          "type": "description",
+          "settings": {
+            "title_tab": "Description"
+          }
+        }
+      },
+      "block_order": [
+        "6889c9ba-caef-4edd-9757-6711505cb095"
+      ],
+      "disabled": true,
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container-fluid",
+        "tab_size": "large",
+        "enable_left": true,
+        "paddingsection": "40px 0px 40px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container-fluid",
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "heading_align": "center",
+        "products_to_show": 10,
+        "spaceBetween": 30,
+        "perviewDesktop": 4,
+        "nowrap": true,
+        "arrows": true,
+        "scrollbar": true,
+        "padding_top": 80,
+        "padding_bottom": 32
+      }
+    },
+    "be561305-5bee-4018-a668-c8770086ba5b": {
+      "type": "line",
+      "disabled": true,
+      "settings": {
+        "animation": "",
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "bgsection": "#ffffff",
+        "setwidth": "container",
+        "bgborder": "#dddddd",
+        "wborder": "1px"
+      }
+    },
+    "product-recent": {
+      "type": "recently-viewed",
+      "disabled": true,
+      "settings": {
+        "enable": true,
+        "animation": "fade-up",
+        "setwidth": "container",
+        "title_top": "",
+        "title": "Recently viewed",
+        "des": "",
+        "align-heading": "center",
+        "limit": 6,
+        "paddingsection": "0px 0px 60px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "mu_split_banner_8qzMnP": {
+      "type": "mu-split-banner",
+      "blocks": {
+        "column_bFFVBp": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/7d1e9d0240a4c79c06af4c1c71354eeabb373ab9.png",
+            "image_position": "center top",
+            "heading": "Crown Your Next Chapter\nBirthday Styles With A\nLittle Extra Queen Energy.",
+            "button_label": "Shop Queen Collection",
+            "button_link": "shopify://collections/the-queen-is-birthday-t-shirts",
+            "text_color": "#ffffff",
+            "align": "left",
+            "content_pl_d": 110,
+            "overlay_color": "#000000",
+            "overlay_opacity": 50,
+            "overlay_start": 45
+          }
+        },
+        "column_fYbdU9": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/f68d712c00178052ba5063b905117acdf69b84b2.png",
+            "image_position": "center top",
+            "heading": "A Classic Since Day One\nCelebrate Your Birth Year\nWith Vintage-Inspired Style.",
+            "button_label": "Shop Vintage Collection",
+            "button_link": "shopify://collections/vintage-design-birthday-t-shirts",
+            "text_color": "#ffffff",
+            "align": "left",
+            "content_pl_d": 36,
+            "overlay_color": "#000000",
+            "overlay_opacity": 50,
+            "overlay_start": 45
+          }
+        }
+      },
+      "block_order": [
+        "column_bFFVBp",
+        "column_fYbdU9"
+      ],
+      "name": "mu-Birthday split banner",
+      "settings": {
+        "full_width": true,
+        "container_max": 1440,
+        "pad_x_d": 110,
+        "pad_x_m": 16,
+        "columns_d": "2",
+        "mobile_layout": "stack",
+        "swipe_width_m": 85,
+        "gap_d": 0,
+        "gap_m": 0,
+        "height_d": 660,
+        "height_m": 520,
+        "column_link": false,
+        "hover_zoom": true,
+        "content_pr_d": 36,
+        "content_pb_d": 36,
+        "content_px_m": 20,
+        "content_pb_m": 28,
+        "font_family": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+        "heading_tag": "h3",
+        "h_size_d": 31,
+        "h_size_m": 24,
+        "h_weight": "400",
+        "h_lh": 110,
+        "h_ls": 0,
+        "h_max_width": 520,
+        "keep_breaks_mobile": false,
+        "btn_bg": "#ffffff",
+        "btn_text": "#000000",
+        "btn_bg_hover": "#e55c8a",
+        "btn_text_hover": "#ffffff",
+        "btn_size_d": 15,
+        "btn_size_m": 14,
+        "btn_weight": "400",
+        "btn_ls": 0,
+        "btn_height_d": 46,
+        "btn_height_m": 44,
+        "btn_px_d": 22,
+        "btn_px_m": 20,
+        "btn_mt_d": 18,
+        "btn_mt_m": 16,
+        "pt_d": 0,
+        "pb_d": 0,
+        "mt_d": 0,
+        "mb_d": 0,
+        "pt_m": 0,
+        "pb_m": 0,
+        "mt_m": 0,
+        "mb_m": 0
+      }
+    },
+    "mu_reviews_cHrAPx": {
+      "type": "mu-reviews",
+      "blocks": {
+        "review_kmc4JD": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "source": "google",
+            "text": "<p>This 60th birthday T-shirt is fantastic! The design is personalized, and the fabric is so soft. It's a fun way to celebrate such a special milestone. Highly recommend!</p>",
+            "name": "Anna L.",
+            "date": "6 Months Ago"
+          }
+        },
+        "review_BpCJNP": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "source": "google",
+            "text": "<p>I simply love this 'Queen Is 40' T-shirt! The fabric is soft, the fit is great, and the design is stunning. The perfect birthday gift for my sister – she loved it!</p>",
+            "name": "Clara K.",
+            "date": "1 Year Ago"
+          }
+        },
+        "review_E6fjHY": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "source": "google",
+            "text": "<p>This sweatshirt is perfect for my 45th birthday! The fabric is super soft, and the custom design makes it special. Great quality and a fun way to celebrate!</p>",
+            "name": "Emma M.",
+            "date": "5 Years Ago"
+          }
+        },
+        "review_R7WkG8": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "source": "google",
+            "text": "<p>Ordered the vintage 1975 tee for my husband's 50th and he hasn't taken it off since. The print looks great after several washes and shipping was quick.</p>",
+            "name": "Sophie R.",
+            "date": "3 Months Ago"
+          }
+        },
+        "review_WtainT": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "source": "google",
+            "text": "<p>We got matching 'Queen' shirts for my mom's 70th birthday party. Everyone asked where they were from. True to size and really comfortable!</p>",
+            "name": "Laura B.",
+            "date": "8 Months Ago"
+          }
+        },
+        "review_fHPkRn": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "source": "google",
+            "text": "<p>Such a thoughtful gift for my best friend's 30th. The colors are bright, the cotton feels premium, and it arrived beautifully packed. Will order again!</p>",
+            "name": "Mia T.",
+            "date": "2 Weeks Ago"
+          }
+        }
+      },
+      "block_order": [
+        "review_kmc4JD",
+        "review_BpCJNP",
+        "review_E6fjHY",
+        "review_R7WkG8",
+        "review_WtainT",
+        "review_fHPkRn"
+      ],
+      "name": "mu-Birthday reviews",
+      "settings": {
+        "heading_tag": "h2",
+        "heading": "Real People. Happy Birthdays.",
+        "per_page_d": "3",
+        "per_page_t": "2",
+        "peek_d": 0,
+        "peek_m": 12,
+        "gap_d": 22,
+        "gap_m": 12,
+        "loop": true,
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "show_arrows": true,
+        "arrows_mobile": false,
+        "show_dots": false,
+        "dots_mt": 28,
+        "arrow_color": "#000000",
+        "arrow_hover_bg": "#e55c8a",
+        "arrow_size": 48,
+        "font_family": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+        "h_color": "#000000",
+        "h_size_d": 50,
+        "h_size_m": 32,
+        "h_weight": "400",
+        "h_lh": 110,
+        "h_ls": -1,
+        "card_bg": "#f4f4f4",
+        "card_radius": 8,
+        "card_pad_d": 26,
+        "card_pad_m": 20,
+        "star_color": "#ffc107",
+        "star_empty_color": "#d9d9d9",
+        "star_size_d": 24,
+        "star_size_m": 20,
+        "star_gap": 0,
+        "star_offset": 12,
+        "logo_size_d": 42,
+        "logo_size_m": 36,
+        "text_color": "#1a1a1a",
+        "text_size_d": 14,
+        "text_size_m": 14,
+        "text_weight": "400",
+        "text_lh": 190,
+        "text_uppercase": false,
+        "text_mt_d": 22,
+        "text_mt_m": 16,
+        "avatar_size_d": 50,
+        "avatar_size_m": 48,
+        "name_color": "#000000",
+        "name_size_d": 16,
+        "name_size_m": 15,
+        "name_weight": "500",
+        "name_uppercase": true,
+        "date_color": "#e55c8a",
+        "date_size_d": 11,
+        "date_size_m": 11,
+        "date_weight": "500",
+        "author_mt_d": 20,
+        "author_mt_m": 16,
+        "bg_color": "#ffffff",
+        "container_max": 1440,
+        "pad_x_d": 24,
+        "pad_x_m": 16,
+        "heading_mb_d": 56,
+        "heading_mb_m": 28,
+        "pt_d": 80,
+        "pb_d": 80,
+        "mt_d": 0,
+        "mb_d": 0,
+        "pt_m": 48,
+        "pb_m": 48,
+        "mt_m": 0,
+        "mb_m": 0
+      }
+    },
+    "mu_insta_49ARPf": {
+      "type": "mu-insta",
+      "blocks": {
+        "photo_z9NJUT": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/1880777f3bdd14f50db092035f9726f3e5d144f9.png",
+            "link": "",
+            "new_tab": true,
+            "rotate": 5,
+            "offset_y": 0
+          }
+        },
+        "photo_EjCCD4": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/3b720633ad5e1a8700fbcdce99083f5fb9685057.png",
+            "link": "",
+            "new_tab": true,
+            "rotate": -5,
+            "offset_y": 80
+          }
+        },
+        "photo_xgkPYk": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/c8870783cc7f8cf7f8c4b9601bd541a5a78c1193.png",
+            "link": "",
+            "new_tab": true,
+            "rotate": 7,
+            "offset_y": 40
+          }
+        },
+        "photo_QPVWH6": {
+          "type": "photo",
+          "settings": {
+            "image": "shopify://shop_images/5f9b4b573b1e1da8a0b17a8931d376ea1a735a3e.png",
+            "link": "",
+            "new_tab": true,
+            "rotate": -5,
+            "offset_y": 80
+          }
+        }
+      },
+      "block_order": [
+        "photo_z9NJUT",
+        "photo_EjCCD4",
+        "photo_xgkPYk",
+        "photo_QPVWH6"
+      ],
+      "name": "mu-Birthday instagram",
+      "settings": {
+        "heading_tag": "h2",
+        "handle": "@birthday_universe",
+        "profile_link": "https://www.instagram.com/birthday_universe/",
+        "follow_label": "Follow Now",
+        "show_follow_icon": true,
+        "font_family": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+        "h_color": "#000000",
+        "h_size_d": 50,
+        "h_size_m": 30,
+        "h_weight": "400",
+        "h_ls": -1,
+        "follow_color": "#e55c8a",
+        "follow_hover": "#000000",
+        "follow_size_d": 50,
+        "follow_size_m": 22,
+        "follow_weight": "500",
+        "image_ratio": "5 / 7",
+        "frame": 6,
+        "frame_color": "#ffffff",
+        "shadow": true,
+        "overlap_d": 60,
+        "item_max_d": 420,
+        "max_offset_pad": 80,
+        "stack_order": "right",
+        "hover_straighten": true,
+        "mobile_layout": "grid",
+        "grid_gap_m": 14,
+        "swipe_width_m": 65,
+        "overlap_m": 20,
+        "bg_color": "#ffffff",
+        "container_max": 1440,
+        "pad_x_d": 24,
+        "pad_x_m": 16,
+        "header_mb_d": 84,
+        "header_mb_m": 28,
+        "pt_d": 80,
+        "pb_d": 40,
+        "mt_d": 0,
+        "mb_d": 0,
+        "pt_m": 48,
+        "pb_m": 32,
+        "mt_m": 0,
+        "mb_m": 0
+      }
+    }
+  },
+  "order": [
+    "mu_pdp_PmyMnU",
+    "main",
+    "product-requently",
+    "product-content",
+    "product-recommendations",
+    "be561305-5bee-4018-a668-c8770086ba5b",
+    "product-recent",
+    "mu_split_banner_8qzMnP",
+    "mu_reviews_cHrAPx",
+    "mu_insta_49ARPf"
+  ]
+}

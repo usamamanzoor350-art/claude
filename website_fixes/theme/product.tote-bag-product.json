@@ -1,0 +1,688 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-template-1",
+      "blocks": {
+        "989bce2f-7961-4267-8e6c-40ff4bb0ed64": {
+          "type": "title",
+          "settings": {
+            "e_label": true
+          }
+        },
+        "c5c11045-e3b5-47e4-80d1-25e86ec844cc": {
+          "type": "price",
+          "settings": {}
+        },
+        "text_WBkbUV": {
+          "type": "text",
+          "settings": {
+            "text": "Every tote is cut, stitched and personalized by hand  reinforced at every seam for long lasting durability and reliable protection against wear and water. Not a flimsy freebie tote; one built to actually be used.",
+            "text_style": "body"
+          }
+        },
+        "ff32ea77-bcea-43d3-8e38-55894c9d938a": {
+          "type": "separator",
+          "settings": {}
+        },
+        "8288910a-1ad6-47df-b127-118bc1d2ce24": {
+          "type": "buttons",
+          "settings": {
+            "enable_local_pickup": true,
+            "enable_hurrify": false,
+            "enable_payment_button": false,
+            "waitlist": false,
+            "product_selector": "radio",
+            "sw_color_product": true,
+            "color_circle": true,
+            "size_color": "small-38"
+          }
+        },
+        "tabcustom_V8rQac": {
+          "type": "tabcustom",
+          "settings": {
+            "title_tab": "Shipping & Delivery",
+            "icon": "none",
+            "answer_content": "<p>Because your specific location and name details are printed to order, production takes 10–15 business days. Once your tote passes our quality check, it ships out with full tracking provided directly to your inbox.</p>",
+            "page": ""
+          }
+        },
+        "tabcustom_EdGH8K": {
+          "type": "tabcustom",
+          "settings": {
+            "title_tab": "Care & Materials",
+            "icon": "none",
+            "answer_content": "<p>Crafted from heavy-duty canvas. Spot clean only with mild soap and warm water. Do not machine wash or tumble dry, as this can damage the bag's rigid structure and the custom lettering.</p>",
+            "page": ""
+          }
+        },
+        "tabcustom_6HRWeg": {
+          "type": "tabcustom",
+          "settings": {
+            "title_tab": "Frequently Asked Questions",
+            "icon": "none",
+            "answer_content": "<ul><li><strong>Can I wash this in the washing machine?</strong> We strongly advise against machine washing to preserve the shape of the canvas and the clarity of the personalized print. Spot cleaning is the safest method.</li><li><strong>How much can this bag hold?</strong> The heavy-duty canvas and reinforced stitching are designed to comfortably carry groceries, laptops, beach gear, and daily essentials.</li><li><strong>Can I change the font style?</strong> To maintain the signature, editorial aesthetic of our brand, the font style and layout shown in the photos are standard for all orders.</li></ul>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "989bce2f-7961-4267-8e6c-40ff4bb0ed64",
+        "c5c11045-e3b5-47e4-80d1-25e86ec844cc",
+        "text_WBkbUV",
+        "ff32ea77-bcea-43d3-8e38-55894c9d938a",
+        "8288910a-1ad6-47df-b127-118bc1d2ce24",
+        "tabcustom_V8rQac",
+        "tabcustom_EdGH8K",
+        "tabcustom_6HRWeg"
+      ],
+      "custom_css": [],
+      "settings": {
+        "setwidth": "container-fluid",
+        "media_style": "media-left",
+        "media_size": "normal",
+        "image_size": "square",
+        "enable_video_looping": true,
+        "stock_enable": false,
+        "sizeguide_enable": false,
+        "sizeguide_title": "Size Guide",
+        "sizeguide_page": "size-guide",
+        "crosssell_title": "Cross selling",
+        "upsell_accept": "Add to cart",
+        "upsell_decline": "No, thanks",
+        "upsell_time": 3,
+        "enable": false,
+        "mix_1": "#262626",
+        "mix_2": "#ffffff",
+        "text_cl": "#ffffff",
+        "cart_bg": "#ffffff",
+        "cart_cl": "#000000",
+        "cart_cl_hover": "#ffffff"
+      }
+    },
+    "aa_timeline_steps_Gn6y9t": {
+      "type": "aa-timeline-steps",
+      "blocks": {
+        "step_QxaPg7": {
+          "type": "step",
+          "settings": {
+            "number": "1",
+            "title": "Canvas cut by hand",
+            "text": "Heavyweight, water-resistant canvas, cut to pattern one panel at a time."
+          }
+        },
+        "step_z3g9qV": {
+          "type": "step",
+          "settings": {
+            "number": "2",
+            "title": "Your name, stitched",
+            "text": "Your name, age and city are set and stitched to order never pre-printed in bulk."
+          }
+        },
+        "step_UpJgKY": {
+          "type": "step",
+          "settings": {
+            "number": "3",
+            "title": "Seams checked, by hand",
+            "text": "Every seam and handle is reinforced and inspected before it's allowed to ship."
+          }
+        },
+        "step_ULCm6g": {
+          "type": "step",
+          "settings": {
+            "number": "4",
+            "title": "Wrapped & sent to you",
+            "text": "Folded, wrapped and boxed by the same small team that stitched it."
+          }
+        }
+      },
+      "block_order": [
+        "step_QxaPg7",
+        "step_z3g9qV",
+        "step_UpJgKY",
+        "step_ULCm6g"
+      ],
+      "name": "AA Timeline Steps",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container-fluid",
+        "bgsection": "#f3e6d6",
+        "gradient_bg": "",
+        "title_color": "rgba(0,0,0,0)",
+        "title_top": "MADE BY HAND, NOT BY MACHINE ALONE",
+        "title": "From bolt of canvas to your doorstep",
+        "line_color": "#b3272d",
+        "circle_size": 44,
+        "circle_bg": "#b3272d",
+        "circle_text_color": "#fbf6f0",
+        "footer_text": "This isn't stitched on an assembly line. It's made with pure love — by hand, checked twice, for one person at a time.",
+        "footer_color": "#332d32",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "parallax_banner_x6PpG3": {
+      "type": "parallax-banner",
+      "blocks": {
+        "heading_tHAKJY": {
+          "type": "heading",
+          "settings": {
+            "title": "\"The gifts people keep are the ones they actually use. Candles burndown, flowers wilt — a tote goes with them for years.\"",
+            "size_text": "h3"
+          }
+        }
+      },
+      "block_order": [
+        "heading_tHAKJY"
+      ],
+      "name": "Parallax banner",
+      "settings": {
+        "animation": "",
+        "setwidth": "full",
+        "bgsection": "#ffffff",
+        "parrallax_enable": true,
+        "image": "shopify://shop_images/tote-walking-full-width-banner.png",
+        "height_section": "650",
+        "height_section_mobile": "450",
+        "align": "left",
+        "position_text": "bot-left",
+        "bg_box": "#fff",
+        "opacity_bgbox": 0,
+        "title_color": "#fbf6f0",
+        "bg_overlay": "#000",
+        "gradient_bg": "",
+        "opacity_bg_overlay": 0.4,
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px"
+      }
+    },
+    "aa_image_hotspots_8UaijA": {
+      "type": "aa-image-hotspots",
+      "blocks": {
+        "hotspot_HR8Tfj": {
+          "type": "hotspot",
+          "settings": {
+            "alignment": "left",
+            "number": "1",
+            "pin_x": 50,
+            "pin_y": 20,
+            "title": "Reinforced handles",
+            "text": "Double-stitched to carry real weight, every day."
+          }
+        },
+        "hotspot_brc3Wp": {
+          "type": "hotspot",
+          "settings": {
+            "alignment": "left",
+            "number": "2",
+            "pin_x": 30,
+            "pin_y": 85,
+            "title": "Structured base",
+            "text": "Stands upright on its own instead of slumping over."
+          }
+        },
+        "hotspot_g8YGqi": {
+          "type": "hotspot",
+          "settings": {
+            "alignment": "right",
+            "number": "3",
+            "pin_x": 80,
+            "pin_y": 60,
+            "title": "Water-resistant canvas",
+            "text": "Shrugs off rain and spills instead of soaking through."
+          }
+        },
+        "hotspot_kpzagP": {
+          "type": "hotspot",
+          "settings": {
+            "alignment": "right",
+            "number": "4",
+            "pin_x": 20,
+            "pin_y": 60,
+            "title": "Reinforced side seams",
+            "text": "Checked by hand so they hold up to years of use, not months."
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_HR8Tfj",
+        "hotspot_brc3Wp",
+        "hotspot_g8YGqi",
+        "hotspot_kpzagP"
+      ],
+      "name": "AA Image Hotspots",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f3e6d6",
+        "gradient_bg": "",
+        "title_color": "rgba(0,0,0,0)",
+        "title_top": "BUILT TO LAST",
+        "title": "Four reasons this isn't a flimsy tote",
+        "image": "shopify://shop_images/personalized-tote-four-features.png",
+        "pin_bg": "#ffffff",
+        "pin_border": "#b3272d",
+        "pin_text_color": "#332d32",
+        "accent_color": "#b3272d",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "aa_icon_text_jkxiWJ": {
+      "type": "aa-icon-text",
+      "blocks": {
+        "icon_block_gwVkbW": {
+          "type": "icon_block",
+          "settings": {
+            "custom_svg": "",
+            "image": "shopify://shop_images/shopping-bag.png",
+            "title": "The grocery run"
+          }
+        },
+        "icon_block_YCzU9p": {
+          "type": "icon_block",
+          "settings": {
+            "custom_svg": "",
+            "image": "shopify://shop_images/monitor.png",
+            "title": "The work commute"
+          }
+        },
+        "icon_block_73gRaX": {
+          "type": "icon_block",
+          "settings": {
+            "custom_svg": "",
+            "image": "shopify://shop_images/padlock.png",
+            "title": "Makeup & everyday essentials"
+          }
+        },
+        "icon_block_NNdf7G": {
+          "type": "icon_block",
+          "settings": {
+            "custom_svg": "",
+            "image": "shopify://shop_images/ribbon.png",
+            "title": "Weekend errands & trips"
+          }
+        }
+      },
+      "block_order": [
+        "icon_block_gwVkbW",
+        "icon_block_YCzU9p",
+        "icon_block_73gRaX",
+        "icon_block_NNdf7G"
+      ],
+      "name": "AA Icon & Text",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#fbf6f0",
+        "gradient_bg": "",
+        "title_color": "rgba(0,0,0,0)",
+        "title_top": "NOT A ONE-DAY BAG",
+        "title": "This isn't opened once and put in a drawer.",
+        "text": "<p>A candle gets used up. A card gets read once. This gets packed every morning — groceries, a laptop, the makeup bag that never leaves — which is exactly why the personalization on it matters so much.</p>",
+        "desktop_columns": 4,
+        "mobile_columns": "2",
+        "grid_gap": 40,
+        "icon_size": 36,
+        "icon_color": "#b3272d",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "aa_image_tabs_8a6fGJ": {
+      "type": "aa-image-tabs",
+      "blocks": {
+        "tab_fmQx9m": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "FOR SOMEONE YOU LOVE",
+            "image": "shopify://shop_images/tote-gift-being-handed-over.png",
+            "image_caption": "",
+            "heading": "For the person who \"has everything\"",
+            "text": "<p>Skip another candle or gift card. A name, an age, a city they love — stitched by hand into something they'll actually reach for every day. It tells them you thought about them specifically, not just about the occasion.</p>"
+          }
+        },
+        "tab_P8HPqJ": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "FOR YOURSELF",
+            "image": "shopify://shop_images/lifestyle-gift-DJJsgciz.jpg",
+            "image_caption": "",
+            "heading": "For the person who \"has everything\"",
+            "text": "<p>Skip another candle or gift card. A name, an age, a city they love — stitched by hand into something they'll actually reach for every day. It tells them you thought about them specifically, not just about the occasion.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "tab_fmQx9m",
+        "tab_P8HPqJ"
+      ],
+      "name": "AA Image Tabs",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container-fluid",
+        "bgsection": "#f3e6d6",
+        "gradient_bg": "",
+        "title_color": "rgba(0,0,0,0)",
+        "title_top": "WHO'S IT FOR",
+        "title": "However you're giving it, it's the same idea",
+        "tab_active_bg": "#b3272d",
+        "tab_active_text": "#fbf6f0",
+        "tab_inactive_bg": "#fbf6f0",
+        "tab_inactive_text": "#b3272d",
+        "box_border": "#b3272d",
+        "caption_color": "#ffffff",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "image_content_hqzr8J": {
+      "type": "image-content",
+      "blocks": {
+        "image_block_ca4GwP": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/tote-daily-reminder-mid-doorway.png"
+          }
+        },
+        "text_block_aJFRw4": {
+          "type": "text_block",
+          "settings": {
+            "width": "100%",
+            "bgtext": "rgba(0,0,0,0)",
+            "title_color": "rgba(0,0,0,0)",
+            "subtitle": "A DAILY REMINDER",
+            "title": "Every grocery run. Every Monday commute. Her name goes with her.",
+            "size_text": "h2",
+            "text": "",
+            "answer_content": "<p>A gift she opens once is a nice moment. A gift she reaches for every single day to carry her makeup to work, her groceries home, her essentials wherever she's headed is a moment that repeats. Every time she picks it up, her name, her city, or the year that mattered stitched right there is a small, quiet reminder of the birthday you made special for her</p>",
+            "style_btn": "btn-underline btn-underline-white",
+            "button": "",
+            "link": "",
+            "enable_padding": true,
+            "align": "left"
+          }
+        }
+      },
+      "block_order": [
+        "image_block_ca4GwP",
+        "text_block_aJFRw4"
+      ],
+      "name": "Image with text",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "full",
+        "bgsection": "#fbf6f0",
+        "rangebg": 0,
+        "bgbefore": "rgba(0,0,0,0)",
+        "bg_pos": "left",
+        "enable_padding": false,
+        "align_center": true,
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "0px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "aa_image_collage_iKh83F": {
+      "type": "aa-image-collage",
+      "blocks": {
+        "image_block_cAdd6p": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/tote-daily-commute.png",
+            "caption": "Daily commute to work"
+          }
+        },
+        "image_block_q6DDGz": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/tote-grocery-run.png",
+            "caption": "The grocery run"
+          }
+        },
+        "image_block_Wt63Rk": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/tote-makeup-essentials.png",
+            "caption": "Makeup & essentials"
+          }
+        },
+        "image_block_H9fmeb": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/tote-school-pickup.png",
+            "caption": "School pickup"
+          }
+        },
+        "image_block_hixHmG": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/tote-weekend-away.png",
+            "caption": "The weekend away"
+          }
+        }
+      },
+      "block_order": [
+        "image_block_cAdd6p",
+        "image_block_q6DDGz",
+        "image_block_Wt63Rk",
+        "image_block_H9fmeb",
+        "image_block_hixHmG"
+      ],
+      "name": "AA Image Collage",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container-fluid",
+        "bgsection": "#f3e6d6",
+        "gradient_bg": "",
+        "title_color": "rgba(0,0,0,0)",
+        "title_top": "EVERYWHERE THIS TOTE HAS BEEN",
+        "title": "Made for real days, not just gift photos",
+        "text": "",
+        "grid_gap": 10,
+        "mobile_gap": 10,
+        "border_radius": 0,
+        "caption_color": "#ffffff",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "aa_trust_badges_4ceekf": {
+      "type": "aa-trust-badges",
+      "blocks": {
+        "badge_eWcGd9": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/checked.png",
+            "custom_svg": "<svg fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z\"></path></svg>",
+            "title": "Proofed by Humans",
+            "text": "Manually checked for accuracy before it ever leaves our studio,"
+          }
+        },
+        "badge_ABykBA": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/box.png",
+            "custom_svg": "<svg fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4\"></path></svg>",
+            "title": "Small Batch Quality",
+            "text": "Made specifically for you. No bins of pre-made inventory."
+          }
+        },
+        "badge_eXkWK8": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/security.png",
+            "custom_svg": "<svg fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z\"></path></svg>",
+            "title": "Made to Last",
+            "text": "Fade-resistant threads and sturdy hardware built for daily wear."
+          }
+        },
+        "badge_Gegnma": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/gift.png",
+            "custom_svg": "<svg fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" viewbox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z\"></path><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z\"></path></svg>",
+            "title": "The Perfect Gift",
+            "text": "Carefully packed and ready to unbox. We obsess over the details."
+          }
+        }
+      },
+      "block_order": [
+        "badge_eWcGd9",
+        "badge_ABykBA",
+        "badge_eXkWK8",
+        "badge_Gegnma"
+      ],
+      "name": "AA Trust Badges",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#fbf6f0",
+        "gradient_bg": "",
+        "title_color": "rgba(0,0,0,0)",
+        "title_top": "",
+        "title": "Small Batch, On Purpose",
+        "text": "<p>We don't do mass production. Every piece is crafted, proofed, and packed by our small team to ensure it is exactly right.</p>",
+        "grid_gap": 40,
+        "icon_size": 40,
+        "icon_color": "#b3272d",
+        "image_width": 60,
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "1789202472fd79a55a": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_wRbG8G": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_wRbG8G"
+      ],
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px",
+        "bgsection": "#f3e6d6"
+      }
+    },
+    "product-requently": {
+      "type": "product-bundle",
+      "disabled": true,
+      "settings": {
+        "animation": "fade-up",
+        "bgsection": "#ffffff",
+        "bundle_title": "Frequently Bought Together",
+        "size_text": "h4",
+        "limit_bundle": 3,
+        "enable_border": true,
+        "btn_add": "Add selected items",
+        "paddingsection": "40px 0px 40px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "product-content": {
+      "type": "product-content",
+      "blocks": {
+        "6889c9ba-caef-4edd-9757-6711505cb095": {
+          "type": "description",
+          "settings": {
+            "title_tab": "Description"
+          }
+        }
+      },
+      "block_order": [
+        "6889c9ba-caef-4edd-9757-6711505cb095"
+      ],
+      "disabled": true,
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container-fluid",
+        "tab_size": "large",
+        "enable_left": true,
+        "paddingsection": "40px 0px 40px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container-fluid",
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "heading_align": "center",
+        "products_to_show": 10,
+        "spaceBetween": 30,
+        "perviewDesktop": 4,
+        "nowrap": true,
+        "arrows": true,
+        "scrollbar": true,
+        "padding_top": 80,
+        "padding_bottom": 32
+      }
+    },
+    "product-recent": {
+      "type": "recently-viewed",
+      "disabled": true,
+      "settings": {
+        "enable": true,
+        "animation": "fade-up",
+        "setwidth": "container",
+        "title_top": "",
+        "title": "Recently viewed",
+        "des": "",
+        "align-heading": "center",
+        "limit": 6,
+        "paddingsection": "0px 0px 60px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "aa_timeline_steps_Gn6y9t",
+    "parallax_banner_x6PpG3",
+    "aa_image_hotspots_8UaijA",
+    "aa_icon_text_jkxiWJ",
+    "aa_image_tabs_8a6fGJ",
+    "image_content_hqzr8J",
+    "aa_image_collage_iKh83F",
+    "aa_trust_badges_4ceekf",
+    "1789202472fd79a55a",
+    "product-requently",
+    "product-content",
+    "product-recommendations",
+    "product-recent"
+  ]
+}

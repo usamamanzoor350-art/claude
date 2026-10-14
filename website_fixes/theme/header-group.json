@@ -1,0 +1,127 @@
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement-bar-slide": {
+      "type": "announcement-bar-slide",
+      "blocks": {
+        "afb084a9-2a31-4207-9d23-694c0f6b1281": {
+          "type": "Item",
+          "settings": {
+            "code": "Free shipping on orders over $75 ✦",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "item_Yqmmyg": {
+          "type": "Item",
+          "settings": {
+            "code": "Customized with love and care, delivered in 10–15 business days",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "item_zGaJ7W": {
+          "type": "Item",
+          "settings": {
+            "code": "Easy 30-day returns. We are always here for you ♡",
+            "button_text": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "afb084a9-2a31-4207-9d23-694c0f6b1281",
+        "item_Yqmmyg",
+        "item_zGaJ7W"
+      ],
+      "settings": {
+        "enable": true,
+        "animation": "fade",
+        "size_text": "normal",
+        "announ_type": "carousel",
+        "scroll_dot": "none",
+        "size_icon": 24,
+        "speed": 30,
+        "scroll_type": "from-right",
+        "background": "#241620",
+        "gradient_bg": "",
+        "text": "#fffbf7"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo": "shopify://shop_images/birthday_8.png",
+        "logo_max_width": 115,
+        "enable_transparent": false,
+        "hover_transparent": false,
+        "enable_white": true,
+        "setwidth": "container-fluid",
+        "layout_header": "logo-center-navigation-left",
+        "type_sticky": "sticky-top",
+        "height_header": "small",
+        "topbarbg": "#fcfdfe",
+        "topborderbg": "rgba(0,0,0,0)",
+        "textcolor-top": "#000000",
+        "background": "#fbf6f0",
+        "textcolor": "#241620",
+        "linkcolor": "#241620",
+        "linkhover": "#b3272d",
+        "menutext": "#241620",
+        "menutexthover": "#b3272d",
+        "menudroptexttitle": "#2f3336",
+        "menudroptext": "#241620",
+        "menudropbg": "#fffbf7",
+        "menudropborder": "rgba(0,0,0,0)",
+        "main_linklist": "main-menu",
+        "font_family_menu": "--g-font-2",
+        "font_sizemenu": "12px",
+        "font_weight": "400",
+        "menu_spacing": 0.1,
+        "menu_space": 1,
+        "type_menu": "uppercase",
+        "menu_active": "thick-line",
+        "menu_label_text": "#ffffff",
+        "menu_label_new": "#01bad4",
+        "menu_label_hot": "#d24418",
+        "menu_label_sale": "#ffa800",
+        "menu_label_other": "#848484",
+        "enable_menu_vertical": false,
+        "sl_menu_vertical": "click-menu",
+        "main_linklist_vertical": "",
+        "link_list_search": "",
+        "sidebar_search": true,
+        "e_hd_currency": true,
+        "enable_image": true,
+        "enable_name": false,
+        "enable_language_selector": true,
+        "icon_cart": "icon",
+        "svg_cart": "cart-7",
+        "icon_wishlist": "icon",
+        "icon_login": "icon",
+        "e_link_login": "link",
+        "icon_search": "icon"
+      }
+    },
+    "store-messages": {
+      "type": "store-messages",
+      "settings": {
+        "enable": false,
+        "enable_homepage": false,
+        "background": "#000000",
+        "gradient_bg": "",
+        "text": "#ffffff",
+        "paddingsection": "8px 0px 8px 0px",
+        "paddingmobile": "8px 0px 8px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    }
+  },
+  "order": [
+    "announcement-bar-slide",
+    "header",
+    "store-messages"
+  ]
+}
