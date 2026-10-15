@@ -1,0 +1,644 @@
+<title>3 AM Wake-Up Decoder</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one calm reading column, worksheet steps stacked in order; the Night Map is the centerpiece. */
+:root{
+  --paper:#F2F1F7; --surface:#FFFFFF; --ink:#1D2040; --muted:#565A78; --line:#D7D6E5;
+  --sleep:#3B55B4; --sleep-soft:#DCE2F6; --awake:#C9781A; --awake-soft:#F8E6CC;
+  --out:#ECEBF3; --warn:#A23B3B; --warn-soft:#F6E1E1; --ok:#2D7A57;
+  --display:"Gloock", Georgia, "Times New Roman", serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#121428; --surface:#1B1E37; --ink:#E9E8F4; --muted:#A4A7C6; --line:#30345A;
+  --sleep:#86A0F2; --sleep-soft:#26305E; --awake:#F0AA52; --awake-soft:#4A3519;
+  --out:#22264A; --warn:#F09090; --warn-soft:#4A2228; --ok:#7FD3A8; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#121428; --surface:#1B1E37; --ink:#E9E8F4; --muted:#A4A7C6; --line:#30345A;
+  --sleep:#86A0F2; --sleep-soft:#26305E; --awake:#F0AA52; --awake-soft:#4A3519;
+  --out:#22264A; --warn:#F09090; --warn-soft:#4A2228; --ok:#7FD3A8; color-scheme:dark}
+
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6}
+.wrap{max-width:780px;margin:0 auto;padding-block:40px 64px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(2.2rem,6vw,3.2rem)}
+h2{font-size:1.75rem}
+h3{font-size:1.2rem}
+p{margin:0}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.lede{font-size:1.15rem;color:var(--muted);max-width:62ch}
+header{display:flex;flex-direction:column;gap:14px}
+.howto{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.95rem;color:var(--muted)}
+.howto b{color:var(--ink)}
+
+section.step{display:flex;flex-direction:column;gap:18px}
+.step-head{display:flex;gap:14px;align-items:baseline}
+.num{font-family:var(--mono);font-size:.9rem;color:var(--sleep);border:1.5px solid var(--sleep);border-radius:50%;
+  width:2rem;height:2rem;display:inline-flex;align-items:center;justify-content:center;flex:none;transform:translateY(-3px)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.muted{color:var(--muted)}
+.small{font-size:.92rem}
+
+.research{border-left:3px solid var(--sleep);padding:4px 0 4px 16px;font-size:.95rem;color:var(--muted)}
+.research b{color:var(--ink);font-weight:600}
+sup a{color:var(--sleep);text-decoration:none;font-family:var(--mono);font-size:.75rem}
+
+button{font:inherit;cursor:pointer}
+.btn{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 16px;font-size:.95rem;font-weight:600}
+.btn:hover{border-color:var(--sleep)}
+.btn.primary{background:var(--sleep);border-color:var(--sleep);color:var(--surface)}
+:focus-visible{outline:3px solid var(--sleep);outline-offset:2px}
+
+.banner{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:var(--awake-soft);
+  border-radius:12px;padding:12px 16px;font-size:.95rem}
+
+/* night tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tab{border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:10px;padding:6px 12px;font-size:.92rem;font-weight:600;display:flex;gap:6px;align-items:center}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tab .dot{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.tab.has .dot{background:var(--sleep)}
+
+/* brush */
+.brushes{display:flex;flex-wrap:wrap;gap:8px}
+.brush{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;background:transparent;color:var(--ink);font-size:.95rem;font-weight:600}
+.brush[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.sw{width:16px;height:16px;border-radius:4px;flex:none}
+.sw.s2{background:var(--sleep)} .sw.s1{background:var(--awake)} .sw.s0{background:var(--out);border:1px solid var(--line)}
+
+/* grid */
+.map{display:flex;flex-direction:column;gap:14px;touch-action:none;user-select:none;-webkit-user-select:none}
+.row{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
+.cell{height:44px;border-radius:5px;border:0;background:var(--out);padding:0;position:relative}
+.cell.s2{background:var(--sleep)}
+.cell.s1{background:var(--awake)}
+.cell.hour{box-shadow:inset 2px 0 0 var(--line)}
+.ticks{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.ticks span{white-space:nowrap;overflow:visible}
+.rowlabel{font-size:.8rem;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.stat{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:10px;background:var(--paper)}
+.stat .v{font-family:var(--mono);font-size:1.35rem;font-variant-numeric:tabular-nums;font-weight:500}
+.stat .k{font-size:.8rem;color:var(--muted)}
+.stat.flag .v{color:var(--awake)}
+
+/* causes */
+.causes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.cause{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1.5px solid var(--line);border-radius:12px;padding:8px 10px 8px 14px;min-width:0}
+.cause .lbl{font-weight:600;font-size:.98rem}
+.counter{display:flex;align-items:center;gap:6px}
+.counter button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.1rem;line-height:1}
+.counter output{font-family:var(--mono);min-width:1.5ch;text-align:center;font-variant-numeric:tabular-nums}
+
+.bars{display:flex;flex-direction:column;gap:8px}
+.bar{display:grid;grid-template-columns:150px 1fr 2.5ch;gap:10px;align-items:center;font-size:.92rem}
+.bar .track{height:14px;background:var(--paper);border-radius:7px;overflow:hidden}
+.bar .fill{height:100%;background:var(--sleep);border-radius:7px}
+.bar.top .fill{background:var(--awake)}
+.bar .n{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-weight:600;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+td.mono{font-family:var(--mono)}
+
+/* quiz */
+.q{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0}
+.q p{flex:1 1 320px;min-width:0}
+.yn{display:flex;gap:6px}
+.yn button{border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:6px 16px;font-weight:600;font-size:.92rem}
+.yn button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* insights */
+.insights{display:flex;flex-direction:column;gap:14px}
+.insight{border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;background:var(--surface)}
+.insight .tag{align-self:flex-start;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:var(--awake-soft);color:var(--ink)}
+.insight .tag.calm{background:var(--sleep-soft)}
+.insight .try{font-size:.95rem}
+.insight .try b{color:var(--sleep)}
+.empty{padding:18px;border:1.5px dashed var(--line);border-radius:14px;color:var(--muted)}
+
+/* plan */
+.plan-group{display:flex;flex-direction:column;gap:8px}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:.98rem;cursor:pointer}
+.check input{width:22px;height:22px;margin-top:3px;accent-color:var(--sleep);flex:none}
+.card{border:2px dashed var(--ink);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;background:var(--surface)}
+.card h3{font-size:1.4rem}
+.card ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px}
+.card .if{font-weight:700}
+.row-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.toast{font-size:.9rem;color:var(--ok)}
+
+textarea{width:100%;box-sizing:border-box;min-height:96px;font:inherit;font-size:1rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:12px}
+
+.flagnote{background:var(--warn-soft);border-radius:12px;padding:14px 16px;font-size:.98rem}
+.flagnote b{color:var(--warn)}
+
+.refs{font-size:.85rem;color:var(--muted);display:flex;flex-direction:column;gap:6px;padding-left:1.4em;margin:0}
+.refs li{padding-left:4px}
+footer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:20px;display:flex;flex-direction:column;gap:8px}
+
+@media (max-width:520px){
+  .panel{padding:16px}
+  .cell{height:38px}
+  .bar{grid-template-columns:110px 1fr 2.5ch}
+  .ticks{font-size:.6rem}
+}
+@media (prefers-reduced-motion:no-preference){.bar .fill{transition:width .35s ease}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">The Menopause Sleep Reset &middot; Worksheet 7</span>
+    <h1>The 3 AM Wake-Up Decoder</h1>
+    <p class="lede">For nights when you're exhausted but can't drift off, wake every couple of hours, or find yourself wide awake at 3 AM. Map a week of nights, see your own pattern, and build a plan that matches it.</p>
+    <div class="howto">
+      <span><b>Takes</b> 2 minutes each morning</span>
+      <span><b>Track</b> for 7 nights</span>
+      <span><b>Saves</b> automatically on this device</span>
+    </div>
+  </header>
+
+  <section class="research" aria-label="Why this matters">
+    <p><b>You are not imagining it.</b> Roughly 40–60% of women report sleep problems during the menopause transition, and night sweats are linked to more awakenings.<sup><a href="#r1">1</a></sup> The good news: Cognitive Behavioral Therapy for Insomnia (CBT-I), the approach this worksheet is built on, is the recommended first treatment for chronic insomnia<sup><a href="#r2">2</a>,<a href="#r3">3</a></sup> and has been tested specifically in women with hot flashes.<sup><a href="#r4">4</a></sup></p>
+  </section>
+
+  <!-- STEP 1 -->
+  <section class="step" id="map">
+    <div class="step-head"><span class="num">1</span><h2>Map your night</h2></div>
+    <p class="muted">Each morning, pick a color and tap or drag across the half-hours. Don't time yourself at night. A best guess is all CBT-I asks for, and watching the clock keeps you awake.<sup><a href="#r5">5</a></sup></p>
+
+    <div class="banner" id="exampleBanner" hidden>
+      <span>You're looking at <b>3 example nights</b> so you can see how it works.</span>
+      <button class="btn" id="clearExample" type="button">Clear examples and start mine</button>
+    </div>
+
+    <div class="panel">
+      <div class="tabs" role="tablist" id="tabs" aria-label="Choose a night"></div>
+      <div class="brushes" role="group" aria-label="Paint with">
+        <button class="brush" type="button" data-brush="2" aria-pressed="true"><span class="sw s2"></span>Asleep</button>
+        <button class="brush" type="button" data-brush="1" aria-pressed="false"><span class="sw s1"></span>Awake in bed</button>
+        <button class="brush" type="button" data-brush="0" aria-pressed="false"><span class="sw s0"></span>Out of bed</button>
+      </div>
+      <div class="map" id="mapGrid" aria-label="Half-hour grid from 9 PM to 9 AM"></div>
+      <div class="stats" id="nightStats"></div>
+      <div class="row-actions"><button class="btn" type="button" id="clearNight">Clear this night</button></div>
+    </div>
+
+    <div class="panel">
+      <h3>What woke me up? <span class="muted small" id="causeNight"></span></h3>
+      <p class="small muted">Tap + once for every time you woke and knew why. Leave it if you don't remember; that's normal.</p>
+      <div class="causes" id="causes"></div>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="step" id="week">
+    <div class="step-head"><span class="num">2</span><h2>Your week at a glance</h2></div>
+    <div class="panel">
+      <div class="stats" id="weekStats"></div>
+      <div class="tablewrap"><table id="weekTable"></table></div>
+    </div>
+    <div class="panel">
+      <h3>Top reasons you woke up</h3>
+      <div class="bars" id="causeBars"></div>
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="step" id="quiz">
+    <div class="step-head"><span class="num">3</span><h2>Sleepy, or tired but wired?</h2></div>
+    <p class="muted">"Tired" and "sleepy" aren't the same. Sleepy means your eyes are heavy and you could nod off. Tired-but-wired means your body is drained but your brain is still switched on, which researchers call hyperarousal.<sup><a href="#r6">6</a></sup> Answer for a typical night this week.</p>
+    <div class="panel" id="quizList"></div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section class="step" id="decode">
+    <div class="step-head"><span class="num">4</span><h2>What your pattern is telling you</h2></div>
+    <p class="muted">This updates as you fill in Steps 1–3.</p>
+    <div class="insights" id="insights"></div>
+  </section>
+
+  <!-- STEP 5 -->
+  <section class="step" id="plan">
+    <div class="step-head"><span class="num">5</span><h2>Build your If–Then night plan</h2></div>
+    <p class="muted">Plans written as "If this happens, then I will…" are easier to follow half-asleep than general advice. Check what you'll try. Your top reasons from Step 2 are listed first.</p>
+    <div class="panel" id="planBuilder"></div>
+    <div class="card" id="bedCard" aria-live="polite"></div>
+    <div class="row-actions">
+      <button class="btn primary" type="button" id="copyCard">Copy my bedside card</button>
+      <span class="toast" id="copyToast" role="status"></span>
+    </div>
+  </section>
+
+  <!-- STEP 6 -->
+  <section class="step" id="doctor">
+    <div class="step-head"><span class="num">6</span><h2>Check with your doctor if…</h2></div>
+    <div class="panel">
+      <div id="flags" class="plan-group"></div>
+      <div class="flagnote" id="flagNote" hidden></div>
+    </div>
+    <div class="panel">
+      <h3>One thing I noticed this week</h3>
+      <label class="small muted" for="reflection">Write it in your own words. You can bring this page to your next appointment.</label>
+      <textarea id="reflection" placeholder="e.g. I wake up hot around 2 AM on nights I have wine with dinner."></textarea>
+    </div>
+    <div class="row-actions">
+      <button class="btn" type="button" id="resetAll">Erase everything on this page</button>
+      <button class="btn" type="button" id="resetConfirm" hidden>Yes, erase it</button>
+      <button class="btn" type="button" id="resetCancel" hidden>Keep my notes</button>
+    </div>
+  </section>
+
+  <footer>
+    <h3>Research behind this worksheet</h3>
+    <ol class="refs">
+      <li id="r1">Baker FC, Lampio L, Saaresranta T, Polo-Kantola P. Sleep and sleep disorders in the menopausal transition. <i>Sleep Med Clin.</i> 2018;13(3):443–456.</li>
+      <li id="r2">Qaseem A, et al. Management of chronic insomnia disorder in adults: a clinical practice guideline from the American College of Physicians. <i>Ann Intern Med.</i> 2016;165(2):125–133.</li>
+      <li id="r3">Edinger JD, et al. Behavioral and psychological treatments for chronic insomnia disorder in adults: an American Academy of Sleep Medicine clinical practice guideline. <i>J Clin Sleep Med.</i> 2021;17(2):255–262.</li>
+      <li id="r4">McCurry SM, et al. Telephone-based cognitive behavioral therapy for insomnia in perimenopausal and postmenopausal women with vasomotor symptoms: a MsFLASH randomized clinical trial. <i>JAMA Intern Med.</i> 2016;176(7):913–920.</li>
+      <li id="r5">Tang NKY, Schmidt DA, Harvey AG. Sleeping with the enemy: clock monitoring in the maintenance of insomnia. <i>J Behav Ther Exp Psychiatry.</i> 2007;38(1):40–55.</li>
+      <li id="r6">Riemann D, et al. The hyperarousal model of insomnia: a review of the concept and its evidence. <i>Sleep Med Rev.</i> 2010;14(1):19–31.</li>
+      <li id="r7">Ebrahim IO, Shapiro CM, Williams AJ, Fenwick PB. Alcohol and sleep I: effects on normal sleep. <i>Alcohol Clin Exp Res.</i> 2013;37(4):539–549.</li>
+      <li id="r8">Young T, et al. Menopausal status and sleep-disordered breathing in the Wisconsin Sleep Cohort Study. <i>Am J Respir Crit Care Med.</i> 2003;167(9):1181–1185.</li>
+      <li id="r9">The 2023 nonhormone therapy position statement of The North American Menopause Society. <i>Menopause.</i> 2023;30(6):573–590.</li>
+    </ol>
+    <p>This worksheet is for education and self-tracking. It is not medical advice and does not diagnose or treat any condition. Talk with your healthcare provider about your sleep, especially before changing medications.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var SLOTS = 24, START_HOUR = 21, NIGHTS = 7, KEY = "mpsr-3am-decoder-v1";
+  var CAUSES = [
+    {id:"hot",  label:"Hot or sweaty"},
+    {id:"bath", label:"Bathroom"},
+    {id:"mind", label:"Racing mind"},
+    {id:"pain", label:"Aches or pain"},
+    {id:"noise",label:"Noise or partner"},
+    {id:"none", label:"No clear reason"}
+  ];
+  var QUIZ = [
+    {id:"sleepy", text:"At bedtime my eyes feel heavy and I could nod off easily."},
+    {id:"wired",  text:"At bedtime I feel exhausted, but my mind is busy or alert."},
+    {id:"doze",   text:"I nap, or doze on the couch, in the afternoon or evening."},
+    {id:"catch",  text:"After a bad night I go to bed earlier or stay in bed later to catch up."},
+    {id:"clock",  text:"When I wake up at night, I check the time."},
+    {id:"alc",    text:"I have alcohol within 3 hours of bedtime on some nights."}
+  ];
+  var PLAN = {
+    hot: {ifText:"If I wake up hot or sweaty", opts:[
+      "Keep the bedroom cool (about 60–67°F) with a fan running",
+      "Use light layers I can kick off without fully waking",
+      "Keep cold water and a cool cloth within reach",
+      "Breathe slowly and tell myself: this wave passes in a few minutes"]},
+    bath:{ifText:"If I wake up needing the bathroom", opts:[
+      "Drink more earlier in the day and stop about 2 hours before bed",
+      "Use a dim night-light so I don't switch on bright lights",
+      "Go straight back to bed without checking my phone",
+      "Mention frequent night bathroom trips to my doctor"]},
+    mind:{ifText:"If my mind starts racing", opts:[
+      "Do 15 minutes of Worry Time in the early evening, not in bed",
+      "Write the thought on the bedside notepad and park it until morning",
+      "If I've been awake about 20 minutes, get up and do something calm in dim light",
+      "Turn the clock away from me"]},
+    pain:{ifText:"If aches or pain wake me", opts:[
+      "Try a pillow between my knees or under my lower back",
+      "Do a few gentle stretches before bed",
+      "Note when the pain happens and ask my doctor about it"]},
+    noise:{ifText:"If noise or my partner wakes me", opts:[
+      "Use earplugs or a steady white-noise sound",
+      "Talk with my partner about snoring, and suggest they get it checked",
+      "Try separate blankets so their movement doesn't wake me"]},
+    none:{ifText:"If I wake up for no clear reason", opts:[
+      "Remind myself that brief waking between sleep cycles is normal",
+      "Don't look at the clock",
+      "If I'm still awake after about 20 minutes, get up and return only when sleepy",
+      "Get up at the same time every morning, even after a bad night"]}
+  };
+  var FLAGS = [
+    "I snore loudly, gasp or choke at night, or someone has seen me stop breathing",
+    "I get an uncomfortable urge to move my legs in the evening or at night",
+    "I fall asleep without meaning to while driving, reading or in conversation",
+    "I feel low, hopeless or lose interest in things most days",
+    "My sleep has been poor at least 3 nights a week for 3 months or more"
+  ];
+
+  function blankNight(){ var s=[]; for(var i=0;i<SLOTS;i++) s.push(0); var c={}; CAUSES.forEach(function(x){c[x.id]=0}); return {slots:s,causes:c}; }
+  function ex(arr, causes){ var n=blankNight(); n.slots=arr; for(var k in causes) n.causes[k]=causes[k]; return n; }
+  function exampleState(){
+    var nights=[];
+    nights.push(ex([0,0,1,1,2,2,2,2,1,2,2,2,1,1,2,2,2,1,0,0,0,0,0,0],{hot:2,bath:1}));
+    nights.push(ex([0,0,0,1,2,2,2,1,2,2,2,1,2,2,2,1,2,2,0,0,0,0,0,0],{hot:1,bath:1,mind:1}));
+    nights.push(ex([0,0,1,2,2,2,2,2,2,2,2,1,1,1,1,2,2,2,0,0,0,0,0,0],{mind:1,hot:1}));
+    for(var i=3;i<NIGHTS;i++) nights.push(blankNight());
+    return {nights:nights, current:0, example:true, quiz:{}, plan:{}, flags:{}, reflection:""};
+  }
+  function freshState(){ var s=exampleState(); s.nights=[]; for(var i=0;i<NIGHTS;i++) s.nights.push(blankNight()); s.example=false; return s; }
+
+  var state;
+  try{ var raw=localStorage.getItem(KEY); state = raw ? JSON.parse(raw) : null; }catch(e){ state=null; }
+  if(!state || !state.nights || state.nights.length!==NIGHTS) state = exampleState();
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+  var brush = 2;
+  function $(id){ return document.getElementById(id); }
+  function slotLabel(i){ var h=(START_HOUR + Math.floor(i/2))%24, m=i%2?"30":"00"; var ap=h>=12?"PM":"AM"; var hh=h%12||12; return hh+":"+m+" "+ap; }
+  function shortHour(i){ var h=(START_HOUR + Math.floor(i/2))%24; var hh=h%12||12; return hh+(h>=12?"p":"a"); }
+  function fmtMin(m){ if(m==null) return "–"; var h=Math.floor(m/60), r=m%60; return h ? (h+"h"+(r?" "+r+"m":"")) : (r+"m"); }
+
+  /* ---------- per-night analysis ---------- */
+  function analyze(n){
+    var s=n.slots, inBed=0, asleep=0, i;
+    for(i=0;i<SLOTS;i++){ if(s[i]>0) inBed++; if(s[i]===2) asleep++; }
+    if(!inBed) return null;
+    var first=-1, firstSleep=-1, lastSleep=-1;
+    for(i=0;i<SLOTS;i++){ if(s[i]>0 && first<0) first=i; if(s[i]===2){ if(firstSleep<0) firstSleep=i; lastSleep=i; } }
+    var onset = firstSleep<0 ? null : (firstSleep-first)*30;
+    var wakings=[], longest=0, run=0, longestAwake=0;
+    for(i=0;i<SLOTS;i++){
+      if(s[i]===2){ run++; if(run>longest) longest=run; } else run=0;
+      if(firstSleep>=0 && i>firstSleep && s[i]===1 && s[i-1]===2){
+        var len=0, j=i; while(j<SLOTS && s[j]===1){ len++; j++; }
+        var backToSleep = j<SLOTS && s[j]===2;
+        wakings.push({at:i, len:len*30, back:backToSleep});
+        if(backToSleep && len*30>longestAwake) longestAwake=len*30;
+      }
+    }
+    return {inBed:inBed*30, asleep:asleep*30, eff:Math.round(asleep/inBed*100), onset:onset, wakings:wakings, longest:longest*30, longestAwake:longestAwake};
+  }
+
+  /* ---------- Step 1 ---------- */
+  function renderTabs(){
+    var t=$("tabs"); t.innerHTML="";
+    state.nights.forEach(function(n,i){
+      var b=document.createElement("button"); b.type="button"; b.className="tab"+(analyze(n)?" has":"");
+      b.setAttribute("role","tab"); b.setAttribute("aria-selected", i===state.current?"true":"false");
+      b.innerHTML='<span class="dot"></span>Night '+(i+1);
+      b.addEventListener("click",function(){ state.current=i; save(); renderAll(); });
+      t.appendChild(b);
+    });
+  }
+  function renderGrid(){
+    var g=$("mapGrid"); g.innerHTML="";
+    var n=state.nights[state.current];
+    [["Evening","9 PM – 3 AM",0],["Early morning","3 AM – 9 AM",12]].forEach(function(r){
+      var wrap=document.createElement("div"); wrap.style.display="flex"; wrap.style.flexDirection="column"; wrap.style.gap="6px";
+      var lab=document.createElement("div"); lab.className="rowlabel"; lab.textContent=r[0]+" · "+r[1]; wrap.appendChild(lab);
+      var row=document.createElement("div"); row.className="row";
+      var ticks=document.createElement("div"); ticks.className="ticks";
+      for(var k=0;k<12;k++){
+        var i=r[2]+k, c=document.createElement("button");
+        c.type="button"; c.className="cell s"+n.slots[i]+(i%2===0?" hour":""); c.dataset.i=i;
+        c.setAttribute("aria-label", slotLabel(i)+": "+["out of bed","awake in bed","asleep"][n.slots[i]]);
+        row.appendChild(c);
+        var sp=document.createElement("span"); sp.textContent = i%2===0 ? shortHour(i) : ""; ticks.appendChild(sp);
+      }
+      wrap.appendChild(row); wrap.appendChild(ticks); g.appendChild(wrap);
+    });
+  }
+  function paint(cell){
+    if(!cell || !cell.dataset || cell.dataset.i==null) return;
+    var i=+cell.dataset.i, n=state.nights[state.current];
+    if(n.slots[i]===brush) return;
+    n.slots[i]=brush; cell.className="cell s"+brush+(i%2===0?" hour":"");
+    cell.setAttribute("aria-label", slotLabel(i)+": "+["out of bed","awake in bed","asleep"][brush]);
+    leaveExample();
+    save(); renderNightStats(); renderTabs(); renderWeek(); renderInsights();
+  }
+  var painting=false;
+  $("mapGrid").addEventListener("pointerdown",function(e){ var c=e.target.closest(".cell"); if(!c) return; painting=true; paint(c); e.preventDefault(); });
+  document.addEventListener("pointermove",function(e){ if(!painting) return; var el=document.elementFromPoint(e.clientX,e.clientY); if(el) paint(el.closest(".cell")); });
+  document.addEventListener("pointerup",function(){ painting=false; });
+  document.addEventListener("pointercancel",function(){ painting=false; });
+  $("mapGrid").addEventListener("keydown",function(e){ if((e.key==="Enter"||e.key===" ") && e.target.classList.contains("cell")){ e.preventDefault(); paint(e.target); } });
+
+  document.querySelectorAll(".brush").forEach(function(b){
+    b.addEventListener("click",function(){ brush=+b.dataset.brush; document.querySelectorAll(".brush").forEach(function(x){ x.setAttribute("aria-pressed", x===b?"true":"false"); }); });
+  });
+
+  function statTile(v,k,flag){ return '<div class="stat'+(flag?' flag':'')+'"><span class="v">'+v+'</span><span class="k">'+k+'</span></div>'; }
+  function renderNightStats(){
+    var a=analyze(state.nights[state.current]), el=$("nightStats");
+    if(!a){ el.innerHTML='<p class="muted small" style="grid-column:1/-1">Nothing marked yet for Night '+(state.current+1)+'. Choose <b>Asleep</b> and drag across the hours you slept, then mark the times you lay awake.</p>'; return; }
+    el.innerHTML = statTile(fmtMin(a.asleep),"estimated sleep")
+      + statTile(fmtMin(a.onset),"to fall asleep", a.onset!=null && a.onset>30)
+      + statTile(a.wakings.length,"times awake", a.wakings.length>=2)
+      + statTile(a.eff+"%","sleep efficiency", a.eff<85)
+      + statTile(fmtMin(a.longest),"longest stretch");
+  }
+  function renderCauses(){
+    $("causeNight").textContent="· Night "+(state.current+1);
+    var wrap=$("causes"); wrap.innerHTML="";
+    var n=state.nights[state.current];
+    CAUSES.forEach(function(c){
+      var d=document.createElement("div"); d.className="cause";
+      d.innerHTML='<span class="lbl">'+c.label+'</span><span class="counter"><button type="button" aria-label="One fewer: '+c.label+'">−</button><output aria-live="polite">'+n.causes[c.id]+'</output><button type="button" aria-label="One more: '+c.label+'">+</button></span>';
+      var btns=d.querySelectorAll("button");
+      btns[0].addEventListener("click",function(){ if(n.causes[c.id]>0){ n.causes[c.id]--; changed(); } });
+      btns[1].addEventListener("click",function(){ if(n.causes[c.id]<9){ n.causes[c.id]++; changed(); } });
+      wrap.appendChild(d);
+    });
+    function changed(){ leaveExample(); save(); renderCauses(); renderWeek(); renderInsights(); renderPlan(); }
+  }
+
+  /* ---------- Step 2 ---------- */
+  function weekData(){
+    var rows=[], tot={hot:0,bath:0,mind:0,pain:0,noise:0,none:0};
+    state.nights.forEach(function(n,i){ var a=analyze(n); if(a) rows.push({i:i,a:a}); CAUSES.forEach(function(c){ tot[c.id]+=n.causes[c.id]; }); });
+    return {rows:rows, causes:tot};
+  }
+  function avg(arr){ if(!arr.length) return null; return Math.round(arr.reduce(function(x,y){return x+y},0)/arr.length); }
+  function renderWeek(){
+    var w=weekData(), rows=w.rows;
+    if(!rows.length){
+      $("weekStats").innerHTML='<p class="muted small" style="grid-column:1/-1">Your averages appear here once you map your first night.</p>';
+      $("weekTable").innerHTML="";
+    } else {
+      var onsets=rows.map(function(r){return r.a.onset}).filter(function(x){return x!=null});
+      $("weekStats").innerHTML = statTile(rows.length+" / 7","nights mapped")
+        + statTile(fmtMin(avg(rows.map(function(r){return r.a.asleep}))),"average sleep")
+        + statTile(fmtMin(avg(onsets)),"average to fall asleep", avg(onsets)>30)
+        + statTile((rows.reduce(function(s,r){return s+r.a.wakings.length},0)/rows.length).toFixed(1),"awakenings per night", rows.reduce(function(s,r){return s+r.a.wakings.length},0)/rows.length>=2)
+        + statTile(avg(rows.map(function(r){return r.a.eff}))+"%","average efficiency", avg(rows.map(function(r){return r.a.eff}))<85);
+      var h='<thead><tr><th>Night</th><th>Sleep</th><th>Fall asleep</th><th>Woke at</th><th>Efficiency</th></tr></thead><tbody>';
+      rows.forEach(function(r){
+        h+='<tr><td>Night '+(r.i+1)+'</td><td class="mono">'+fmtMin(r.a.asleep)+'</td><td class="mono">'+fmtMin(r.a.onset)+'</td><td class="mono">'+(r.a.wakings.map(function(x){return slotLabel(x.at).replace(":00","")}).join(", ")||"–")+'</td><td class="mono">'+r.a.eff+'%</td></tr>';
+      });
+      $("weekTable").innerHTML=h+'</tbody>';
+    }
+    var max=0, top=null; CAUSES.forEach(function(c){ if(w.causes[c.id]>max){ max=w.causes[c.id]; top=c.id; } });
+    var b=$("causeBars"); b.innerHTML="";
+    if(!max){ b.innerHTML='<p class="muted small">Use the + buttons in Step 1 to log what woke you. Your top reasons show up here.</p>'; return; }
+    CAUSES.slice().sort(function(x,y){return w.causes[y.id]-w.causes[x.id]}).forEach(function(c){
+      var v=w.causes[c.id];
+      var d=document.createElement("div"); d.className="bar"+(c.id===top?" top":"");
+      d.innerHTML='<span>'+c.label+'</span><span class="track"><span class="fill" style="width:'+(v/max*100)+'%;display:block"></span></span><span class="n">'+v+'</span>';
+      b.appendChild(d);
+    });
+  }
+
+  /* ---------- Step 3 ---------- */
+  function renderQuiz(){
+    var q=$("quizList"); q.innerHTML="";
+    QUIZ.forEach(function(item){
+      var d=document.createElement("div"); d.className="q";
+      d.innerHTML='<p>'+item.text+'</p><span class="yn"><button type="button" data-v="yes">Yes</button><button type="button" data-v="no">No</button></span>';
+      d.querySelectorAll("button").forEach(function(b){
+        b.setAttribute("aria-pressed", state.quiz[item.id]===b.dataset.v?"true":"false");
+        b.addEventListener("click",function(){ state.quiz[item.id] = state.quiz[item.id]===b.dataset.v ? undefined : b.dataset.v; save(); renderQuiz(); renderInsights(); });
+      });
+      q.appendChild(d);
+    });
+  }
+
+  /* ---------- Step 4 ---------- */
+  function insight(tag, title, see, research, tryText, calm){
+    return '<article class="insight"><span class="tag'+(calm?' calm':'')+'">'+tag+'</span><h3>'+title+'</h3><p>'+see+'</p><p class="research">'+research+'</p><p class="try"><b>Try this:</b> '+tryText+'</p></article>';
+  }
+  function renderInsights(){
+    var w=weekData(), rows=w.rows, out="", q=state.quiz;
+    if(rows.length){
+      var onsets=rows.map(function(r){return r.a.onset}).filter(function(x){return x!=null}), ao=avg(onsets);
+      var allW=[]; rows.forEach(function(r){ allW=allW.concat(r.a.wakings); });
+      var perNight=allW.length/rows.length, eff=avg(rows.map(function(r){return r.a.eff}));
+      var mid=allW.filter(function(x){return x.at>=10 && x.at<=16}).length;
+      var longAwake=rows.filter(function(r){return r.a.longestAwake>=60}).length;
+      var gaps=[]; rows.forEach(function(r){ for(var k=1;k<r.a.wakings.length;k++) gaps.push((r.a.wakings[k].at-r.a.wakings[k-1].at)*30); });
+      var ag=avg(gaps);
+
+      if(ao!=null && ao>30) out+=insight("Falling asleep","It takes you about "+fmtMin(ao)+" to drift off",
+        "Taking more than 30 minutes to fall asleep on a regular basis is the point where sleep specialists start to call it trouble falling asleep.",
+        "Lying in bed awake teaches your brain that bed is a place for being awake. CBT-I's stimulus control method rebuilds that link, and guidelines recommend it as a first-line treatment.<sup><a href=\"#r3\">3</a></sup>",
+        "Go to bed only when you feel sleepy (heavy eyes), not just tired. If you're not asleep after about 20 minutes, get up, do something calm in dim light, and come back when sleepy.");
+      if(perNight>=2 && ag!=null && ag>=90 && ag<=150) out+=insight("Every-couple-of-hours waking","You tend to wake about every "+fmtMin(ag),
+        "That spacing lines up with the end of a sleep cycle. Everyone passes through cycles of roughly 90 minutes and surfaces briefly between them. Most people simply don't remember it.",
+        "Sleep gets lighter between cycles. Hot flashes, a full bladder or a busy mind can turn a normal 30-second surfacing into a full wake-up.<sup><a href=\"#r1\">1</a></sup>",
+        "Treat these wake-ups as normal. Don't check the clock, keep the room cool and dark, and use your If–Then card from Step 5 so you aren't problem-solving at 2 AM.", true);
+      else if(perNight>=2) out+=insight("Broken sleep","You're waking about "+perNight.toFixed(1)+" times a night",
+        "Repeated awakenings, rather than trouble falling asleep, are the most common sleep complaint during menopause.",
+        "Night sweats are closely tied to these awakenings, and CBT-I reduced insomnia severity in a trial of women with hot flashes.<sup><a href=\"#r1\">1</a>,<a href=\"#r4\">4</a></sup>",
+        "Look at your top reason in Step 2 and pick 2–3 actions for it in Step 5.");
+      if(allW.length && mid/allW.length>=0.5) out+=insight("The 3 AM window","Most of your wake-ups happen between 2 and 5 AM",
+        "The second half of the night has more light sleep and dream sleep, so it is easier to be pulled awake then.",
+        "Alcohol in the evening can make you fall asleep faster but tends to fragment sleep later in the night.<sup><a href=\"#r7\">7</a></sup> Checking the clock when you wake raises worry and makes it harder to fall back asleep.<sup><a href=\"#r5\">5</a></sup>",
+        "Turn the clock to face the wall tonight. If you drink, try a few alcohol-free evenings this week and compare those nights on your map.");
+      if(longAwake) out+=insight("Wide awake","On "+longAwake+" night"+(longAwake>1?"s":"")+" you lay awake for an hour or more",
+        "Long stretches awake in bed are when frustration builds, and frustration makes you more alert.",
+        "Hyperarousal, a body and brain stuck in 'on' mode, is one of the best-supported explanations for ongoing insomnia.<sup><a href=\"#r6\">6</a></sup>",
+        "Use the 20-minute rule. Prepare a get-up spot now (a chair, a soft lamp, a dull book or puzzle) so it's easy to leave the bed when it happens.");
+      if(eff!=null && eff<85) out+=insight("Time in bed","Your sleep efficiency is about "+eff+"%",
+        "Sleep efficiency is the share of your time in bed that you actually spend asleep. CBT-I programs usually aim for 85% or more.",
+        "Spending extra time in bed to 'catch up' often spreads the same amount of sleep thinner and makes it lighter.<sup><a href=\"#r3\">3</a></sup>",
+        "Pick one wake-up time and keep it every day, weekends included. Avoid going to bed much earlier than you naturally feel sleepy.");
+    }
+    var c=w.causes;
+    if(c.hot>=2) out+=insight("Night sweats","Heat is waking you up",
+      "You logged "+c.hot+" wake-ups from feeling hot or sweaty.",
+      "Expert guidance from The Menopause Society lists CBT among the recommended non-hormone options for hot flashes, and a cool bedroom makes it easier to fall back asleep.<sup><a href=\"#r9\">9</a></sup>",
+      "Cool the room, use layers you can kick off, and keep cold water at the bedside. If night sweats are frequent, ask your doctor which treatments suit you.");
+    if(q.wired==="yes" && q.sleepy!=="yes") out+=insight("Tired but wired","Your body is drained, but your brain is still on",
+      "This is a classic sign of hyperarousal. Going to bed earlier usually makes it worse, not better.",
+      "Calming the mind before bed, through a wind-down hour and writing down worries earlier in the evening, targets this pattern directly.<sup><a href=\"#r6\">6</a></sup>",
+      "Do 15 minutes of Worry Time around 7 PM, then a 60-minute screen-light wind-down. Go to bed when your eyes feel heavy.");
+    if(q.doze==="yes" || q.catch==="yes") out+=insight("Sleep pressure","You may be using up your sleep drive too early",
+      "Naps, evening dozing and extra time in bed all lower the natural 'sleep pressure' that builds up during the day and helps you sleep deeply at night.",
+      "Keeping a steady wake time and limiting time in bed are core parts of CBT-I.<sup><a href=\"#r3\">3</a></sup>",
+      "If you need a nap, keep it under 30 minutes and before 3 PM. Stand up and move if you start to doze in the evening.");
+    if(q.clock==="yes") out+=insight("Clock watching","Checking the time is keeping you up",
+      "Seeing '3:12' starts the math: how many hours are left, and how tired you'll be tomorrow.",
+      "In a controlled study, people who could see a clock worried more and took longer to fall asleep.<sup><a href=\"#r5\">5</a></sup>",
+      "Turn the clock around and keep your phone across the room tonight.");
+    if(q.alc==="yes" && !(allW.length && mid/allW.length>=0.5)) out+=insight("Evening drinks","Alcohol may be lightening your second half of the night",
+      "A glass of wine can feel relaxing, but its effect on sleep changes as your body processes it.",
+      "Alcohol tends to disrupt sleep later in the night and can trigger hot flashes in some women.<sup><a href=\"#r7\">7</a></sup>",
+      "Try 3 alcohol-free evenings this week and compare those nights on your map.");
+    $("insights").innerHTML = out || '<div class="empty">Map at least one night in Step 1 and answer Step 3. Your personal read-out will appear here.</div>';
+  }
+
+  /* ---------- Step 5 ---------- */
+  function rankedCauses(){ var c=weekData().causes; return CAUSES.slice().sort(function(a,b){return c[b.id]-c[a.id]}); }
+  function renderPlan(){
+    var p=$("planBuilder"), c=weekData().causes; p.innerHTML="";
+    rankedCauses().forEach(function(cause){
+      var plan=PLAN[cause.id], g=document.createElement("div"); g.className="plan-group";
+      g.innerHTML='<h3>'+plan.ifText+'… <span class="muted small">'+(c[cause.id]?("logged "+c[cause.id]+"×"):"")+'</span></h3>';
+      plan.opts.forEach(function(o,k){
+        var id="p-"+cause.id+"-"+k, key=cause.id+":"+k;
+        var l=document.createElement("label"); l.className="check"; l.htmlFor=id;
+        l.innerHTML='<input type="checkbox" id="'+id+'"'+(state.plan[key]?" checked":"")+'><span>'+o+'</span>';
+        l.querySelector("input").addEventListener("change",function(e){ state.plan[key]=e.target.checked; save(); renderCard(); });
+        g.appendChild(l);
+      });
+      p.appendChild(g);
+    });
+    renderCard();
+  }
+  function cardLines(){
+    var lines=[];
+    rankedCauses().forEach(function(cause){
+      var plan=PLAN[cause.id], picks=plan.opts.filter(function(o,k){ return state.plan[cause.id+":"+k]; });
+      if(picks.length) lines.push({ifText:plan.ifText, picks:picks});
+    });
+    return lines;
+  }
+  function renderCard(){
+    var lines=cardLines(), el=$("bedCard");
+    if(!lines.length){ el.innerHTML='<h3>My bedside card</h3><p class="muted">Check a few actions above and your card builds itself here. Copy it, print it at home, and keep it next to your bed.</p>'; return; }
+    var h='<h3>My bedside card</h3>';
+    lines.forEach(function(l){ h+='<div><p class="if">'+l.ifText+', then I will:</p><ul>'+l.picks.map(function(x){return '<li>'+x+'</li>'}).join("")+'</ul></div>'; });
+    h+='<p class="small muted">Waking up between sleep cycles is normal. My job is to stay calm, not to force sleep.</p>';
+    el.innerHTML=h;
+  }
+  $("copyCard").addEventListener("click",function(){
+    var lines=cardLines(), toast=$("copyToast");
+    if(!lines.length){ toast.textContent="Check at least one action first."; return; }
+    var txt="MY BEDSIDE CARD\n\n"+lines.map(function(l){ return l.ifText.toUpperCase()+", THEN I WILL:\n"+l.picks.map(function(x){return "  - "+x}).join("\n"); }).join("\n\n")+"\n\nWaking up between sleep cycles is normal. My job is to stay calm, not to force sleep.";
+    function fallback(){ var r=document.createRange(); r.selectNodeContents($("bedCard")); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); toast.textContent="Card selected. Press Ctrl+C or Cmd+C to copy."; }
+    try{ navigator.clipboard.writeText(txt).then(function(){ toast.textContent="Copied. Paste it into a document and print it."; }, fallback); }catch(e){ fallback(); }
+  });
+
+  /* ---------- Step 6 ---------- */
+  function renderFlags(){
+    var f=$("flags"); f.innerHTML="";
+    FLAGS.forEach(function(text,k){
+      var id="f-"+k, l=document.createElement("label"); l.className="check"; l.htmlFor=id;
+      l.innerHTML='<input type="checkbox" id="'+id+'"'+(state.flags[k]?" checked":"")+'><span>'+text+'</span>';
+      l.querySelector("input").addEventListener("change",function(e){ state.flags[k]=e.target.checked; save(); renderFlagNote(); });
+      f.appendChild(l);
+    });
+    renderFlagNote();
+  }
+  function renderFlagNote(){
+    var any=Object.keys(state.flags).some(function(k){return state.flags[k]}), n=$("flagNote");
+    n.hidden=!any;
+    if(any) n.innerHTML='<b>Please bring this up with your doctor.</b> These can point to conditions such as sleep apnea, restless legs or depression, which need their own care. The risk of sleep apnea rises after menopause<sup><a href="#r8">8</a></sup> and it is often missed in women. Ongoing poor sleep for 3 months or more also deserves a proper conversation, and CBT-I with a trained provider is an option to ask about.';
+  }
+  $("reflection").value = state.reflection || "";
+  $("reflection").addEventListener("input",function(e){ state.reflection=e.target.value; save(); });
+
+  /* ---------- examples & reset ---------- */
+  function leaveExample(){ if(state.example){ state.example=false; $("exampleBanner").hidden=true; } }
+  $("clearExample").addEventListener("click",function(){ state=freshState(); save(); renderAll(); });
+  $("clearNight").addEventListener("click",function(){ state.nights[state.current]=blankNight(); leaveExample(); save(); renderAll(); });
+  $("resetAll").addEventListener("click",function(){ $("resetAll").hidden=true; $("resetConfirm").hidden=false; $("resetCancel").hidden=false; });
+  $("resetCancel").addEventListener("click",function(){ $("resetAll").hidden=false; $("resetConfirm").hidden=true; $("resetCancel").hidden=true; });
+  $("resetConfirm").addEventListener("click",function(){ state=freshState(); save(); $("reflection").value=""; $("resetCancel").click(); renderAll(); });
+
+  function renderAll(){
+    $("exampleBanner").hidden=!state.example;
+    renderTabs(); renderGrid(); renderNightStats(); renderCauses(); renderWeek(); renderQuiz(); renderInsights(); renderPlan(); renderFlags();
+  }
+  renderAll();
+})();
+</script>
