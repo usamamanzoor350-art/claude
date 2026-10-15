@@ -1,0 +1,429 @@
+<title>Softly to Sleep</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Nunito:wght@400;600&display=swap">
+<style>
+/* Layout: one quiet scene at a time, centered in a dim room; nothing scrolls, everything moves slowly.
+   Deliberately single-theme: a warm, low-blue night palette for use in bed with the lights off. */
+:root{
+  color-scheme:dark;
+  --night:#17131F; --dusk:#221C2E; --moon:#EBDDC2; --glow:#E0B57A; --mist:#9C93AE; --line:#3A3149;
+  --display:"Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --body:"Nunito", "Avenir Next", system-ui, sans-serif;
+  --slow:1.6s;
+}
+html,body{height:100%}
+body{background:var(--night);color:var(--moon);font-family:var(--body);font-size:19px;line-height:1.6;overflow:hidden}
+.app{height:100%;position:relative;
+  background:radial-gradient(120% 80% at 50% 0%, var(--dusk) 0%, var(--night) 70%)}
+
+/* top controls */
+.controls{position:absolute;z-index:5;top:calc(env(safe-area-inset-top,0px) + 12px);
+  right:max(16px, env(safe-area-inset-right,0px));display:flex;gap:8px}
+.ctl{font:inherit;font-size:.85rem;color:var(--mist);background:transparent;border:1px solid var(--line);
+  border-radius:999px;padding:6px 14px;cursor:pointer}
+.ctl[aria-pressed="true"]{color:var(--glow);border-color:var(--glow)}
+.home{position:absolute;z-index:5;top:calc(env(safe-area-inset-top,0px) + 12px);left:max(16px, env(safe-area-inset-left,0px))}
+
+/* dimmer */
+.dimmer{position:absolute;inset:0;background:#000;pointer-events:none;z-index:4;opacity:0;transition:opacity 2s ease}
+
+/* scenes */
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+  text-align:center;padding-block:72px 40px;
+  padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));
+  opacity:0;visibility:hidden;transition:opacity var(--slow) ease, visibility 0s linear var(--slow)}
+.scene.on{opacity:1;visibility:visible;transition:opacity var(--slow) ease, visibility 0s}
+h1,h2{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;line-height:1.15}
+h1{font-size:clamp(3rem,11vw,5rem);letter-spacing:.01em}
+h2{font-size:clamp(1.8rem,6vw,2.5rem);font-style:italic}
+p{margin:0;max-width:30ch}
+.soft{color:var(--mist)}
+.tag{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
+
+.paths{display:flex;flex-direction:column;gap:12px;width:min(340px,100%)}
+.path{font:inherit;color:var(--moon);background:rgba(235,221,194,.04);border:1px solid var(--line);border-radius:18px;
+  padding:16px 20px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:2px}
+.path b{font-family:var(--display);font-size:1.45rem;font-weight:500}
+.path span{font-size:.88rem;color:var(--mist)}
+.path:hover{border-color:var(--glow)}
+
+.next{font:inherit;font-size:.95rem;color:var(--mist);background:transparent;border:1px solid var(--line);border-radius:999px;
+  padding:10px 26px;cursor:pointer;transition:color 1s, border-color 1s}
+.next:hover,.next.ready{color:var(--glow);border-color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+
+/* gentle line-by-line text */
+.lines{display:flex;flex-direction:column;gap:14px;align-items:center;min-height:9.5em;justify-content:center}
+.lines p{font-family:var(--display);font-size:clamp(1.35rem,4.6vw,1.75rem);line-height:1.35;max-width:24ch;
+  opacity:0;transition:opacity 2.4s ease}
+.lines p.show{opacity:1}
+.lines p.fade{opacity:.28}
+
+/* breathing moon */
+.moonwrap{width:min(62vw,250px);aspect-ratio:1;max-width:100%;display:grid;place-items:center}
+.breath{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at 40% 38%, #F6ECD8 0%, var(--moon) 45%, #C9B48F 100%);
+  box-shadow:0 0 60px 10px rgba(224,181,122,.18), 0 0 140px 40px rgba(224,181,122,.08);
+  transform:scale(.62)}
+.breath.in{transform:scale(1);transition:transform 4s ease-in-out}
+.breath.out{transform:scale(.62);transition:transform 6s ease-in-out}
+.cue{font-family:var(--display);font-size:1.7rem;font-style:italic;min-height:1.4em;transition:opacity 1s}
+
+/* coloring */
+.colorbox{width:min(92vw,520px);max-width:100%;display:flex;flex-direction:column;gap:14px}
+.colorbox svg{width:100%;height:auto;border-radius:14px;display:block;touch-action:manipulation}
+.region{fill:#211B2B;stroke:#4A4058;stroke-width:1.1;cursor:pointer;transition:fill 1.4s ease}
+.palette{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.chip{width:36px;height:36px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0}
+.chip[aria-pressed="true"]{border-color:var(--moon);box-shadow:0 0 0 3px var(--night) inset}
+
+/* stars */
+.sky{width:min(92vw,520px);max-width:100%}
+.sky svg{width:100%;height:auto;display:block}
+.star{cursor:pointer}
+.star .dot{fill:#4A4058;transition:fill 1.6s ease}
+.star .halo{fill:var(--glow);opacity:0;transition:opacity 1.6s ease}
+.star.lit .dot{fill:#FBF1DC}
+.star.lit .halo{opacity:.22}
+.star.hint .dot{animation:hint 3.5s ease-in-out infinite}
+@keyframes hint{50%{fill:#8C7F9E}}
+.link{stroke:var(--glow);stroke-width:1;opacity:0;transition:opacity 2s ease}
+.link.on{opacity:.45}
+.word{font-family:var(--display);font-style:italic;font-size:1.9rem;min-height:1.4em;color:var(--glow);transition:opacity 1.5s}
+
+/* drift words */
+.drift{font-family:var(--display);font-size:clamp(2rem,8vw,3rem);min-height:2.6em;display:flex;align-items:center;
+  justify-content:center;max-width:16ch;transition:opacity 2.2s ease;line-height:1.15}
+
+/* goodnight */
+.close-eyes{font-family:var(--display);font-size:clamp(2.2rem,8vw,3.4rem);font-style:italic;transition:opacity 8s ease}
+.again{font:inherit;font-size:.85rem;color:var(--line);background:none;border:0;cursor:pointer;transition:color 1s}
+.again:hover{color:var(--mist)}
+
+.steps{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:3}
+.steps i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background 1s}
+.steps i.on{background:var(--mist)}
+
+/* a few quiet stars in the room */
+.room-stars{position:absolute;inset:0;pointer-events:none}
+.room-stars b{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--moon);opacity:.25}
+
+@media (prefers-reduced-motion:reduce){
+  .breath.in,.breath.out{transition:none;transform:scale(.8)}
+  .star.hint .dot{animation:none}
+  .scene,.lines p,.drift,.close-eyes{transition-duration:.01s}
+}
+</style>
+
+<div class="app" id="app">
+  <div class="room-stars" id="roomStars" aria-hidden="true"></div>
+  <div class="dimmer" id="dimmer"></div>
+
+  <button class="ctl home" id="homeBtn" type="button" hidden>Start over</button>
+  <div class="controls">
+    <button class="ctl" id="rainBtn" type="button" aria-pressed="false">Soft rain</button>
+    <button class="ctl" id="dimBtn" type="button" aria-pressed="false">Dim screen</button>
+  </div>
+
+  <!-- START -->
+  <section class="scene on" data-scene="start" aria-label="Welcome">
+    <span class="tag">A gentle path for menopause nights</span>
+    <h1>Softly to Sleep</h1>
+    <p class="soft">Nothing to track. Nothing to fix.<br>Just a slow, quiet way back to sleep.</p>
+    <div class="paths">
+      <button class="path" type="button" data-path="bed"><b>Wind down for bed</b><span>About 15 minutes · breathe, color, light the stars, drift</span></button>
+      <button class="path" type="button" data-path="wake"><b>Back to sleep</b><span>About 5 minutes · for when you wake in the night</span></button>
+    </div>
+  </section>
+
+  <!-- ARRIVE (bedtime) -->
+  <section class="scene" data-scene="arrive" aria-label="Settle in">
+    <div class="lines" data-lines="arrive"></div>
+    <button class="next" type="button">Continue</button>
+  </section>
+
+  <!-- ARRIVE (night waking) -->
+  <section class="scene" data-scene="arrive3" aria-label="Settle back in">
+    <div class="lines" data-lines="arrive3"></div>
+    <button class="next" type="button">Continue</button>
+  </section>
+
+  <!-- BREATHE -->
+  <section class="scene" data-scene="breathe" aria-label="Breathe with the moon">
+    <h2>Breathe with the moon</h2>
+    <div class="moonwrap"><div class="breath" id="breath"></div></div>
+    <div class="cue" id="cue" aria-live="polite">&nbsp;</div>
+    <button class="next" type="button">Continue when you're ready</button>
+  </section>
+
+  <!-- COLOR -->
+  <section class="scene" data-scene="color" aria-label="Color the night">
+    <h2>Color the quiet valley</h2>
+    <div class="colorbox">
+      <svg viewBox="0 0 400 300" id="valley" role="img" aria-label="A night valley to color: sky, moon, hills, a cottage, trees and a lake">
+        <rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/>
+        <circle class="region" data-r="moon" cx="300" cy="70" r="28"/>
+        <path class="region" data-r="farhills" d="M0 170 Q60 118 120 150 T240 140 T400 148 L400 300 L0 300Z"/>
+        <path class="region" data-r="nearhills" d="M0 205 Q80 168 160 196 T320 186 T400 196 L400 300 L0 300Z"/>
+        <rect class="region" data-r="house" x="70" y="182" width="42" height="30"/>
+        <polygon class="region" data-r="roof" points="63,184 91,160 119,184"/>
+        <rect class="region" data-r="window" x="84" y="190" width="13" height="11"/>
+        <polygon class="region" data-r="tree1" points="150,206 162,166 174,206"/>
+        <polygon class="region" data-r="tree2" points="176,204 186,174 196,204"/>
+        <polygon class="region" data-r="tree3" points="330,196 342,158 354,196"/>
+        <path class="region" data-r="lake" d="M0 232 Q200 214 400 232 L400 300 L0 300Z"/>
+        <ellipse class="region" data-r="glimmer" cx="300" cy="258" rx="30" ry="5"/>
+        <g fill="#EBDDC2" opacity=".55" pointer-events="none">
+          <circle cx="40" cy="40" r="1.4"/><circle cx="96" cy="70" r="1"/><circle cx="150" cy="30" r="1.3"/>
+          <circle cx="210" cy="60" r="1"/><circle cx="250" cy="26" r="1.2"/><circle cx="360" cy="40" r="1"/>
+          <circle cx="370" cy="110" r="1.2"/><circle cx="60" cy="118" r="1"/>
+        </g>
+      </svg>
+      <div class="palette" id="palette" role="group" aria-label="Choose a color"></div>
+      <p class="soft" style="margin:0 auto">Tap a color, then tap any part of the picture. There's no wrong color.</p>
+    </div>
+    <button class="next" type="button">Continue</button>
+  </section>
+
+  <!-- STARS -->
+  <section class="scene" data-scene="stars" aria-label="Light the stars">
+    <h2>Light the stars, one by one</h2>
+    <div class="sky"><svg viewBox="0 0 400 240" id="skySvg" role="img" aria-label="Nine dim stars to light"></svg></div>
+    <div class="word" id="starWord" aria-live="polite">&nbsp;</div>
+    <button class="next" type="button">Continue</button>
+  </section>
+
+  <!-- LAKE -->
+  <section class="scene" data-scene="lake" aria-label="The cool lake">
+    <div class="lines" data-lines="lake"></div>
+    <button class="next" type="button">Continue</button>
+  </section>
+
+  <!-- DRIFT -->
+  <section class="scene" data-scene="drift" aria-label="Drift">
+    <span class="tag">Picture each one, then let it go</span>
+    <div class="drift" id="drift" aria-live="polite"></div>
+    <p class="soft">You don't need to hold on to anything.<br>Close your eyes whenever you like.</p>
+    <button class="next" type="button">I'm getting sleepy</button>
+  </section>
+
+  <!-- GOODNIGHT -->
+  <section class="scene" data-scene="night" aria-label="Goodnight">
+    <div class="close-eyes" id="closeEyes">Now close your eyes.</div>
+    <p class="soft" id="nightNote">Put the screen down.<br>Sleep will find you.</p>
+    <button class="again" type="button" id="againBtn">Begin again</button>
+  </section>
+
+  <div class="steps" id="steps" aria-hidden="true"></div>
+</div>
+
+<script>
+(function(){
+  var KEY="softly-to-sleep-v1";
+  var store={}; try{ store=JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ store={}; }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
+
+  var TEXT={
+    arrive:[
+      "The day is done.",
+      "Whatever happened today, you did enough.",
+      "Let your shoulders drop, just a little.",
+      "Let your jaw go soft.",
+      "There is nowhere you need to be now."
+    ],
+    arrive3:[
+      "Hello again.",
+      "You don't need to know what time it is.",
+      "Let the pillow hold your head.",
+      "Rest is still rest, even with your eyes open.",
+      "Let's go slowly back down."
+    ],
+    lake:[
+      "Picture a lake at night, perfectly still.",
+      "The air above the water is cool and clean.",
+      "Breathe it in. Feel the coolness on your cheeks.",
+      "Your feet rest in the shallow water, cool and calm.",
+      "The coolness rises slowly… ankles… knees…",
+      "Moonlight lies across the water like a silver path.",
+      "A soft breeze moves over your shoulders.",
+      "Your arms grow heavy, and cool, and still.",
+      "Nothing here needs you right now.",
+      "Let the stillness of the lake become yours."
+    ]
+  };
+  var DRIFT=["a feather drifting down","a warm cup of tea","a sleeping cat","a sailboat far away","fresh snow on a fence",
+    "a lantern in a window","a field of lavender","a slow river","a soft wool blanket","a quiet library","a seashell",
+    "a ripe peach","a garden gate","a pinecone","rain on a window","a distant lighthouse","a bowl of lemons",
+    "an old wooden bench","a balloon floating away","a meadow at dusk","a candle flame","a pair of slippers",
+    "a willow tree","a piano in an empty room","a basket of apples","clouds over hills","a kite on a long string",
+    "a stone path","a little teapot","a sunflower","a rowboat at rest","a snow globe","a curling fern",
+    "a sleeping puppy","a moonlit porch","a dandelion clock","a paper boat","honey on a spoon","an orchard in spring",
+    "a robin","a patchwork quilt","lily pads on a pond","smoke from a cottage chimney","a starfish","a golden wheat field",
+    "a sleepy village","a pear on a windowsill","a hammock between two trees","a jar of fireflies","a sleeping fox"];
+  var PALETTE=["#2E2A47","#46507A","#6E6290","#B58FA2","#7E9A8A","#5B6B66","#EBDDC2","#E0B57A","#8A6B57"];
+  var STARS=[[50,170],[92,122],[140,90],[196,74],[252,80],[302,104],[340,142],[316,184],[270,200]];
+  var STAR_WORDS=["soft","still","warm","safe","slow","quiet","easy","gentle","rest"];
+
+  var PATHS={ bed:["arrive","breathe","color","stars","lake","drift","night"], wake:["arrive3","breathe","drift","night"] };
+  var path=null, idx=0, timers=[];
+  function later(fn,ms){ var t=setTimeout(fn,ms); timers.push(t); return t; }
+  function clearTimers(){ timers.forEach(clearTimeout); timers=[]; }
+  function $(s,r){ return (r||document).querySelector(s); }
+  function scene(name){ return $('.scene[data-scene="'+name+'"]'); }
+
+  /* quiet room stars */
+  (function(){ var r=$("#roomStars"); for(var i=0;i<28;i++){ var b=document.createElement("b");
+    b.style.left=(Math.random()*100)+"%"; b.style.top=(Math.random()*55)+"%"; b.style.opacity=(.08+Math.random()*.25).toFixed(2); r.appendChild(b);} })();
+
+  function show(name){
+    clearTimers(); stopBreath();
+    document.querySelectorAll(".scene").forEach(function(s){ s.classList.toggle("on", s.dataset.scene===name); });
+    $("#homeBtn").hidden = name==="start";
+    renderSteps();
+    var s=scene(name);
+    var nb=$(".next",s); if(nb) nb.classList.remove("ready");
+    if(TEXT[name]) playLines(s, TEXT[name]);
+    if(name==="breathe") startBreath();
+    if(name==="drift") startDrift();
+    if(name==="stars") resetStarWord();
+    if(name==="night") goodnight();
+  }
+  function renderSteps(){
+    var el=$("#steps"); el.innerHTML="";
+    if(!path) return;
+    PATHS[path].forEach(function(_,i){ var d=document.createElement("i"); if(i<=idx) d.className="on"; el.appendChild(d); });
+  }
+  function go(p){ path=p; idx=0; show(PATHS[p][0]); }
+  function next(){ if(!path) return; if(idx<PATHS[path].length-1){ idx++; show(PATHS[path][idx]); } }
+  document.querySelectorAll(".path").forEach(function(b){ b.addEventListener("click",function(){ startRainIfOn(); go(b.dataset.path); }); });
+  document.querySelectorAll(".next").forEach(function(b){ b.addEventListener("click",next); });
+  $("#homeBtn").addEventListener("click",function(){ path=null; show("start"); });
+  $("#againBtn").addEventListener("click",function(){ path=null; show("start"); });
+
+  /* line-by-line text, one breath apart */
+  function playLines(s, lines){
+    var box=$(".lines",s); box.innerHTML="";
+    var els=lines.map(function(t){ var p=document.createElement("p"); p.textContent=t; return p; });
+    var visible=3, gap=6500;
+    els.forEach(function(p,i){
+      later(function(){
+        box.appendChild(p); void p.offsetWidth; p.classList.add("show");
+        var kids=box.children;
+        if(kids.length>visible) box.removeChild(kids[0]);
+        for(var k=0;k<kids.length-1;k++) kids[k].classList.add("fade");
+        if(i===els.length-1){ var nb=$(".next",s); if(nb) nb.classList.add("ready"); }
+      }, 600 + i*gap);
+    });
+  }
+
+  /* breathing: 4 seconds in, 6 seconds out */
+  var breathTimer=null, breathing=false;
+  function startBreath(){
+    var b=$("#breath"), cue=$("#cue"), n=0; breathing=true;
+    function inhale(){ if(!breathing) return; b.classList.remove("out"); b.classList.add("in"); cue.textContent="Breathe in, slowly…";
+      breathTimer=setTimeout(exhale,4000); }
+    function exhale(){ if(!breathing) return; b.classList.remove("in"); b.classList.add("out"); cue.textContent="And out, longer and softer…";
+      n++; if(n===6){ $(".next",scene("breathe")).classList.add("ready"); }
+      breathTimer=setTimeout(inhale,6000); }
+    breathTimer=setTimeout(inhale,1200);
+  }
+  function stopBreath(){ breathing=false; clearTimeout(breathTimer); var b=$("#breath"); if(b){ b.classList.remove("in","out"); } var c=$("#cue"); if(c) c.innerHTML="&nbsp;"; }
+
+  /* coloring */
+  var current=PALETTE[2];
+  (function(){
+    var pal=$("#palette");
+    PALETTE.forEach(function(c){ var b=document.createElement("button"); b.type="button"; b.className="chip"; b.style.background=c;
+      b.setAttribute("aria-label","Color "+c); b.setAttribute("aria-pressed", c===current?"true":"false");
+      b.addEventListener("click",function(){ current=c; pal.querySelectorAll(".chip").forEach(function(x){ x.setAttribute("aria-pressed", x===b?"true":"false"); }); });
+      pal.appendChild(b); });
+    var fills=store.fills||{};
+    document.querySelectorAll("#valley .region").forEach(function(r){
+      if(fills[r.dataset.r]) r.style.fill=fills[r.dataset.r];
+      r.addEventListener("click",function(){ r.style.fill=current; fills[r.dataset.r]=current; store.fills=fills; save(); });
+    });
+  })();
+
+  /* stars */
+  var litOrder=[];
+  (function(){
+    var svg=$("#skySvg"), NS="http://www.w3.org/2000/svg";
+    var links=document.createElementNS(NS,"g"); svg.appendChild(links);
+    STARS.forEach(function(p,i){
+      var g=document.createElementNS(NS,"g"); g.setAttribute("class","star"); g.setAttribute("tabindex","0"); g.setAttribute("role","button");
+      g.setAttribute("aria-label","Light star "+(i+1));
+      var hit=document.createElementNS(NS,"circle"); hit.setAttribute("cx",p[0]); hit.setAttribute("cy",p[1]); hit.setAttribute("r",22); hit.setAttribute("fill","transparent");
+      var halo=document.createElementNS(NS,"circle"); halo.setAttribute("class","halo"); halo.setAttribute("cx",p[0]); halo.setAttribute("cy",p[1]); halo.setAttribute("r",16);
+      var dot=document.createElementNS(NS,"circle"); dot.setAttribute("class","dot"); dot.setAttribute("cx",p[0]); dot.setAttribute("cy",p[1]); dot.setAttribute("r",5);
+      g.appendChild(hit); g.appendChild(halo); g.appendChild(dot); svg.appendChild(g);
+      function light(){
+        if(g.classList.contains("lit")) return;
+        g.classList.add("lit"); g.classList.remove("hint");
+        if(litOrder.length){ var a=STARS[litOrder[litOrder.length-1]], l=document.createElementNS(NS,"line");
+          l.setAttribute("x1",a[0]); l.setAttribute("y1",a[1]); l.setAttribute("x2",p[0]); l.setAttribute("y2",p[1]); l.setAttribute("class","link");
+          links.appendChild(l); requestAnimationFrame(function(){ requestAnimationFrame(function(){ l.classList.add("on"); }); }); }
+        litOrder.push(i);
+        var w=$("#starWord"); w.style.opacity=0;
+        setTimeout(function(){ w.textContent = litOrder.length===STARS.length ? "Your sky is full. Rest here a moment." : STAR_WORDS[litOrder.length-1]; w.style.opacity=1; }, 500);
+        hintNext();
+        if(litOrder.length===STARS.length) $(".next",scene("stars")).classList.add("ready");
+      }
+      g.addEventListener("click",light);
+      g.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); light(); } });
+    });
+    hintNext();
+    function hintNext(){ var all=svg.querySelectorAll(".star"); all.forEach(function(s){ s.classList.remove("hint"); });
+      for(var k=0;k<all.length;k++){ if(!all[k].classList.contains("lit")){ all[k].classList.add("hint"); break; } } }
+  })();
+  function resetStarWord(){ var w=$("#starWord"); if(!litOrder.length){ w.textContent="Tap the softly glowing star"; w.style.opacity=.6; } }
+
+  /* drift words: one gentle image every 9 seconds */
+  function startDrift(){
+    var el=$("#drift"), order=DRIFT.slice().sort(function(){ return Math.random()-.5; }), k=0;
+    function step(){ el.style.opacity=0; later(function(){ el.textContent=order[k%order.length]; k++; el.style.opacity=1; later(step, 9000); }, 2200); }
+    el.textContent=order[0]; k=1; el.style.opacity=1; later(step, 9000);
+  }
+
+  /* goodnight: the screen slowly goes dark */
+  function goodnight(){
+    var c=$("#closeEyes"), n=$("#nightNote"); c.style.opacity=1; n.style.opacity=1;
+    later(function(){ n.style.transition="opacity 6s"; n.style.opacity=0; }, 6000);
+    later(function(){ c.style.opacity=.15; }, 9000);
+    later(function(){ setDim(2, true); }, 12000);
+  }
+
+  /* dimmer */
+  var DIMS=[0,.35,.6], dim=store.dim||0;
+  function setDim(level, temp){ $("#dimmer").style.opacity=DIMS[level]; $("#dimBtn").setAttribute("aria-pressed", level>0?"true":"false");
+    $("#dimBtn").textContent = level===0 ? "Dim screen" : (level===1 ? "Dimmer" : "Dimmest"); if(!temp){ dim=level; store.dim=level; save(); } }
+  $("#dimBtn").addEventListener("click",function(){ setDim((dim+1)%DIMS.length); });
+  setDim(dim);
+
+  /* soft rain: gentle filtered noise, made in the browser */
+  var ctx=null, gain=null, rainOn=false;
+  function buildRain(){
+    var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false;
+    ctx=new AC(); var len=ctx.sampleRate*4, buf=ctx.createBuffer(2,len,ctx.sampleRate);
+    for(var ch=0;ch<2;ch++){ var d=buf.getChannelData(ch), last=0; for(var i=0;i<len;i++){ var w=Math.random()*2-1; last=(last+0.02*w)/1.02; d[i]=last*3.2; } }
+    var src=ctx.createBufferSource(); src.buffer=buf; src.loop=true;
+    var lp=ctx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=1100;
+    gain=ctx.createGain(); gain.gain.value=0;
+    src.connect(lp); lp.connect(gain); gain.connect(ctx.destination); src.start();
+    return true;
+  }
+  function rain(on){
+    if(on && !ctx && !buildRain()) return;
+    if(!ctx) return;
+    if(ctx.state==="suspended") ctx.resume();
+    var t=ctx.currentTime; gain.gain.cancelScheduledValues(t); gain.gain.setValueAtTime(gain.gain.value,t);
+    gain.gain.linearRampToValueAtTime(on?0.22:0, t+(on?3:1.5));
+    rainOn=on; $("#rainBtn").setAttribute("aria-pressed", on?"true":"false");
+  }
+  function startRainIfOn(){ if(rainOn && ctx && ctx.state==="suspended") ctx.resume(); }
+  $("#rainBtn").addEventListener("click",function(){ rain(!rainOn); });
+
+  renderSteps();
+})();
+</script>
