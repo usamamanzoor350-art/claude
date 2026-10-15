@@ -5,48 +5,56 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Nunito:wght@400;600&display=swap">
 <style>
 /* Layout: one quiet scene at a time, centered in a dim room; nothing scrolls, everything moves slowly.
-   Deliberately single-theme: a warm, low-blue night palette for use in bed with the lights off. */
+   Deliberately single-theme: a warm, low-blue night palette for use in bed with the lights off.
+   Each "place" (valley, snow, ocean, lavender) only shifts the glow accent. */
 :root{
   color-scheme:dark;
   --night:#17131F; --dusk:#221C2E; --moon:#EBDDC2; --glow:#E0B57A; --mist:#9C93AE; --line:#3A3149;
   --display:"Cormorant Garamond", "Iowan Old Style", Georgia, serif;
   --body:"Nunito", "Avenir Next", system-ui, sans-serif;
   --slow:1.6s;
+  --stage:min(92vw, 520px, 66vh);
 }
+.app[data-world="snow"]{--glow:#CFD8E4; --dusk:#1E2130}
+.app[data-world="ocean"]{--glow:#93C2BE; --dusk:#18222A}
+.app[data-world="lavender"]{--glow:#C7AEE2; --dusk:#241C32}
 html,body{height:100%}
 body{background:var(--night);color:var(--moon);font-family:var(--body);font-size:19px;line-height:1.6;overflow:hidden}
-.app{height:100%;position:relative;
+.app{height:100%;position:relative;transition:background 2s;
   background:radial-gradient(120% 80% at 50% 0%, var(--dusk) 0%, var(--night) 70%)}
 
-/* top controls */
 .controls{position:absolute;z-index:5;top:calc(env(safe-area-inset-top,0px) + 12px);
   right:max(16px, env(safe-area-inset-right,0px));display:flex;gap:8px}
 .ctl{font:inherit;font-size:.85rem;color:var(--mist);background:transparent;border:1px solid var(--line);
   border-radius:999px;padding:6px 14px;cursor:pointer}
 .ctl[aria-pressed="true"]{color:var(--glow);border-color:var(--glow)}
 .home{position:absolute;z-index:5;top:calc(env(safe-area-inset-top,0px) + 12px);left:max(16px, env(safe-area-inset-left,0px))}
-
-/* dimmer */
 .dimmer{position:absolute;inset:0;background:#000;pointer-events:none;z-index:4;opacity:0;transition:opacity 2s ease}
 
-/* scenes */
-.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
-  text-align:center;padding-block:72px 40px;
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+  text-align:center;padding-block:68px 40px;
   padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));
   opacity:0;visibility:hidden;transition:opacity var(--slow) ease, visibility 0s linear var(--slow)}
 .scene.on{opacity:1;visibility:visible;transition:opacity var(--slow) ease, visibility 0s}
 h1,h2{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;line-height:1.15}
-h1{font-size:clamp(3rem,11vw,5rem);letter-spacing:.01em}
-h2{font-size:clamp(1.8rem,6vw,2.5rem);font-style:italic}
+h1{font-size:clamp(2.8rem,10vw,4.6rem);letter-spacing:.01em}
+h2{font-size:clamp(1.7rem,5.6vw,2.4rem);font-style:italic}
 p{margin:0;max-width:30ch}
 .soft{color:var(--mist)}
 .tag{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
 
-.paths{display:flex;flex-direction:column;gap:12px;width:min(340px,100%)}
+/* start */
+.places{display:flex;flex-direction:column;gap:8px;align-items:center}
+.place-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.place{font:inherit;font-size:.92rem;color:var(--mist);background:transparent;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;
+  display:flex;align-items:center;gap:8px}
+.place i{width:10px;height:10px;border-radius:50%;flex:none}
+.place[aria-pressed="true"]{color:var(--moon);border-color:var(--glow)}
+.paths{display:flex;flex-direction:column;gap:10px;width:min(340px,100%)}
 .path{font:inherit;color:var(--moon);background:rgba(235,221,194,.04);border:1px solid var(--line);border-radius:18px;
-  padding:16px 20px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:2px}
-.path b{font-family:var(--display);font-size:1.45rem;font-weight:500}
-.path span{font-size:.88rem;color:var(--mist)}
+  padding:14px 20px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:2px}
+.path b{font-family:var(--display);font-size:1.4rem;font-weight:500}
+.path span{font-size:.86rem;color:var(--mist)}
 .path:hover{border-color:var(--glow)}
 
 .next{font:inherit;font-size:.95rem;color:var(--mist);background:transparent;border:1px solid var(--line);border-radius:999px;
@@ -54,34 +62,30 @@ p{margin:0;max-width:30ch}
 .next:hover,.next.ready{color:var(--glow);border-color:var(--glow)}
 :focus-visible{outline:2px solid var(--glow);outline-offset:3px}
 
-/* gentle line-by-line text */
 .lines{display:flex;flex-direction:column;gap:14px;align-items:center;min-height:9.5em;justify-content:center}
-.lines p{font-family:var(--display);font-size:clamp(1.35rem,4.6vw,1.75rem);line-height:1.35;max-width:24ch;
-  opacity:0;transition:opacity 2.4s ease}
+.lines p{font-family:var(--display);font-size:clamp(1.35rem,4.6vw,1.75rem);line-height:1.35;max-width:24ch;opacity:0;transition:opacity 2.4s ease}
 .lines p.show{opacity:1}
 .lines p.fade{opacity:.28}
 
 /* breathing moon */
-.moonwrap{width:min(62vw,250px);aspect-ratio:1;max-width:100%;display:grid;place-items:center}
+.moonwrap{width:min(60vw,240px,34vh);aspect-ratio:1;max-width:100%;display:grid;place-items:center}
 .breath{width:100%;height:100%;border-radius:50%;
   background:radial-gradient(circle at 40% 38%, #F6ECD8 0%, var(--moon) 45%, #C9B48F 100%);
-  box-shadow:0 0 60px 10px rgba(224,181,122,.18), 0 0 140px 40px rgba(224,181,122,.08);
-  transform:scale(.62)}
+  box-shadow:0 0 60px 10px rgba(224,181,122,.18), 0 0 140px 40px rgba(224,181,122,.08);transform:scale(.62)}
 .breath.in{transform:scale(1);transition:transform 4s ease-in-out}
 .breath.out{transform:scale(.62);transition:transform 6s ease-in-out}
-.cue{font-family:var(--display);font-size:1.7rem;font-style:italic;min-height:1.4em;transition:opacity 1s}
+.cue{font-family:var(--display);font-size:1.7rem;font-style:italic;min-height:1.4em}
 
-/* coloring */
-.colorbox{width:min(92vw,520px);max-width:100%;display:flex;flex-direction:column;gap:14px}
-.colorbox svg{width:100%;height:auto;border-radius:14px;display:block;touch-action:manipulation}
+/* stage for pictures and activities */
+.stage{width:var(--stage);max-width:100%;display:flex;flex-direction:column;gap:12px}
+.stage svg,.stage canvas{width:100%;height:auto;aspect-ratio:4/3;display:block;border-radius:14px}
+.stage canvas{touch-action:none;cursor:pointer}
+#valley{touch-action:manipulation}
 .region{fill:#211B2B;stroke:#4A4058;stroke-width:1.1;cursor:pointer;transition:fill 1.4s ease}
-.palette{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
-.chip{width:36px;height:36px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0}
+.palette{display:flex;flex-wrap:wrap;justify-content:center;gap:9px}
+.chip{width:34px;height:34px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0}
 .chip[aria-pressed="true"]{border-color:var(--moon);box-shadow:0 0 0 3px var(--night) inset}
 
-/* stars */
-.sky{width:min(92vw,520px);max-width:100%}
-.sky svg{width:100%;height:auto;display:block}
 .star{cursor:pointer}
 .star .dot{fill:#4A4058;transition:fill 1.6s ease}
 .star .halo{fill:var(--glow);opacity:0;transition:opacity 1.6s ease}
@@ -91,13 +95,10 @@ p{margin:0;max-width:30ch}
 @keyframes hint{50%{fill:#8C7F9E}}
 .link{stroke:var(--glow);stroke-width:1;opacity:0;transition:opacity 2s ease}
 .link.on{opacity:.45}
-.word{font-family:var(--display);font-style:italic;font-size:1.9rem;min-height:1.4em;color:var(--glow);transition:opacity 1.5s}
+.word{font-family:var(--display);font-style:italic;font-size:1.7rem;min-height:1.4em;color:var(--glow);transition:opacity 1.5s}
 
-/* drift words */
 .drift{font-family:var(--display);font-size:clamp(2rem,8vw,3rem);min-height:2.6em;display:flex;align-items:center;
   justify-content:center;max-width:16ch;transition:opacity 2.2s ease;line-height:1.15}
-
-/* goodnight */
 .close-eyes{font-family:var(--display);font-size:clamp(2.2rem,8vw,3.4rem);font-style:italic;transition:opacity 8s ease}
 .again{font:inherit;font-size:.85rem;color:var(--line);background:none;border:0;cursor:pointer;transition:color 1s}
 .again:hover{color:var(--mist)}
@@ -105,11 +106,10 @@ p{margin:0;max-width:30ch}
 .steps{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:3}
 .steps i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background 1s}
 .steps i.on{background:var(--mist)}
-
-/* a few quiet stars in the room */
 .room-stars{position:absolute;inset:0;pointer-events:none}
 .room-stars b{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--moon);opacity:.25}
 
+@media (max-height:640px){ .scene{gap:14px;padding-block:58px 34px} h1{font-size:2.6rem} }
 @media (prefers-reduced-motion:reduce){
   .breath.in,.breath.out{transition:none;transform:scale(.8)}
   .star.hint .dot{animation:none}
@@ -117,40 +117,40 @@ p{margin:0;max-width:30ch}
 }
 </style>
 
-<div class="app" id="app">
+<div class="app" id="app" data-world="valley">
   <div class="room-stars" id="roomStars" aria-hidden="true"></div>
   <div class="dimmer" id="dimmer"></div>
 
   <button class="ctl home" id="homeBtn" type="button" hidden>Start over</button>
   <div class="controls">
-    <button class="ctl" id="rainBtn" type="button" aria-pressed="false">Soft rain</button>
+    <button class="ctl" id="soundBtn" type="button" aria-pressed="false">Soft rain</button>
     <button class="ctl" id="dimBtn" type="button" aria-pressed="false">Dim screen</button>
   </div>
 
-  <!-- START -->
   <section class="scene on" data-scene="start" aria-label="Welcome">
     <span class="tag">A gentle path for menopause nights</span>
     <h1>Softly to Sleep</h1>
     <p class="soft">Nothing to track. Nothing to fix.<br>Just a slow, quiet way back to sleep.</p>
+    <div class="places">
+      <span class="tag">Tonight's place</span>
+      <div class="place-row" id="placeRow" role="group" aria-label="Choose tonight's place"></div>
+    </div>
     <div class="paths">
-      <button class="path" type="button" data-path="bed"><b>Wind down for bed</b><span>About 15 minutes · breathe, color, light the stars, drift</span></button>
+      <button class="path" type="button" data-path="bed"><b>Wind down for bed</b><span id="bedDesc">About 15 minutes</span></button>
       <button class="path" type="button" data-path="wake"><b>Back to sleep</b><span>About 5 minutes · for when you wake in the night</span></button>
     </div>
   </section>
 
-  <!-- ARRIVE (bedtime) -->
   <section class="scene" data-scene="arrive" aria-label="Settle in">
-    <div class="lines" data-lines="arrive"></div>
+    <div class="lines"></div>
     <button class="next" type="button">Continue</button>
   </section>
 
-  <!-- ARRIVE (night waking) -->
   <section class="scene" data-scene="arrive3" aria-label="Settle back in">
-    <div class="lines" data-lines="arrive3"></div>
+    <div class="lines"></div>
     <button class="next" type="button">Continue</button>
   </section>
 
-  <!-- BREATHE -->
   <section class="scene" data-scene="breathe" aria-label="Breathe with the moon">
     <h2>Breathe with the moon</h2>
     <div class="moonwrap"><div class="breath" id="breath"></div></div>
@@ -158,50 +158,49 @@ p{margin:0;max-width:30ch}
     <button class="next" type="button">Continue when you're ready</button>
   </section>
 
-  <!-- COLOR -->
-  <section class="scene" data-scene="color" aria-label="Color the night">
-    <h2>Color the quiet valley</h2>
-    <div class="colorbox">
-      <svg viewBox="0 0 400 300" id="valley" role="img" aria-label="A night valley to color: sky, moon, hills, a cottage, trees and a lake">
-        <rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/>
-        <circle class="region" data-r="moon" cx="300" cy="70" r="28"/>
-        <path class="region" data-r="farhills" d="M0 170 Q60 118 120 150 T240 140 T400 148 L400 300 L0 300Z"/>
-        <path class="region" data-r="nearhills" d="M0 205 Q80 168 160 196 T320 186 T400 196 L400 300 L0 300Z"/>
-        <rect class="region" data-r="house" x="70" y="182" width="42" height="30"/>
-        <polygon class="region" data-r="roof" points="63,184 91,160 119,184"/>
-        <rect class="region" data-r="window" x="84" y="190" width="13" height="11"/>
-        <polygon class="region" data-r="tree1" points="150,206 162,166 174,206"/>
-        <polygon class="region" data-r="tree2" points="176,204 186,174 196,204"/>
-        <polygon class="region" data-r="tree3" points="330,196 342,158 354,196"/>
-        <path class="region" data-r="lake" d="M0 232 Q200 214 400 232 L400 300 L0 300Z"/>
-        <ellipse class="region" data-r="glimmer" cx="300" cy="258" rx="30" ry="5"/>
-        <g fill="#EBDDC2" opacity=".55" pointer-events="none">
-          <circle cx="40" cy="40" r="1.4"/><circle cx="96" cy="70" r="1"/><circle cx="150" cy="30" r="1.3"/>
-          <circle cx="210" cy="60" r="1"/><circle cx="250" cy="26" r="1.2"/><circle cx="360" cy="40" r="1"/>
-          <circle cx="370" cy="110" r="1.2"/><circle cx="60" cy="118" r="1"/>
-        </g>
-      </svg>
+  <section class="scene" data-scene="color" aria-label="Color the picture">
+    <h2 id="colorTitle">Color the quiet valley</h2>
+    <div class="stage">
+      <svg viewBox="0 0 400 300" id="valley" role="img" aria-label="A night picture to color"></svg>
       <div class="palette" id="palette" role="group" aria-label="Choose a color"></div>
-      <p class="soft" style="margin:0 auto">Tap a color, then tap any part of the picture. There's no wrong color.</p>
+      <p class="soft" style="margin:0 auto">Tap a color, then any part of the picture. There's no wrong color.</p>
     </div>
     <button class="next" type="button">Continue</button>
   </section>
 
-  <!-- STARS -->
   <section class="scene" data-scene="stars" aria-label="Light the stars">
     <h2>Light the stars, one by one</h2>
-    <div class="sky"><svg viewBox="0 0 400 240" id="skySvg" role="img" aria-label="Nine dim stars to light"></svg></div>
+    <div class="stage"><svg viewBox="0 0 400 300" id="skySvg" role="img" aria-label="Nine dim stars to light"></svg></div>
     <div class="word" id="starWord" aria-live="polite">&nbsp;</div>
     <button class="next" type="button">Continue</button>
   </section>
 
-  <!-- LAKE -->
-  <section class="scene" data-scene="lake" aria-label="The cool lake">
-    <div class="lines" data-lines="lake"></div>
+  <section class="scene" data-scene="snow" aria-label="Let the snow fall">
+    <h2>Let the snow fall</h2>
+    <div class="stage"><canvas id="snowCanvas" width="800" height="600" aria-label="A night sky. Tap to let snow fall."></canvas></div>
+    <div class="word" id="snowWord" aria-live="polite">Tap the sky, softly</div>
     <button class="next" type="button">Continue</button>
   </section>
 
-  <!-- DRIFT -->
+  <section class="scene" data-scene="sand" aria-label="Draw in the sand">
+    <h2>Draw in the cool sand</h2>
+    <div class="stage"><canvas id="sandCanvas" width="800" height="600" aria-label="Moonlit sand. Draw with your finger; the tide smooths it away."></canvas></div>
+    <div class="word" id="sandWord" aria-live="polite">Draw anything. The tide will smooth it away.</div>
+    <button class="next" type="button">Continue</button>
+  </section>
+
+  <section class="scene" data-scene="fireflies" aria-label="Gather the fireflies">
+    <h2>Gather the fireflies</h2>
+    <div class="stage"><canvas id="flyCanvas" width="800" height="600" aria-label="Fireflies over a lavender field. Tap one to bring it to the jar."></canvas></div>
+    <div class="word" id="flyWord" aria-live="polite">Tap a firefly to bring it home</div>
+    <button class="next" type="button">Continue</button>
+  </section>
+
+  <section class="scene" data-scene="imagery" aria-label="Imagine">
+    <div class="lines"></div>
+    <button class="next" type="button">Continue</button>
+  </section>
+
   <section class="scene" data-scene="drift" aria-label="Drift">
     <span class="tag">Picture each one, then let it go</span>
     <div class="drift" id="drift" aria-live="polite"></div>
@@ -209,7 +208,6 @@ p{margin:0;max-width:30ch}
     <button class="next" type="button">I'm getting sleepy</button>
   </section>
 
-  <!-- GOODNIGHT -->
   <section class="scene" data-scene="night" aria-label="Goodnight">
     <div class="close-eyes" id="closeEyes">Now close your eyes.</div>
     <p class="soft" id="nightNote">Put the screen down.<br>Sleep will find you.</p>
@@ -225,96 +223,177 @@ p{margin:0;max-width:30ch}
   var store={}; try{ store=JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ store={}; }
   function save(){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
 
-  var TEXT={
-    arrive:[
-      "The day is done.",
-      "Whatever happened today, you did enough.",
-      "Let your shoulders drop, just a little.",
-      "Let your jaw go soft.",
-      "There is nowhere you need to be now."
-    ],
-    arrive3:[
-      "Hello again.",
-      "You don't need to know what time it is.",
-      "Let the pillow hold your head.",
-      "Rest is still rest, even with your eyes open.",
-      "Let's go slowly back down."
-    ],
-    lake:[
-      "Picture a lake at night, perfectly still.",
-      "The air above the water is cool and clean.",
-      "Breathe it in. Feel the coolness on your cheeks.",
-      "Your feet rest in the shallow water, cool and calm.",
-      "The coolness rises slowly… ankles… knees…",
-      "Moonlight lies across the water like a silver path.",
-      "A soft breeze moves over your shoulders.",
-      "Your arms grow heavy, and cool, and still.",
-      "Nothing here needs you right now.",
-      "Let the stillness of the lake become yours."
-    ]
+  var ARRIVE=["The day is done.","Whatever happened today, you did enough.","Let your shoulders drop, just a little.","Let your jaw go soft.","There is nowhere you need to be now."];
+  var ARRIVE3=["Hello again.","You don't need to know what time it is.","Let the pillow hold your head.","Rest is still rest, even with your eyes open.","Let's go slowly back down."];
+
+  var WORLDS={
+    valley:{ name:"Quiet Valley", dot:"#E0B57A", sound:"Soft rain", activity:"stars", actName:"light the stars",
+      colorTitle:"Color the quiet valley",
+      palette:["#2E2A47","#46507A","#6E6290","#B58FA2","#7E9A8A","#5B6B66","#EBDDC2","#E0B57A","#8A6B57"],
+      svg:'<rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/>'+
+        '<circle class="region" data-r="moon" cx="300" cy="70" r="28"/>'+
+        '<path class="region" data-r="farhills" d="M0 170 Q60 118 120 150 T240 140 T400 148 L400 300 L0 300Z"/>'+
+        '<path class="region" data-r="nearhills" d="M0 205 Q80 168 160 196 T320 186 T400 196 L400 300 L0 300Z"/>'+
+        '<rect class="region" data-r="house" x="70" y="182" width="42" height="30"/>'+
+        '<polygon class="region" data-r="roof" points="63,184 91,160 119,184"/>'+
+        '<rect class="region" data-r="window" x="84" y="190" width="13" height="11"/>'+
+        '<polygon class="region" data-r="tree1" points="150,206 162,166 174,206"/>'+
+        '<polygon class="region" data-r="tree2" points="176,204 186,174 196,204"/>'+
+        '<polygon class="region" data-r="tree3" points="330,196 342,158 354,196"/>'+
+        '<path class="region" data-r="lake" d="M0 232 Q200 214 400 232 L400 300 L0 300Z"/>'+
+        '<ellipse class="region" data-r="glimmer" cx="300" cy="258" rx="30" ry="5"/>',
+      imagery:["Picture a lake at night, perfectly still.","The air above the water is cool and clean.","Breathe it in. Feel the coolness on your cheeks.",
+        "Your feet rest in the shallow water, cool and calm.","The coolness rises slowly… ankles… knees…","Moonlight lies across the water like a silver path.",
+        "A soft breeze moves over your shoulders.","Your arms grow heavy, and cool, and still.","Nothing here needs you right now.","Let the stillness of the lake become yours."],
+      drift:["a feather drifting down","a warm cup of tea","a sleeping cat","a sailboat far away","fresh snow on a fence","a lantern in a window",
+        "a field of lavender","a slow river","a soft wool blanket","a quiet library","a seashell","a ripe peach","a garden gate","a pinecone",
+        "rain on a window","a distant lighthouse","a bowl of lemons","an old wooden bench","a balloon floating away","a meadow at dusk",
+        "a candle flame","a pair of slippers","a willow tree","a piano in an empty room","a basket of apples","clouds over hills",
+        "a kite on a long string","a stone path","a little teapot","a rowboat at rest","a curling fern","a sleeping puppy","a moonlit porch",
+        "a dandelion clock","a paper boat","honey on a spoon","a robin","a patchwork quilt","lily pads on a pond","a sleepy village"]},
+    snow:{ name:"Snowy Cabin", dot:"#CFD8E4", sound:"Soft wind", activity:"snow", actName:"let the snow fall",
+      colorTitle:"Color the snowy cabin",
+      palette:["#2B3147","#4A5675","#7E8DA8","#C9D3E0","#F2EEE6","#E0B57A","#8A6B57","#5F7A6E","#A06E6E"],
+      svg:'<rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/>'+
+        '<circle class="region" data-r="moon" cx="80" cy="58" r="22"/>'+
+        '<path class="region" data-r="mountains" d="M0 165 L70 98 L130 150 L200 82 L270 146 L330 102 L400 152 L400 300 L0 300Z"/>'+
+        '<path class="region" data-r="snowfield" d="M0 214 Q120 194 220 210 T400 204 L400 300 L0 300Z"/>'+
+        '<rect class="region" data-r="chimney" x="222" y="140" width="12" height="24"/>'+
+        '<rect class="region" data-r="cabin" x="150" y="170" width="90" height="50"/>'+
+        '<polygon class="region" data-r="roof" points="140,174 195,134 250,174"/>'+
+        '<rect class="region" data-r="window1" x="162" y="184" width="18" height="16"/>'+
+        '<rect class="region" data-r="window2" x="210" y="184" width="18" height="16"/>'+
+        '<rect class="region" data-r="door" x="186" y="192" width="18" height="28"/>'+
+        '<polygon class="region" data-r="pine1" points="46,222 68,150 90,222"/>'+
+        '<polygon class="region" data-r="pine2" points="298,214 318,158 338,214"/>'+
+        '<polygon class="region" data-r="pine3" points="340,220 355,176 370,220"/>'+
+        '<path class="region" data-r="path" d="M188 220 Q180 260 150 300 L205 300 Q205 258 202 220Z"/>',
+      imagery:["Picture a small cabin in the snow.","Outside, the air is crisp and cool.","Snow is falling slowly, with no sound at all.",
+        "You open the window just a little. Cool air drifts in.","It brushes your face, your neck, your wrists.","Under a light blanket, you are perfectly comfortable.",
+        "Each snowflake lands softly and stays.","The whole world is quiet and white.","There is nothing to do until morning.","Let yourself be covered in that quiet."],
+      drift:["a mug of cocoa","fresh snow on a branch","a knitted mitten","a sled at rest","a frosted window","a snow-covered bench",
+        "a woolen scarf","a fox's footprints","a silver bell","snow on rooftops","a cardinal on a branch","a frozen pond","a lantern on a porch",
+        "a sleeping owl","boots by the door","icicles catching the light","a stack of firewood","a snowy forest path","a gingerbread house",
+        "a white rabbit","a quilt at the foot of the bed","moonlight on snow","a distant church bell","a cup of peppermint tea","a sleigh in a barn",
+        "a snowflake on an eyelash","a candle in a window","a hush over the hills","a pine branch","a snow globe"]},
+    ocean:{ name:"Ocean Night", dot:"#93C2BE", sound:"Soft waves", activity:"sand", actName:"draw in the sand",
+      colorTitle:"Color the moonlit beach",
+      palette:["#1F2D3D","#2F4A5E","#4F7486","#86A9B0","#D9C9A8","#B79B78","#EBDDC2","#E0B57A","#9A7F9E"],
+      svg:'<rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/>'+
+        '<circle class="region" data-r="moon" cx="110" cy="68" r="24"/>'+
+        '<rect class="region" data-r="sea" x="0" y="150" width="400" height="60"/>'+
+        '<ellipse class="region" data-r="reflection" cx="110" cy="172" rx="24" ry="4"/>'+
+        '<path class="region" data-r="wave" d="M0 200 Q50 190 100 200 T200 200 T300 200 T400 200 L400 226 L0 226Z"/>'+
+        '<path class="region" data-r="sand" d="M0 222 Q200 206 400 224 L400 300 L0 300Z"/>'+
+        '<path class="region" data-r="rocks" d="M296 214 Q324 186 356 212Z"/>'+
+        '<polygon class="region" data-r="tower" points="318,150 332,150 336,204 314,204"/>'+
+        '<rect class="region" data-r="lamp" x="316" y="136" width="18" height="14"/>'+
+        '<polygon class="region" data-r="cap" points="314,136 325,124 336,136"/>'+
+        '<ellipse class="region" data-r="shell" cx="80" cy="262" rx="14" ry="9"/>'+
+        '<path class="region" data-r="starfish" d="M200 250 L205 262 L218 262 L208 270 L212 283 L200 275 L188 283 L192 270 L182 262 L195 262Z"/>',
+      imagery:["Picture a beach at night.","The sand is cool beneath you.","Waves come in… and slowly go out.","Breathe in as a wave arrives.",
+        "Breathe out as it slides away.","A cool sea breeze moves over your skin.","Far away, a lighthouse turns its gentle light.",
+        "Each wave carries a little of the day away.","The ocean keeps its own rhythm. You can rest in it.","Let the waves keep time for you."],
+      drift:["a smooth stone","a seagull resting","a sailboat at anchor","a seashell in your palm","footprints in wet sand","a piece of sea glass",
+        "a tide pool","a sleeping seal","a sandcastle","a starfish","a distant lighthouse","a pier at night","a sand dollar","a hammock by the sea",
+        "a paper lantern","driftwood","moonlight on the waves","a pelican gliding","a folded beach umbrella","a slow wave","a shell necklace",
+        "a beach cottage","a little crab","the far horizon","a bucket and spade","foam on the shore","a cool sea breeze","a rowboat on the sand",
+        "a sea turtle swimming","a lighthouse beam"]},
+    lavender:{ name:"Lavender Field", dot:"#C7AEE2", sound:"Evening breeze", activity:"fireflies", actName:"gather the fireflies",
+      colorTitle:"Color the lavender field",
+      palette:["#2E2A47","#5A4E7E","#8E7BB5","#B9A6D6","#D8A7B5","#7E9A6A","#A9B88A","#E0B57A","#EBDDC2"],
+      svg:'<rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/>'+
+        '<circle class="region" data-r="moon" cx="320" cy="60" r="22"/>'+
+        '<path class="region" data-r="hills" d="M0 150 Q100 118 200 144 T400 138 L400 300 L0 300Z"/>'+
+        '<rect class="region" data-r="trunk" x="70" y="140" width="7" height="34"/>'+
+        '<circle class="region" data-r="crown" cx="73" cy="132" r="20"/>'+
+        '<path class="region" data-r="field" d="M0 188 Q200 168 400 188 L400 300 L0 300Z"/>'+
+        '<path class="region" data-r="row1" d="M0 206 Q200 186 400 206 L400 218 Q200 198 0 218Z"/>'+
+        '<path class="region" data-r="row2" d="M0 234 Q200 212 400 234 L400 250 Q200 228 0 250Z"/>'+
+        '<path class="region" data-r="row3" d="M0 266 Q200 242 400 266 L400 286 Q200 262 0 286Z"/>'+
+        '<rect class="region" data-r="farmhouse" x="250" y="150" width="34" height="22"/>'+
+        '<polygon class="region" data-r="farmroof" points="245,152 267,136 289,152"/>'+
+        '<path class="region" data-r="lane" d="M188 300 Q198 240 204 188 L212 188 Q216 240 232 300Z"/>',
+      imagery:["Picture a lavender field at dusk.","The air is soft and cool after a warm day.","Rows of purple flowers sway gently.",
+        "Breathe in their calm, sweet scent.","Fireflies rise slowly from the grass.","A cool breeze brushes your arms.",
+        "The sky turns from rose to deep blue.","One by one, the stars appear.","Everything is unhurried here.","Let the evening settle over you like a light shawl."],
+      drift:["a bundle of lavender","a straw hat","a sleeping bumblebee","a wooden fence","a jar of honey","a butterfly resting",
+        "a stone farmhouse","a basket of herbs","a winding lane","a cup of chamomile","a blue shutter","an olive tree","a linen dress",
+        "a chapel on a hill","a bicycle with a basket","a garden bench","a lavender sachet","a little bird","rows of purple",
+        "a warm loaf of bread","a field mouse","a summer cloud","a lantern on a table","a lace curtain","a fountain in a square",
+        "a meadow path","fireflies at dusk","a pot of rosemary","a wicker chair","a sleepy village"]}
   };
-  var DRIFT=["a feather drifting down","a warm cup of tea","a sleeping cat","a sailboat far away","fresh snow on a fence",
-    "a lantern in a window","a field of lavender","a slow river","a soft wool blanket","a quiet library","a seashell",
-    "a ripe peach","a garden gate","a pinecone","rain on a window","a distant lighthouse","a bowl of lemons",
-    "an old wooden bench","a balloon floating away","a meadow at dusk","a candle flame","a pair of slippers",
-    "a willow tree","a piano in an empty room","a basket of apples","clouds over hills","a kite on a long string",
-    "a stone path","a little teapot","a sunflower","a rowboat at rest","a snow globe","a curling fern",
-    "a sleeping puppy","a moonlit porch","a dandelion clock","a paper boat","honey on a spoon","an orchard in spring",
-    "a robin","a patchwork quilt","lily pads on a pond","smoke from a cottage chimney","a starfish","a golden wheat field",
-    "a sleepy village","a pear on a windowsill","a hammock between two trees","a jar of fireflies","a sleeping fox"];
-  var PALETTE=["#2E2A47","#46507A","#6E6290","#B58FA2","#7E9A8A","#5B6B66","#EBDDC2","#E0B57A","#8A6B57"];
-  var STARS=[[50,170],[92,122],[140,90],[196,74],[252,80],[302,104],[340,142],[316,184],[270,200]];
+  var STARS=[[50,200],[92,152],[140,118],[196,100],[252,106],[302,130],[340,170],[316,212],[270,228]];
   var STAR_WORDS=["soft","still","warm","safe","slow","quiet","easy","gentle","rest"];
 
-  var PATHS={ bed:["arrive","breathe","color","stars","lake","drift","night"], wake:["arrive3","breathe","drift","night"] };
+  var world = WORLDS[store.world] ? store.world : "valley";
   var path=null, idx=0, timers=[];
   function later(fn,ms){ var t=setTimeout(fn,ms); timers.push(t); return t; }
   function clearTimers(){ timers.forEach(clearTimeout); timers=[]; }
   function $(s,r){ return (r||document).querySelector(s); }
   function scene(name){ return $('.scene[data-scene="'+name+'"]'); }
+  function W(){ return WORLDS[world]; }
+  function pathFor(p){ return p==="bed" ? ["arrive","breathe","color",W().activity,"imagery","drift","night"] : ["arrive3","breathe","drift","night"]; }
 
-  /* quiet room stars */
   (function(){ var r=$("#roomStars"); for(var i=0;i<28;i++){ var b=document.createElement("b");
     b.style.left=(Math.random()*100)+"%"; b.style.top=(Math.random()*55)+"%"; b.style.opacity=(.08+Math.random()*.25).toFixed(2); r.appendChild(b);} })();
 
+  /* places */
+  function renderPlaces(){
+    var row=$("#placeRow"); row.innerHTML="";
+    Object.keys(WORLDS).forEach(function(k){
+      var b=document.createElement("button"); b.type="button"; b.className="place";
+      b.setAttribute("aria-pressed", k===world?"true":"false");
+      b.innerHTML='<i style="background:'+WORLDS[k].dot+'"></i>'+WORLDS[k].name;
+      b.addEventListener("click",function(){ setWorld(k); });
+      row.appendChild(b);
+    });
+    $("#bedDesc").textContent="About 15 minutes · breathe, color, "+W().actName+", drift";
+  }
+  function setWorld(k){
+    world=k; store.world=k; save();
+    $("#app").dataset.world=k; $("#soundBtn").textContent=W().sound; tuneSound();
+    renderPlaces();
+  }
+
   function show(name){
-    clearTimers(); stopBreath();
+    clearTimers(); stopBreath(); stopAnim();
     document.querySelectorAll(".scene").forEach(function(s){ s.classList.toggle("on", s.dataset.scene===name); });
     $("#homeBtn").hidden = name==="start";
     renderSteps();
-    var s=scene(name);
-    var nb=$(".next",s); if(nb) nb.classList.remove("ready");
-    if(TEXT[name]) playLines(s, TEXT[name]);
+    var s=scene(name), nb=$(".next",s); if(nb) nb.classList.remove("ready");
+    if(name==="arrive") playLines(s, ARRIVE);
+    if(name==="arrive3") playLines(s, ARRIVE3);
+    if(name==="imagery") playLines(s, W().imagery);
     if(name==="breathe") startBreath();
-    if(name==="drift") startDrift();
+    if(name==="color") buildColoring();
     if(name==="stars") resetStarWord();
+    if(name==="snow") startAnim(snowAct);
+    if(name==="sand") startAnim(sandAct);
+    if(name==="fireflies") startAnim(flyAct);
+    if(name==="drift") startDrift();
     if(name==="night") goodnight();
   }
   function renderSteps(){
-    var el=$("#steps"); el.innerHTML="";
-    if(!path) return;
-    PATHS[path].forEach(function(_,i){ var d=document.createElement("i"); if(i<=idx) d.className="on"; el.appendChild(d); });
+    var el=$("#steps"); el.innerHTML=""; if(!path) return;
+    pathFor(path).forEach(function(_,i){ var d=document.createElement("i"); if(i<=idx) d.className="on"; el.appendChild(d); });
   }
-  function go(p){ path=p; idx=0; show(PATHS[p][0]); }
-  function next(){ if(!path) return; if(idx<PATHS[path].length-1){ idx++; show(PATHS[path][idx]); } }
-  document.querySelectorAll(".path").forEach(function(b){ b.addEventListener("click",function(){ startRainIfOn(); go(b.dataset.path); }); });
+  function go(p){ path=p; idx=0; show(pathFor(p)[0]); }
+  function next(){ if(!path) return; var list=pathFor(path); if(idx<list.length-1){ idx++; show(list[idx]); } }
+  document.querySelectorAll(".path").forEach(function(b){ b.addEventListener("click",function(){ resumeSound(); go(b.dataset.path); }); });
   document.querySelectorAll(".next").forEach(function(b){ b.addEventListener("click",next); });
   $("#homeBtn").addEventListener("click",function(){ path=null; show("start"); });
   $("#againBtn").addEventListener("click",function(){ path=null; show("start"); });
 
-  /* line-by-line text, one breath apart */
   function playLines(s, lines){
     var box=$(".lines",s); box.innerHTML="";
-    var els=lines.map(function(t){ var p=document.createElement("p"); p.textContent=t; return p; });
-    var visible=3, gap=6500;
-    els.forEach(function(p,i){
+    lines.forEach(function(t,i){
       later(function(){
-        box.appendChild(p); void p.offsetWidth; p.classList.add("show");
-        var kids=box.children;
-        if(kids.length>visible) box.removeChild(kids[0]);
+        var p=document.createElement("p"); p.textContent=t; box.appendChild(p); void p.offsetWidth; p.classList.add("show");
+        var kids=box.children; if(kids.length>3) box.removeChild(kids[0]);
         for(var k=0;k<kids.length-1;k++) kids[k].classList.add("fade");
-        if(i===els.length-1){ var nb=$(".next",s); if(nb) nb.classList.add("ready"); }
-      }, 600 + i*gap);
+        if(i===lines.length-1){ var nb=$(".next",s); if(nb) nb.classList.add("ready"); }
+      }, 600 + i*6500);
     });
   }
 
@@ -322,108 +401,205 @@ p{margin:0;max-width:30ch}
   var breathTimer=null, breathing=false;
   function startBreath(){
     var b=$("#breath"), cue=$("#cue"), n=0; breathing=true;
-    function inhale(){ if(!breathing) return; b.classList.remove("out"); b.classList.add("in"); cue.textContent="Breathe in, slowly…";
-      breathTimer=setTimeout(exhale,4000); }
+    function inhale(){ if(!breathing) return; b.classList.remove("out"); b.classList.add("in"); cue.textContent="Breathe in, slowly…"; breathTimer=setTimeout(exhale,4000); }
     function exhale(){ if(!breathing) return; b.classList.remove("in"); b.classList.add("out"); cue.textContent="And out, longer and softer…";
-      n++; if(n===6){ $(".next",scene("breathe")).classList.add("ready"); }
-      breathTimer=setTimeout(inhale,6000); }
+      n++; if(n===6) $(".next",scene("breathe")).classList.add("ready"); breathTimer=setTimeout(inhale,6000); }
     breathTimer=setTimeout(inhale,1200);
   }
-  function stopBreath(){ breathing=false; clearTimeout(breathTimer); var b=$("#breath"); if(b){ b.classList.remove("in","out"); } var c=$("#cue"); if(c) c.innerHTML="&nbsp;"; }
+  function stopBreath(){ breathing=false; clearTimeout(breathTimer); var b=$("#breath"); b.classList.remove("in","out"); $("#cue").innerHTML="&nbsp;"; }
 
-  /* coloring */
-  var current=PALETTE[2];
-  (function(){
-    var pal=$("#palette");
-    PALETTE.forEach(function(c){ var b=document.createElement("button"); b.type="button"; b.className="chip"; b.style.background=c;
+  /* coloring, one picture per place */
+  var current=null;
+  function buildColoring(){
+    var w=W(), svg=$("#valley"), pal=$("#palette");
+    $("#colorTitle").textContent=w.colorTitle;
+    svg.setAttribute("aria-label", w.colorTitle);
+    svg.innerHTML=w.svg+'<g fill="#EBDDC2" opacity=".5" pointer-events="none"><circle cx="40" cy="40" r="1.4"/><circle cx="160" cy="30" r="1.2"/><circle cx="210" cy="60" r="1"/><circle cx="250" cy="24" r="1.2"/><circle cx="370" cy="36" r="1"/><circle cx="372" cy="108" r="1.2"/></g>';
+    if(w.palette.indexOf(current)<0) current=w.palette[2];
+    pal.innerHTML="";
+    w.palette.forEach(function(c){ var b=document.createElement("button"); b.type="button"; b.className="chip"; b.style.background=c;
       b.setAttribute("aria-label","Color "+c); b.setAttribute("aria-pressed", c===current?"true":"false");
       b.addEventListener("click",function(){ current=c; pal.querySelectorAll(".chip").forEach(function(x){ x.setAttribute("aria-pressed", x===b?"true":"false"); }); });
       pal.appendChild(b); });
-    var fills=store.fills||{};
-    document.querySelectorAll("#valley .region").forEach(function(r){
+    store.fills=store.fills||{}; var fills=store.fills[world]=store.fills[world]||{};
+    svg.querySelectorAll(".region").forEach(function(r){
       if(fills[r.dataset.r]) r.style.fill=fills[r.dataset.r];
-      r.addEventListener("click",function(){ r.style.fill=current; fills[r.dataset.r]=current; store.fills=fills; save(); });
+      r.addEventListener("click",function(){ r.style.fill=current; fills[r.dataset.r]=current; save(); });
     });
-  })();
+  }
 
-  /* stars */
+  /* stars (valley) */
   var litOrder=[];
   (function(){
-    var svg=$("#skySvg"), NS="http://www.w3.org/2000/svg";
-    var links=document.createElementNS(NS,"g"); svg.appendChild(links);
+    var svg=$("#skySvg"), NS="http://www.w3.org/2000/svg", links=document.createElementNS(NS,"g"); svg.appendChild(links);
+    function c(tag,attrs){ var e=document.createElementNS(NS,tag); for(var k in attrs) e.setAttribute(k,attrs[k]); return e; }
     STARS.forEach(function(p,i){
-      var g=document.createElementNS(NS,"g"); g.setAttribute("class","star"); g.setAttribute("tabindex","0"); g.setAttribute("role","button");
-      g.setAttribute("aria-label","Light star "+(i+1));
-      var hit=document.createElementNS(NS,"circle"); hit.setAttribute("cx",p[0]); hit.setAttribute("cy",p[1]); hit.setAttribute("r",22); hit.setAttribute("fill","transparent");
-      var halo=document.createElementNS(NS,"circle"); halo.setAttribute("class","halo"); halo.setAttribute("cx",p[0]); halo.setAttribute("cy",p[1]); halo.setAttribute("r",16);
-      var dot=document.createElementNS(NS,"circle"); dot.setAttribute("class","dot"); dot.setAttribute("cx",p[0]); dot.setAttribute("cy",p[1]); dot.setAttribute("r",5);
-      g.appendChild(hit); g.appendChild(halo); g.appendChild(dot); svg.appendChild(g);
+      var g=c("g",{"class":"star",tabindex:"0",role:"button","aria-label":"Light star "+(i+1)});
+      g.appendChild(c("circle",{cx:p[0],cy:p[1],r:22,fill:"transparent"}));
+      g.appendChild(c("circle",{"class":"halo",cx:p[0],cy:p[1],r:16}));
+      g.appendChild(c("circle",{"class":"dot",cx:p[0],cy:p[1],r:5}));
+      svg.appendChild(g);
       function light(){
         if(g.classList.contains("lit")) return;
-        g.classList.add("lit"); g.classList.remove("hint");
-        if(litOrder.length){ var a=STARS[litOrder[litOrder.length-1]], l=document.createElementNS(NS,"line");
-          l.setAttribute("x1",a[0]); l.setAttribute("y1",a[1]); l.setAttribute("x2",p[0]); l.setAttribute("y2",p[1]); l.setAttribute("class","link");
+        g.classList.add("lit");
+        if(litOrder.length){ var a=STARS[litOrder[litOrder.length-1]], l=c("line",{x1:a[0],y1:a[1],x2:p[0],y2:p[1],"class":"link"});
           links.appendChild(l); requestAnimationFrame(function(){ requestAnimationFrame(function(){ l.classList.add("on"); }); }); }
         litOrder.push(i);
         var w=$("#starWord"); w.style.opacity=0;
         setTimeout(function(){ w.textContent = litOrder.length===STARS.length ? "Your sky is full. Rest here a moment." : STAR_WORDS[litOrder.length-1]; w.style.opacity=1; }, 500);
-        hintNext();
-        if(litOrder.length===STARS.length) $(".next",scene("stars")).classList.add("ready");
+        hintNext(); if(litOrder.length===STARS.length) $(".next",scene("stars")).classList.add("ready");
       }
       g.addEventListener("click",light);
       g.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); light(); } });
     });
+    function hintNext(){ var all=svg.querySelectorAll(".star"), done=false; all.forEach(function(s){ s.classList.remove("hint"); if(!done && !s.classList.contains("lit")){ s.classList.add("hint"); done=true; } }); }
     hintNext();
-    function hintNext(){ var all=svg.querySelectorAll(".star"); all.forEach(function(s){ s.classList.remove("hint"); });
-      for(var k=0;k<all.length;k++){ if(!all[k].classList.contains("lit")){ all[k].classList.add("hint"); break; } } }
   })();
-  function resetStarWord(){ var w=$("#starWord"); if(!litOrder.length){ w.textContent="Tap the softly glowing star"; w.style.opacity=.6; } }
+  function resetStarWord(){ if(!litOrder.length){ var w=$("#starWord"); w.textContent="Tap the softly glowing star"; w.style.opacity=.6; } }
+
+  /* ---------- canvas activities ---------- */
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var SPEED = reduce ? .5 : 1;
+  var anim=null, raf=0, lastT=0;
+  function startAnim(act){ anim=act; act.start(); lastT=performance.now(); raf=requestAnimationFrame(loop); }
+  function stopAnim(){ if(anim && anim.stop) anim.stop(); anim=null; cancelAnimationFrame(raf); }
+  function loop(t){ if(!anim) return; var dt=Math.min(50,t-lastT)*SPEED; lastT=t; anim.frame(dt,t); raf=requestAnimationFrame(loop); }
+  function prep(canvas){
+    var r=canvas.getBoundingClientRect(), dpr=Math.min(2, window.devicePixelRatio||1);
+    var w=Math.max(200, Math.round(r.width*dpr)); canvas.width=w; canvas.height=Math.round(w*.75);
+    var ctx=canvas.getContext("2d"); var s=canvas.width/400; ctx.setTransform(s,0,0,s,0,0); return ctx;
+  }
+  function pt(canvas,e){ var r=canvas.getBoundingClientRect(); return {x:(e.clientX-r.left)/r.width*400, y:(e.clientY-r.top)/r.height*300}; }
+  function setWord(id,text){ var w=$(id); w.style.opacity=0; setTimeout(function(){ w.textContent=text; w.style.opacity=1; },600); }
+
+  /* snow: tap to let it fall; it gathers softly on the ground */
+  var snowAct=(function(){
+    var cv=$("#snowCanvas"), ctx, flakes=[], ground=[], acc=0, taps=0, COLS=80;
+    function add(x,y){ flakes.push({x:x,y:y,r:1.2+Math.random()*2.4,vy:.012+Math.random()*.018,ph:Math.random()*6.28}); }
+    cv.addEventListener("pointerdown",function(e){ var p=pt(cv,e); for(var i=0;i<7;i++) add(p.x+(Math.random()-.5)*50, p.y+(Math.random()-.5)*20);
+      taps++; if(taps===4) setWord("#snowWord","slow… soft… quiet…"); if(taps===12){ setWord("#snowWord","Everything is softly covered now."); $(".next",scene("snow")).classList.add("ready"); } });
+    return { start:function(){ ctx=prep(cv); if(!ground.length) for(var i=0;i<COLS;i++) ground.push(4); },
+      frame:function(dt,t){
+        acc+=dt; if(acc>700){ acc=0; add(Math.random()*400,-5); }
+        var g=ctx.createLinearGradient(0,0,0,300); g.addColorStop(0,"#1A1D2C"); g.addColorStop(1,"#2A2F45"); ctx.fillStyle=g; ctx.fillRect(0,0,400,300);
+        ctx.fillStyle="rgba(235,226,205,.9)"; ctx.beginPath(); ctx.arc(70,54,16,0,6.28); ctx.fill();
+        ctx.fillStyle="#2E3448"; ctx.beginPath(); ctx.moveTo(0,190); ctx.lineTo(80,120); ctx.lineTo(150,175); ctx.lineTo(230,105); ctx.lineTo(310,170); ctx.lineTo(400,125); ctx.lineTo(400,300); ctx.lineTo(0,300); ctx.fill();
+        ctx.fillStyle="#3A3248"; ctx.fillRect(250,212,46,30); ctx.beginPath(); ctx.moveTo(244,214); ctx.lineTo(273,192); ctx.lineTo(302,214); ctx.fill();
+        ctx.fillStyle="rgba(224,181,122,.75)"; ctx.fillRect(262,222,10,9);
+        for(var i=flakes.length-1;i>=0;i--){ var f=flakes[i];
+          f.y+=f.vy*dt; f.x+=Math.sin(f.ph+t/1400)*.012*dt;
+          var col=Math.max(0,Math.min(COLS-1,Math.floor(f.x/400*COLS)));
+          if(f.y>=300-ground[col]){ for(var k=-2;k<=2;k++){ var c=col+k; if(c>=0&&c<COLS&&ground[c]<70) ground[c]+=f.r*(k===0?.5:.22); } flakes.splice(i,1); continue; }
+          ctx.fillStyle="rgba(245,244,250,.9)"; ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,6.28); ctx.fill(); }
+        ctx.fillStyle="rgba(236,238,246,.92)"; ctx.beginPath(); ctx.moveTo(0,300);
+        for(var j=0;j<COLS;j++) ctx.lineTo(j/(COLS-1)*400, 300-ground[j]); ctx.lineTo(400,300); ctx.fill();
+      } };
+  })();
+
+  /* sand: draw with a finger; each line slowly washes away */
+  var sandAct=(function(){
+    var cv=$("#sandCanvas"), ctx, strokes=[], cur=null, drawn=0, LIFE=7000;
+    cv.addEventListener("pointerdown",function(e){ cv.setPointerCapture(e.pointerId); cur={pts:[pt(cv,e)],born:performance.now()}; strokes.push(cur); });
+    cv.addEventListener("pointermove",function(e){ if(cur){ cur.pts.push(pt(cv,e)); cur.born=performance.now(); } });
+    function end(){ if(cur){ drawn++; if(drawn===3) setWord("#sandWord","Let the water carry it away…"); if(drawn===6){ setWord("#sandWord","The sand is smooth again. So are you."); $(".next",scene("sand")).classList.add("ready"); } } cur=null; }
+    cv.addEventListener("pointerup",end); cv.addEventListener("pointercancel",end);
+    return { start:function(){ ctx=prep(cv); },
+      frame:function(dt,t){
+        var g=ctx.createLinearGradient(0,0,0,300); g.addColorStop(0,"#16222B"); g.addColorStop(.32,"#223845"); g.addColorStop(.36,"#3B3442"); g.addColorStop(1,"#2B2633"); ctx.fillStyle=g; ctx.fillRect(0,0,400,300);
+        ctx.fillStyle="rgba(235,226,205,.85)"; ctx.beginPath(); ctx.arc(320,40,14,0,6.28); ctx.fill();
+        ctx.fillStyle="rgba(235,226,205,.12)"; ctx.fillRect(300,70,40,2); ctx.fillRect(306,80,28,2);
+        var edge=104+Math.sin(t/2600)*8;
+        ctx.fillStyle="rgba(147,194,190,.22)"; ctx.beginPath(); ctx.moveTo(0,0);
+        for(var x=0;x<=400;x+=10) ctx.lineTo(x, edge+Math.sin(x/38+t/1700)*4); ctx.lineTo(400,0); ctx.fill();
+        ctx.strokeStyle="rgba(235,235,235,.35)"; ctx.lineWidth=1.2; ctx.beginPath();
+        for(var x2=0;x2<=400;x2+=10){ var y=edge+Math.sin(x2/38+t/1700)*4; if(x2) ctx.lineTo(x2,y); else ctx.moveTo(x2,y); } ctx.stroke();
+        var now=performance.now(); ctx.lineCap="round"; ctx.lineJoin="round";
+        for(var i=strokes.length-1;i>=0;i--){ var s=strokes[i], a=1-(now-s.born)/LIFE;
+          if(a<=0 && s!==cur){ strokes.splice(i,1); continue; }
+          ctx.strokeStyle="rgba(147,194,190,"+(Math.max(0,a)*.85)+")"; ctx.lineWidth=3; ctx.shadowColor="rgba(147,194,190,.6)"; ctx.shadowBlur=8;
+          ctx.beginPath(); s.pts.forEach(function(p,k){ if(k) ctx.lineTo(p.x,p.y); else ctx.moveTo(p.x,p.y); }); ctx.stroke(); }
+        ctx.shadowBlur=0;
+      } };
+  })();
+
+  /* fireflies: tap one and it floats into the jar */
+  var flyAct=(function(){
+    var cv=$("#flyCanvas"), ctx, flies=[], caught=0, JX=200, JY=250;
+    function init(){ flies=[]; caught=0; for(var i=0;i<12;i++) flies.push({x:30+Math.random()*340,y:40+Math.random()*150,a:Math.random()*6.28,ph:Math.random()*6.28,c:false,tx:0,ty:0}); }
+    cv.addEventListener("pointerdown",function(e){ var p=pt(cv,e), best=null, bd=45;
+      flies.forEach(function(f){ if(f.c) return; var d=Math.hypot(f.x-p.x,f.y-p.y); if(d<bd){ bd=d; best=f; } });
+      if(best){ best.c=true; best.tx=JX+(Math.random()-.5)*20; best.ty=JY+(Math.random()-.5)*22; caught++;
+        if(caught===3) setWord("#flyWord","One light at a time…");
+        if(caught===8){ setWord("#flyWord","Your jar is glowing. Let it light your way to sleep."); $(".next",scene("fireflies")).classList.add("ready"); } } });
+    return { start:function(){ ctx=prep(cv); if(!flies.length) init(); },
+      frame:function(dt,t){
+        var g=ctx.createLinearGradient(0,0,0,300); g.addColorStop(0,"#1C1730"); g.addColorStop(.55,"#2E2442"); g.addColorStop(1,"#241C32"); ctx.fillStyle=g; ctx.fillRect(0,0,400,300);
+        ctx.fillStyle="#3A2F52"; ctx.beginPath(); ctx.moveTo(0,200); ctx.quadraticCurveTo(200,175,400,200); ctx.lineTo(400,300); ctx.lineTo(0,300); ctx.fill();
+        ctx.strokeStyle="rgba(199,174,226,.35)"; ctx.lineWidth=2;
+        for(var r=0;r<5;r++){ ctx.beginPath(); var yy=215+r*18; ctx.moveTo(0,yy+6); ctx.quadraticCurveTo(200,yy-14,400,yy+6); ctx.stroke(); }
+        var glow=Math.min(1,caught/8);
+        var jg=ctx.createRadialGradient(JX,JY,2,JX,JY,60); jg.addColorStop(0,"rgba(240,214,140,"+(.08+glow*.35)+")"); jg.addColorStop(1,"rgba(240,214,140,0)");
+        ctx.fillStyle=jg; ctx.beginPath(); ctx.arc(JX,JY,60,0,6.28); ctx.fill();
+        ctx.strokeStyle="rgba(235,221,194,.55)"; ctx.lineWidth=1.5; ctx.beginPath();
+        ctx.moveTo(JX-18,JY-24); ctx.lineTo(JX-20,JY+24); ctx.quadraticCurveTo(JX,JY+30,JX+20,JY+24); ctx.lineTo(JX+18,JY-24); ctx.stroke();
+        ctx.fillStyle="rgba(235,221,194,.4)"; ctx.fillRect(JX-20,JY-30,40,5);
+        flies.forEach(function(f){
+          if(f.c){ f.x+=(f.tx-f.x)*.0025*dt; f.y+=(f.ty-f.y)*.0025*dt; f.tx+=Math.sin(t/900+f.ph)*.01; }
+          else { f.a+=(Math.random()-.5)*.003*dt; f.x+=Math.cos(f.a)*.012*dt; f.y+=Math.sin(f.a)*.009*dt;
+            if(f.x<20||f.x>380) f.a=Math.PI-f.a; if(f.y<25||f.y>190) f.a=-f.a; f.x=Math.max(15,Math.min(385,f.x)); f.y=Math.max(20,Math.min(195,f.y)); }
+          var b=.45+.55*Math.max(0,Math.sin(t/(f.c?1400:900)+f.ph));
+          var fg=ctx.createRadialGradient(f.x,f.y,0,f.x,f.y,10); fg.addColorStop(0,"rgba(250,230,150,"+b+")"); fg.addColorStop(1,"rgba(250,230,150,0)");
+          ctx.fillStyle=fg; ctx.beginPath(); ctx.arc(f.x,f.y,10,0,6.28); ctx.fill();
+          ctx.fillStyle="rgba(255,244,200,"+b+")"; ctx.beginPath(); ctx.arc(f.x,f.y,1.6,0,6.28); ctx.fill(); });
+      } };
+  })();
 
   /* drift words: one gentle image every 9 seconds */
   function startDrift(){
-    var el=$("#drift"), order=DRIFT.slice().sort(function(){ return Math.random()-.5; }), k=0;
+    var el=$("#drift"), order=W().drift.slice().sort(function(){ return Math.random()-.5; }), k=1;
     function step(){ el.style.opacity=0; later(function(){ el.textContent=order[k%order.length]; k++; el.style.opacity=1; later(step, 9000); }, 2200); }
-    el.textContent=order[0]; k=1; el.style.opacity=1; later(step, 9000);
+    el.textContent=order[0]; el.style.opacity=1; later(step, 9000);
   }
 
-  /* goodnight: the screen slowly goes dark */
   function goodnight(){
-    var c=$("#closeEyes"), n=$("#nightNote"); c.style.opacity=1; n.style.opacity=1;
+    var c=$("#closeEyes"), n=$("#nightNote"); c.style.opacity=1; n.style.transition="none"; n.style.opacity=1;
     later(function(){ n.style.transition="opacity 6s"; n.style.opacity=0; }, 6000);
     later(function(){ c.style.opacity=.15; }, 9000);
     later(function(){ setDim(2, true); }, 12000);
   }
 
-  /* dimmer */
   var DIMS=[0,.35,.6], dim=store.dim||0;
   function setDim(level, temp){ $("#dimmer").style.opacity=DIMS[level]; $("#dimBtn").setAttribute("aria-pressed", level>0?"true":"false");
     $("#dimBtn").textContent = level===0 ? "Dim screen" : (level===1 ? "Dimmer" : "Dimmest"); if(!temp){ dim=level; store.dim=level; save(); } }
   $("#dimBtn").addEventListener("click",function(){ setDim((dim+1)%DIMS.length); });
-  setDim(dim);
 
-  /* soft rain: gentle filtered noise, made in the browser */
-  var ctx=null, gain=null, rainOn=false;
-  function buildRain(){
+  /* soft sound made in the browser: filtered noise; the ocean gets a slow wave swell */
+  var actx=null, master=null, lp=null, lfoDepth=null, soundOn=false;
+  var TUNE={valley:{f:1100,swell:0}, snow:{f:520,swell:.35}, ocean:{f:750,swell:.85}, lavender:{f:420,swell:.2}};
+  function buildSound(){
     var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false;
-    ctx=new AC(); var len=ctx.sampleRate*4, buf=ctx.createBuffer(2,len,ctx.sampleRate);
+    actx=new AC(); var len=actx.sampleRate*4, buf=actx.createBuffer(2,len,actx.sampleRate);
     for(var ch=0;ch<2;ch++){ var d=buf.getChannelData(ch), last=0; for(var i=0;i<len;i++){ var w=Math.random()*2-1; last=(last+0.02*w)/1.02; d[i]=last*3.2; } }
-    var src=ctx.createBufferSource(); src.buffer=buf; src.loop=true;
-    var lp=ctx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=1100;
-    gain=ctx.createGain(); gain.gain.value=0;
-    src.connect(lp); lp.connect(gain); gain.connect(ctx.destination); src.start();
-    return true;
+    var src=actx.createBufferSource(); src.buffer=buf; src.loop=true;
+    lp=actx.createBiquadFilter(); lp.type="lowpass";
+    var swell=actx.createGain(); swell.gain.value=1;
+    var lfo=actx.createOscillator(); lfo.frequency.value=.09; lfoDepth=actx.createGain(); lfo.connect(lfoDepth); lfoDepth.connect(swell.gain); lfo.start();
+    master=actx.createGain(); master.gain.value=0;
+    src.connect(lp); lp.connect(swell); swell.connect(master); master.connect(actx.destination); src.start();
+    tuneSound(); return true;
   }
-  function rain(on){
-    if(on && !ctx && !buildRain()) return;
-    if(!ctx) return;
-    if(ctx.state==="suspended") ctx.resume();
-    var t=ctx.currentTime; gain.gain.cancelScheduledValues(t); gain.gain.setValueAtTime(gain.gain.value,t);
-    gain.gain.linearRampToValueAtTime(on?0.22:0, t+(on?3:1.5));
-    rainOn=on; $("#rainBtn").setAttribute("aria-pressed", on?"true":"false");
+  function tuneSound(){ if(!actx) return; var tn=TUNE[world], t=actx.currentTime;
+    lp.frequency.setTargetAtTime(tn.f,t,.8); lfoDepth.gain.setTargetAtTime(tn.swell,t,.8); }
+  function sound(on){
+    if(on && !actx && !buildSound()) return; if(!actx) return;
+    if(actx.state==="suspended") actx.resume();
+    var t=actx.currentTime; master.gain.cancelScheduledValues(t); master.gain.setValueAtTime(master.gain.value,t);
+    master.gain.linearRampToValueAtTime(on?0.22:0, t+(on?3:1.5));
+    soundOn=on; $("#soundBtn").setAttribute("aria-pressed", on?"true":"false");
   }
-  function startRainIfOn(){ if(rainOn && ctx && ctx.state==="suspended") ctx.resume(); }
-  $("#rainBtn").addEventListener("click",function(){ rain(!rainOn); });
+  function resumeSound(){ if(soundOn && actx && actx.state==="suspended") actx.resume(); }
+  $("#soundBtn").addEventListener("click",function(){ sound(!soundOn); });
 
-  renderSteps();
+  setDim(dim); setWorld(world); renderSteps();
 })();
 </script>
