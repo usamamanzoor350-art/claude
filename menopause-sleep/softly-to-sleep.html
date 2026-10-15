@@ -100,6 +100,7 @@ p{margin:0;max-width:30ch}
 .drift{font-family:var(--display);font-size:clamp(2rem,8vw,3rem);min-height:2.6em;display:flex;align-items:center;
   justify-content:center;max-width:16ch;transition:opacity 2.2s ease;line-height:1.15}
 .close-eyes{font-family:var(--display);font-size:clamp(2.2rem,8vw,3.4rem);font-style:italic;transition:opacity 8s ease}
+.small-cap{font-size:.85rem;opacity:.75}
 .again{font:inherit;font-size:.85rem;color:var(--line);background:none;border:0;cursor:pointer;transition:color 1s}
 .again:hover{color:var(--mist)}
 
@@ -205,6 +206,7 @@ p{margin:0;max-width:30ch}
     <span class="tag">Picture each one, then let it go</span>
     <div class="drift" id="drift" aria-live="polite"></div>
     <p class="soft">You don't need to hold on to anything.<br>Close your eyes whenever you like.</p>
+    <p class="soft small-cap">Feeling sleepy? Just close your eyes.<br>If you drift off, the screen will dim and go dark on its own.</p>
     <button class="next" type="button">I'm getting sleepy</button>
   </section>
 
@@ -559,19 +561,26 @@ p{margin:0;max-width:30ch}
     var el=$("#drift"), order=W().drift.slice().sort(function(){ return Math.random()-.5; }), k=1;
     function step(){ el.style.opacity=0; later(function(){ el.textContent=order[k%order.length]; k++; el.style.opacity=1; later(step, 9000); }, 2200); }
     el.textContent=order[0]; el.style.opacity=1; later(step, 9000);
+    /* if she stops touching the screen for 3 minutes, she has probably drifted off: go to goodnight on its own */
+    (function watch(){ later(function(){ if(Date.now()-lastTouch>180000) next(); else watch(); }, 15000); })();
   }
+  var lastTouch=Date.now();
+  ["pointerdown","keydown"].forEach(function(ev){ document.addEventListener(ev,function(){ lastTouch=Date.now(); }, true); });
 
   function goodnight(){
     var c=$("#closeEyes"), n=$("#nightNote"); c.style.opacity=1; n.style.transition="none"; n.style.opacity=1;
-    later(function(){ n.style.transition="opacity 6s"; n.style.opacity=0; }, 6000);
-    later(function(){ c.style.opacity=.15; }, 9000);
+    n.innerHTML = "Put the screen down.<br>Sleep will find you." + (soundOn ? "<br>The sound will fade away on its own in 20 minutes." : "");
+    later(function(){ n.style.transition="opacity 6s"; n.style.opacity=0; }, 7000);
+    later(function(){ c.style.opacity=.15; }, 10000);
     later(function(){ setDim(2, true); }, 12000);
+    later(function(){ setDim(3, true); }, 60000);
+    later(fadeSoundSlow, 20*60000);
   }
 
-  var DIMS=[0,.35,.6], dim=store.dim||0;
+  var DIMS=[0,.35,.6,.9], dim=store.dim||0;
   function setDim(level, temp){ $("#dimmer").style.opacity=DIMS[level]; $("#dimBtn").setAttribute("aria-pressed", level>0?"true":"false");
     $("#dimBtn").textContent = level===0 ? "Dim screen" : (level===1 ? "Dimmer" : "Dimmest"); if(!temp){ dim=level; store.dim=level; save(); } }
-  $("#dimBtn").addEventListener("click",function(){ setDim((dim+1)%DIMS.length); });
+  $("#dimBtn").addEventListener("click",function(){ setDim((dim+1)%3); });
 
   /* soft sound made in the browser: filtered noise; the ocean gets a slow wave swell */
   var actx=null, master=null, lp=null, lfoDepth=null, soundOn=false;
@@ -597,6 +606,9 @@ p{margin:0;max-width:30ch}
     master.gain.linearRampToValueAtTime(on?0.22:0, t+(on?3:1.5));
     soundOn=on; $("#soundBtn").setAttribute("aria-pressed", on?"true":"false");
   }
+  function fadeSoundSlow(){ if(!actx || !soundOn) return; var t=actx.currentTime;
+    master.gain.cancelScheduledValues(t); master.gain.setValueAtTime(master.gain.value,t); master.gain.linearRampToValueAtTime(0,t+90);
+    soundOn=false; $("#soundBtn").setAttribute("aria-pressed","false"); }
   function resumeSound(){ if(soundOn && actx && actx.state==="suspended") actx.resume(); }
   $("#soundBtn").addEventListener("click",function(){ sound(!soundOn); });
 
