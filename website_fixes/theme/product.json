@@ -105,6 +105,25 @@
             "check_icons": false,
             "open": false
           }
+        },
+        "reels_carousel_RDKF9j": {
+          "type": "reels_carousel",
+          "settings": {
+            "heading": "",
+            "heading_size": 24,
+            "subheading": "",
+            "subheading_size": 16,
+            "video_1": "shopify://files/videos/4 (2).mp4",
+            "video_2": "shopify://files/videos/instagram-video-a4f03833-b733-4d7e-a2db-654991d47633.mp4",
+            "video_3": "shopify://files/videos/2 (2).mp4",
+            "video_4": "shopify://files/videos/1 (2).mp4",
+            "video_5": "shopify://files/videos/3 (1).mp4",
+            "button_text": "",
+            "button_url": "",
+            "button_color": "#a2765d",
+            "button_subtext": "",
+            "custom_class": ""
+          }
         }
       },
       "block_order": [
@@ -116,7 +135,8 @@
         "accordion_gMpJiq",
         "accordion_EpAJxj",
         "accordion_6Vzm4e",
-        "accordion_xCGYfA"
+        "accordion_xCGYfA",
+        "reels_carousel_RDKF9j"
       ],
       "name": "mu-Product main",
       "settings": {
@@ -400,6 +420,7 @@
       "blocks": {
         "column_bFFVBp": {
           "type": "column",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/7d1e9d0240a4c79c06af4c1c71354eeabb373ab9.png",
             "image_position": "center top",
@@ -416,6 +437,7 @@
         },
         "column_fYbdU9": {
           "type": "column",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/f68d712c00178052ba5063b905117acdf69b84b2.png",
             "image_position": "center top",
