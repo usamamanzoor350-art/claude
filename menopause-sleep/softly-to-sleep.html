@@ -4,79 +4,81 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Nunito:wght@400;600&display=swap">
 <style>
-/* Layout: one quiet scene at a time, centered in a dim room; nothing scrolls, everything moves slowly.
-   Deliberately single-theme: a warm, low-blue night palette for use in bed with the lights off.
+/* Layout: an app of quiet full-screen scenes. Night scenes never scroll; daytime pages scroll gently.
+   Deliberately single-theme: warm, low-blue night palette for use in bed with the lights off.
    Each "place" (valley, snow, ocean, lavender) only shifts the glow accent. */
 :root{
   color-scheme:dark;
-  --night:#17131F; --dusk:#221C2E; --moon:#EBDDC2; --glow:#E0B57A; --mist:#9C93AE; --line:#3A3149;
+  --night:#17131F; --dusk:#221C2E; --moon:#EBDDC2; --glow:#E0B57A; --mist:#9C93AE; --line:#3A3149; --card:rgba(235,221,194,.045);
   --display:"Cormorant Garamond", "Iowan Old Style", Georgia, serif;
   --body:"Nunito", "Avenir Next", system-ui, sans-serif;
   --slow:1.6s;
-  --stage:min(92vw, 520px, 66vh);
+  --stage:min(92vw, 520px, 62vh);
 }
 .app[data-world="snow"]{--glow:#CFD8E4; --dusk:#1E2130}
 .app[data-world="ocean"]{--glow:#93C2BE; --dusk:#18222A}
 .app[data-world="lavender"]{--glow:#C7AEE2; --dusk:#241C32}
 html,body{height:100%}
 body{background:var(--night);color:var(--moon);font-family:var(--body);font-size:19px;line-height:1.6;overflow:hidden}
-.app{height:100%;position:relative;transition:background 2s;
-  background:radial-gradient(120% 80% at 50% 0%, var(--dusk) 0%, var(--night) 70%)}
+.app{height:100%;position:relative;transition:background 2s;background:radial-gradient(120% 80% at 50% 0%, var(--dusk) 0%, var(--night) 70%)}
 
-.controls{position:absolute;z-index:5;top:calc(env(safe-area-inset-top,0px) + 12px);
-  right:max(16px, env(safe-area-inset-right,0px));display:flex;gap:8px}
-.ctl{font:inherit;font-size:.85rem;color:var(--mist);background:transparent;border:1px solid var(--line);
-  border-radius:999px;padding:6px 14px;cursor:pointer}
+.topbar{position:absolute;z-index:6;top:calc(env(safe-area-inset-top,0px) + 12px);left:max(16px, env(safe-area-inset-left,0px));right:max(16px, env(safe-area-inset-right,0px));
+  display:flex;justify-content:space-between;gap:8px;pointer-events:none}
+.topbar>*{pointer-events:auto}
+.tb-right{display:flex;gap:8px;margin-left:auto}
+.ctl{font:inherit;font-size:.82rem;color:var(--mist);background:rgba(23,19,31,.6);border:1px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer}
 .ctl[aria-pressed="true"]{color:var(--glow);border-color:var(--glow)}
-.home{position:absolute;z-index:5;top:calc(env(safe-area-inset-top,0px) + 12px);left:max(16px, env(safe-area-inset-left,0px))}
-.dimmer{position:absolute;inset:0;background:#000;pointer-events:none;z-index:4;opacity:0;transition:opacity 2s ease}
+.dimmer{position:absolute;inset:0;background:#000;pointer-events:none;z-index:5;opacity:0;transition:opacity 2s ease}
 
-.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
-  text-align:center;padding-block:68px 40px;
-  padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;text-align:center;
+  padding-block:66px 40px;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));
   opacity:0;visibility:hidden;transition:opacity var(--slow) ease, visibility 0s linear var(--slow)}
 .scene.on{opacity:1;visibility:visible;transition:opacity var(--slow) ease, visibility 0s}
-h1,h2{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;line-height:1.15}
-h1{font-size:clamp(2.8rem,10vw,4.6rem);letter-spacing:.01em}
-h2{font-size:clamp(1.7rem,5.6vw,2.4rem);font-style:italic}
-p{margin:0;max-width:30ch}
+.scene.scroll{justify-content:flex-start;overflow-y:auto;text-align:left;-webkit-overflow-scrolling:touch}
+.page{width:min(640px,100%);display:flex;flex-direction:column;gap:22px;padding-bottom:40px}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;line-height:1.15}
+h1{font-size:clamp(2.6rem,9vw,4.2rem);letter-spacing:.01em}
+h2{font-size:clamp(1.65rem,5.4vw,2.3rem);font-style:italic}
+h3{font-size:1.45rem;font-weight:500}
+p{margin:0;max-width:34ch}
+.page p{max-width:60ch}
 .soft{color:var(--mist)}
-.tag{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
-
-/* start */
-.places{display:flex;flex-direction:column;gap:8px;align-items:center}
-.place-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-.place{font:inherit;font-size:.92rem;color:var(--mist);background:transparent;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;
-  display:flex;align-items:center;gap:8px}
-.place i{width:10px;height:10px;border-radius:50%;flex:none}
-.place[aria-pressed="true"]{color:var(--moon);border-color:var(--glow)}
-.paths{display:flex;flex-direction:column;gap:10px;width:min(340px,100%)}
-.path{font:inherit;color:var(--moon);background:rgba(235,221,194,.04);border:1px solid var(--line);border-radius:18px;
-  padding:14px 20px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:2px}
-.path b{font-family:var(--display);font-size:1.4rem;font-weight:500}
-.path span{font-size:.86rem;color:var(--mist)}
-.path:hover{border-color:var(--glow)}
-
-.next{font:inherit;font-size:.95rem;color:var(--mist);background:transparent;border:1px solid var(--line);border-radius:999px;
-  padding:10px 26px;cursor:pointer;transition:color 1s, border-color 1s}
-.next:hover,.next.ready{color:var(--glow);border-color:var(--glow)}
+.small{font-size:.86rem}
+.tag{font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
+a{color:var(--glow)}
 :focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+
+.menu{display:flex;flex-direction:column;gap:9px;width:min(400px,100%)}
+.opt{font:inherit;color:var(--moon);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:11px 18px;cursor:pointer;text-align:left;
+  display:flex;flex-direction:column;gap:0;transition:border-color .6s}
+.opt b{font-family:var(--display);font-size:1.32rem;font-weight:500;line-height:1.2}
+.opt span{font-size:.82rem;color:var(--mist)}
+.opt:hover{border-color:var(--glow)}
+.linkbtn{font:inherit;font-size:.9rem;color:var(--mist);background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line)}
+.linkbtn:hover{color:var(--moon)}
+.next{font:inherit;font-size:.95rem;color:var(--mist);background:transparent;border:1px solid var(--line);border-radius:999px;padding:10px 26px;cursor:pointer;transition:color 1s, border-color 1s}
+.next:hover,.next.ready{color:var(--glow);border-color:var(--glow)}
+.row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+
+.place-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;width:min(420px,100%)}
+.place{font:inherit;color:var(--moon);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;flex:1 1 170px;
+  display:flex;align-items:center;gap:10px;text-align:left}
+.place i{width:12px;height:12px;border-radius:50%;flex:none}
+.place b{font-family:var(--display);font-size:1.25rem;font-weight:500}
+.place[aria-pressed="true"]{border-color:var(--glow)}
 
 .lines{display:flex;flex-direction:column;gap:14px;align-items:center;min-height:9.5em;justify-content:center}
 .lines p{font-family:var(--display);font-size:clamp(1.35rem,4.6vw,1.75rem);line-height:1.35;max-width:24ch;opacity:0;transition:opacity 2.4s ease}
 .lines p.show{opacity:1}
 .lines p.fade{opacity:.28}
 
-/* breathing moon */
-.moonwrap{width:min(60vw,240px,34vh);aspect-ratio:1;max-width:100%;display:grid;place-items:center}
-.breath{width:100%;height:100%;border-radius:50%;
-  background:radial-gradient(circle at 40% 38%, #F6ECD8 0%, var(--moon) 45%, #C9B48F 100%);
+.moonwrap{width:min(58vw,230px,32vh);aspect-ratio:1;max-width:100%;display:grid;place-items:center}
+.breath{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 40% 38%, #F6ECD8 0%, var(--moon) 45%, #C9B48F 100%);
   box-shadow:0 0 60px 10px rgba(224,181,122,.18), 0 0 140px 40px rgba(224,181,122,.08);transform:scale(.62)}
 .breath.in{transform:scale(1);transition:transform 4s ease-in-out}
 .breath.out{transform:scale(.62);transition:transform 6s ease-in-out}
 .cue{font-family:var(--display);font-size:1.7rem;font-style:italic;min-height:1.4em}
 
-/* stage for pictures and activities */
 .stage{width:var(--stage);max-width:100%;display:flex;flex-direction:column;gap:12px}
 .stage svg,.stage canvas{width:100%;height:auto;aspect-ratio:4/3;display:block;border-radius:14px}
 .stage canvas{touch-action:none;cursor:pointer}
@@ -85,7 +87,6 @@ p{margin:0;max-width:30ch}
 .palette{display:flex;flex-wrap:wrap;justify-content:center;gap:9px}
 .chip{width:34px;height:34px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0}
 .chip[aria-pressed="true"]{border-color:var(--moon);box-shadow:0 0 0 3px var(--night) inset}
-
 .star{cursor:pointer}
 .star .dot{fill:#4A4058;transition:fill 1.6s ease}
 .star .halo{fill:var(--glow);opacity:0;transition:opacity 1.6s ease}
@@ -95,25 +96,54 @@ p{margin:0;max-width:30ch}
 @keyframes hint{50%{fill:#8C7F9E}}
 .link{stroke:var(--glow);stroke-width:1;opacity:0;transition:opacity 2s ease}
 .link.on{opacity:.45}
-.word{font-family:var(--display);font-style:italic;font-size:1.7rem;min-height:1.4em;color:var(--glow);transition:opacity 1.5s}
+.word{font-family:var(--display);font-style:italic;font-size:1.6rem;min-height:1.4em;color:var(--glow);transition:opacity 1.5s}
 
-.drift{font-family:var(--display);font-size:clamp(2rem,8vw,3rem);min-height:2.6em;display:flex;align-items:center;
-  justify-content:center;max-width:16ch;transition:opacity 2.2s ease;line-height:1.15}
+.drift{font-family:var(--display);font-size:clamp(2rem,8vw,3rem);min-height:2.6em;display:flex;align-items:center;justify-content:center;max-width:16ch;transition:opacity 2.2s ease;line-height:1.15}
 .close-eyes{font-family:var(--display);font-size:clamp(2.2rem,8vw,3.4rem);font-style:italic;transition:opacity 8s ease}
-.small-cap{font-size:.85rem;opacity:.75}
-.again{font:inherit;font-size:.85rem;color:var(--line);background:none;border:0;cursor:pointer;transition:color 1s}
-.again:hover{color:var(--mist)}
+.quiet{font:inherit;font-size:.85rem;color:var(--line);background:none;border:0;cursor:pointer;transition:color 1s}
+.quiet:hover{color:var(--mist)}
 
-.steps{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:3}
+/* voice player */
+.orb{width:min(46vw,170px,26vh);aspect-ratio:1;border-radius:50%;max-width:100%;
+  background:radial-gradient(circle at 45% 40%, rgba(246,236,216,.55) 0%, rgba(224,181,122,.18) 45%, rgba(224,181,122,0) 70%);
+  animation:orb 10s ease-in-out infinite}
+@keyframes orb{0%,100%{transform:scale(.82);opacity:.7}40%{transform:scale(1);opacity:1}}
+.pline{font-family:var(--display);font-size:clamp(1.4rem,5vw,1.9rem);line-height:1.35;max-width:22ch;min-height:4.2em;display:flex;align-items:center;justify-content:center;transition:opacity 1.4s}
+.pline.hidden{visibility:hidden}
+
+/* daytime */
+.daycard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.daycard .step{border-top:1px solid var(--line);padding-top:12px;font-size:.98rem}
+.daycard .step b{color:var(--glow);font-weight:600}
+.daynav{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pill{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--glow)}
+.weeks{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.week{background:transparent;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font:inherit;color:var(--moon);text-align:left;cursor:pointer}
+.week b{display:block;font-family:var(--display);font-size:1.15rem;font-weight:500}
+.week span{font-size:.8rem;color:var(--mist)}
+.week[aria-current="true"]{border-color:var(--glow)}
+.list{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:8px}
+.list li{max-width:60ch}
+.refs{font-size:.85rem;color:var(--mist);margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.sci{display:flex;flex-direction:column;gap:6px;border-left:2px solid var(--line);padding-left:14px}
+.sci b{font-family:var(--display);font-size:1.2rem;font-weight:500}
+.field{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.field label{font-size:.98rem}
+select{font:inherit;font-size:.9rem;color:var(--moon);background:var(--dusk);border:1px solid var(--line);border-radius:10px;padding:6px 10px;max-width:100%}
+.switch{font:inherit;font-size:.85rem;border:1px solid var(--line);background:transparent;color:var(--mist);border-radius:999px;padding:6px 14px;cursor:pointer}
+.switch[aria-pressed="true"]{color:var(--glow);border-color:var(--glow)}
+.note{font-size:.9rem;color:var(--mist);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+
+.steps{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:3;pointer-events:none}
 .steps i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background 1s}
 .steps i.on{background:var(--mist)}
 .room-stars{position:absolute;inset:0;pointer-events:none}
 .room-stars b{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--moon);opacity:.25}
 
-@media (max-height:640px){ .scene{gap:14px;padding-block:58px 34px} h1{font-size:2.6rem} }
+@media (max-height:700px){ .scene{gap:12px;padding-block:58px 30px} h1{font-size:2.4rem} .opt{padding:8px 16px} .opt b{font-size:1.18rem} }
 @media (prefers-reduced-motion:reduce){
   .breath.in,.breath.out{transition:none;transform:scale(.8)}
-  .star.hint .dot{animation:none}
+  .star.hint .dot,.orb{animation:none}
   .scene,.lines p,.drift,.close-eyes{transition-duration:.01s}
 }
 </style>
@@ -122,98 +152,241 @@ p{margin:0;max-width:30ch}
   <div class="room-stars" id="roomStars" aria-hidden="true"></div>
   <div class="dimmer" id="dimmer"></div>
 
-  <button class="ctl home" id="homeBtn" type="button" hidden>Start over</button>
-  <div class="controls">
-    <button class="ctl" id="soundBtn" type="button" aria-pressed="false">Soft rain</button>
-    <button class="ctl" id="dimBtn" type="button" aria-pressed="false">Dim screen</button>
+  <div class="topbar">
+    <button class="ctl" id="homeBtn" type="button" hidden>Home</button>
+    <div class="tb-right">
+      <button class="ctl" id="soundBtn" type="button" aria-pressed="false">Soft rain</button>
+      <button class="ctl" id="dimBtn" type="button" aria-pressed="false">Dim</button>
+      <button class="ctl" id="setBtn" type="button">Settings</button>
+    </div>
   </div>
 
-  <section class="scene on" data-scene="start" aria-label="Welcome">
-    <span class="tag">A gentle path for menopause nights</span>
+  <!-- ONBOARDING -->
+  <section class="scene" data-scene="ob1" aria-label="Welcome">
+    <span class="tag">For the nights of menopause</span>
     <h1>Softly to Sleep</h1>
-    <p class="soft">Nothing to track. Nothing to fix.<br>Just a slow, quiet way back to sleep.</p>
-    <div class="places">
-      <span class="tag">Tonight's place</span>
-      <div class="place-row" id="placeRow" role="group" aria-label="Choose tonight's place"></div>
+    <p class="soft">Nothing to track. Nothing to fix.<br>A calm voice and gentle tools that help you fall asleep, and get back to sleep.</p>
+    <button class="next ready" type="button" data-go="ob2">Begin</button>
+  </section>
+  <section class="scene" data-scene="ob2" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="menu" style="pointer-events:none">
+      <div class="opt"><b>At night</b><span>Tell it what woke you, with one tap. A soft voice guides you back down. Eyes closed is fine.</span></div>
+      <div class="opt"><b>During the day</b><span>One small, kind step each morning for six weeks, based on the most studied approach to better sleep.</span></div>
+      <div class="opt"><b>Nothing to fill in</b><span>No diaries, no scores, no charts. Just rest.</span></div>
     </div>
-    <div class="paths">
-      <button class="path" type="button" data-path="bed"><b>Wind down for bed</b><span id="bedDesc">About 15 minutes</span></button>
-      <button class="path" type="button" data-path="wake"><b>Back to sleep</b><span>About 5 minutes · for when you wake in the night</span></button>
+    <button class="next ready" type="button" data-go="ob3">Continue</button>
+  </section>
+  <section class="scene" data-scene="ob3" aria-label="Hear the voice">
+    <h2>Let's find your voice</h2>
+    <p class="soft">The guide speaks softly so you can keep your eyes closed. Choose the voice you like best.</p>
+    <select id="obVoice" aria-label="Choose a voice"></select>
+    <div class="row">
+      <button class="next" type="button" id="obTest">Hear it</button>
+      <button class="next ready" type="button" data-go="ob4">This one is nice</button>
+    </div>
+    <button class="linkbtn" type="button" id="obNoVoice">I'd rather read than listen</button>
+  </section>
+  <section class="scene" data-scene="ob4" aria-label="A gentle note">
+    <h2>A gentle note</h2>
+    <p class="soft">Softly to Sleep is a calming companion, not medical care.</p>
+    <div class="note" style="max-width:420px;text-align:left">Please talk with your doctor if you snore loudly, gasp or stop breathing in your sleep, feel very sleepy during the day, have an urge to move your legs at night, or feel low most days. These deserve their own care.</div>
+    <button class="next ready" type="button" id="obDone">I understand</button>
+  </section>
+
+  <!-- NIGHT HOME -->
+  <section class="scene" data-scene="nightHome" aria-label="Night">
+    <span class="tag">Night</span>
+    <h2>What would help right now?</h2>
+    <div class="menu">
+      <button class="opt" type="button" data-night="bed"><b>Getting ready for bed</b><span>About 15 min · wind down, color, drift</span></button>
+      <button class="opt" type="button" data-night="hot"><b>I woke up hot</b><span>About 10 min · a cooling journey, spoken softly</span></button>
+      <button class="opt" type="button" data-night="mind"><b>My mind won't quiet</b><span>About 15 min · a gentle word game for a busy mind</span></button>
+      <button class="opt" type="button" data-night="awake"><b>I'm just awake</b><span>About 10 min · permission to rest, then a story</span></button>
+      <button class="opt" type="button" data-night="bath"><b>Back from the bathroom</b><span>About 6 min · settle back down</span></button>
+    </div>
+    <div class="row">
+      <button class="linkbtn" type="button" data-night="chair">Been awake a long while?</button>
+      <button class="linkbtn" type="button" data-go="dayHome">Daytime</button>
     </div>
   </section>
 
-  <section class="scene" data-scene="arrive" aria-label="Settle in">
-    <div class="lines"></div>
-    <button class="next" type="button">Continue</button>
+  <!-- WIND-DOWN -->
+  <section class="scene" data-scene="place" aria-label="Choose a place">
+    <h2>Where shall we go tonight?</h2>
+    <div class="place-row" id="placeRow" role="group" aria-label="Choose tonight's place"></div>
+    <button class="next ready" type="button" id="placeGo">Let's go</button>
   </section>
-
-  <section class="scene" data-scene="arrive3" aria-label="Settle back in">
-    <div class="lines"></div>
-    <button class="next" type="button">Continue</button>
-  </section>
-
+  <section class="scene" data-scene="arrive" aria-label="Settle in"><div class="lines"></div><button class="next" type="button">Continue</button></section>
   <section class="scene" data-scene="breathe" aria-label="Breathe with the moon">
     <h2>Breathe with the moon</h2>
     <div class="moonwrap"><div class="breath" id="breath"></div></div>
     <div class="cue" id="cue" aria-live="polite">&nbsp;</div>
     <button class="next" type="button">Continue when you're ready</button>
   </section>
-
   <section class="scene" data-scene="color" aria-label="Color the picture">
     <h2 id="colorTitle">Color the quiet valley</h2>
     <div class="stage">
       <svg viewBox="0 0 400 300" id="valley" role="img" aria-label="A night picture to color"></svg>
       <div class="palette" id="palette" role="group" aria-label="Choose a color"></div>
-      <p class="soft" style="margin:0 auto">Tap a color, then any part of the picture. There's no wrong color.</p>
+      <p class="soft small" style="margin:0 auto">Tap a color, then any part of the picture. There's no wrong color.</p>
     </div>
     <button class="next" type="button">Continue</button>
   </section>
-
   <section class="scene" data-scene="stars" aria-label="Light the stars">
     <h2>Light the stars, one by one</h2>
     <div class="stage"><svg viewBox="0 0 400 300" id="skySvg" role="img" aria-label="Nine dim stars to light"></svg></div>
     <div class="word" id="starWord" aria-live="polite">&nbsp;</div>
     <button class="next" type="button">Continue</button>
   </section>
-
   <section class="scene" data-scene="snow" aria-label="Let the snow fall">
     <h2>Let the snow fall</h2>
     <div class="stage"><canvas id="snowCanvas" width="800" height="600" aria-label="A night sky. Tap to let snow fall."></canvas></div>
     <div class="word" id="snowWord" aria-live="polite">Tap the sky, softly</div>
     <button class="next" type="button">Continue</button>
   </section>
-
   <section class="scene" data-scene="sand" aria-label="Draw in the sand">
     <h2>Draw in the cool sand</h2>
     <div class="stage"><canvas id="sandCanvas" width="800" height="600" aria-label="Moonlit sand. Draw with your finger; the tide smooths it away."></canvas></div>
     <div class="word" id="sandWord" aria-live="polite">Draw anything. The tide will smooth it away.</div>
     <button class="next" type="button">Continue</button>
   </section>
-
   <section class="scene" data-scene="fireflies" aria-label="Gather the fireflies">
     <h2>Gather the fireflies</h2>
     <div class="stage"><canvas id="flyCanvas" width="800" height="600" aria-label="Fireflies over a lavender field. Tap one to bring it to the jar."></canvas></div>
     <div class="word" id="flyWord" aria-live="polite">Tap a firefly to bring it home</div>
     <button class="next" type="button">Continue</button>
   </section>
-
-  <section class="scene" data-scene="imagery" aria-label="Imagine">
-    <div class="lines"></div>
-    <button class="next" type="button">Continue</button>
-  </section>
-
+  <section class="scene" data-scene="imagery" aria-label="Imagine"><div class="lines"></div><button class="next" type="button">Continue</button></section>
   <section class="scene" data-scene="drift" aria-label="Drift">
     <span class="tag">Picture each one, then let it go</span>
     <div class="drift" id="drift" aria-live="polite"></div>
-    <p class="soft">You don't need to hold on to anything.<br>Close your eyes whenever you like.</p>
-    <p class="soft small-cap">Feeling sleepy? Just close your eyes.<br>If you drift off, the screen will dim and go dark on its own.</p>
+    <p class="soft">You don't need to hold on to anything.</p>
+    <p class="soft small">Feeling sleepy? Just close your eyes.<br>If you drift off, the screen will go dark on its own.</p>
     <button class="next" type="button">I'm getting sleepy</button>
+  </section>
+
+  <!-- VOICE PLAYER -->
+  <section class="scene" data-scene="player" aria-label="Listening">
+    <span class="tag" id="pTitle">&nbsp;</span>
+    <div class="orb" aria-hidden="true"></div>
+    <div class="pline" id="pLine" aria-live="polite"></div>
+    <p class="soft small" id="pHint">Eyes closed is fine. Just listen.</p>
+    <div class="row">
+      <button class="next" type="button" id="pPause">Pause</button>
+      <button class="next" type="button" id="pEnd">I'm sleepy now</button>
+    </div>
+  </section>
+
+  <section class="scene" data-scene="chairEnd" aria-label="Back to bed">
+    <h2>When your eyes feel heavy…</h2>
+    <p class="soft">…go back to bed, slowly, with the lights low.<br>There's no hurry. Stay here as long as you like.</p>
+    <div class="row">
+      <button class="next ready" type="button" id="chairBack">I'm back in bed</button>
+      <button class="next" type="button" id="chairStory">Another story</button>
+    </div>
   </section>
 
   <section class="scene" data-scene="night" aria-label="Goodnight">
     <div class="close-eyes" id="closeEyes">Now close your eyes.</div>
     <p class="soft" id="nightNote">Put the screen down.<br>Sleep will find you.</p>
-    <button class="again" type="button" id="againBtn">Begin again</button>
+    <button class="quiet" type="button" id="againBtn">Back to the start</button>
+  </section>
+
+  <!-- DAYTIME -->
+  <section class="scene scroll" data-scene="dayHome" aria-label="Daytime">
+    <div class="page">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <span class="tag">Daytime</span>
+        <h1 style="font-size:clamp(2.2rem,7vw,3.2rem)">Your six-week sleep reset</h1>
+        <p class="soft">One small step each morning. Nothing to log, nothing to score. These steps come from CBT for insomnia, the approach doctors recommend first for long-running sleep trouble.</p>
+      </div>
+      <div class="daycard" id="dayCard"></div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <h3>The six weeks</h3>
+        <div class="weeks" id="weeks"></div>
+      </div>
+      <div class="row" style="justify-content:flex-start">
+        <button class="next" type="button" data-go="doctor">Talk with your doctor</button>
+        <button class="next" type="button" data-go="science">Why this works</button>
+        <button class="next" type="button" data-go="nightHome">Night tools</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene scroll" data-scene="doctor" aria-label="Talk with your doctor">
+    <div class="page">
+      <span class="tag">Daytime</span>
+      <h2>Talk with your doctor</h2>
+      <p class="soft">Many women are never asked about their sleep. These questions can help you start the conversation.</p>
+      <h3>Questions you might ask</h3>
+      <ul class="list">
+        <li>Could hormone therapy be a good option for my hot flashes and sleep?</li>
+        <li>If hormones aren't right for me, are there non-hormonal medicines for hot flashes, such as fezolinetant?</li>
+        <li>Could my snoring, waking or daytime tiredness be sleep apnea? Should I have a sleep study?</li>
+        <li>Can you refer me to someone who offers CBT for insomnia (CBT-I)?</li>
+        <li>I wake up to use the bathroom most nights. Is there something we can look at?</li>
+        <li>Could any of my current medicines be affecting my sleep?</li>
+      </ul>
+      <h3>Mention these right away</h3>
+      <ul class="list">
+        <li>Loud snoring, gasping or choking in your sleep, or someone noticing you stop breathing</li>
+        <li>Falling asleep without meaning to during the day</li>
+        <li>An uncomfortable urge to move your legs in the evening or at night</li>
+        <li>Feeling low, hopeless or anxious most days</li>
+      </ul>
+      <p class="soft small">Sleep apnea becomes more common after menopause and is often missed in women, partly because it can show up as insomnia or tiredness rather than snoring.</p>
+      <button class="next" type="button" data-go="dayHome" style="align-self:flex-start">Back</button>
+    </div>
+  </section>
+
+  <section class="scene scroll" data-scene="science" aria-label="Why this works">
+    <div class="page">
+      <span class="tag">Daytime</span>
+      <h2>Why this works</h2>
+      <p class="soft">Every part of Softly to Sleep is built on techniques that have been studied with real people. Here is what is behind each one.</p>
+      <div class="sci"><b>Waking in the night is the most common menopause sleep complaint</b><p class="soft">Between about 35% and 60% of women report sleep problems around menopause, and repeated night waking is the main one. In sleep-lab studies most hot flashes come with an awakening, yet a lot of night waking happens without a hot flash. That's why Softly to Sleep has separate tools for heat and for a busy mind.</p></div>
+      <div class="sci"><b>The six-week reset: CBT for insomnia</b><p class="soft">CBT-I is the first treatment medical guidelines recommend for chronic insomnia. A 2025 review of 11 trials in women with menopausal insomnia found it improved sleep quality, including when it was delivered remotely. In one trial with women who had hot flashes, the benefit lasted at least six months. The reset uses gentle, self-guided steps from CBT-I. It is inspired by CBT-I but is not a replacement for therapy with a trained provider.</p></div>
+      <div class="sci"><b>"I woke up hot": cooling imagery</b><p class="soft">In clinical hypnosis research, guided imagery of coolness (snow, cool water, a breeze) was part of programs that cut hot flashes substantially for many postmenopausal women, including programs women listened to on their own at home.</p></div>
+      <div class="sci"><b>"My mind won't quiet": the word game</b><p class="soft">Picturing a slow series of unrelated, peaceful things is called serial diverse imagining, or cognitive shuffling. In a study of people kept awake by a busy mind, it eased pre-sleep arousal and helped them fall asleep more easily.</p></div>
+      <div class="sci"><b>"I'm just awake": rest without trying</b><p class="soft">Trying hard to sleep keeps the brain alert. Letting go of the effort, sometimes called paradoxical intention, has been shown to reduce sleep effort and worry about sleep.</p></div>
+      <div class="sci"><b>"Been awake a long while?": leaving the bed for a while</b><p class="soft">Getting up when you're restless, and returning when sleepy, is called stimulus control. It is one of the best-supported parts of CBT-I and helps the bed feel like a place for sleep again.</p></div>
+      <div class="sci"><b>What we don't claim</b><p class="soft">Slow breathing is included to help you relax, but trials have not shown that it reduces hot flashes, so we don't promise that. Softly to Sleep does not diagnose or treat any condition.</p></div>
+      <h3>Selected research</h3>
+      <ol class="refs">
+        <li>Baker FC et al. Sleep and sleep disorders in the menopausal transition. <i>Sleep Med Clin</i> 2018. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5776689" target="_blank" rel="noopener">Read</a></li>
+        <li>de Zambotti M et al. Magnitude of the impact of hot flashes on sleep in perimenopausal women. <i>Fertil Steril</i> 2014. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4252627" target="_blank" rel="noopener">Read</a></li>
+        <li>McCurry SM et al. Telephone-based CBT for insomnia in women with vasomotor symptoms (MsFLASH). <i>JAMA Intern Med</i> 2016. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4935624" target="_blank" rel="noopener">Read</a></li>
+        <li>Effects of CBT on sleep quality and insomnia severity in women with menopausal insomnia: systematic review and meta-analysis, 2025. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12835450/" target="_blank" rel="noopener">Read</a></li>
+        <li>Elkins GR et al. Clinical hypnosis in the treatment of postmenopausal hot flashes. <i>Menopause</i> 2013. <a href="https://scientia.global/professor-gary-elkins-hypnosis-a-mind-body-solution-for-hot-flushes-and-sleep-post-menopause-and-in-breast-cancer-survivors" target="_blank" rel="noopener">Read</a></li>
+        <li>Beaudoin LP, Digdon N et al. Serial diverse imagining for pre-sleep arousal, 2016. <a href="https://summit.sfu.ca/item/15270" target="_blank" rel="noopener">Read</a></li>
+        <li>Broomfield NM, Espie CA. Paradoxical intention and sleep effort, 2003. <a href="https://eprints.gla.ac.uk/22309" target="_blank" rel="noopener">Read</a></li>
+        <li>Carpenter JS et al. Paced respiration for vasomotor symptoms: a randomized trial, 2013. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3614127" target="_blank" rel="noopener">Read</a></li>
+        <li>Nocturia, sleep apnea and menopause in women: review. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8120610" target="_blank" rel="noopener">Read</a></li>
+      </ol>
+      <p class="soft small">Softly to Sleep is for relaxation and general wellbeing. It is not medical advice and does not diagnose or treat any condition.</p>
+      <button class="next" type="button" data-go="dayHome" style="align-self:flex-start">Back</button>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="scene scroll" data-scene="settings" aria-label="Settings">
+    <div class="page">
+      <h2>Settings</h2>
+      <div>
+        <div class="field"><label for="voiceToggle">Spoken guide</label><button class="switch" id="voiceToggle" type="button" aria-pressed="true">On</button></div>
+        <div class="field"><label for="voiceSel">Voice</label><select id="voiceSel"></select></div>
+        <div class="field"><label for="rateSel">Speaking pace</label>
+          <select id="rateSel"><option value="0.72">Very slow</option><option value="0.82">Slow</option><option value="0.92">Gentle</option></select></div>
+        <div class="field"><label for="wordsToggle">Show the words while listening</label><button class="switch" id="wordsToggle" type="button" aria-pressed="true">On</button></div>
+        <div class="field"><label>Try the voice</label><button class="switch" id="testVoice" type="button">Hear it</button></div>
+      </div>
+      <p class="soft small">The voice comes from your phone or computer. Voices called "Enhanced", "Premium" or "Natural" usually sound the most soothing. On iPhone you can download them in Settings, Accessibility, Spoken Content, Voices.</p>
+      <div class="row" style="justify-content:flex-start">
+        <button class="next ready" type="button" id="setBack">Done</button>
+        <button class="linkbtn" type="button" id="replayIntro">See the welcome again</button>
+      </div>
+    </div>
   </section>
 
   <div class="steps" id="steps" aria-hidden="true"></div>
@@ -224,26 +397,23 @@ p{margin:0;max-width:30ch}
   var KEY="softly-to-sleep-v1";
   var store={}; try{ store=JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ store={}; }
   function save(){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
+  if(store.voiceOn===undefined) store.voiceOn=true;
+  if(store.words===undefined) store.words=true;
+  if(!store.rate) store.rate="0.82";
 
+  /* ===================== CONTENT ===================== */
   var ARRIVE=["The day is done.","Whatever happened today, you did enough.","Let your shoulders drop, just a little.","Let your jaw go soft.","There is nowhere you need to be now."];
-  var ARRIVE3=["Hello again.","You don't need to know what time it is.","Let the pillow hold your head.","Rest is still rest, even with your eyes open.","Let's go slowly back down."];
 
   var WORLDS={
-    valley:{ name:"Quiet Valley", dot:"#E0B57A", sound:"Soft rain", activity:"stars", actName:"light the stars",
-      colorTitle:"Color the quiet valley",
+    valley:{ name:"Quiet Valley", dot:"#E0B57A", sound:"Soft rain", activity:"stars", colorTitle:"Color the quiet valley",
       palette:["#2E2A47","#46507A","#6E6290","#B58FA2","#7E9A8A","#5B6B66","#EBDDC2","#E0B57A","#8A6B57"],
-      svg:'<rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/>'+
-        '<circle class="region" data-r="moon" cx="300" cy="70" r="28"/>'+
+      svg:'<rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/><circle class="region" data-r="moon" cx="300" cy="70" r="28"/>'+
         '<path class="region" data-r="farhills" d="M0 170 Q60 118 120 150 T240 140 T400 148 L400 300 L0 300Z"/>'+
         '<path class="region" data-r="nearhills" d="M0 205 Q80 168 160 196 T320 186 T400 196 L400 300 L0 300Z"/>'+
-        '<rect class="region" data-r="house" x="70" y="182" width="42" height="30"/>'+
-        '<polygon class="region" data-r="roof" points="63,184 91,160 119,184"/>'+
-        '<rect class="region" data-r="window" x="84" y="190" width="13" height="11"/>'+
-        '<polygon class="region" data-r="tree1" points="150,206 162,166 174,206"/>'+
-        '<polygon class="region" data-r="tree2" points="176,204 186,174 196,204"/>'+
-        '<polygon class="region" data-r="tree3" points="330,196 342,158 354,196"/>'+
-        '<path class="region" data-r="lake" d="M0 232 Q200 214 400 232 L400 300 L0 300Z"/>'+
-        '<ellipse class="region" data-r="glimmer" cx="300" cy="258" rx="30" ry="5"/>',
+        '<rect class="region" data-r="house" x="70" y="182" width="42" height="30"/><polygon class="region" data-r="roof" points="63,184 91,160 119,184"/>'+
+        '<rect class="region" data-r="window" x="84" y="190" width="13" height="11"/><polygon class="region" data-r="tree1" points="150,206 162,166 174,206"/>'+
+        '<polygon class="region" data-r="tree2" points="176,204 186,174 196,204"/><polygon class="region" data-r="tree3" points="330,196 342,158 354,196"/>'+
+        '<path class="region" data-r="lake" d="M0 232 Q200 214 400 232 L400 300 L0 300Z"/><ellipse class="region" data-r="glimmer" cx="300" cy="258" rx="30" ry="5"/>',
       imagery:["Picture a lake at night, perfectly still.","The air above the water is cool and clean.","Breathe it in. Feel the coolness on your cheeks.",
         "Your feet rest in the shallow water, cool and calm.","The coolness rises slowly… ankles… knees…","Moonlight lies across the water like a silver path.",
         "A soft breeze moves over your shoulders.","Your arms grow heavy, and cool, and still.","Nothing here needs you right now.","Let the stillness of the lake become yours."],
@@ -252,23 +422,26 @@ p{margin:0;max-width:30ch}
         "rain on a window","a distant lighthouse","a bowl of lemons","an old wooden bench","a balloon floating away","a meadow at dusk",
         "a candle flame","a pair of slippers","a willow tree","a piano in an empty room","a basket of apples","clouds over hills",
         "a kite on a long string","a stone path","a little teapot","a rowboat at rest","a curling fern","a sleeping puppy","a moonlit porch",
-        "a dandelion clock","a paper boat","honey on a spoon","a robin","a patchwork quilt","lily pads on a pond","a sleepy village"]},
-    snow:{ name:"Snowy Cabin", dot:"#CFD8E4", sound:"Soft wind", activity:"snow", actName:"let the snow fall",
-      colorTitle:"Color the snowy cabin",
+        "a dandelion clock","a paper boat","honey on a spoon","a robin","a patchwork quilt","lily pads on a pond","a sleepy village"],
+      story:{ title:"The Lantern in the Valley", lines:[
+        "This is a story about a quiet valley at night.","At the edge of a still lake, there is a small stone cottage.","In its window, a single lantern glows, soft and gold.",
+        "Inside, the fire has burned down to quiet embers.","A woman sits by the window with a cup of chamomile tea.","Outside, the lake holds the moon like a silver coin.",
+        "A cool breeze slips under the door, carrying the smell of pine.","She pulls a light blanket around her shoulders. Not too warm. Just right.",
+        "Somewhere across the water, an owl calls once… and then is quiet.","The hills are dark and soft, like sleeping animals.",
+        "She watches the stars come out, one by one.","The first one, above the tallest pine.","Another, low over the water.","Then so many she stops counting.",
+        "The tea is finished. The cup is warm in her hands.","She sets it on the windowsill, beside the lantern.",
+        "She walks slowly to bed, the old floorboards cool beneath her feet.","The sheets are cool and smooth.","She lets the pillow take the weight of her head.",
+        "Through the window, the lantern glow softens to a blur.","The lake is still. The valley is still.","Her breathing slows, like small waves on a shore.",
+        "In… and out…","Nothing needs her now.","The night will look after everything until morning.","And she drifts… down… into a deep and easy sleep."]}},
+    snow:{ name:"Snowy Cabin", dot:"#CFD8E4", sound:"Soft wind", activity:"snow", colorTitle:"Color the snowy cabin",
       palette:["#2B3147","#4A5675","#7E8DA8","#C9D3E0","#F2EEE6","#E0B57A","#8A6B57","#5F7A6E","#A06E6E"],
-      svg:'<rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/>'+
-        '<circle class="region" data-r="moon" cx="80" cy="58" r="22"/>'+
+      svg:'<rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/><circle class="region" data-r="moon" cx="80" cy="58" r="22"/>'+
         '<path class="region" data-r="mountains" d="M0 165 L70 98 L130 150 L200 82 L270 146 L330 102 L400 152 L400 300 L0 300Z"/>'+
-        '<path class="region" data-r="snowfield" d="M0 214 Q120 194 220 210 T400 204 L400 300 L0 300Z"/>'+
-        '<rect class="region" data-r="chimney" x="222" y="140" width="12" height="24"/>'+
-        '<rect class="region" data-r="cabin" x="150" y="170" width="90" height="50"/>'+
-        '<polygon class="region" data-r="roof" points="140,174 195,134 250,174"/>'+
-        '<rect class="region" data-r="window1" x="162" y="184" width="18" height="16"/>'+
-        '<rect class="region" data-r="window2" x="210" y="184" width="18" height="16"/>'+
-        '<rect class="region" data-r="door" x="186" y="192" width="18" height="28"/>'+
-        '<polygon class="region" data-r="pine1" points="46,222 68,150 90,222"/>'+
-        '<polygon class="region" data-r="pine2" points="298,214 318,158 338,214"/>'+
-        '<polygon class="region" data-r="pine3" points="340,220 355,176 370,220"/>'+
+        '<path class="region" data-r="snowfield" d="M0 214 Q120 194 220 210 T400 204 L400 300 L0 300Z"/><rect class="region" data-r="chimney" x="222" y="140" width="12" height="24"/>'+
+        '<rect class="region" data-r="cabin" x="150" y="170" width="90" height="50"/><polygon class="region" data-r="roof" points="140,174 195,134 250,174"/>'+
+        '<rect class="region" data-r="window1" x="162" y="184" width="18" height="16"/><rect class="region" data-r="window2" x="210" y="184" width="18" height="16"/>'+
+        '<rect class="region" data-r="door" x="186" y="192" width="18" height="28"/><polygon class="region" data-r="pine1" points="46,222 68,150 90,222"/>'+
+        '<polygon class="region" data-r="pine2" points="298,214 318,158 338,214"/><polygon class="region" data-r="pine3" points="340,220 355,176 370,220"/>'+
         '<path class="region" data-r="path" d="M188 220 Q180 260 150 300 L205 300 Q205 258 202 220Z"/>',
       imagery:["Picture a small cabin in the snow.","Outside, the air is crisp and cool.","Snow is falling slowly, with no sound at all.",
         "You open the window just a little. Cool air drifts in.","It brushes your face, your neck, your wrists.","Under a light blanket, you are perfectly comfortable.",
@@ -277,21 +450,24 @@ p{margin:0;max-width:30ch}
         "a woolen scarf","a fox's footprints","a silver bell","snow on rooftops","a cardinal on a branch","a frozen pond","a lantern on a porch",
         "a sleeping owl","boots by the door","icicles catching the light","a stack of firewood","a snowy forest path","a gingerbread house",
         "a white rabbit","a quilt at the foot of the bed","moonlight on snow","a distant church bell","a cup of peppermint tea","a sleigh in a barn",
-        "a snowflake on an eyelash","a candle in a window","a hush over the hills","a pine branch","a snow globe"]},
-    ocean:{ name:"Ocean Night", dot:"#93C2BE", sound:"Soft waves", activity:"sand", actName:"draw in the sand",
-      colorTitle:"Color the moonlit beach",
+        "a snowflake on an eyelash","a candle in a window","a hush over the hills","a pine branch","a snow globe"],
+      story:{ title:"The Cabin at First Snow", lines:[
+        "This is a story about the first snow of winter.","High in the mountains, there is a small wooden cabin.","Two windows glow warm and gold against the blue night.",
+        "Inside, everything is ready for sleep.","The bed is made with cool, crisp sheets and one soft quilt.","A window is open just a crack, and cool air drifts in.",
+        "Outside, the first snowflakes begin to fall.","They come slowly, one at a time, turning in the air.","They settle on the pine branches.","They settle on the fence posts, and on the woodpile.",
+        "There is no wind tonight. Only the quiet falling.","A fox crosses the meadow, leaving a line of small footprints.","Then the snow fills them in, softly, until they are gone.",
+        "The mountains disappear under a white blanket.","The whole valley grows still, and hushed.","Inside, a woman lies in bed, listening to the quiet.",
+        "The cool air touches her cheeks.","Her body feels heavy, and comfortable, and cool.","She thinks of nothing in particular.",
+        "Only the snow… falling… and falling…","Covering everything in white.","Every sound grows softer.","Every thought grows softer.",
+        "The snow will keep falling all night.","It doesn't need her to watch it.","And she sinks… gently… into a deep, white sleep."]}},
+    ocean:{ name:"Ocean Night", dot:"#93C2BE", sound:"Soft waves", activity:"sand", colorTitle:"Color the moonlit beach",
       palette:["#1F2D3D","#2F4A5E","#4F7486","#86A9B0","#D9C9A8","#B79B78","#EBDDC2","#E0B57A","#9A7F9E"],
-      svg:'<rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/>'+
-        '<circle class="region" data-r="moon" cx="110" cy="68" r="24"/>'+
-        '<rect class="region" data-r="sea" x="0" y="150" width="400" height="60"/>'+
-        '<ellipse class="region" data-r="reflection" cx="110" cy="172" rx="24" ry="4"/>'+
+      svg:'<rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/><circle class="region" data-r="moon" cx="110" cy="68" r="24"/>'+
+        '<rect class="region" data-r="sea" x="0" y="150" width="400" height="60"/><ellipse class="region" data-r="reflection" cx="110" cy="172" rx="24" ry="4"/>'+
         '<path class="region" data-r="wave" d="M0 200 Q50 190 100 200 T200 200 T300 200 T400 200 L400 226 L0 226Z"/>'+
-        '<path class="region" data-r="sand" d="M0 222 Q200 206 400 224 L400 300 L0 300Z"/>'+
-        '<path class="region" data-r="rocks" d="M296 214 Q324 186 356 212Z"/>'+
-        '<polygon class="region" data-r="tower" points="318,150 332,150 336,204 314,204"/>'+
-        '<rect class="region" data-r="lamp" x="316" y="136" width="18" height="14"/>'+
-        '<polygon class="region" data-r="cap" points="314,136 325,124 336,136"/>'+
-        '<ellipse class="region" data-r="shell" cx="80" cy="262" rx="14" ry="9"/>'+
+        '<path class="region" data-r="sand" d="M0 222 Q200 206 400 224 L400 300 L0 300Z"/><path class="region" data-r="rocks" d="M296 214 Q324 186 356 212Z"/>'+
+        '<polygon class="region" data-r="tower" points="318,150 332,150 336,204 314,204"/><rect class="region" data-r="lamp" x="316" y="136" width="18" height="14"/>'+
+        '<polygon class="region" data-r="cap" points="314,136 325,124 336,136"/><ellipse class="region" data-r="shell" cx="80" cy="262" rx="14" ry="9"/>'+
         '<path class="region" data-r="starfish" d="M200 250 L205 262 L218 262 L208 270 L212 283 L200 275 L188 283 L192 270 L182 262 L195 262Z"/>',
       imagery:["Picture a beach at night.","The sand is cool beneath you.","Waves come in… and slowly go out.","Breathe in as a wave arrives.",
         "Breathe out as it slides away.","A cool sea breeze moves over your skin.","Far away, a lighthouse turns its gentle light.",
@@ -300,22 +476,25 @@ p{margin:0;max-width:30ch}
         "a tide pool","a sleeping seal","a sandcastle","a starfish","a distant lighthouse","a pier at night","a sand dollar","a hammock by the sea",
         "a paper lantern","driftwood","moonlight on the waves","a pelican gliding","a folded beach umbrella","a slow wave","a shell necklace",
         "a beach cottage","a little crab","the far horizon","a bucket and spade","foam on the shore","a cool sea breeze","a rowboat on the sand",
-        "a sea turtle swimming","a lighthouse beam"]},
-    lavender:{ name:"Lavender Field", dot:"#C7AEE2", sound:"Evening breeze", activity:"fireflies", actName:"gather the fireflies",
-      colorTitle:"Color the lavender field",
+        "a sea turtle swimming","a lighthouse beam"],
+      story:{ title:"The Lighthouse at Low Tide", lines:[
+        "This is a story about a quiet beach at night.","The tide is going out, slowly, the way it always does.","The sand it leaves behind is smooth, and cool, and shining.",
+        "At the end of the beach stands an old white lighthouse.","Its light turns, slow and patient, across the dark water.","Around… and around… and around.",
+        "A woman walks barefoot at the edge of the sea.","The cool water slides over her feet, and slips away again.","She stops to pick up a shell, pale as the moon.",
+        "She holds it to her ear, and hears the ocean breathing.","In… and out.","A cool breeze lifts her hair from her neck.",
+        "Far out on the water, a small boat rests at anchor, rocking gently.","The waves come in, unhurried.","Each one says the same soft word.",
+        "Rest… rest… rest…","She lies down on a blanket on the cool sand.","Above her, the stars are scattered like sea glass.",
+        "The lighthouse beam passes over her, slow and kind.","She doesn't need to count the waves.","She doesn't need to count anything.",
+        "The ocean will keep its rhythm all night long.","And the tide will turn without her help.","Her breathing slows to match the sea.",
+        "In… and out…","And she drifts… out… on a long, calm tide of sleep."]}},
+    lavender:{ name:"Lavender Field", dot:"#C7AEE2", sound:"Evening breeze", activity:"fireflies", colorTitle:"Color the lavender field",
       palette:["#2E2A47","#5A4E7E","#8E7BB5","#B9A6D6","#D8A7B5","#7E9A6A","#A9B88A","#E0B57A","#EBDDC2"],
-      svg:'<rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/>'+
-        '<circle class="region" data-r="moon" cx="320" cy="60" r="22"/>'+
-        '<path class="region" data-r="hills" d="M0 150 Q100 118 200 144 T400 138 L400 300 L0 300Z"/>'+
-        '<rect class="region" data-r="trunk" x="70" y="140" width="7" height="34"/>'+
-        '<circle class="region" data-r="crown" cx="73" cy="132" r="20"/>'+
-        '<path class="region" data-r="field" d="M0 188 Q200 168 400 188 L400 300 L0 300Z"/>'+
-        '<path class="region" data-r="row1" d="M0 206 Q200 186 400 206 L400 218 Q200 198 0 218Z"/>'+
-        '<path class="region" data-r="row2" d="M0 234 Q200 212 400 234 L400 250 Q200 228 0 250Z"/>'+
-        '<path class="region" data-r="row3" d="M0 266 Q200 242 400 266 L400 286 Q200 262 0 286Z"/>'+
-        '<rect class="region" data-r="farmhouse" x="250" y="150" width="34" height="22"/>'+
-        '<polygon class="region" data-r="farmroof" points="245,152 267,136 289,152"/>'+
-        '<path class="region" data-r="lane" d="M188 300 Q198 240 204 188 L212 188 Q216 240 232 300Z"/>',
+      svg:'<rect class="region" data-r="sky" x="0" y="0" width="400" height="300"/><circle class="region" data-r="moon" cx="320" cy="60" r="22"/>'+
+        '<path class="region" data-r="hills" d="M0 150 Q100 118 200 144 T400 138 L400 300 L0 300Z"/><rect class="region" data-r="trunk" x="70" y="140" width="7" height="34"/>'+
+        '<circle class="region" data-r="crown" cx="73" cy="132" r="20"/><path class="region" data-r="field" d="M0 188 Q200 168 400 188 L400 300 L0 300Z"/>'+
+        '<path class="region" data-r="row1" d="M0 206 Q200 186 400 206 L400 218 Q200 198 0 218Z"/><path class="region" data-r="row2" d="M0 234 Q200 212 400 234 L400 250 Q200 228 0 250Z"/>'+
+        '<path class="region" data-r="row3" d="M0 266 Q200 242 400 266 L400 286 Q200 262 0 286Z"/><rect class="region" data-r="farmhouse" x="250" y="150" width="34" height="22"/>'+
+        '<polygon class="region" data-r="farmroof" points="245,152 267,136 289,152"/><path class="region" data-r="lane" d="M188 300 Q198 240 204 188 L212 188 Q216 240 232 300Z"/>',
       imagery:["Picture a lavender field at dusk.","The air is soft and cool after a warm day.","Rows of purple flowers sway gently.",
         "Breathe in their calm, sweet scent.","Fireflies rise slowly from the grass.","A cool breeze brushes your arms.",
         "The sky turns from rose to deep blue.","One by one, the stars appear.","Everything is unhurried here.","Let the evening settle over you like a light shawl."],
@@ -323,49 +502,129 @@ p{margin:0;max-width:30ch}
         "a stone farmhouse","a basket of herbs","a winding lane","a cup of chamomile","a blue shutter","an olive tree","a linen dress",
         "a chapel on a hill","a bicycle with a basket","a garden bench","a lavender sachet","a little bird","rows of purple",
         "a warm loaf of bread","a field mouse","a summer cloud","a lantern on a table","a lace curtain","a fountain in a square",
-        "a meadow path","fireflies at dusk","a pot of rosemary","a wicker chair","a sleepy village"]}
+        "a meadow path","fireflies at dusk","a pot of rosemary","a wicker chair","a sleepy village"],
+      story:{ title:"Evening in the Lavender Field", lines:[
+        "This is a story about a summer evening in the countryside.","The sun has gone down behind the hills.","The heat of the day is lifting, and the air is turning cool.",
+        "A narrow lane winds between long rows of lavender.","A woman walks along it slowly, with nowhere to be.","Her fingers brush the purple flowers as she passes.",
+        "Each touch releases a soft, sweet scent.","Bees are going home for the night, heavy and slow.","A cool breeze moves across the field, and every stem bends gently.",
+        "Then rises again.","At the end of the lane is an old stone farmhouse with blue shutters.","A lamp is lit in the kitchen window.",
+        "She sits on a wooden bench outside, still warm from the sun.","The sky fades from rose to lilac, then to deep blue.","The first firefly rises from the grass.",
+        "Then another.","Then dozens, blinking softly over the lavender, like slow, golden thoughts.","She doesn't try to follow them.","She just lets them drift.",
+        "Her shoulders loosen.","Her hands rest open in her lap.","The cool evening air settles over her like a light shawl.","The crickets begin their quiet song.",
+        "The field breathes… and she breathes with it.","Slower… and slower…","And she drifts… softly… into a deep, sweet sleep."]}}
   };
-  var STARS=[[50,200],[92,152],[140,118],[196,100],[252,106],[302,130],[340,170],[316,212],[270,228]];
-  var STAR_WORDS=["soft","still","warm","safe","slow","quiet","easy","gentle","rest"];
 
+  /* night programs: strings are spoken lines, {p:ms} is a pause, {shuffle:min} is the word game, {story:1} is tonight's story */
+  var PROGRAMS={
+    hot:{ title:"Cooling journey", items:[
+      "Let's cool down together.","First, if you can, push the covers away from your body.","Turn your pillow over, to the cool side.","Take a sip of cool water, if it's close by.",{p:5000},
+      "Now let your eyes close.","Breathe in slowly through your nose…","and let it out, long and slow.",{p:2500},
+      "Imagine you are standing at the edge of a mountain lake, early on a winter morning.","The air is clean, and cold, and still.",
+      "With every breath in, cool air fills your chest.","With every breath out, warmth leaves your body, like mist lifting off the water.",{p:3000},
+      "Notice your hands.","Imagine them resting in clear, cool water.","The coolness gathers in your fingertips…","into your palms…","your wrists…",
+      "Your arms feel lighter, and cooler.",{p:3000},
+      "Now a soft, cold breeze moves across your face.","Across your forehead…","your cheeks…","the back of your neck.",{p:3000},
+      "Snow begins to fall, slowly and silently.","Each flake lands on your skin and melts into a tiny drop of cool.","Your shoulders soften.",
+      "The coolness moves down your back, like a cool cloth.","Down your legs…","to your feet, resting in fresh snow.",{p:3000},
+      "Your whole body is cool, and calm, and heavy.","If warmth comes again, let it pass, like a wave across the lake.","It rises…","and it falls away.",
+      "You don't need to do anything with it.",{p:3000},"Just the cool air…","the still water…","the falling snow.","Each breath takes you a little deeper.",
+      "Cooler…","calmer…","deeper.",{p:4000},"There is nothing you need to do now.","Let sleep come when it's ready.",{p:3000},
+      "I'll stay here with some quiet words, for a little while.",{shuffle:8}]},
+    mind:{ title:"A word game for a busy mind", items:[
+      "This is a gentle game for a busy mind.","I'll say a word, every few seconds.","Picture it, any way you like.","Then let it go when the next one comes.",
+      "There's nothing to get right, and nothing to remember.","If a thought from the day comes back, that's alright. Just wait for the next word.","Let your eyes close.","Let's begin.",{p:3000},{shuffle:15}]},
+    awake:{ title:"Rest is enough", items:[
+      "Hello again.","You're awake, and that's alright.","Waking in the night is part of how sleep works.","Everyone surfaces between sleep cycles. Most people simply don't remember it.",
+      "You don't need to know what time it is.","And you don't need to try to sleep.","Trying makes the mind work harder.","Instead, let's simply rest.",{p:2500},
+      "Rest with your eyes closed still helps your body.","Let the bed hold all of your weight.","Let your hands open.","Let your face go soft.","Let your tongue rest at the bottom of your mouth.",
+      "You can stay awake if you like. Just be comfortable.",{p:3000},"Now, let me tell you a quiet story.",{p:2000},{story:1},{p:3000},{shuffle:8}]},
+    bath:{ title:"Settle back down", items:[
+      "Welcome back.","Keep the lights low, and your eyes soft.","Settle into your favorite position.","Pull the blanket just where you like it.",{p:3000},
+      "Breathe in…","and let a long breath out.",{p:2500},"Your body knows the way back.","Let your arms grow heavy.","Let your legs grow heavy.",
+      "Let your breathing slow down on its own.","Back down…","and down…",{p:3000},"Here are some quiet words to rest on.",{shuffle:6}]},
+    chair:{ title:"Sit with me for a while", items:[
+      "If you've been awake a long while and feel restless, it's alright to get up for a little bit.","This isn't giving up on sleep.",
+      "It helps your mind remember that bed is a place for sleeping.","Wrap yourself in something soft.","Find a chair or a sofa, with a dim lamp, or no light at all.",
+      "Keep this screen dimmed.","When you're settled, I'll tell you a story.",{p:12000},"Are you comfortable? Good.",{p:2000},{story:1}], end:"chairEnd"},
+    story:{ title:"Another story", items:[{story:1}], end:"chairEnd"},
+    settle:{ title:"Back in bed", items:[
+      "Welcome back to bed.","Let the pillow take your head.","Let the mattress hold you.","Let your breathing be slow and easy.",{p:2500},"Here are some quiet words to drift on.",{shuffle:8}]}
+  };
+
+  var RESET=[
+    {w:"Anchor your mornings", d:[
+      ["One steady wake-up time","Your body clock sets itself by when you get up, more than by when you go to bed. A steady wake-up time is the anchor for everything else.","Choose a wake-up time you can keep every day, weekends too."],
+      ["Morning light","Daylight soon after waking tells your brain the day has begun, which helps sleepiness arrive on time in the evening.","Spend about 10 minutes outside, or by a bright window, within an hour of waking."],
+      ["Up when you wake","Lingering in bed in the morning blurs the line between sleep and wake.","When your alarm goes, sit up, feet on the floor, and open the curtains."],
+      ["Even after a rough night","After a short night it's tempting to sleep in. Keeping your wake-up time builds healthy sleepiness for the next night.","Keep your wake-up time today, whatever kind of night you had."],
+      ["Move in the daylight","Daytime movement supports deeper sleep. It doesn't need to be hard exercise.","Take a 15 to 20 minute walk, ideally in the morning or early afternoon."],
+      ["Meals as signals","Regular meal times are another cue for your body clock.","Have breakfast at about the same time each day this week."],
+      ["A gentle look back","You've started building your anchor. Some mornings will be easier than others, and that's normal.","Keep your wake-up time. That's the only goal right now."]]},
+    {w:"Bed is for sleep", d:[
+      ["A new meaning for your bed","After many restless nights, the brain can start linking bed with being awake. We can gently teach it again that bed means sleep.","Keep your bed for sleep and intimacy only this week."],
+      ["Screens elsewhere","Scrolling, emails and TV in bed keep the mind switched on.","Move screens out of bed. Softly to Sleep is the one exception, with the screen dimmed."],
+      ["The 20-minute idea","If you've been lying awake for what feels like a long while and feel restless, getting up for a bit helps your bed stop feeling like a place of frustration.","Choose a cozy chair for night-time, with a soft blanket nearby. Use \"Been awake a long while?\" in Night mode when you need it."],
+      ["Let the clock rest","Checking the time at night starts mental arithmetic and worry, which makes drifting back off harder.","Turn your clock to face the wall tonight."],
+      ["A wind-down hour","Your brain needs a runway to land on. An hour of slower, softer things before bed helps.","Pick a time to start winding down each evening, and dim the lights then."],
+      ["Low light in the evening","Bright overhead lights late in the evening can push your body clock later.","Use lamps instead of ceiling lights after dinner."],
+      ["A gentle look back","Bed is slowly becoming a calmer place. This takes time, and every night counts.","Keep your wake-up time and your screen-free bed."]]},
+    {w:"Follow your sleepiness", d:[
+      ["Sleepy, not just tired","Tired is a drained body. Sleepy is heavy eyelids and nodding off. Sleep comes most easily when you go to bed sleepy.","Tonight, notice the moment your eyelids start to feel heavy."],
+      ["Bed when sleepy","Going to bed early to catch up often means more time lying awake.","Wait until you feel sleepy before going to bed, even if it's later than usual."],
+      ["Not too long in bed","Spending a lot more time in bed than you actually sleep tends to make sleep lighter and more broken. A slightly shorter, steady night is often deeper.","Keep your wake-up time fixed, and let your bedtime follow your sleepiness."],
+      ["About naps","Long or late naps use up the sleep pressure you need at night.","If you nap, keep it under 30 minutes and before 3 PM."],
+      ["Evening dozing","Nodding off on the sofa can leave you wide awake at bedtime.","If you feel yourself dozing in the evening, stand up, stretch or do something light."],
+      ["Rest without effort","Sleep can't be forced. The harder we try, the more alert we become. Resting without trying often lets sleep arrive on its own.","Tonight, tell yourself: I'm just resting."],
+      ["A gentle look back","You're learning to work with your body instead of against it.","Keep following your sleepiness."]]},
+    {w:"Quiet the busy mind", d:[
+      ["Thinking time in daylight","Many women find the mind gets busiest at night. Giving worries their own time during the day can make the night quieter.","Set aside 15 minutes in the late afternoon to think things through, on a walk or with a cup of tea."],
+      ["Not now, in the morning","When a thought appears at night, you don't need to solve it.","If a worry comes tonight, tell it kindly: not now, in the morning."],
+      ["Caffeine's long tail","Caffeine can stay in the body for many hours, and sensitivity often increases with age.","Have your last coffee or black tea before noon this week."],
+      ["Alcohol and the second half of the night","A glass of wine can help you fall asleep, but it tends to make sleep lighter and more broken later in the night, and can trigger hot flashes for some women.","Try a few alcohol-free evenings this week and see how your nights feel."],
+      ["The word game","Picturing random, peaceful things is close to what the mind does naturally as it falls asleep.","Tonight, try \"My mind won't quiet\" in Night mode."],
+      ["Kindness at night","Being hard on ourselves at night wakes the mind up. A kind voice calms it.","If you wake tonight, say to yourself: this is normal, I'm safe, I can rest."],
+      ["A gentle look back","Your nights are becoming a little less busy, even if not every night.","Keep your daytime thinking time."]]},
+    {w:"Keep cool", d:[
+      ["A cool bedroom","The body cools slightly to fall and stay asleep, and many women in menopause sleep hot. A bedroom around 60 to 67°F (15 to 19°C) is often suggested.","Lower the thermostat or open a window a little tonight."],
+      ["Layers you can shed","One heavy duvet is hard to adjust in the night.","Use two lighter layers, so you can push one away without fully waking."],
+      ["Breathable fabrics","Cotton, linen and moisture-wicking fabrics let heat escape.","Choose light, breathable nightwear and sheets."],
+      ["A cool-down corner","Having everything within reach means you can cool down without getting up.","Put a glass of cold water, and a small fan if you have one, by the bed."],
+      ["Your evening shower","A warm, not hot, shower or bath an hour or two before bed helps your body cool down afterwards, which can make sleep come more easily.","Try a lukewarm shower about 90 minutes before bed."],
+      ["Cooling imagery","In research, guided imagery of coolness, as part of clinical hypnosis, helped reduce hot flashes for many women.","Next time you wake hot, try \"I woke up hot\" in Night mode."],
+      ["A gentle look back","You've made your nights a little cooler, inside and out.","Keep your cool-down corner ready."]]},
+    {w:"Keep what works", d:[
+      ["Notice what's helping","By now some ideas feel natural and others don't. That's how it should be.","Think of the one change that has helped you most."],
+      ["Make it yours","The best sleep routine is one you can keep.","Choose two or three habits to keep for good."],
+      ["Rough nights still happen","Even good sleepers have bad nights. One rough night doesn't undo your progress.","After a hard night, keep your wake-up time and be gentle with yourself."],
+      ["Talk with your doctor","Hormone therapy and non-hormonal medicines can help with hot flashes and sleep. Your doctor can help you weigh them.","Read \"Talk with your doctor\" before your next appointment."],
+      ["When to look deeper","Loud snoring, gasping, or feeling very sleepy in the day can be signs of sleep apnea, which becomes more common after menopause.","If any of these sound familiar, ask your doctor about a sleep evaluation."],
+      ["Your night toolkit","You now have something for every kind of night: hot, busy-minded, wide awake, or back from the bathroom.","Add Softly to Sleep to your phone's home screen so it's there in the dark."],
+      ["You did this","Six weeks of small, kind steps. Your body has been learning, even on the nights it didn't feel like it.","Keep your anchor: a steady wake-up time, morning light, and a bed for sleep."]]}
+  ];
+
+  /* ===================== CORE ===================== */
   var world = WORLDS[store.world] ? store.world : "valley";
-  var path=null, idx=0, timers=[];
+  var flow=null, idx=0, timers=[], current="";
   function later(fn,ms){ var t=setTimeout(fn,ms); timers.push(t); return t; }
   function clearTimers(){ timers.forEach(clearTimeout); timers=[]; }
   function $(s,r){ return (r||document).querySelector(s); }
   function scene(name){ return $('.scene[data-scene="'+name+'"]'); }
   function W(){ return WORLDS[world]; }
-  function pathFor(p){ return p==="bed" ? ["arrive","breathe","color",W().activity,"imagery","drift","night"] : ["arrive3","breathe","drift","night"]; }
+  var WIND=function(){ return ["arrive","breathe","color",W().activity,"imagery","drift","night"]; };
+  function isNight(){ var h=new Date().getHours(); return h>=19 || h<6; }
 
   (function(){ var r=$("#roomStars"); for(var i=0;i<28;i++){ var b=document.createElement("b");
     b.style.left=(Math.random()*100)+"%"; b.style.top=(Math.random()*55)+"%"; b.style.opacity=(.08+Math.random()*.25).toFixed(2); r.appendChild(b);} })();
 
-  /* places */
-  function renderPlaces(){
-    var row=$("#placeRow"); row.innerHTML="";
-    Object.keys(WORLDS).forEach(function(k){
-      var b=document.createElement("button"); b.type="button"; b.className="place";
-      b.setAttribute("aria-pressed", k===world?"true":"false");
-      b.innerHTML='<i style="background:'+WORLDS[k].dot+'"></i>'+WORLDS[k].name;
-      b.addEventListener("click",function(){ setWorld(k); });
-      row.appendChild(b);
-    });
-    $("#bedDesc").textContent="About 15 minutes · breathe, color, "+W().actName+", drift";
-  }
-  function setWorld(k){
-    world=k; store.world=k; save();
-    $("#app").dataset.world=k; $("#soundBtn").textContent=W().sound; tuneSound();
-    renderPlaces();
-  }
-
   function show(name){
-    clearTimers(); stopBreath(); stopAnim();
+    clearTimers(); stopBreath(); stopAnim(); hush();
+    current=name;
     document.querySelectorAll(".scene").forEach(function(s){ s.classList.toggle("on", s.dataset.scene===name); });
-    $("#homeBtn").hidden = name==="start";
+    $("#homeBtn").hidden = /^(ob\d|nightHome|dayHome)$/.test(name);
+    if(!/^(night|player|drift)$/.test(name)) setDim(dim, true);
     renderSteps();
-    var s=scene(name), nb=$(".next",s); if(nb) nb.classList.remove("ready");
+    var s=scene(name), nb=$(".next",s); if(nb && !nb.classList.contains("keep")) { if(flow) nb.classList.remove("ready"); }
     if(name==="arrive") playLines(s, ARRIVE);
-    if(name==="arrive3") playLines(s, ARRIVE3);
     if(name==="imagery") playLines(s, W().imagery);
     if(name==="breathe") startBreath();
     if(name==="color") buildColoring();
@@ -375,106 +634,191 @@ p{margin:0;max-width:30ch}
     if(name==="fireflies") startAnim(flyAct);
     if(name==="drift") startDrift();
     if(name==="night") goodnight();
+    if(name==="dayHome") renderDay();
+    if(name==="place") renderPlaces();
   }
+  function home(){ flow=null; show(isNight() ? "nightHome" : "dayHome"); }
   function renderSteps(){
-    var el=$("#steps"); el.innerHTML=""; if(!path) return;
-    pathFor(path).forEach(function(_,i){ var d=document.createElement("i"); if(i<=idx) d.className="on"; el.appendChild(d); });
+    var el=$("#steps"); el.innerHTML=""; if(!flow) return;
+    WIND().forEach(function(_,i){ var d=document.createElement("i"); if(i<=idx) d.className="on"; el.appendChild(d); });
   }
-  function go(p){ path=p; idx=0; show(pathFor(p)[0]); }
-  function next(){ if(!path) return; var list=pathFor(path); if(idx<list.length-1){ idx++; show(list[idx]); } }
-  document.querySelectorAll(".path").forEach(function(b){ b.addEventListener("click",function(){ resumeSound(); go(b.dataset.path); }); });
-  document.querySelectorAll(".next").forEach(function(b){ b.addEventListener("click",next); });
-  $("#homeBtn").addEventListener("click",function(){ path=null; show("start"); });
-  $("#againBtn").addEventListener("click",function(){ path=null; show("start"); });
+  function next(){ if(!flow) return; var list=WIND(); if(idx<list.length-1){ idx++; show(list[idx]); } }
+  document.querySelectorAll(".scene .next:not([id]):not([data-go])").forEach(function(b){ b.addEventListener("click",next); });
+  document.querySelectorAll("[data-go]").forEach(function(b){ b.addEventListener("click",function(){ flow=null; show(b.dataset.go); }); });
+  $("#homeBtn").addEventListener("click",home);
+  $("#againBtn").addEventListener("click",home);
 
+  /* night menu */
+  document.querySelectorAll("[data-night]").forEach(function(b){ b.addEventListener("click",function(){
+    resumeSound(); var k=b.dataset.night;
+    if(k==="bed"){ show("place"); return; }
+    runProgram(k);
+  }); });
+  $("#placeGo").addEventListener("click",function(){ resumeSound(); flow="bed"; idx=0; show(WIND()[0]); });
+  $("#chairBack").addEventListener("click",function(){ runProgram("settle"); });
+  $("#chairStory").addEventListener("click",function(){ runProgram("story"); });
+
+  /* places */
+  function renderPlaces(){
+    var row=$("#placeRow"); row.innerHTML="";
+    Object.keys(WORLDS).forEach(function(k){
+      var b=document.createElement("button"); b.type="button"; b.className="place"; b.setAttribute("aria-pressed", k===world?"true":"false");
+      b.innerHTML='<i style="background:'+WORLDS[k].dot+'"></i><b>'+WORLDS[k].name+'</b>';
+      b.addEventListener("click",function(){ setWorld(k); renderPlaces(); });
+      row.appendChild(b);
+    });
+  }
+  function setWorld(k){ world=k; store.world=k; save(); $("#app").dataset.world=k; $("#soundBtn").textContent=W().sound; tuneSound(); }
+
+  /* ===================== VOICE ===================== */
+  var synth = window.speechSynthesis || null, voices=[], voice=null, speakToken=0;
+  var PREFER=["Samantha","Ava","Allison","Susan","Zoe","Karen","Moira","Serena","Tessa","Fiona","Aria","Jenny","Libby","Sonia","Google UK English Female","Google US English"];
+  function loadVoices(){
+    if(!synth) return;
+    voices=synth.getVoices().filter(function(v){ return /^en/i.test(v.lang); });
+    function score(v){ var s=0, n=v.name; PREFER.forEach(function(p,i){ if(n.indexOf(p)>=0) s=Math.max(s,100-i); });
+      if(/enhanced|premium|natural|neural/i.test(n)) s+=60; if(/female|woman/i.test(n)) s+=10; if(/en-US|en-GB/i.test(v.lang)) s+=5; return s; }
+    voices.sort(function(a,b){ return score(b)-score(a); });
+    voice = voices.filter(function(v){ return v.name===store.voice; })[0] || voices[0] || null;
+    ["#voiceSel","#obVoice"].forEach(function(id){ var sel=$(id); sel.innerHTML="";
+      if(!voices.length){ var o=document.createElement("option"); o.textContent="No voices found on this device"; sel.appendChild(o); sel.disabled=true; return; }
+      voices.forEach(function(v){ var o=document.createElement("option"); o.value=v.name; o.textContent=v.name.replace(/\s*\(.*\)\s*/,"")+" · "+v.lang; if(voice&&v.name===voice.name) o.selected=true; sel.appendChild(o); });
+    });
+  }
+  if(synth){ loadVoices(); if("onvoiceschanged" in synth) synth.onvoiceschanged=loadVoices; }
+  function pickVoice(name){ voice=voices.filter(function(v){return v.name===name;})[0]||voice; store.voice=voice?voice.name:""; save(); loadVoices(); }
+  $("#voiceSel").addEventListener("change",function(e){ pickVoice(e.target.value); });
+  $("#obVoice").addEventListener("change",function(e){ pickVoice(e.target.value); });
+  function voiceReady(){ return store.voiceOn && synth && voices.length; }
+  function readMs(t){ return Math.max(3200, t.split(/\s+/).length*520); }
+  function speak(text, cb, vol){
+    var token=++speakToken, done=false;
+    function fin(){ if(done || token!==speakToken) return; done=true; cb && cb(); }
+    if(!voiceReady()){ later(fin, readMs(text)); return; }
+    var u=new SpeechSynthesisUtterance(text.replace(/…/g,"..."));
+    if(voice) u.voice=voice; u.lang=voice?voice.lang:"en-US"; u.rate=parseFloat(store.rate); u.pitch=.95; u.volume=vol==null?1:vol;
+    u.onend=fin; u.onerror=fin;
+    synth.speak(u);
+    later(fin, readMs(text)*2.6+4000); /* safety net if the browser forgets to fire onend */
+  }
+  function hush(){ speakToken++; if(synth){ try{ synth.cancel(); }catch(e){} } }
+  function testVoice(){ hush(); var on=store.voiceOn; store.voiceOn=true; speak("Hello. I'll be here with you on the nights you need me. Let's rest together.", null); store.voiceOn=on; }
+  $("#obTest").addEventListener("click",testVoice);
+  $("#testVoice").addEventListener("click",testVoice);
+
+  /* ===================== PLAYER ===================== */
+  var prog=null, pi=0, paused=false, shuffleEnd=0, shuffleList=null, inShuffle=false, inStory=null, si=0;
+  function runProgram(key){
+    var P=PROGRAMS[key]; flow=null;
+    show("player");
+    prog={key:key, items:P.items, end:P.end||"night"}; pi=0; paused=false; inShuffle=false; inStory=null;
+    $("#pTitle").textContent=P.title; $("#pLine").textContent=""; $("#pPause").textContent="Pause";
+    $("#pLine").classList.toggle("hidden", !store.words);
+    $("#pHint").textContent = voiceReady() ? "Eyes closed is fine. Just listen." : "Read slowly. Let each line settle before the next.";
+    later(function(){ setDim(2,true); }, 45000);
+    stepP();
+  }
+  function showLine(t){ var el=$("#pLine"); el.style.opacity=0; setTimeout(function(){ el.textContent=t; el.style.opacity=1; },400); }
+  function gapAfter(t){ return /…$|\.\.\.$/.test(t) ? 3600 : 1900; }
+  function stepP(){
+    if(paused || current!=="player") return;
+    if(inStory){ if(si<inStory.length){ var line=inStory[si++]; showLine(line); speak(line,function(){ later(stepP, gapAfter(line)+600); }); return; } inStory=null; }
+    if(inShuffle){ if(Date.now()<shuffleEnd){ var left=(shuffleEnd-Date.now())/60000, w=shuffleList[Math.floor(Math.random()*shuffleList.length)];
+        showLine(w); speak(w,function(){ later(stepP, 7500); }, left<2 ? .55 : .85); return; } inShuffle=false; }
+    if(pi>=prog.items.length){ show(prog.end); return; }
+    var it=prog.items[pi++];
+    if(typeof it==="string"){ showLine(it); speak(it,function(){ later(stepP, gapAfter(it)); }); }
+    else if(it.p){ later(stepP, it.p); }
+    else if(it.story){ var st=W().story; $("#pTitle").textContent=st.title; inStory=st.lines; si=0; stepP(); }
+    else if(it.shuffle){ var all=[]; Object.keys(WORLDS).forEach(function(k){ all=all.concat(WORLDS[k].drift); });
+      shuffleList = prog.key==="mind" ? all : W().drift; shuffleEnd=Date.now()+it.shuffle*60000; inShuffle=true; stepP(); }
+  }
+  $("#pPause").addEventListener("click",function(){
+    if(!paused){ paused=true; hush(); clearTimers(); this.textContent="Continue"; setDim(dim,true); }
+    else { paused=false; this.textContent="Pause"; if(inShuffle) shuffleEnd+=0; else if(inStory) si=Math.max(0,si-1); else pi=Math.max(0,pi-1); stepP(); }
+  });
+  $("#pEnd").addEventListener("click",function(){ show("night"); });
+  scene("player").addEventListener("pointerdown",function(e){ if(e.target.closest("button")) return; setDim(dim,true); later(function(){ if(current==="player"&&!paused) setDim(2,true); }, 8000); });
+
+  /* ===================== WIND-DOWN ===================== */
   function playLines(s, lines){
     var box=$(".lines",s); box.innerHTML="";
     lines.forEach(function(t,i){
       later(function(){
         var p=document.createElement("p"); p.textContent=t; box.appendChild(p); void p.offsetWidth; p.classList.add("show");
+        if(voiceReady()) speak(t,null,.9);
         var kids=box.children; if(kids.length>3) box.removeChild(kids[0]);
         for(var k=0;k<kids.length-1;k++) kids[k].classList.add("fade");
         if(i===lines.length-1){ var nb=$(".next",s); if(nb) nb.classList.add("ready"); }
       }, 600 + i*6500);
     });
   }
-
-  /* breathing: 4 seconds in, 6 seconds out */
   var breathTimer=null, breathing=false;
   function startBreath(){
     var b=$("#breath"), cue=$("#cue"), n=0; breathing=true;
-    function inhale(){ if(!breathing) return; b.classList.remove("out"); b.classList.add("in"); cue.textContent="Breathe in, slowly…"; breathTimer=setTimeout(exhale,4000); }
-    function exhale(){ if(!breathing) return; b.classList.remove("in"); b.classList.add("out"); cue.textContent="And out, longer and softer…";
+    function inhale(){ if(!breathing) return; b.classList.remove("out"); b.classList.add("in"); cue.textContent="Breathe in, slowly…"; if(n<2&&voiceReady()) speak("Breathe in, slowly.",null,.8); breathTimer=setTimeout(exhale,4000); }
+    function exhale(){ if(!breathing) return; b.classList.remove("in"); b.classList.add("out"); cue.textContent="And out, longer and softer…"; if(n<2&&voiceReady()) speak("And out. Longer, and softer.",null,.8);
       n++; if(n===6) $(".next",scene("breathe")).classList.add("ready"); breathTimer=setTimeout(inhale,6000); }
     breathTimer=setTimeout(inhale,1200);
   }
   function stopBreath(){ breathing=false; clearTimeout(breathTimer); var b=$("#breath"); b.classList.remove("in","out"); $("#cue").innerHTML="&nbsp;"; }
 
-  /* coloring, one picture per place */
-  var current=null;
+  var curColor=null;
   function buildColoring(){
     var w=W(), svg=$("#valley"), pal=$("#palette");
-    $("#colorTitle").textContent=w.colorTitle;
-    svg.setAttribute("aria-label", w.colorTitle);
+    $("#colorTitle").textContent=w.colorTitle; svg.setAttribute("aria-label", w.colorTitle);
     svg.innerHTML=w.svg+'<g fill="#EBDDC2" opacity=".5" pointer-events="none"><circle cx="40" cy="40" r="1.4"/><circle cx="160" cy="30" r="1.2"/><circle cx="210" cy="60" r="1"/><circle cx="250" cy="24" r="1.2"/><circle cx="370" cy="36" r="1"/><circle cx="372" cy="108" r="1.2"/></g>';
-    if(w.palette.indexOf(current)<0) current=w.palette[2];
+    if(w.palette.indexOf(curColor)<0) curColor=w.palette[2];
     pal.innerHTML="";
     w.palette.forEach(function(c){ var b=document.createElement("button"); b.type="button"; b.className="chip"; b.style.background=c;
-      b.setAttribute("aria-label","Color "+c); b.setAttribute("aria-pressed", c===current?"true":"false");
-      b.addEventListener("click",function(){ current=c; pal.querySelectorAll(".chip").forEach(function(x){ x.setAttribute("aria-pressed", x===b?"true":"false"); }); });
+      b.setAttribute("aria-label","Color "+c); b.setAttribute("aria-pressed", c===curColor?"true":"false");
+      b.addEventListener("click",function(){ curColor=c; pal.querySelectorAll(".chip").forEach(function(x){ x.setAttribute("aria-pressed", x===b?"true":"false"); }); });
       pal.appendChild(b); });
     store.fills=store.fills||{}; var fills=store.fills[world]=store.fills[world]||{};
     svg.querySelectorAll(".region").forEach(function(r){
       if(fills[r.dataset.r]) r.style.fill=fills[r.dataset.r];
-      r.addEventListener("click",function(){ r.style.fill=current; fills[r.dataset.r]=current; save(); });
+      r.addEventListener("click",function(){ r.style.fill=curColor; fills[r.dataset.r]=curColor; save(); });
     });
   }
 
-  /* stars (valley) */
+  var STARS=[[50,200],[92,152],[140,118],[196,100],[252,106],[302,130],[340,170],[316,212],[270,228]];
+  var STAR_WORDS=["soft","still","warm","safe","slow","quiet","easy","gentle","rest"];
   var litOrder=[];
   (function(){
     var svg=$("#skySvg"), NS="http://www.w3.org/2000/svg", links=document.createElementNS(NS,"g"); svg.appendChild(links);
     function c(tag,attrs){ var e=document.createElementNS(NS,tag); for(var k in attrs) e.setAttribute(k,attrs[k]); return e; }
     STARS.forEach(function(p,i){
       var g=c("g",{"class":"star",tabindex:"0",role:"button","aria-label":"Light star "+(i+1)});
-      g.appendChild(c("circle",{cx:p[0],cy:p[1],r:22,fill:"transparent"}));
-      g.appendChild(c("circle",{"class":"halo",cx:p[0],cy:p[1],r:16}));
-      g.appendChild(c("circle",{"class":"dot",cx:p[0],cy:p[1],r:5}));
+      g.appendChild(c("circle",{cx:p[0],cy:p[1],r:22,fill:"transparent"})); g.appendChild(c("circle",{"class":"halo",cx:p[0],cy:p[1],r:16})); g.appendChild(c("circle",{"class":"dot",cx:p[0],cy:p[1],r:5}));
       svg.appendChild(g);
       function light(){
-        if(g.classList.contains("lit")) return;
-        g.classList.add("lit");
+        if(g.classList.contains("lit")) return; g.classList.add("lit");
         if(litOrder.length){ var a=STARS[litOrder[litOrder.length-1]], l=c("line",{x1:a[0],y1:a[1],x2:p[0],y2:p[1],"class":"link"});
           links.appendChild(l); requestAnimationFrame(function(){ requestAnimationFrame(function(){ l.classList.add("on"); }); }); }
         litOrder.push(i);
-        var w=$("#starWord"); w.style.opacity=0;
-        setTimeout(function(){ w.textContent = litOrder.length===STARS.length ? "Your sky is full. Rest here a moment." : STAR_WORDS[litOrder.length-1]; w.style.opacity=1; }, 500);
+        var txt = litOrder.length===STARS.length ? "Your sky is full. Rest here a moment." : STAR_WORDS[litOrder.length-1];
+        var w=$("#starWord"); w.style.opacity=0; setTimeout(function(){ w.textContent=txt; w.style.opacity=1; }, 500);
+        if(voiceReady()) speak(txt,null,.8);
         hintNext(); if(litOrder.length===STARS.length) $(".next",scene("stars")).classList.add("ready");
       }
-      g.addEventListener("click",light);
-      g.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); light(); } });
+      g.addEventListener("click",light); g.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); light(); } });
     });
     function hintNext(){ var all=svg.querySelectorAll(".star"), done=false; all.forEach(function(s){ s.classList.remove("hint"); if(!done && !s.classList.contains("lit")){ s.classList.add("hint"); done=true; } }); }
     hintNext();
   })();
   function resetStarWord(){ if(!litOrder.length){ var w=$("#starWord"); w.textContent="Tap the softly glowing star"; w.style.opacity=.6; } }
 
-  /* ---------- canvas activities ---------- */
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var SPEED = reduce ? .5 : 1;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches, SPEED = reduce ? .5 : 1;
   var anim=null, raf=0, lastT=0;
   function startAnim(act){ anim=act; act.start(); lastT=performance.now(); raf=requestAnimationFrame(loop); }
-  function stopAnim(){ if(anim && anim.stop) anim.stop(); anim=null; cancelAnimationFrame(raf); }
+  function stopAnim(){ anim=null; cancelAnimationFrame(raf); }
   function loop(t){ if(!anim) return; var dt=Math.min(50,t-lastT)*SPEED; lastT=t; anim.frame(dt,t); raf=requestAnimationFrame(loop); }
-  function prep(canvas){
-    var r=canvas.getBoundingClientRect(), dpr=Math.min(2, window.devicePixelRatio||1);
+  function prep(canvas){ var r=canvas.getBoundingClientRect(), dpr=Math.min(2, window.devicePixelRatio||1);
     var w=Math.max(200, Math.round(r.width*dpr)); canvas.width=w; canvas.height=Math.round(w*.75);
-    var ctx=canvas.getContext("2d"); var s=canvas.width/400; ctx.setTransform(s,0,0,s,0,0); return ctx;
-  }
+    var ctx=canvas.getContext("2d"), s=canvas.width/400; ctx.setTransform(s,0,0,s,0,0); return ctx; }
   function pt(canvas,e){ var r=canvas.getBoundingClientRect(); return {x:(e.clientX-r.left)/r.width*400, y:(e.clientY-r.top)/r.height*300}; }
-  function setWord(id,text){ var w=$(id); w.style.opacity=0; setTimeout(function(){ w.textContent=text; w.style.opacity=1; },600); }
+  function setWord(id,text){ var w=$(id); w.style.opacity=0; setTimeout(function(){ w.textContent=text; w.style.opacity=1; },600); if(voiceReady()) speak(text,null,.8); }
 
-  /* snow: tap to let it fall; it gathers softly on the ground */
   var snowAct=(function(){
     var cv=$("#snowCanvas"), ctx, flakes=[], ground=[], acc=0, taps=0, COLS=80;
     function add(x,y){ flakes.push({x:x,y:y,r:1.2+Math.random()*2.4,vy:.012+Math.random()*.018,ph:Math.random()*6.28}); }
@@ -488,17 +832,13 @@ p{margin:0;max-width:30ch}
         ctx.fillStyle="#2E3448"; ctx.beginPath(); ctx.moveTo(0,190); ctx.lineTo(80,120); ctx.lineTo(150,175); ctx.lineTo(230,105); ctx.lineTo(310,170); ctx.lineTo(400,125); ctx.lineTo(400,300); ctx.lineTo(0,300); ctx.fill();
         ctx.fillStyle="#3A3248"; ctx.fillRect(250,212,46,30); ctx.beginPath(); ctx.moveTo(244,214); ctx.lineTo(273,192); ctx.lineTo(302,214); ctx.fill();
         ctx.fillStyle="rgba(224,181,122,.75)"; ctx.fillRect(262,222,10,9);
-        for(var i=flakes.length-1;i>=0;i--){ var f=flakes[i];
-          f.y+=f.vy*dt; f.x+=Math.sin(f.ph+t/1400)*.012*dt;
+        for(var i=flakes.length-1;i>=0;i--){ var f=flakes[i]; f.y+=f.vy*dt; f.x+=Math.sin(f.ph+t/1400)*.012*dt;
           var col=Math.max(0,Math.min(COLS-1,Math.floor(f.x/400*COLS)));
           if(f.y>=300-ground[col]){ for(var k=-2;k<=2;k++){ var c=col+k; if(c>=0&&c<COLS&&ground[c]<70) ground[c]+=f.r*(k===0?.5:.22); } flakes.splice(i,1); continue; }
           ctx.fillStyle="rgba(245,244,250,.9)"; ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,6.28); ctx.fill(); }
-        ctx.fillStyle="rgba(236,238,246,.92)"; ctx.beginPath(); ctx.moveTo(0,300);
-        for(var j=0;j<COLS;j++) ctx.lineTo(j/(COLS-1)*400, 300-ground[j]); ctx.lineTo(400,300); ctx.fill();
+        ctx.fillStyle="rgba(236,238,246,.92)"; ctx.beginPath(); ctx.moveTo(0,300); for(var j=0;j<COLS;j++) ctx.lineTo(j/(COLS-1)*400, 300-ground[j]); ctx.lineTo(400,300); ctx.fill();
       } };
   })();
-
-  /* sand: draw with a finger; each line slowly washes away */
   var sandAct=(function(){
     var cv=$("#sandCanvas"), ctx, strokes=[], cur=null, drawn=0, LIFE=7000;
     cv.addEventListener("pointerdown",function(e){ cv.setPointerCapture(e.pointerId); cur={pts:[pt(cv,e)],born:performance.now()}; strokes.push(cur); });
@@ -509,22 +849,17 @@ p{margin:0;max-width:30ch}
       frame:function(dt,t){
         var g=ctx.createLinearGradient(0,0,0,300); g.addColorStop(0,"#16222B"); g.addColorStop(.32,"#223845"); g.addColorStop(.36,"#3B3442"); g.addColorStop(1,"#2B2633"); ctx.fillStyle=g; ctx.fillRect(0,0,400,300);
         ctx.fillStyle="rgba(235,226,205,.85)"; ctx.beginPath(); ctx.arc(320,40,14,0,6.28); ctx.fill();
-        ctx.fillStyle="rgba(235,226,205,.12)"; ctx.fillRect(300,70,40,2); ctx.fillRect(306,80,28,2);
         var edge=104+Math.sin(t/2600)*8;
-        ctx.fillStyle="rgba(147,194,190,.22)"; ctx.beginPath(); ctx.moveTo(0,0);
-        for(var x=0;x<=400;x+=10) ctx.lineTo(x, edge+Math.sin(x/38+t/1700)*4); ctx.lineTo(400,0); ctx.fill();
+        ctx.fillStyle="rgba(147,194,190,.22)"; ctx.beginPath(); ctx.moveTo(0,0); for(var x=0;x<=400;x+=10) ctx.lineTo(x, edge+Math.sin(x/38+t/1700)*4); ctx.lineTo(400,0); ctx.fill();
         ctx.strokeStyle="rgba(235,235,235,.35)"; ctx.lineWidth=1.2; ctx.beginPath();
         for(var x2=0;x2<=400;x2+=10){ var y=edge+Math.sin(x2/38+t/1700)*4; if(x2) ctx.lineTo(x2,y); else ctx.moveTo(x2,y); } ctx.stroke();
         var now=performance.now(); ctx.lineCap="round"; ctx.lineJoin="round";
-        for(var i=strokes.length-1;i>=0;i--){ var s=strokes[i], a=1-(now-s.born)/LIFE;
-          if(a<=0 && s!==cur){ strokes.splice(i,1); continue; }
+        for(var i=strokes.length-1;i>=0;i--){ var s=strokes[i], a=1-(now-s.born)/LIFE; if(a<=0 && s!==cur){ strokes.splice(i,1); continue; }
           ctx.strokeStyle="rgba(147,194,190,"+(Math.max(0,a)*.85)+")"; ctx.lineWidth=3; ctx.shadowColor="rgba(147,194,190,.6)"; ctx.shadowBlur=8;
           ctx.beginPath(); s.pts.forEach(function(p,k){ if(k) ctx.lineTo(p.x,p.y); else ctx.moveTo(p.x,p.y); }); ctx.stroke(); }
         ctx.shadowBlur=0;
       } };
   })();
-
-  /* fireflies: tap one and it floats into the jar */
   var flyAct=(function(){
     var cv=$("#flyCanvas"), ctx, flies=[], caught=0, JX=200, JY=250;
     function init(){ flies=[]; caught=0; for(var i=0;i<12;i++) flies.push({x:30+Math.random()*340,y:40+Math.random()*150,a:Math.random()*6.28,ph:Math.random()*6.28,c:false,tx:0,ty:0}); }
@@ -537,39 +872,36 @@ p{margin:0;max-width:30ch}
       frame:function(dt,t){
         var g=ctx.createLinearGradient(0,0,0,300); g.addColorStop(0,"#1C1730"); g.addColorStop(.55,"#2E2442"); g.addColorStop(1,"#241C32"); ctx.fillStyle=g; ctx.fillRect(0,0,400,300);
         ctx.fillStyle="#3A2F52"; ctx.beginPath(); ctx.moveTo(0,200); ctx.quadraticCurveTo(200,175,400,200); ctx.lineTo(400,300); ctx.lineTo(0,300); ctx.fill();
-        ctx.strokeStyle="rgba(199,174,226,.35)"; ctx.lineWidth=2;
-        for(var r=0;r<5;r++){ ctx.beginPath(); var yy=215+r*18; ctx.moveTo(0,yy+6); ctx.quadraticCurveTo(200,yy-14,400,yy+6); ctx.stroke(); }
-        var glow=Math.min(1,caught/8);
-        var jg=ctx.createRadialGradient(JX,JY,2,JX,JY,60); jg.addColorStop(0,"rgba(240,214,140,"+(.08+glow*.35)+")"); jg.addColorStop(1,"rgba(240,214,140,0)");
+        ctx.strokeStyle="rgba(199,174,226,.35)"; ctx.lineWidth=2; for(var r=0;r<5;r++){ ctx.beginPath(); var yy=215+r*18; ctx.moveTo(0,yy+6); ctx.quadraticCurveTo(200,yy-14,400,yy+6); ctx.stroke(); }
+        var glow=Math.min(1,caught/8), jg=ctx.createRadialGradient(JX,JY,2,JX,JY,60); jg.addColorStop(0,"rgba(240,214,140,"+(.08+glow*.35)+")"); jg.addColorStop(1,"rgba(240,214,140,0)");
         ctx.fillStyle=jg; ctx.beginPath(); ctx.arc(JX,JY,60,0,6.28); ctx.fill();
-        ctx.strokeStyle="rgba(235,221,194,.55)"; ctx.lineWidth=1.5; ctx.beginPath();
-        ctx.moveTo(JX-18,JY-24); ctx.lineTo(JX-20,JY+24); ctx.quadraticCurveTo(JX,JY+30,JX+20,JY+24); ctx.lineTo(JX+18,JY-24); ctx.stroke();
+        ctx.strokeStyle="rgba(235,221,194,.55)"; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(JX-18,JY-24); ctx.lineTo(JX-20,JY+24); ctx.quadraticCurveTo(JX,JY+30,JX+20,JY+24); ctx.lineTo(JX+18,JY-24); ctx.stroke();
         ctx.fillStyle="rgba(235,221,194,.4)"; ctx.fillRect(JX-20,JY-30,40,5);
         flies.forEach(function(f){
           if(f.c){ f.x+=(f.tx-f.x)*.0025*dt; f.y+=(f.ty-f.y)*.0025*dt; f.tx+=Math.sin(t/900+f.ph)*.01; }
           else { f.a+=(Math.random()-.5)*.003*dt; f.x+=Math.cos(f.a)*.012*dt; f.y+=Math.sin(f.a)*.009*dt;
             if(f.x<20||f.x>380) f.a=Math.PI-f.a; if(f.y<25||f.y>190) f.a=-f.a; f.x=Math.max(15,Math.min(385,f.x)); f.y=Math.max(20,Math.min(195,f.y)); }
-          var b=.45+.55*Math.max(0,Math.sin(t/(f.c?1400:900)+f.ph));
-          var fg=ctx.createRadialGradient(f.x,f.y,0,f.x,f.y,10); fg.addColorStop(0,"rgba(250,230,150,"+b+")"); fg.addColorStop(1,"rgba(250,230,150,0)");
-          ctx.fillStyle=fg; ctx.beginPath(); ctx.arc(f.x,f.y,10,0,6.28); ctx.fill();
+          var b=.45+.55*Math.max(0,Math.sin(t/(f.c?1400:900)+f.ph)), fg=ctx.createRadialGradient(f.x,f.y,0,f.x,f.y,10);
+          fg.addColorStop(0,"rgba(250,230,150,"+b+")"); fg.addColorStop(1,"rgba(250,230,150,0)"); ctx.fillStyle=fg; ctx.beginPath(); ctx.arc(f.x,f.y,10,0,6.28); ctx.fill();
           ctx.fillStyle="rgba(255,244,200,"+b+")"; ctx.beginPath(); ctx.arc(f.x,f.y,1.6,0,6.28); ctx.fill(); });
       } };
   })();
 
-  /* drift words: one gentle image every 9 seconds */
-  function startDrift(){
-    var el=$("#drift"), order=W().drift.slice().sort(function(){ return Math.random()-.5; }), k=1;
-    function step(){ el.style.opacity=0; later(function(){ el.textContent=order[k%order.length]; k++; el.style.opacity=1; later(step, 9000); }, 2200); }
-    el.textContent=order[0]; el.style.opacity=1; later(step, 9000);
-    /* if she stops touching the screen for 3 minutes, she has probably drifted off: go to goodnight on its own */
-    (function watch(){ later(function(){ if(Date.now()-lastTouch>180000) next(); else watch(); }, 15000); })();
-  }
   var lastTouch=Date.now();
   ["pointerdown","keydown"].forEach(function(ev){ document.addEventListener(ev,function(){ lastTouch=Date.now(); }, true); });
+  function startDrift(){
+    var el=$("#drift"), order=W().drift.slice().sort(function(){ return Math.random()-.5; }), k=1;
+    function say(w){ el.textContent=w; el.style.opacity=1; if(voiceReady()) speak(w,null,.75); }
+    function step(){ el.style.opacity=0; later(function(){ say(order[k%order.length]); k++; later(step, 9000); }, 2200); }
+    say(order[0]); later(step, 9000);
+    later(function(){ setDim(2,true); }, 60000);
+    (function watch(){ later(function(){ if(Date.now()-lastTouch>180000) show("night"); else watch(); }, 15000); })();
+  }
 
   function goodnight(){
     var c=$("#closeEyes"), n=$("#nightNote"); c.style.opacity=1; n.style.transition="none"; n.style.opacity=1;
     n.innerHTML = "Put the screen down.<br>Sleep will find you." + (soundOn ? "<br>The sound will fade away on its own in 20 minutes." : "");
+    if(voiceReady()) later(function(){ speak("Now close your eyes. Sleep will find you.",null,.7); }, 800);
     later(function(){ n.style.transition="opacity 6s"; n.style.opacity=0; }, 7000);
     later(function(){ c.style.opacity=.15; }, 10000);
     later(function(){ setDim(2, true); }, 12000);
@@ -577,12 +909,58 @@ p{margin:0;max-width:30ch}
     later(fadeSoundSlow, 20*60000);
   }
 
+  /* ===================== DAYTIME ===================== */
+  var viewDay=null;
+  function todayIndex(){ if(!store.resetStart) return -1; var d=Math.floor((Date.now()-store.resetStart)/86400000); return Math.min(41,Math.max(0,d)); }
+  function renderDay(){
+    var card=$("#dayCard"), t=todayIndex();
+    if(viewDay==null) viewDay = t<0 ? 0 : t;
+    if(t<0){
+      card.innerHTML='<span class="pill">Six weeks · one step a day</span><h3>Ready when you are</h3><p class="soft">Each morning you\'ll find one small, kind idea here. Most take less than a minute to read. There is nothing to record.</p>';
+      var b=document.createElement("button"); b.className="next ready"; b.type="button"; b.textContent="Begin my reset today"; b.style.alignSelf="flex-start";
+      b.addEventListener("click",function(){ store.resetStart=new Date().setHours(0,0,0,0); save(); viewDay=0; renderDay(); }); card.appendChild(b);
+    } else {
+      var w=Math.floor(viewDay/7), d=viewDay%7, item=RESET[w].d[d];
+      card.innerHTML='<div class="daynav"><span class="pill">Week '+(w+1)+' · '+RESET[w].w+'</span><span class="soft small">'+(viewDay===t?"Today":"Day "+(viewDay+1))+'</span></div>'+
+        '<h3>'+item[0]+'</h3><p>'+item[1]+'</p><p class="step"><b>One small step:</b> '+item[2]+'</p>';
+      var nav=document.createElement("div"); nav.className="daynav";
+      var prev=document.createElement("button"); prev.className="linkbtn"; prev.type="button"; prev.textContent="Previous"; prev.disabled=viewDay===0;
+      var nx=document.createElement("button"); nx.className="linkbtn"; nx.type="button"; nx.textContent="Next"; nx.disabled=viewDay>=41;
+      prev.addEventListener("click",function(){ if(viewDay>0){ viewDay--; renderDay(); } });
+      nx.addEventListener("click",function(){ if(viewDay<41){ viewDay++; renderDay(); } });
+      nav.appendChild(prev); if(viewDay!==t){ var td=document.createElement("button"); td.className="linkbtn"; td.type="button"; td.textContent="Back to today"; td.addEventListener("click",function(){ viewDay=t; renderDay(); }); nav.appendChild(td); } nav.appendChild(nx);
+      card.appendChild(nav);
+    }
+    var wk=$("#weeks"); wk.innerHTML="";
+    RESET.forEach(function(r,i){ var b=document.createElement("button"); b.type="button"; b.className="week";
+      b.setAttribute("aria-current", t>=0 && Math.floor(viewDay/7)===i ? "true":"false");
+      b.innerHTML='<span>Week '+(i+1)+'</span><b>'+r.w+'</b>';
+      b.addEventListener("click",function(){ if(t<0){ store.resetStart=new Date().setHours(0,0,0,0); save(); t=0; } viewDay=i*7; renderDay(); $("#dayCard").scrollIntoView({behavior:"smooth",block:"start"}); });
+      wk.appendChild(b); });
+  }
+
+  /* ===================== SETTINGS ===================== */
+  var setReturn="nightHome";
+  $("#setBtn").addEventListener("click",function(){ if(current!=="settings"){ setReturn=current; } syncSettings(); flow=null; show("settings"); });
+  $("#setBack").addEventListener("click",function(){ show(/^(player|night|drift)$/.test(setReturn) ? (isNight()?"nightHome":"dayHome") : setReturn); });
+  function syncSettings(){
+    var vt=$("#voiceToggle"); vt.setAttribute("aria-pressed", store.voiceOn?"true":"false"); vt.textContent=store.voiceOn?"On":"Off";
+    var wt=$("#wordsToggle"); wt.setAttribute("aria-pressed", store.words?"true":"false"); wt.textContent=store.words?"On":"Off";
+    $("#rateSel").value=store.rate;
+  }
+  $("#voiceToggle").addEventListener("click",function(){ store.voiceOn=!store.voiceOn; save(); syncSettings(); });
+  $("#wordsToggle").addEventListener("click",function(){ store.words=!store.words; save(); syncSettings(); });
+  $("#rateSel").addEventListener("change",function(e){ store.rate=e.target.value; save(); });
+  $("#replayIntro").addEventListener("click",function(){ show("ob1"); });
+  $("#obNoVoice").addEventListener("click",function(){ store.voiceOn=false; save(); show("ob4"); });
+  $("#obDone").addEventListener("click",function(){ store.onboarded=true; save(); home(); });
+
+  /* ===================== DIM & SOUND ===================== */
   var DIMS=[0,.35,.6,.9], dim=store.dim||0;
-  function setDim(level, temp){ $("#dimmer").style.opacity=DIMS[level]; $("#dimBtn").setAttribute("aria-pressed", level>0?"true":"false");
-    $("#dimBtn").textContent = level===0 ? "Dim screen" : (level===1 ? "Dimmer" : "Dimmest"); if(!temp){ dim=level; store.dim=level; save(); } }
+  function setDim(level, temp){ $("#dimmer").style.opacity=DIMS[level]; if(!temp){ dim=level; store.dim=level; save(); }
+    $("#dimBtn").setAttribute("aria-pressed", dim>0?"true":"false"); $("#dimBtn").textContent = dim===0 ? "Dim" : (dim===1 ? "Dimmer" : "Dimmest"); }
   $("#dimBtn").addEventListener("click",function(){ setDim((dim+1)%3); });
 
-  /* soft sound made in the browser: filtered noise; the ocean gets a slow wave swell */
   var actx=null, master=null, lp=null, lfoDepth=null, soundOn=false;
   var TUNE={valley:{f:1100,swell:0}, snow:{f:520,swell:.35}, ocean:{f:750,swell:.85}, lavender:{f:420,swell:.2}};
   function buildSound(){
@@ -597,13 +975,12 @@ p{margin:0;max-width:30ch}
     src.connect(lp); lp.connect(swell); swell.connect(master); master.connect(actx.destination); src.start();
     tuneSound(); return true;
   }
-  function tuneSound(){ if(!actx) return; var tn=TUNE[world], t=actx.currentTime;
-    lp.frequency.setTargetAtTime(tn.f,t,.8); lfoDepth.gain.setTargetAtTime(tn.swell,t,.8); }
+  function tuneSound(){ if(!actx) return; var tn=TUNE[world], t=actx.currentTime; lp.frequency.setTargetAtTime(tn.f,t,.8); lfoDepth.gain.setTargetAtTime(tn.swell,t,.8); }
   function sound(on){
     if(on && !actx && !buildSound()) return; if(!actx) return;
     if(actx.state==="suspended") actx.resume();
     var t=actx.currentTime; master.gain.cancelScheduledValues(t); master.gain.setValueAtTime(master.gain.value,t);
-    master.gain.linearRampToValueAtTime(on?0.22:0, t+(on?3:1.5));
+    master.gain.linearRampToValueAtTime(on ? (store.voiceOn ? .14 : .22) : 0, t+(on?3:1.5));
     soundOn=on; $("#soundBtn").setAttribute("aria-pressed", on?"true":"false");
   }
   function fadeSoundSlow(){ if(!actx || !soundOn) return; var t=actx.currentTime;
@@ -612,6 +989,8 @@ p{margin:0;max-width:30ch}
   function resumeSound(){ if(soundOn && actx && actx.state==="suspended") actx.resume(); }
   $("#soundBtn").addEventListener("click",function(){ sound(!soundOn); });
 
-  setDim(dim); setWorld(world); renderSteps();
+  /* ===================== START ===================== */
+  setDim(dim); setWorld(world);
+  if(store.onboarded) home(); else show("ob1");
 })();
 </script>
