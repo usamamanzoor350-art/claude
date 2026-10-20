@@ -1,0 +1,37 @@
+import cv2,numpy as np,sys,os,json
+from scipy import ndimage as nd
+from place import shirt_mask,apply
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+D='/tmp/claude-0/-home-user-claude/c9e590a4-3afc-5ada-9071-97ba7f0cf5fc/scratchpad/designs/'
+FAC={'hello':.76,'queen':.85,'finger':.71,'vintage_u':.82,'birthyear_u':.85}
+IM=json.load(open('photos.json'))  # list of [file,color,neck]
+ORDER=['black','white','pink','sage','burgundy','navy']
+def geo(im,seed):
+    lab=cv2.cvtColor(cv2.GaussianBlur(im,(0,0),2),cv2.COLOR_BGR2LAB).astype(np.float32)
+    x,y=seed;ref=np.median(lab[y-25:y+25,x-25:x+25].reshape(-1,3),0)
+    wt=np.array([0.5,1.5,1.5]) if ref[0]>215 else np.array([0.25,1.5,1.5]);thr=14 if ref[0]>215 else 16
+    d=np.sqrt((((lab-ref)*wt)**2).sum(-1));m=(d<thr).astype(np.uint8)
+    m=cv2.morphologyEx(m,cv2.MORPH_OPEN,np.ones((5,5),np.uint8));lbl,_=nd.label(m);m=(lbl==lbl[y,x]).astype(np.uint8)
+    m=nd.binary_fill_holes(cv2.morphologyEx(m,cv2.MORPH_CLOSE,np.ones((21,21),np.uint8))).astype(np.uint8)
+    col=np.where(m[:,x-6:x+7].all(1))[0];ny=col[0]
+    mids=[];ws=[]
+    for r in m[ny+100:ny+260]:
+        xs=np.where(r)[0]
+        if len(xs):
+            runs=np.split(xs,np.where(np.diff(xs)>1)[0]+1);rr=min(runs,key=lambda q:abs((q[0]+q[-1])/2-x));mids.append((rr[0]+rr[-1])/2)
+    r=m[ny+230];xs=np.where(r)[0];runs=np.split(xs,np.where(np.diff(xs)>1)[0]+1);rr=min(runs,key=lambda q:abs((q[0]+q[-1])/2-x))
+    return m,ny,float(np.median(mids)),rr[-1]-rr[0]
+if __name__=='__main__':
+    des,age,tag=sys.argv[1],sys.argv[2],sys.argv[3]
+    G=json.load(open('geo.json'))
+    outs=[]
+    for k,c in enumerate(ORDER,1):
+        g=G[c];im=cv2.imread(g['file']);m=cv2.imread(g['mask'],0)//255
+        ink='white' if c in('black','burgundy','navy') else 'black'
+        s=g['bw']/330;w=FAC[des]*g['bw'];top=g['ny']+(45 if g['neck']=='v' else 72)*s
+        f=f'{D}{des}/{age}_{ink}.png'
+        if g.get('maxbottom'):
+            a=cv2.imread(f,cv2.IMREAD_UNCHANGED)[...,3];ys,xs=np.where(a>10);ar=(ys.max()-ys.min())/(xs.max()-xs.min())
+            top=g['ny']+14;w=min(w,(g['maxbottom']-top)/ar)
+        o,_=apply(im,m,f,g['cx'],top,w)
+        cv2.imwrite(f'final/{tag}_{k}_{c}.jpg',o,[cv2.IMWRITE_JPEG_QUALITY,94])
