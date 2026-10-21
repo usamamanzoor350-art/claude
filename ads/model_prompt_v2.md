@@ -19,9 +19,15 @@ THE SHIRT (the most important part — a design will be printed on the chest lat
   - fully visible, never covered by hands, arms, hair, a necklace, a bag or any object;
   - free of shadows from arms or hair.
 
+FRONT-FACING RULE (MOST IMPORTANT — the design will be placed exactly in the center of the shirt)
+- In ALL 6 images she stands PERFECTLY FRONT-FACING, like a passport photo or a straight-on catalog shot: chest, shoulders, hips and face all point straight at the camera.
+- ZERO rotation of the body to the left or right. NO three-quarter turn, NO side angle, NO twisting, NO leaning, NO tilted or angled torso, NO hip popped to one side, NO weight shifted onto one leg, NO head turned to the side.
+- Both shoulders are level and the same distance from the camera. Both sides of the shirt are equally visible: the left edge and the right edge of the shirt look like mirror images.
+- The center line of the shirt (from the middle of the collar / point of the V straight down to the middle of the hem) is a perfectly VERTICAL straight line in the exact horizontal center of the image.
+- The camera is straight in front of her at chest height, not from the side, not from above, not from below.
+
 POSE RULES (very strict — we had to redo images because of these)
-- The body faces the camera SQUARELY: shoulders level and parallel to the camera, hips facing forward.
-- NO three-quarter turn, NO side angle, NO twisting, NO leaning, NO tilted torso. The head may tilt slightly or smile toward the camera, but the body stays straight.
+- The body faces the camera SQUARELY (see the front-facing rule above). Only the arms and the smile change between images.
 - She stands in the CENTER of the frame. The middle of her neck is on the vertical center line of the image.
 - Arms: down at her sides, OR hands in the front jeans pockets, OR one hand on the hip with the elbow out to the side (the hand rests on the hip, NOT on the shirt front).
 - Arms must NEVER be crossed. Hands are never in front of the chest or stomach, and she never holds anything.
@@ -55,7 +61,7 @@ CAMERA
 - Vertical 4:5 (e.g. 1122x1402), highest resolution possible. Same size for all 6.
 
 FINAL CHECK BEFORE SENDING EACH IMAGE
-1) Body square to the camera, not turned?
+1) Body 100% front-facing (shoulders level, no turn or tilt, both shirt sides equal), with the shirt center line vertical in the middle of the image?
 2) Chest (collar to 12" down) fully visible and flat, no hand, arm, hair or necklace on it?
 3) Shirt blank and the exact hex color?
 4) Same distance and size as the other images?
