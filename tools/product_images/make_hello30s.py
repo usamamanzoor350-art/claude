@@ -59,6 +59,13 @@ def build(n):
         out[c4['y']:c4['y']+c4['h'],X4+dx:X4+dx+c4['w']]=last
     out[c3['y']:c3['y']+c3['h'],X3:X3+g.shape[1]]=np.maximum(out[c3['y']:c3['y']+c3['h'],X3:X3+g.shape[1]],g)
     assert yr_old[3]==yr_new[3]
+    # center "hello" over the word line (like the Thirty design) so the design stays balanced
+    hm=mask_of(lab,Hh,a.shape);hx=np.where(hm.any(0))[0];hc=(hx[0]+hx[-1])/2
+    wl=[c for c in L if c['y']<yW+0.5*cap];wx0=fx0;wx1=max(c['x']+c['w'] for c in L)+delta;wc=(wx0+wx1)/2
+    sh=int(round(wc-hc))
+    if sh>0:
+        hel=np.where(np.pad(hm,((0,0),(0,out.shape[1]-hm.shape[1]))),out,0);out=np.where(hel>0,0,out)
+        moved=np.zeros_like(out);moved[:,sh:]=hel[:,:-sh];out=np.maximum(out,moved)
     return out
 for n in range(1,10):
     o=build(n)
