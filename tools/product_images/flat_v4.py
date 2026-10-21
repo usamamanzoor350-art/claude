@@ -6,6 +6,9 @@ def flat(dw,db,out,pw=168):
     im=cv2.imread('src_1293.png')
     for n,cx,top,ink in ([('black',210,391,dw),('pink',558,432,db),('white',909,391,db)] if 'vintage' in dw else [('black',212,372,dw),('pink',558,428,db),('white',925,377,db)]):
         m=cv2.imread(f'fmask_{n}.png',0)//255
+        import os as _o
+        _p=ink.rsplit('_',1)[0]+f'_{n}.png'
+        if 'vintage_e' in ink and _o.path.exists(_p): ink=_p
         cxa=cx
         if 'hello' in ink:
             import sys as _s;_s.path.insert(0,'..');from firstl import hello_info;hf,hc=hello_info(ink);pw=min(112/hf,190);cxa=cx+(0.5-hc)*pw
