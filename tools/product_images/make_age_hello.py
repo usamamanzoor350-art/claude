@@ -37,7 +37,7 @@ if __name__=='__main__':
         cxa=g['cx']
         if des=='hello':
             import sys as _s;_s.path.insert(0,'..');from firstl import first_l
-            lx=first_l(f)[1][1];w=min(w,(g['R']-10-g['cx'])/(1-lx))
+            lx=first_l(f)[1][1]
             # shrink until no ink is hidden by the mask (arms/skin/shirt edge): heart and year must stay whole
             da=cv2.imread(f,cv2.IMREAD_UNCHANGED)[...,3];ys,xs=np.where(da>10);da=da[ys.min():ys.max()+1,xs.min():xs.max()+1]
             mm=cv2.erode(m,np.ones((9,9),np.uint8))
