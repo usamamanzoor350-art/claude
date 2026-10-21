@@ -5,6 +5,7 @@ def first_l(path):
     # hello band: from top to first blank row after 20% height
     y=int(H*0.15)
     while y<H and rows[y]: y+=1
+    if y>H*0.6: y=int(H*0.45)  # hello touches the number: no blank gap
     band=a[:y]
     # ascender zone: top 28% of hello band (h, l, l stems)
     asc=band[:max(3,int(y*0.28))]
