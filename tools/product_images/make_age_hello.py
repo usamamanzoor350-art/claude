@@ -30,6 +30,7 @@ if __name__=='__main__':
         g=G[c];im=cv2.imread(g['file']);m=cv2.imread(g['mask'],0)//255
         ink='white' if c in('black','burgundy','navy') else 'black'
         s=g['bw']/330;w=FAC[des]*g['bw'];top=g['ny']+(45 if g['neck']=='v' else 72)*s
+        if g.get('top'): top=g['top']
         f=f'{D}{des}/{age}_{ink}.png'
         if g.get('maxbottom'):
             a=cv2.imread(f,cv2.IMREAD_UNCHANGED)[...,3];ys,xs=np.where(a>10);ar=(ys.max()-ys.min())/(xs.max()-xs.min())
