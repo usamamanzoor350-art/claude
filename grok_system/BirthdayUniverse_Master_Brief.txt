@@ -1,0 +1,57 @@
+BIRTHDAYUNIVERSE.CO — MASTER BRIEF
+(Last updated: [date])
+
+1. HUMARI KAHANI
+- Hum 7 saal se e-commerce kar rahe hain. Shipping, fulfilment aur operations sab sorted hain — masla sirf marketing/creatives ka hai.
+- Pehla brand: "Birthday Clothing". Wahan sirf static image ads chalaye. Creative fatigue aaya,
+  ads ka asar khatam hua aur sales aani band ho gayin.
+- Is liye naya brand banaya: BirthdayUniverse.co (Shopify, US market, currency USD).
+- Pehle orders: Aug 2026. Abhi tak (Oct 2026): ~14 orders, ~$505 net sales, AOV ~$38.
+  Matlab brand naya hai — abhi growth ka shuru ka marhala hai.
+- SABAQ: kabhi ek format (static) par depend nahi karna. Creatives har 2-3 hafte naye.
+  Har ad ke result se seekhna hai.
+
+2. PRODUCTS
+- Women's milestone birthday T-shirts, ages 30 se 80.
+- 5 designs (har age ke liye):
+  a) "Hello [Age]" — e.g. "Hello Sixty-Five, Est. 1961"  ← abhi tak best seller
+  b) "I Am [Age-1] + Middle Finger" — funny design
+  c) "The Queen Is [Age]" — crown wala, elegant
+  d) "Vintage [Year]" — retro
+  e) "[Birth Year]" — retro rainbow digits (e.g. 1971)
+- 6 colours: Black, White, Blush Pink, Sage Green, Burgundy, Navy Blue.
+- Round Neck + V-Neck. Sizes S se 3XL. 100% cotton, made to order.
+- Price: ~$25.99–28.99 per tee. Shipping aur fulfilment sorted hai (7 saal ka tajurba).
+- Doosre products: Birthday Trip Tee, Personalized Tote Bag, Birthstone Birthday Necklace.
+
+3. ASAL SALES DATA (Aug–Oct 2026)
+- Hello Sixty-Five (65th): 6 orders — sab se zyada.
+- Hello 40, Hello 49, Hello 52, Hello 63, Hello 67: 1-1 order.
+- Middle Finger 40th aur 65th: 1-1 order.
+- Birthday Trip Tee: 1 order.
+- Nateeja: "Hello" design aur 60+ ages ab tak sab se acha chal rahe hain. Bohat kam data hai,
+  isliye ye pakki baat nahi — test karna hai.
+
+4. CUSTOMER (humara andaza — tumhein verify karna hai)
+- Woman jo apni milestone birthday celebrate kar rahi hai (40, 50, 60, 65, 70...).
+- Gift dene wale: beti, saheli, shohar, colleagues.
+- [Asal data: customer states, gift vs self, repeat customers]
+
+5. ADS HISTORY
+- Purane creatives ab use nahi karte: wo bohat kam din chalte the — kuch hi din mein fatigue
+  ho jaate the aur results gir jaate the.
+- Isliye humein aisa creative system chahiye jo har hafte naye, lambe chalne wale (video) ads de.
+- Platform/budget: [Meta / TikTok — $__/month]
+
+6. GOAL
+- US ka #1 birthday store: kisi ki bhi birthday ya birthday gift ho, pehli choice BirthdayUniverse.co.
+- 90 din target: $0 se $1,000,000 sales.
+  Hisaab: $1M / 90 din = ~$11,000/din = ~290 orders/din (AOV ~$38 par).
+  Ye bohat bada target hai — tumhara kaam iske liye raasta banana hai:
+  AOV kaise badhe (bundles, gift boxes), kaunse naye products, kaunse channels,
+  aur har 30 din ka milestone kya ho. Agar ye target is waqt mein mumkin nahi to
+  saaf batao aur sab se tez realistic raasta do.
+
+7. BRAND VOICE
+- Warm, celebratory, thoda funny, premium.
+- Tagline: "We don't sell a piece of cloth. We sell the feeling of being celebrated."
