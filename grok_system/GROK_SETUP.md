@@ -59,7 +59,7 @@ BIRTHDAYUNIVERSE.CO — MASTER BRIEF
 (Last updated: [date])
 
 1. HUMARI KAHANI
-- Hum [6-7] saal se e-commerce kar rahe hain.
+- Hum 7 saal se e-commerce kar rahe hain. Shipping, fulfilment aur operations sab sorted hain — masla sirf marketing/creatives ka hai.
 - Pehla brand: "Birthday Clothing". Wahan sirf static image ads chalaye. Creative fatigue aaya,
   ads ka asar khatam hua aur sales aani band ho gayin.
 - Is liye naya brand banaya: BirthdayUniverse.co (Shopify, US market, currency USD).
@@ -78,7 +78,7 @@ BIRTHDAYUNIVERSE.CO — MASTER BRIEF
   e) "[Birth Year]" — retro rainbow digits (e.g. 1971)
 - 6 colours: Black, White, Blush Pink, Sage Green, Burgundy, Navy Blue.
 - Round Neck + V-Neck. Sizes S se 3XL. 100% cotton, made to order.
-- Price: ~$25.99–28.99 per tee. Shipping: [__ din], POD partner: [__].
+- Price: ~$25.99–28.99 per tee. Shipping aur fulfilment sorted hai (7 saal ka tajurba).
 - Doosre products: Birthday Trip Tee, Personalized Tote Bag, Birthstone Birthday Necklace.
 
 3. ASAL SALES DATA (Aug–Oct 2026)
@@ -95,14 +95,19 @@ BIRTHDAYUNIVERSE.CO — MASTER BRIEF
 - [Asal data: customer states, gift vs self, repeat customers]
 
 5. ADS HISTORY
-- Platform: [Meta / TikTok / Pinterest]. Mahana budget: [$__].
-- Kya chala: [__]
-- Kya fail hua: static image ads (creative fatigue), [__]
-- Best result kabhi: [__]. Abhi: [__]
+- Purane creatives ab use nahi karte: wo bohat kam din chalte the — kuch hi din mein fatigue
+  ho jaate the aur results gir jaate the.
+- Isliye humein aisa creative system chahiye jo har hafte naye, lambe chalne wale (video) ads de.
+- Platform/budget: [Meta / TikTok — $__/month]
 
 6. GOAL
 - US ka #1 birthday store: kisi ki bhi birthday ya birthday gift ho, pehli choice BirthdayUniverse.co.
-- 90 din target: [__ orders/month], ROAS [__].
+- 90 din target: $0 se $1,000,000 sales.
+  Hisaab: $1M / 90 din = ~$11,000/din = ~290 orders/din (AOV ~$38 par).
+  Ye bohat bada target hai — tumhara kaam iske liye raasta banana hai:
+  AOV kaise badhe (bundles, gift boxes), kaunse naye products, kaunse channels,
+  aur har 30 din ka milestone kya ho. Agar ye target is waqt mein mumkin nahi to
+  saaf batao aur sab se tez realistic raasta do.
 
 7. BRAND VOICE
 - Warm, celebratory, thoda funny, premium.
