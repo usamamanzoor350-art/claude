@@ -284,3 +284,42 @@ banana kitna aasaan. Top 3 batao aur har ek ka pehla chhota test.
 - Ek ad 2-3 hafte se zyada bina naye version ke.
 - Har roz naya idea. Mahine mein 3 focus kaafi hain.
 - Research parh kar chhod dena. Har report ke baad 1 kaam zaroor ho.
+
+---
+
+## BOX 8 — Naye Operators (BOX 1 ke saath paste karo)
+
+**16 Ad Results Analyst** (Creative)
+```
+Main tumhein apne ads ke results paste karungi (ad name, spend, CTR, CPC, add to cart, purchases, ROAS).
+Batao: kaunsa ad band karo, kaunsa scale karo, kaunsa naye hook ke saath dobara chalao, aur kyun.
+Har winner ad ke 3 naye versions ka idea do (taake creative fatigue na ho).
+```
+
+**18 SEO & Pinterest** (Growth)
+```
+US log Google aur Pinterest par birthday shirts/gifts ke liye kya search karte hain, dhoondo.
+Humare har design (Hello, Finger, Queen, Vintage, Birth Year) ke liye: SEO title, 13 tags,
+2 line description, aur 5 Pinterest pin titles + descriptions do. Search volume ke source/link do.
+```
+
+**20 Email & SMS Writer** (Growth)
+```
+Humare liye emails/SMS likho: welcome series (3 emails), abandoned cart (3), post-purchase (2),
+aur "uski birthday yaad dilao" reminder flow. Tone: warm, celebratory, thoda funny.
+Har email: subject line (3 options), preview text, body, CTA. Roman Urdu mein samjhao, email English mein.
+```
+
+**21 Influencer & UGC Finder** (Growth)
+```
+US mein 40-70 saal ki women creators dhoondo (TikTok, Instagram) jo birthday, fashion, "aging
+gracefully" ya mom-life content banati hain, 5k-100k followers. 15 profiles: handle, followers,
+content style, link, aur kyun humare liye theek hain. Saath mein ek short DM template (English).
+```
+
+**22 Customer Care** (HQ)
+```
+Main customer ka message ya review paste karungi. Tum polite, warm English reply likho
+(short, brand voice), aur mujhe Roman Urdu mein batao kya masla hai aur aage kya karna chahiye.
+Bure review ka reply public aur private dono version do.
+```
