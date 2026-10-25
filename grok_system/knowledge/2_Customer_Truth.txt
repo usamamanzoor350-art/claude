@@ -1,4 +1,4 @@
-CUSTOMER TRUTH — BirthdayUniverse.co (Oct 2026)
+CUSTOMER TRUTH v3 — BirthdayUniverse.co (26 Oct 2026)
 Sirf wo baatein jo link se ya humare ads se SABIT hain.
 
 AUDIENCE
@@ -24,9 +24,37 @@ WEB RESEARCH (Claude, 25 Oct 2026)
 - BUNDLE GAP: koi seller shirt + gift box bundle nahi bech raha. Walmart 7-piece 50th gift set 4.8★ (23 reviews).
 - SIZE sab se bada dar: women's cut chhota, unisex bara, size chart garment ka. → saaf size guide + "fits like your usual size".
 
-ASAL QUOTES (Comment Miner yahan add karega, link ke saath)
--
+ASAL QUOTES — Review Miner (Amazon + Etsy, 2024-2026)
+Sources: Amazon LAZYCHILD B09XV84BXF, ShirtInvaders B09PMXL36T, LHBNK, BEIDEFY; Etsy hello-fifty / Chapter 50 listings.
+KHUSHI:
+- "This shirt is so soft and stretchy. Two of my friends who are turning 50 this year too now own one as well." (BEIDEFY)
+- "Gave as a 50th BDay gift - it's SUPER soft and she LOVED it!" (ShirtInvaders)
+- "I bought this as a gift for my friend who turned 50. It's very true to size and she loved it!!" (LAZYCHILD)
+- "Love this shirt. The colors don't fade with washing."
+- "Super soft material, love that it had something on front and back. Front says vintage 1976 and back says chapter 50."
+- Gift language: "She absolutely loves it", "perfect for a big 50 girls trip".
+DARD:
+- "The size runs very small" / "Runs very small. I recommend sizing up." / "Like most, not true to size"
+- "Not a true XL. I have a large bust…" / "It fits like a medium!"
+- "Wrong numeric age… should have said 50 years" (print error)
+- "Runs super small, yucky polyester like"
+- "Rude when I contacted about shipping date" (Etsy 1★)
 
-WO KYUN NAHI KHARIDTI (link ke saath)
-- Sizing / fit ka dar (upar dekho)
--
+TOP 5 KHUSHIYAN: soft fabric | cute vintage/funny design jo compliments laaye | gift reaction "she LOVED it" | front + back print | fast delivery
+TOP 5 DARD: runs small (#1, har jagah "size up") | ghalat age/print | patla/polyester/shrink | shipping delay ya seller ka bura jawab | bade bust par fit
+
+AD LIBRARY PATTERN (Ad Library Analyst, proxy — Meta ne block kiya, exact cards UNVERIFIED)
+- Lambe chalne wale ads: static, bara saaf text, EXACT age/year ("Hello Fifty EST 1976", "Vintage 1966"), halka mazaq ya fakhr
+  ("Old Balls Club", "Aged to Perfection", "The Queen Is 50"), simple offer (free shipping / % off), gift buyers main audience.
+- Comments: "Need this for my dad/mom", "Perfect gift", "So funny".
+- Ye humare purane winners (5_Old_Winners) se match karta hai.
+
+WO KYUN NAHI KHARIDTI → HUMARA JAWAB
+- Size ka dar → har page par size chart + "fits true to size, size up for relaxed fit" + model ka size + FREE SIZE EXCHANGE.
+- Quality shak → "100% soft cotton, colours don't fade" + close-up fabric photo.
+- Ghalat print ka dar → "Every shirt checked for the right age & year".
+- Shipping dar → saaf delivery time + fast, friendly support.
+
+NAYE MAUQE
+- SQUAD: saheliyan saath 50 ki hoti hain aur sab ek jaisi shirt leti hain → "Squad / Girls Trip pack" (3+ tees discount).
+- FRONT + BACK print (front: Vintage 1976, back: Chapter 50) → product upgrade.
